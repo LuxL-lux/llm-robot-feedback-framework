@@ -1,0 +1,26 @@
+%% +++++++++++++++++++++++++++++++++
+%% Neue Befehle
+%% +++++++++++++++++++++++++++++++++
+
+\newcommand{\changefont}[3]{\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont} % Schriftart ändern
+
+\newcommand{\code}[1]{\texttt{#1}} % Code-Umgebung im Fließtext
+\newcommand{\bs}[1]{\boldsymbol{#1}} % Fett geschrieben
+\newcommand{\sm}[1]{{\textit{\tiny #1}}} % Fett geschrieben
+\newcommand{\veci}[5]{{_{#2}^\textit{\tiny #4} \bs{#1} ^{\textit{\tiny #5}}_{#3}}} % #1 Vektorname, #2 IndexLinksUnten, #3 IndexRechtsUnten, #4 IndexLinksOben, #5 IndexRechtsOben
+\newcommand{\elei}[5]{{_{#2}^\textit{\tiny #4} {#1} ^{\textit{\tiny #5}}_{#3}}} % #1 Elementname, #2 IndexLinksUnten, #3 IndexRechtsUnten, #4 IndexLinksOben, #5 IndexRechtsOben
+\newcommand{\mati}[5]{{_\textit{\tiny #5}^\textit{\tiny #3} \bs{#1} ^{\textit{\tiny #4}}_{#2}}} % #1 Matrixname, #2 IndexRechtsUnten, #3 IndexLinksOben, #4 IndexRechtsOben, #5 IndexLinksUnten
+\newcommand{\vecdoti}[5]{{_{#2}^\textit{\tiny #4} \dot{\bs{#1}} ^{\textit{\tiny #5}}_{#3}}} % #1 Vektorname, #2 IndexLinksUnten, #3 IndexRechtsUnten, #4 IndexLinksOben, #5 IndexRechtsOben
+\newcommand{\eledoti}[5]{{_{#2}^\textit{\tiny #4} \dot{#1} ^{\textit{\tiny #5}}_{#3}}} % #1 Elementname, #2 IndexLinksUnten, #3 IndexRechtsUnten, #4 IndexLinksOben, #5 IndexRechtsOben
+\newcommand{\matdoti}[5]{{_\textit{\tiny #5}^\textit{\tiny #3} \dot{\bs{#1}} ^{\textit{\tiny #4}}_{#2}}} % #1 Matrixname, #2 IndexRechtsUnten, #3 IndexLinksOben, #4 IndexRechtsOben, #5 IndexLinksUnten
+\newcommand{\vecddoti}[5]{{_{#2}^\textit{\tiny #4} \ddot{\bs{#1}} ^{\textit{\tiny #5}}_{#3}}} % #1 Vektorname, #2 IndexLinksUnten, #3 IndexRechtsUnten, #4 IndexLinksOben, #5 IndexRechtsOben
+\newcommand{\eleddoti}[5]{{_{#2}^\textit{\tiny #4} \ddot{#1} ^{\textit{\tiny #5}}_{#3}}} % #1 Elementname, #2 IndexLinksUnten, #3 IndexRechtsUnten, #4 IndexLinksOben, #5 IndexRechtsOben
+\newcommand{\matddoti}[5]{{_\textit{\tiny #5}^\textit{\tiny #3} \ddot{\bs{#1}} ^{\textit{\tiny #4}}_{#2}}} % #1 Matrixname, #2 IndexRechtsUnten, #3 IndexLinksOben, #4 IndexRechtsOben, #5 IndexLinksUnten
+\newcommand{\vecr}[3]{\left(\begin{array}{rrr}#1\\ #2 \\ #3 \end{array}\right)} % Vektor mit 3 Elementen, rechtsbündig
+\newcommand{\vecc}[3]{\left(\begin{array}{ccc}#1\\ #2 \\ #3 \end{array}\right)} % Vektor mit 3 Elementen, zentriert
+\newcommand{\matr}[9]{\left(\begin{array}{rrr}#1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{array}\right)} % Matriz mit 3 Zeilen und 3 Spalten, rechtsbündig
+\newcommand{\matc}[9]{\left(\begin{array}{ccc}#1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{array}\right)} % Matrix mit 3 Zeilen und 3 Spalten, zentriert
+\newcommand{\vecri}[6]{\left(\begin{array}{rrr}#1\\ #2 \\ #3 \\ #4\\ #5 \\ #6 \end{array}\right)} % Vektor mit 6 Elementen, rechtsbündig
+\newcommand{\vecci}[6]{\left(\begin{array}{ccc}#1\\ #2 \\ #3 \\ #4\\ #5 \\ #6 \end{array}\right)} % Vektor mit 6 Elementen, zentriert
+\newcommand{\vecrii}[2]{\left(\begin{array}{rr}#1\\ #2 \end{array}\right)} % Vektor mit 2 Elementen, rechtsbündig
+\newcommand{\veccii}[2]{\left(\begin{array}{cc}#1\\ #2 \end{array}\right)} % Vektor mit 2 Elementen, zentriert

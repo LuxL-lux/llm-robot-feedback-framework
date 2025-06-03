@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%&& Weitere Formalia %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Weitere Formalia}
+\label{cap:Weitere Formalia}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Sonstiges}
+
+\begin{itemize}
+	\item Sobald eine Abkürzung eingeführt wurde (Beispiel: Mensch-Roboter-Kollaboration, kurz MRK), dann sollte diese Abkürzung durchgängig verwendet werden. In Ausnahmefällen (z.\,B. bei Überschriften) kann hiervon abgewichen werden.
+	\item Alle Abkürzungen (u.\,a., z.\,B., i.\,d.\,R. etc.) oder Maßangaben (200\,kg) werden mit einem kleinen geschützten Leerzeichen getrennt. In der LaTeX-Umgebung wird dies mit \verb+\,+ getrennt.
+	\item "`Hurenkinder\footnote{Als Hurenkind wird die letzte Zeile eines Absatzes bezeichnet, wenn sie zugleich die erste einer neuen Seite oder Spalte ist.}"' bzw. "`Schusterjungen\footnote{Als Schusterjunge wird eine am Seiten- oder Spaltenende stehende Zeile eines neuen Absatzes bezeichnet, der auf der Folgeseite fortgesetzt wird.}"' sollen vermieden werden.
+	\item Der Gebrauch des Wortes "`man"' sollte vermieden werden.
+	\item Variablen, Indizes etc. werden immer kursiv dargestellt, also z.\,B. $i$ anstatt i. Matrizen und Vektoren werden zudem kursiv und fett dargestellt, d.\,h. Vektor $\bs{x}(t)$ anstatt $x(t)$!
+	\item Ein Kapitel besteht i.\,d.\,R. aus verschiedenen Abschnitten, d.\,h. es existiert ein Kapitel 2, jedoch ein Abschnitt 2.1 oder Abschnitt 3.2.1.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Häufige Fehler}
+
+\noindent
+Besteht eine Wortgruppe aus mehreren zusammengesetzten Wörtern, dann wird ein Bindestrich gesetzt.
+
+% Bindestrich
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[H]
+	  \centering
+		\caption{Bindestrich}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline
+			\textbf{Richtig} & \textbf{Falsch} \tabularnewline
+			 \hline
+					Mensch-Roboter-Kollaboration & Mensch-Roboter Kollaboration \\	
+					Not-Halt-Funktion & Not-Halt Funktion \\
+					MRK-Anwendungen & MRK Anwendungen \\
+					MRK-Applikation & MRK- Applikation \\
+					Primär- und Sekundäranalyse & Primär und Sekundäranalyse \\		
+					DIN-Norm & DIN Norm \\			
+					Ergonomie-Analyse, Ergonomieanalyse & Ergonomie Analyse \\
+				\hline
+		\end{tabular}	
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+\noindent
+Bei Verweisen auf Tabellen und Abbildungen kann auf einen Artikel verzichtet werden.
+
+% Artikel
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[H]
+	  \centering
+		\caption{Artikel}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline
+			\textbf{Richtig} & \textbf{Falsch} \tabularnewline
+			 \hline
+					In Tabelle x... & In der Tabelle x... \\
+					Abbildung y zeigt... & Die Abbildung y zeigt... \\
+				\hline
+		\end{tabular}	
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+% Literaturangabe
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[H]
+	  \centering
+		\caption{Literaturangabe}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline 
+			\textbf{Richtig} & \textbf{Falsch} \tabularnewline
+			 \hline		
+					Einer der ersten Schritte der Methode nach Beumelburg [2005] ist die Berechnung der Eignungsgrade von Mensch und Roboter. &
+					Einer der ersten Schritte der Methode nach [Beumelburg, 2005] ist die Berechnung der Eignungsgrade von Mensch und Roboter. \\
+					Dazu wird ein Kriterienkatalog entwickelt, welcher Kriterien aus den nachfolgenden Bereichen berücksichtigt [Bauer, 2006]. &
+					Dazu wird ein Kriterienkatalog entwickelt, welcher Kriterien aus den nachfolgenden Bereichen berücksichtigt Bauer [2006]. \\
+	 		 \hline
+		\end{tabular}	
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+\noindent
+Hervorhebungen erfolgen in der LaTeX-Umgebung über \verb+\emph{...}+.
+
+
+% Anführungszeichen und Hervorhebung
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[H]
+	  \centering
+		\caption{Anführungszeichen und Hervorhebung}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline 
+			\textbf{Richtig} & \textbf{Falsch} \tabularnewline
+			 \hline		
+					Die Merkmale "`Taktzeit"', "`Prozesssicherheit"' und "`Qualität"' werden bewertet. &
+					Die Merkmale Taktzeit, Prozesssicherheit und Qualität werden bewertet. \\
+					Die Merkmale \emph{Taktzeit}, \emph{Prozesssicherheit} und \emph{Qualität} werden bewertet. &
+					\\
+	 		 \hline
+		\end{tabular}	
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+\noindent
+Zwischen die Glieder einer Aufzählung wird ein Komma gesetzt. Wenn jedoch eine Aufzählung abschließt, folgt kein Komma hinter das letzte Glied der Aufzählung.
+
+% Aufzählungen
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[H]
+	  \centering
+		\caption{Aufzählungen}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline 
+			\textbf{Richtig} & \textbf{Falsch} \tabularnewline
+			 \hline		
+					Ein Robotersystem besteht aus mehreren Komponenten (Gelenke, Antriebe, Endeffektor etc.). &
+					Ein Robotersystem besteht aus mehreren Komponenten (Gelenke, Antriebe, Endeffektor\textbf{,} etc.). \\
+	 		 \hline
+		\end{tabular}	
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Beispielhafter Programmcode}
+
+\begin{lstlisting}[caption={Ausgabe der Inversen Kinematik}]
+// This is a comment
+std::size_t attempts = 10;
+double timeout = 0.1;
+bool found_ik = kinematic_state->setFromIK(joint_model_group, end_effector_state, attempts, timeout);
+
+
+if (found_ik)
+{
+  kinematic_state->copyJointGroupPositions(joint_model_group, joint_values);
+  for (std::size_t i = 0; i < joint_names.size(); ++i)
+  {
+    ROS_INFO("Joint $\%$s: $\%$f", joint_names[i].c_str(), joint_values[i]);
+  }
+}
+else
+{
+  ROS_INFO("Did not find IK solution");
+}
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[caption={Armteil}]
+<?xml version="1.0"?>
+<robot name="RoboterBeispiel1">
+  <link name="ErsterArmteil">
+    <visual>
+      <geometry>
+        <cylinder length="0.5" radius="0.3"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>
+\end{lstlisting}
+\vspace{0.5cm}

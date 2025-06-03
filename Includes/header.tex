@@ -1,0 +1,147 @@
+%% +++++++++++++++++++++++++++++++++
+%% Header
+%% +++++++++++++++++++++++++++++++++
+
+% Seitengeometrie
+\geometry{a4paper,inner=32mm,outer=24mm,top=30mm,bottom=40mm}
+
+% Farben definieren
+\definecolor{lightgrey}{rgb}{0.99,0.99,0.99}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colString}{rgb}{0,0.5,0}
+\definecolor{darkred}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{green}{HTML}{009846}
+\definecolor{blue}{rgb}{0,0,0.7}
+\definecolor{red}{rgb}{0.7,0,0}
+\definecolor{black}{rgb}{0,0,0}
+
+\definecolor{gray1}{Gray}{1} %dunkelgrau
+\definecolor{gray2}{Gray}{7} %grau
+\definecolor{gray3}{Gray}{11} %hellgrau
+
+% Quellcode
+\lstloadlanguages{XML} 
+\lstset{
+		language=C++,
+    float=hbp,
+    keywordstyle=\color{colKeys},
+    stringstyle=\color{colString},
+    commentstyle=\color{gray3},
+     basicstyle=\ttfamily,
+		%basicstyle=\footnotesize\ttfamily,
+		%basicstyle=\texttt\small,
+    identifierstyle=\color{colIdentifier},
+    columns=flexible,
+    tabsize=2,
+    frame=bt,
+    extendedchars=true,
+    showspaces=false,
+    showstringspaces=false,    
+		numbers=left, %numbers=none,
+    numberstyle=\tiny,
+    breaklines=true,
+    breakautoindent=true,
+		captionpos=t,
+		xleftmargin=\fboxsep,
+		xrightmargin=\fboxsep,
+		frameround=tttt,
+		mathescape=true,
+		numberblanklines=false,
+}
+
+\lstdefinestyle{bash}{
+	language=bash,	
+	xleftmargin={1.0\parindent},
+	keywordstyle=\bfseries\color{black},
+	stringstyle=\color{black},
+	numbers=none,
+	frame=none,
+}
+
+
+\newcommand{\dollar}{\mbox{\textdollar}}
+
+% Kopf- und Fußzeilen
+\pagestyle{scrheadings}
+
+\clearscrheadfoot
+
+\lehead[]{\small{\textnormal{\headmark}}}
+%\rehead[]{\small{\textnormal{\pagemark}}}
+%\lohead[]{\small{\textnormal{\pagemark}}}
+\rohead[]{\small{\textnormal{\headmark}}}
+
+
+\ifoot[]{}
+\cfoot[\pagemark]{\pagemark}% Seitenzahl (c = centered) 
+\ofoot[]{}
+
+% Absätze
+\setlength{\parindent}{3ex}
+\setlength{\parskip}{0pt}
+
+% Zeilenabstand 
+\usepackage{setspace}            % Zeilenabstand einstellbar
+%\onehalfspacing                  % eineinhalbzeilig einstellen
+
+% Fußnoten
+\setlength{\footnotemargin}{0pt}
+
+% Einstellungen für die PDF-Erzeugung
+\hypersetup{
+colorlinks, % Auskommentieren zum Ausdrucken
+linkcolor=black,
+filecolor=black,
+urlcolor=black,
+citecolor=black
+}
+
+\def\topfraction{1.0} 
+\def\bottomfraction{1.0} 
+\def\textfraction{0.0}
+
+\renewcommand*{\partpagestyle}{empty}
+
+% Hurenkinder und Schusterjungen verhindern
+\clubpenalty10000
+\widowpenalty10000
+\displaywidowpenalty=10000
+
+\interfootnotelinepenalty=10000
+
+% Silbentrennung
+\hyphenation{
+  %
+	Lagrange
+	Schwenk-arm
+	Hufnagel
+	Reichert
+	Jacobi
+	Re-kon-fi-gu-ra-ti-ons-stra-te-gie
+	Surdilovic
+	Radojicic
+	LogistikRuhr
+	Bruckmann
+	Segesta
+	Um-lenk-rolle
+	pa-ral-lel-ki-ne-ma-tische
+	Ge-lenk-raum
+	an-ta-go-nis-tisch
+	an-ta-go-nis-tisch-en
+	Aug-ment-ed
+	Seil-aus-tritts-punk-te
+	Seil-füh-run-gen
+	Li-near-ein-heit	
+}
+
+% Römische Zahlen
+\newcommand{\rom}[1]{\MakeUppercase{\romannumeral #1}}
+
+% grid style
+\pgfplotsset{grid style={dotted,gray}}
+
+%pgf plots
+\usepgfplotslibrary{patchplots}

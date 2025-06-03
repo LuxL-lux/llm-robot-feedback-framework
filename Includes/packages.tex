@@ -1,0 +1,63 @@
+%% +++++++++++++++++++++++++++++++++
+%% Einbinden von Paketen
+%% +++++++++++++++++++++++++++++++++
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{ae,aecompl}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[german,ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{float}
+\usepackage[
+	pdfauthor={Vor- und Nachname},
+	pdftitle={Titel der Arbeit}, %mit Umlauten kann hyperref nicht wirklich umgehen
+	pdfsubject={Bachelor-/Master-Thesis, RUB},
+	hypertexnames=false,
+	pdfdisplaydoctitle
+]{hyperref}
+\usepackage{url}
+\usepackage[automark]{scrpage2} 
+\usepackage{bbm}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{pifont}
+\usepackage{placeins}
+\usepackage[]{caption}
+\usepackage[normal]{subfigure}
+\usepackage[percent]{overpic}
+\usepackage{multirow}
+\usepackage{pgfplots} 
+\usepackage{filecontents}
+\usepackage[bottom,hang]{footmisc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype} % Verbesserter Randausgleich bei Silbentrennung
+
+%Bib-LaTex (aus https://de.sharelatex.com/learn/biblatex_bibliography_styles)
+
+\usepackage[		
+	style=numeric, 	%stylename = {numeric, alphabetic, authoryear, authortitle, verbose, reading, draft} 
+	%sorting=none
+	sorting=nty,		%nty: Sort by name, title, year; % nyt: Sort by name, year, title.	
+	backend=biber,
+	maxcitenames=2,
+	maxbibnames=99,
+	natbib=true,
+	%citestyle=authoryear,
+	%bibstyle=authortitle,
+	%dashed=false,
+	%uniquelist=false,
+	%uniquename=false,
+	%urldate=comp,
+	%isbn=false,
+	%doi=false,
+]{biblatex}
+\bibliography{literatur} %where citavi_Export is the name of the bibliography .bib file (e.g. MRKLiteraturExport)

@@ -1,0 +1,105 @@
+%% +++++++++++++++++++++++++++++++++
+%% Setzen von scrreprt
+%% +++++++++++++++++++++++++++++++++
+\documentclass[
+12pt,
+titlepage,
+a4paper,
+abstracton,
+twoside,
+openright,
+chapterprefix,
+noappendixprefix,
+headsepline,
+cleardoubleplain,
+bibtotoc,
+pointlessnumbers
+]{scrreprt}
+
+
+%% +++++++++++++++++++++++++++++++++
+%% Includes
+%% +++++++++++++++++++++++++++++++++
+
+% Pakete
+\include{Includes/packages}
+
+% Neue Befehle
+\include{Includes/commands}
+
+% Header
+\include{Includes/header}
+
+
+
+%% +++++++++++++++++++++++++++++++++
+%% Start des Dokuments
+%% +++++++++++++++++++++++++++++++++
+
+\raggedbottom
+
+\begin{document}	
+	
+	% Titelseite
+	\include{Includes/titlepage}
+	\pagestyle{plain} 
+	
+	% Leere Seite
+	\newpage
+	\thispagestyle{empty}
+	\mbox{}
+	\newpage
+
+	% Schriftart der Überschriften
+	\addtokomafont{disposition}{\rmfamily}
+	
+	% Seitennummerierung
+	\pagenumbering{roman}
+	
+	% Vorwort
+	\include{Chapter/00-Vorwort}
+	
+	% Aufgabenstellung
+	\include{Chapter/00-Aufgabenstellung}
+	
+	% Kurzfassung
+	\include{Chapter/00-Kurzfassung}
+
+	% Inhaltsverzeichnis
+	\setcounter{tocdepth}{2}
+	\tableofcontents
+
+	% Leere Seite
+	\newpage
+	\thispagestyle{empty}
+	\mbox{}
+	\newpage
+	
+	% Hauptkapitel
+	\cleardoublepage
+	\pagenumbering{arabic}
+	\pagestyle{scrheadings}
+	\sloppy
+	
+	\include{Chapter/Chapter-01}
+	\include{Chapter/Chapter-02}
+	\include{Chapter/Chapter-03}
+
+	% Literaturverzeichnis
+	\nocite{*}
+	\printbibliography
+
+	% Abbildungsverzeichnis
+	\listoffigures
+	
+	% Tabellenverzeichnis
+	\listoftables	
+	
+	% Anhang
+	\include{Chapter/00-Anhang}
+	
+	% Eidesstaatliche Erklärung
+	\include{Chapter/00-Erklaerung}	
+
+
+\end{document}
