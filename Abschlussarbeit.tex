@@ -1,6 +1,3 @@
-%% +++++++++++++++++++++++++++++++++
-%% Setzen von scrreprt
-%% +++++++++++++++++++++++++++++++++
 \documentclass[
 12pt,
 titlepage,
@@ -17,19 +14,18 @@ pointlessnumbers
 ]{scrreprt}
 
 
-%% +++++++++++++++++++++++++++++++++
+%% ++++++++++++++++++++++++++++++++
 %% Includes
-%% +++++++++++++++++++++++++++++++++
+%% ++++++++++++++++++++++++++++++++
 
 % Pakete
-\include{Includes/packages}
+\input{Includes/packages}
 
 % Neue Befehle
-\include{Includes/commands}
+\input{Includes/commands}
 
 % Header
-\include{Includes/header}
-
+\input{Includes/header}
 
 
 %% +++++++++++++++++++++++++++++++++
@@ -38,12 +34,12 @@ pointlessnumbers
 
 \raggedbottom
 
-\begin{document}	
-	
+\begin{document}
+
 	% Titelseite
 	\include{Includes/titlepage}
-	\pagestyle{plain} 
-	
+	\pagestyle{plain}
+
 	% Leere Seite
 	\newpage
 	\thispagestyle{empty}
@@ -52,18 +48,12 @@ pointlessnumbers
 
 	% Schriftart der Überschriften
 	\addtokomafont{disposition}{\rmfamily}
-	
+
 	% Seitennummerierung
 	\pagenumbering{roman}
-	
+
 	% Vorwort
-	\include{Chapter/00-Vorwort}
-	
-	% Aufgabenstellung
-	\include{Chapter/00-Aufgabenstellung}
-	
-	% Kurzfassung
-	\include{Chapter/00-Kurzfassung}
+	\include{Chapter/0-Vorwort}
 
 	% Inhaltsverzeichnis
 	\setcounter{tocdepth}{2}
@@ -74,16 +64,20 @@ pointlessnumbers
 	\thispagestyle{empty}
 	\mbox{}
 	\newpage
-	
+
 	% Hauptkapitel
 	\cleardoublepage
 	\pagenumbering{arabic}
 	\pagestyle{scrheadings}
 	\sloppy
-	
-	\include{Chapter/Chapter-01}
-	\include{Chapter/Chapter-02}
-	\include{Chapter/Chapter-03}
+
+	% Hier die neuen Kapitel-Dateien einbinden
+	\include{Chapter/1-Einleitung}
+	\include{Chapter/2-Grundlagen}
+	\include{Chapter/3-Framework}
+	\include{Chapter/4-Untersuchung}
+	\include{Chapter/5-Ergebnisse}
+	\include{Chapter/6-Fazit}
 
 	% Literaturverzeichnis
 	\nocite{*}
@@ -91,15 +85,15 @@ pointlessnumbers
 
 	% Abbildungsverzeichnis
 	\listoffigures
-	
+
 	% Tabellenverzeichnis
-	\listoftables	
-	
+	\listoftables
+
 	% Anhang
-	\include{Chapter/00-Anhang}
-	
+	\include{Chapter/99-Anhang}
+
 	% Eidesstaatliche Erklärung
-	\include{Chapter/00-Erklaerung}	
+	\include{Chapter/00-Erklaerung}
 
 
 \end{document}

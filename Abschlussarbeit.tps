@@ -167,4 +167,3 @@ Cursor=6197
 [SessionInfo]
 FrameCount=9
 ActiveFrame=1
-

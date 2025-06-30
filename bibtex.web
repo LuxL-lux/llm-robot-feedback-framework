@@ -1,12 +1,12 @@
 % This program is copyright (C) 1985, 1988, 2010 by Oren Patashnik;
 % all rights are reserved.
-% 
+%
 % This program, BibTeX, is available under the same terms as
 % Donald Knuth's TeX program.
-% 
+%
 % (Request to implementors: The WEB system provides for alterations via
 % an auxiliary file; the master file should stay intact.)
-% 
+%
 % See Appendix H of the WEB manual for hints on how to install this program.
 
 % Version 0.98f was released in March 1985.

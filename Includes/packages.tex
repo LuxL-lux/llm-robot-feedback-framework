@@ -1,6 +1,3 @@
-%% +++++++++++++++++++++++++++++++++
-%% Einbinden von Paketen
-%% +++++++++++++++++++++++++++++++++
 \usepackage{longtable}
 \usepackage{geometry}
 \usepackage[utf8]{inputenc}
@@ -13,9 +10,10 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage[german,ngerman]{babel}
+\usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{rotating}
-\usepackage{float}
+\usepackage{tocbasic}
 \usepackage[
 	pdfauthor={Vor- und Nachname},
 	pdftitle={Titel der Arbeit}, %mit Umlauten kann hyperref nicht wirklich umgehen
@@ -24,7 +22,7 @@
 	pdfdisplaydoctitle
 ]{hyperref}
 \usepackage{url}
-\usepackage[automark]{scrpage2} 
+\usepackage[automark]{scrlayer-scrpage}
 \usepackage{bbm}
 \usepackage{array}
 \usepackage{booktabs}
@@ -35,7 +33,7 @@
 \usepackage[normal]{subfigure}
 \usepackage[percent]{overpic}
 \usepackage{multirow}
-\usepackage{pgfplots} 
+\usepackage{pgfplots}
 \usepackage{filecontents}
 \usepackage[bottom,hang]{footmisc}
 \usepackage[T1]{fontenc}
@@ -43,10 +41,10 @@
 
 %Bib-LaTex (aus https://de.sharelatex.com/learn/biblatex_bibliography_styles)
 
-\usepackage[		
-	style=numeric, 	%stylename = {numeric, alphabetic, authoryear, authortitle, verbose, reading, draft} 
+\usepackage[
+	style=numeric, 	%stylename = {numeric, alphabetic, authoryear, authortitle, verbose, reading, draft}
 	%sorting=none
-	sorting=nty,		%nty: Sort by name, title, year; % nyt: Sort by name, year, title.	
+	sorting=nty,		%nty: Sort by name, title, year; % nyt: Sort by name, year, title.
 	backend=biber,
 	maxcitenames=2,
 	maxbibnames=99,
