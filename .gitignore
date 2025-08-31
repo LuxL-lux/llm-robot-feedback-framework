@@ -46,4 +46,4 @@
 *.synctex
 
 build/
-.vscode/
+.vscode/*
