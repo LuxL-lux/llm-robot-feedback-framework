@@ -29,7 +29,6 @@
 *.nlo
 *.nls
 *.out
-*.pdf
 *.pyg
 *.run.xml
 *.snm
@@ -44,4 +43,7 @@
 *blx.bib
 .bak
 .mtc
+*.synctex
+
 build/
+.vscode/
