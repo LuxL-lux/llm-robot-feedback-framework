@@ -9,6 +9,8 @@
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 \usepackage[german,ngerman]{babel}
 \usepackage{csquotes}
 \usepackage{graphicx}
@@ -38,17 +40,16 @@
 \usepackage[bottom,hang]{footmisc}
 \usepackage[T1]{fontenc}
 \usepackage{microtype} % Verbesserter Randausgleich bei Silbentrennung
+\usepackage{tikz}
+\usepackage{dirtree}
 
+\usetikzlibrary{shapes.geometric, arrows, arrows.meta, fit, positioning, backgrounds, shadows}
 %Bib-LaTex (aus https://de.sharelatex.com/learn/biblatex_bibliography_styles)
 
 \usepackage[
 	style=numeric, 	%stylename = {numeric, alphabetic, authoryear, authortitle, verbose, reading, draft}
 	%sorting=none
-	sorting=nty,		%nty: Sort by name, title, year; % nyt: Sort by name, year, title.
-	backend=biber,
-	maxcitenames=2,
-	maxbibnames=99,
-	natbib=true,
+	sorting=nty, backend=biber, maxcitenames=2, maxbibnames=99, natbib=true,%nty: Sort by name, title, year; % nyt: Sort by name, year, title.
 	%citestyle=authoryear,
 	%bibstyle=authortitle,
 	%dashed=false,

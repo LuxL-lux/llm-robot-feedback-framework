@@ -1,8 +1,168 @@
-\chapter{Konzeption und Implementierung des Analyse-Frameworks in Unity}
+\chapter{Methodik und Implementierung}
 \label{cap:Framework}
 
-\section{Architektur des Frameworks}
-\label{sec:Architektur_Framework}
+% Was sind die Anforderungen an meine Anwendung?
+% Wie wird diese Implementiert?
+% Welche Muss und Soll Anforderungen lassen sich definieren?
+
+\section{Systemarchitektur und Design}
+
+\subsection{Architekturübersicht}
+\label{sec:architektur_uebersicht}
+
+Die Systemarchitektur des entwickelten Roboter-Kommunikationsframeworks folgt
+einer mehrschichtigen Architektur (Layered Architecture), die eine klare
+Trennung von Verantwortlichkeiten und eine hohe Modularität gewährleistet
+\cite{Bass2012, Fowler2002}. Diese architektonische Entscheidung basiert auf
+etablierten Softwarearchitekturprinzipien und ermöglicht die Realisierung eines
+erweiterbaren, wartbaren und testbaren Systems für die Integration heterogener
+Robotersysteme.
+
+\subsection{Unity3D als Simulationsplattform}
+Die Wahl von Unity3D als zugrundeliegende Simulationsplattform basiert auf
+mehreren technischen und praktischen Erwägungen. Während es bereits mehrere
+kommerzielle Programme für die Gestaltung und Simulation von Robotern in
+virtuellen Umgebungen gibt - wie Robcad, Robotstudio, Igrip, Workcell und
+Gazebo - sind nicht alle Programme mit anderen CAD-Systemen kompatibel,
+unterstützen nicht alle Roboterbibliotheken oder andere Elemente, und einige
+werden nicht unter Windows vertrieben (vgl.\cite{andaluz:16}). Unity3D hingegen
+ist mit den meisten CAD-Systemen kompatibel und bietet eine
+plattformübergreifende Lösung. Unity3D bietet eine ausgereifte
+3D-Rendering-Pipeline mit integrierter Physik-Engine (PhysX), welche zur
+Simulation von Gegenständen mit realitätsnahem Verhalten sowie komplexen
+Arbeitsräumen geeignet ist. Die Engine wurde bereits erfolgreich in der
+wissenschaftlichen Forschung eingesetzt und bietet Module und Plugins für
+spezifische Anwendungsfälle im Simulationsbereich. Unity3D ermöglicht es auch
+Nicht-Programmierern, leistungsstarke Animations- und Interaktionsdesign-Tools
+zu nutzen, um Roboter visuell zu programmieren und zu animieren (vgl.
+\cite{bartneck:15}).\newline Technisch ermöglicht Unity3D durch seine
+Scripting-Runtime (basierend auf Mono/.NET) die Verwendung moderner
+C\#-Sprachfeatures für nebenläufige Prozesse und asynchroner Programmierung,
+was es ermöglicht, Prozesse in Nahe-Echtzeit darzustellen und zu überwachen.
+Ein entscheidender Vorteil für die Robotik-Simulation liegt in der
+Verfügbarkeit visueller Programmiertools. Die Plattform bietet umfangreiche
+Debugging- und Profiling-Werkzeuge, die während der Entwicklung und zur
+Laufzeit genutzt werden können. Darüber hinaus lassen sich während der Laufzeit
+die Szene (hier: der Arbeitsraum) bearbeiten und aktuelle Parameter einsehen,
+was besonders für die iterative Entwicklung und das Testen ist.
+
+\subsubsection{Abhängigkeitsverwaltung und Modularität}
+
+\subsection{Design Patterns und Prinzipien}
+
+\subsection{Modularitäts- und Erweiterbarkeitskonzept}
+
+Die Architektur des entwickelten Systems folgt einem konsequenten
+Modularitätskonzept, das auf drei zentralen Säulen basiert: einer
+Plugin-Architektur für die Integration neuer Robotertypen, einer durchgängigen
+Interface-basierten Abstraktion sowie einer hierarchischen Namespace-Struktur.
+Diese Designentscheidungen ermöglichen die Erweiterung des Frameworks ohne
+Modifikation bestehender Komponenten und erfüllen damit das Open-Closed-Prinzip
+\cite{martin2003agile}.
+
+\subsubsection{Plugin-Architektur für Robotertypen}
+
+Das Framework implementiert eine Plugin-basierte Architektur, die es
+ermöglicht, neue Robotertypen ohne Änderungen am Core-System zu integrieren.
+Jeder Robotertyp wird in einem eigenen Namespace-Verzeichnis gekapselt (z.B.
+\texttt{RobotSystem/ABB/} für ABB-Roboter), wobei die Integration
+ausschließlich über standardisierte Interfaces erfolgt. Diese Architektur folgt
+dem Konzept der \emph{Dependency Inversion} \cite{martin2000design}, bei der
+High-Level-Module (wie der \texttt{RobotManager}) nicht von Low-Level-Modulen
+(spezifische Roboter-Implementierungen) abhängen, sondern beide von
+Abstraktionen.
+
+Die Vorteile dieser Architektur zeigen sich besonders bei der Integration neuer
+Roboterhersteller. So könnte beispielsweise ein KUKA-Roboter durch einfaches
+Hinzufügen eines \texttt{RobotSystem/KUKA/} Verzeichnisses mit entsprechenden
+Interface-Implementierungen integriert werden, ohne dass bestehende
+ABB-Implementierungen oder Core-Komponenten modifiziert werden müssten. Dies
+reduziert das Risiko von Regressionsfehlern und ermöglicht parallele
+Entwicklung verschiedener Roboter-Integrationen \cite{gamma1995design}.
+
+\subsubsection{Interface-basierte Abstraktion}
+
+Die Abstraktion erfolgt über vier zentrale Interface-Definitionen, die als
+Kontrakte zwischen den Systemkomponenten fungieren:
+
+\begin{itemize}
+    \item \textbf{IRobotConnector}: Definiert die Schnittstelle für Roboterverbindungen, unabhängig vom Kommunikationsprotokoll
+    \item \textbf{IRobotSafetyMonitor}: Standardisiert die Integration von Sicherheitsmonitoren
+    \item \textbf{IRobotDataParser}: Ermöglicht austauschbare Parser für verschiedene Datenformate
+    \item \textbf{IRobotVisualization}: Abstrahiert Visualisierungssysteme
+\end{itemize}
+
+Diese Interface-Segregation \cite{martin2003agile} stellt sicher, dass
+Komponenten nur von den tatsächlich benötigten Abstraktionen abhängen. Der
+\texttt{RobotManager} beispielsweise arbeitet ausschließlich mit der
+\texttt{IRobotConnector}-Schnittstelle und ist damit vollständig entkoppelt von
+spezifischen Implementierungsdetails wie WebSocket-Protokollen oder
+HTTP-Polling-Mechanismen.
+
+Die Verwendung des Strategy-Patterns \cite{gamma1995design} für die
+Safety-Monitore ermöglicht es, verschiedene Überwachungsalgorithmen zur
+Laufzeit auszutauschen. So implementieren sowohl
+\texttt{CollisionDetectionMonitor} als auch
+\texttt{SingularityDetectionMonitor} das
+\texttt{IRobotSafetyMonitor}-Interface, können aber völlig unterschiedliche
+Detektionsstrategien verwenden. Diese Flexibilität ist essentiell für die
+Anpassung an verschiedene Sicherheitsanforderungen und Industrienormen.
+
+\subsubsection{Namespace-Struktur und Paketierung}
+
+Die hierarchische Namespace-Struktur folgt dem Prinzip der \emph{Package by
+    Feature} \cite{uncle2012clean}, wobei funktional zusammengehörige Komponenten
+in gemeinsamen Namespaces organisiert sind:
+
+\dirtree{%
+    .1 RobotSystem/.
+    .2 Core/.
+    .2 Interfaces/.
+    .2 ABB/.
+    .3 RWS/.
+    .2 Safety/.
+}
+
+Diese Struktur bietet mehrere Vorteile für die Wartbarkeit und Erweiterbarkeit:
+
+\begin{enumerate}
+    \item \textbf{Klare Verantwortlichkeiten}: Jeder Namespace hat eine eindeutig definierte Zuständigkeit
+    \item \textbf{Minimale Kopplung}: Abhängigkeiten verlaufen nur von spezifischen zu allgemeinen Namespaces
+    \item \textbf{Einfache Navigation}: Die Struktur spiegelt die konzeptuelle Architektur wider
+    \item \textbf{Versionierbarkeit}: Herstellerspezifische Implementierungen können unabhängig versioniert werden
+\end{enumerate}
+
+Die Verwendung von Unity-spezifischen Meta-Dateien (\texttt{.meta}) in
+Kombination mit der Namespace-Struktur ermöglicht zudem die nahtlose
+Integration in die Unity-Engine, wobei die logische Strukturierung auch auf
+Dateisystemebene erhalten bleibt. Dies erleichtert die Zusammenarbeit in Teams
+und die Versionskontrolle mit Git \cite{chacon2014pro}.
+
+Das Modularitätskonzept zeigt sich auch in der Möglichkeit, einzelne Module als
+Unity-Packages zu exportieren und in anderen Projekten wiederzuverwenden. Die
+strikte Einhaltung der Interface-Kontrakte garantiert dabei die Kompatibilität
+zwischen verschiedenen Versionen und Konfigurationen des Systems.
+
+Ein zentrales Architekturprinzip des Frameworks ist die konsequente Anwendung
+der Dependency Inversion \cite{Martin1996}. Konkrete Implementierungen hängen
+von abstrakten Interfaces ab, nicht von anderen konkreten Klassen. Dies wird
+durch die Definition der Kerninterfaces \texttt{IRobotConnector},
+\texttt{IRobotSafetyMonitor} und \texttt{IRobotVisualization} erreicht, die als
+Kontraktdefinitionen zwischen den Schichten fungieren.
+
+Die Interfaces definieren dabei nicht nur die Methodensignaturen, sondern
+etablieren auch semantische Kontrakte im Sinne des Design by Contract
+\cite{Meyer1992}. Beispielsweise garantiert das
+\texttt{IRobotConnector}-Interface, dass Zustandsänderungen über Events
+propagiert werden und dass die Verbindung idempotent hergestellt und getrennt
+werden kann.
+
+Die lose Kopplung ermöglicht es, verschiedene Robotertypen durch Implementation
+des \texttt{IRobotConnector}-Interfaces zu unterstützen, ohne Änderungen am
+Kern des Frameworks vornehmen zu müssen. Dies demonstriert die Erweiterbarkeit
+der Architektur und validiert die Designentscheidung für eine
+interface-basierte Abstraktion \cite{Liskov1987}.
+
 % Definition der Schnittstellen (ABB Rapid, virtuelle Steuerung)...
 % Modulare Struktur (Datenakquise, Analyse-Engine, Output-Generator)...
 
@@ -13,12 +173,121 @@
 \subsection{Prozessfolgen}
 \label{ssec:Prozessfolgen}
 % Überprüfung der korrekten Abfolge von Aktionen...
+User Input: Simulationsumgebung und Verbindung zu Robot Studio
+
+Wie kann ich Prozessfolgen überprüfen? Prozessfolge: Folge and Arbeitsschritten
+eines Arbeitsprozesses, hier Roboter -> Was wird in welcher Reihenfolge wohin
+bewegt? Wie kann ich das Messen? - Bewegt sich das Werkstück von Position Start
+zu Position Ziel? - Bewegen sich die Werkstücke in der richtigen Reihenfolge
+von Start zu Ziel? Benötigt: Definition von Start \& Zielpositionen einzelner
+Werkstücke
+
+\subsection{Prozesszeiten}
+\label{ssec:Prozesszeiten}
+% Messung und Bewertung von Zyklus- und Wartezeiten...
 \subsection{Kollisionserkennung}
 \label{ssec:Kollisionserkennung}
 % Detektion von Kollisionen...
 \subsection{Singularitäten und Gelenkgrenzen}
 \label{ssec:Singularitaeten}
-% Analyse auf kinematische Problemstellungen...
-\subsection{Prozesszeiten}
-\label{ssec:Prozesszeiten}
-% Messung und Bewertung von Zyklus- und Wartezeiten...
+
+Die Erkennung und Vermeidung von Singularitäten stellt einen kritischen Aspekt
+bei der Robotersteuerung dar, da diese zu einem Verlust der Kontrollierbarkeit
+und potentiell gefährlichen Situationen führen können. Das entwickelte
+Framework implementiert eine geometrisch fundierte Methode zur
+Echtzeitdetektion von Singularitäten basierend auf der Kollinearitätsanalyse
+der Gelenkachsen.
+
+\subsubsection{Theoretische Grundlagen der Singularitätsdetektion}
+\label{sssec:Theorie_Singularitaeten}
+Was sind Singularitäten, wo treten sie auf?
+Ab wann treten Singularitaeten auf, gibt es Schwellwerte, was ist die manipulability?
+Was sind die Folgen von Singularitaeten?
+
+Eine kinematische Singularität tritt auf, wenn die Jacobi-Matrix des Roboters
+ihren vollen Rang verliert, mathematisch ausgedrückt durch:
+\begin{equation}
+    \text{rank}(\mathbf{J}(\boldsymbol{\theta})) < \min(m, n)
+    \label{eq:singularity_condition}
+\end{equation}
+wobei $\mathbf{J}(\boldsymbol{\theta}) \in \mathbb{R}^{m \times n}$ die Jacobi-Matrix, $\boldsymbol{\theta}$ der Gelenkwinkelvektor, $m$ die Anzahl der Freiheitsgrade im kartesischen Raum und $n$ die Anzahl der Robotergelenke darstellt.
+
+Für serielle Robotermanipulatoren mit sechs Freiheitsgraden (wie ABB
+IRB-Roboter) können drei primäre Singularitätstypen unterschieden werden:
+
+\paragraph{Boundary Singularities (Randsingularitäten):}
+Treten auf, wenn der Roboter die Grenzen seines Arbeitsraums erreicht,
+typischerweise bei vollständig ausgestreckter Konfiguration.
+
+\paragraph{Wrist Singularities (Handgelenksingularitäten):}
+Entstehen, wenn die Rotationsachsen der letzten drei Gelenke (Gelenke 4, 5, 6)
+kollinear werden. Mathematisch beschrieben durch:
+\begin{equation}
+    \mathbf{z}_4 \parallel \mathbf{z}_6 \text{ oder } |\mathbf{z}_4 \cdot \mathbf{z}_6| \approx 1
+    \label{eq:wrist_singularity}
+\end{equation}
+wobei $\mathbf{z}_i$ die Rotationsachse (Z-Achse) des $i$-ten Gelenks im Weltkoordinatensystem darstellt.
+
+\paragraph{Elbow Singularities (Ellbogensingularitäten):}
+\subsubsection{Implementierung der achsenbasierten Singularitätserkennung}
+\label{sssec:Implementierung_Singularitaeten}
+
+Das Framework nutzt die räumlichen Transformationen des Flange-Systems, um die
+aktuellen Gelenkachsenorientierungen zu bestimmen. Der implementierte
+Algorithmus basiert auf der geometrischen Analyse der Achsenkollinearität:
+
+\subsubsection{Achsenbasierte Singularitätsdetektion}
+\label{alg:singularity_detection}
+Die Schwellwerte sind konfigurierbar definiert als:
+\begin{align}
+    \tau_{\text{wrist}}    & = 0.98 \quad (\cos(11.5^\circ)) \\
+    \tau_{\text{shoulder}} & = 0.93 \quad (\cos(22^\circ))   \\
+    \tau_{\text{general}}  & = 0.95 \quad (\cos(18^\circ))
+\end{align}
+
+\subsubsection{Praktische Implementierung im Unity-Framework}
+\label{sssec:Unity_Implementierung}
+
+Die Singularitätsdetektion ist in der Klasse \texttt{RobotSafetyMonitor}
+implementiert und nutzt die Flange-Bibliothek zur Transformation der
+Gelenkachsen. Der zentrale Algorithmus wird in der Methode
+\texttt{DetectSingularityByAxes()} realisiert:
+
+\subsubsection{Anwendungsbeispiel: ABB IRB120 Handgelenksingularität}
+\label{sssec:Beispiel_IRB120}
+
+Zur Veranschaulichung der Funktionsweise wird eine typische
+Handgelenksingularität des ABB IRB120 betrachtet:
+
+\textbf{Ausgangssituation:} Der Roboter befindet sich in einer Konfiguration, bei der Gelenk 5 ($\theta_5$) nahe null Grad steht. In dieser Position werden die Rotationsachsen der Gelenke 4 und 6 nahezu kollinear.
+
+\textbf{Geometrische Analyse:}
+\begin{itemize}
+    \item Gelenk 4 Achse: $\mathbf{z}_4 = [0.866, 0.5, 0]^T$
+    \item Gelenk 6 Achse: $\mathbf{z}_6 = [0.848, 0.530, 0]^T$
+    \item Skalarprodukt: $|\mathbf{z}_4 \cdot \mathbf{z}_6| = 0.999$
+\end{itemize}
+
+\textbf{Detektionsergebnis:}
+Da $0.999 > \tau_{\text{wrist}} = 0.98$ erfüllt ist, wird eine Handgelenksingularität detektiert. Die berechnete Manipulierbarkeit ergibt sich zu:
+\begin{equation}
+    \mu = 1 - \frac{0.999 - 0.98}{1 - 0.98} \cdot 0.95 = 0.095
+\end{equation}
+
+Das System protokolliert: \textit{"Wrist Singularity (J4-J6 aligned)"} mit
+einer Manipulierbarkeit von 0.095, was unterhalb des kritischen Schwellwerts
+von 0.1 liegt.
+
+\textbf{Vorteil gegenüber heuristischen Methoden:}
+Im Gegensatz zu vereinfachten trigonometrischen Approximationen nutzt die achsenbasierte Methode die tatsächlichen räumlichen Transformationen der Robotergelenke. Dies ermöglicht eine präzise, konfigurationsunabhängige Detektion, die auch bei komplexeren Robotergeometrien und verschiedenen Herstellern funktioniert.
+
+Die implementierte Lösung bietet folgende Eigenschaften:
+\begin{itemize}
+    \item \textbf{Echtzeitfähigkeit:} Berechnung erfolgt mit 5 Hz Aktualisierungsrate
+    \item \textbf{Typenspezifisch:} Unterscheidung verschiedener Singularitätsarten
+    \item \textbf{Konfigurierbar:} Anpassbare Schwellwerte je Singularitätstyp
+    \item \textbf{Herstellerunabhängig:} Funktioniert mit allen Flange-unterstützten Robotern
+\end{itemize}
+
+\section{Testszenario}
+\subsection{Versuchsaufbau}
