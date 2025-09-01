@@ -47,8 +47,9 @@
 %Bib-LaTex (aus https://de.sharelatex.com/learn/biblatex_bibliography_styles)
 
 \usepackage[
-	style=numeric, 	%stylename = {numeric, alphabetic, authoryear, authortitle, verbose, reading, draft}
-	%sorting=none
+	backend=biber,
+	style=authoryear-comp, 	%stylename = {numeric, alphabetic, authoryear, authortitle, verbose, reading, draft}
+	natbib=true,%sorting=none
 	sorting=nty, backend=biber, maxcitenames=2, maxbibnames=99, natbib=true,%nty: Sort by name, title, year; % nyt: Sort by name, year, title.
 	%citestyle=authoryear,
 	%bibstyle=authortitle,

@@ -1,0 +1,389 @@
+\subsection{Singularitäten}
+\label{ssec:Singularitaeten}
+
+\subsubsection{Theoretische Grundlagen der Singularitätsdetektion}
+\label{sssec:Theorie_Singularitaeten}
+
+Kinematische Singularitäten stellen ein fundamentales Problem in der
+Robotersteuerung dar und treten auf, wenn die Jacobi-Matrix des Roboters ihren
+vollen Rang verliert. In diesen Konfigurationen verliert der Roboter die
+Fähigkeit, sich in bestimmte Richtungen im kartesischen Raum zu bewegen, was zu
+Kontrollverlust und potentiell gefährlichen Situationen führen kann
+\cite{siciliano2010robotics, craig2005introduction}.
+
+\paragraph{Mathematische Definition}
+Eine kinematische Singularität tritt auf, wenn die Jacobi-Matrix des Roboters
+ihren vollen Rang verliert:
+\begin{equation}
+    \text{rank}(\mathbf{J}(\boldsymbol{\theta})) < \min(m, n)
+    \label{eq:singularity_condition}
+\end{equation}
+wobei $\mathbf{J}(\boldsymbol{\theta}) \in \mathbb{R}^{m \times n}$ die Jacobi-Matrix, $\boldsymbol{\theta}$ der Gelenkwinkelvektor, $m$ die Anzahl der Freiheitsgrade im kartesischen Raum und $n$ die Anzahl der Robotergelenke darstellt.
+
+Die Jacobi-Matrix beschreibt die Beziehung zwischen Gelenkgeschwindigkeiten
+$\dot{\boldsymbol{\theta}}$ und kartesischen Geschwindigkeiten des TCP
+$\mathbf{v}$:
+\begin{equation}
+    \mathbf{v} = \mathbf{J}(\boldsymbol{\theta}) \dot{\boldsymbol{\theta}}
+    \label{eq:jacobian_velocity}
+\end{equation}
+
+Tritt eine Singularität auf, so wird die Jacobi-Matrix singulär.
+\begin{equation}
+    \det(\mathbf{J}) = 0
+    \label{eq:jacobian_singularity}
+\end{equation}
+Dadurch wird die inverse Kinematik nicht eindeutig lösbar
+ist und es können theoretisch unendliche Gelenkgeschwindigkeiten auftreten (vgl. \cite{nakamura1991advanced}).
+
+\paragraph{Auswirkungen auf die Robotersteuerung}
+Singularitäten haben mehrere kritische Auswirkungen auf die Robotersteuerung:
+
+\begin{itemize}
+    \item \textbf{Kontrollverlust}: Verlust der Beweglichkeit in bestimmten kartesischen Richtungen
+    \item \textbf{Numerische Instabilität}: Große Konditionszahlen führen zu numerischen Problemen bei der inversen Kinematik
+    \item \textbf{Hohe Gelenkgeschwindigkeiten}: Kleine kartesische Bewegungen können große Gelenkbewegungen erfordern
+    \item \textbf{Sicherheitsrisiken}: Unkontrollierte Bewegungen können zu Kollisionen oder Beschädigungen führen
+\end{itemize}
+
+\paragraph{Klassifikation der Singularitätstypen}
+Für serielle Robotermanipulatoren mit sechs Freiheitsgraden (wie ABB
+IRB-Roboter) können drei primäre Singularitätstypen unterschieden werden
+\cite{spong2006robot}:
+
+\paragraph{Boundary Singularities (Randsingularitäten):}
+Treten auf, wenn der Roboter die Grenzen seines Arbeitsraums erreicht,
+typischerweise bei vollständig ausgestreckter oder eingeklappter Konfiguration.
+Mathematisch charakterisiert durch:
+\begin{equation}
+    \sum_{i=1}^{3} a_i \cos(\theta_i) + d_4 = R_{\text{max/min}}
+    \label{eq:boundary_singularity}
+\end{equation}
+wobei $a_i$ die DH-Parameter-Längen, $d_4$ der Offset und $R_{\text{max/min}}$ die maximale/minimale Reichweite darstellen.
+
+\paragraph{Wrist Singularities (Handgelenksingularitäten):}
+Entstehen, wenn die Rotationsachsen der letzten drei Gelenke (Gelenke 4, 5, 6)
+kollinear werden. Dies tritt typischerweise auf, wenn $\theta_5 = 0°$ oder
+$\theta_5 = 180°$. Mathematisch beschrieben durch:
+\begin{equation}
+    \mathbf{z}_4 \parallel \mathbf{z}_6 \text{ oder } |\mathbf{z}_4 \cdot \mathbf{z}_6| \approx 1
+    \label{eq:wrist_singularity}
+\end{equation}
+wobei $\mathbf{z}_i$ die Rotationsachse (Z-Achse) des $i$-ten Gelenks im Weltkoordinatensystem darstellt.
+
+\paragraph{Elbow Singularities (Ellbogensingularitäten):}
+Treten auf, wenn der Roboterarm vollständig gestreckt oder eingeklappt ist,
+sodass die ersten drei Gelenke kollinear werden. Charakterisiert durch:
+\begin{equation}
+    \sin(\theta_3) = 0 \text{ oder } \theta_2 + \theta_3 = 0°/180°
+    \label{eq:elbow_singularity}
+\end{equation}
+\subsubsection{Standardmetriken und Bewertungsverfahren}
+\label{sssec:Singularitaets_Metriken}
+
+Zur quantitativen Bewertung von Singularitäten haben sich in der Robotik
+verschiedene Metriken etabliert, die jeweils unterschiedliche Aspekte der
+kinematischen Eigenschaften erfassen.
+
+\paragraph{Manipulierbarkeitsindex (Yoshikawa-Maß)}
+Der von Yoshikawa \cite{yoshikawa1985manipulability} eingeführte
+Manipulierbarkeitsindex ist eine der am häufigsten verwendeten Metriken:
+\begin{equation}
+    \mu(\boldsymbol{\theta}) = \sqrt{\det(\mathbf{J}(\boldsymbol{\theta})\mathbf{J}^T(\boldsymbol{\theta}))}
+    \label{eq:yoshikawa_measure}
+\end{equation}
+
+Für quadratische Jacobi-Matrizen vereinfacht sich dies zu:
+\begin{equation}
+    \mu(\boldsymbol{\theta}) = |\det(\mathbf{J}(\boldsymbol{\theta}))|
+    \label{eq:yoshikawa_simplified}
+\end{equation}
+
+Der Index nimmt Werte zwischen 0 (Singularität) und einem maximalen Wert an,
+wobei höhere Werte bessere Manipulierbarkeit indizieren.
+
+\paragraph{Konditionszahl der Jacobi-Matrix}
+Die Konditionszahl quantifiziert die numerische Stabilität der inversen
+Kinematik:
+\begin{equation}
+    \kappa(\mathbf{J}) = \frac{\sigma_{\text{max}}(\mathbf{J})}{\sigma_{\text{min}}(\mathbf{J})}
+    \label{eq:condition_number}
+\end{equation}
+wobei $\sigma_{\text{max}}$ und $\sigma_{\text{min}}$ die größten und kleinsten Singulärwerte der Jacobi-Matrix darstellen. Werte nahe 1 indizieren gute Konditionierung, während große Werte ($\kappa > 10^6$) auf Singularitätsnähe hinweisen.
+
+\paragraph{Determinanten-basierte Ansätze}
+Neben dem Yoshikawa-Maß werden häufig normalisierte Determinanten verwendet:
+\begin{equation}
+    \mu_{\text{norm}}(\boldsymbol{\theta}) = \frac{|\det(\mathbf{J}(\boldsymbol{\theta}))|}{\prod_{i=1}^{n} \|\mathbf{j}_i\|}
+    \label{eq:normalized_determinant}
+\end{equation}
+wobei $\mathbf{j}_i$ die $i$-te Spalte der Jacobi-Matrix darstellt.
+
+\paragraph{Vergleich der Detektionsmetriken}
+Die verschiedenen Metriken haben unterschiedliche Eigenschaften:
+
+\begin{itemize}
+    \item \textbf{Yoshikawa-Maß}: Geometrisch interpretierbar, aber skalierungsabhängig
+    \item \textbf{Konditionszahl}: Numerisch robust, aber rechenintensiv
+    \item \textbf{Normalisierte Determinante}: Skalierungsunabhängig, aber komplexer zu berechnen
+    \item \textbf{Achsenbasierte Methoden}: Geometrisch intuitiv, echtzeitfähig
+\end{itemize}
+
+\subsubsection{Bestehende Lösungsansätze}
+\label{sssec:Literatur_Loesungsansaetze}
+
+Die Robotik-Literatur bietet verschiedene Ansätze zur Behandlung von
+Singularitäten, die sich in präventive und reaktive Strategien unterteilen
+lassen.
+
+\paragraph{Singularitätsvermeidung durch Pfadplanung}
+Präventive Ansätze vermeiden Singularitäten bereits in der Pfadplanungsphase:
+
+\begin{itemize}
+    \item \textbf{Konfigurationsraum-Methoden}: Identifikation singularitätsfreier Pfade im Gelenkraum \cite{latombe1991robot}
+    \item \textbf{Manipulierbarkeits-optimierte Planung}: Maximierung der Manipulierbarkeit entlang des Pfades \cite{vahrenkamp2009manipulability}
+    \item \textbf{Redundanz-basierte Vermeidung}: Nutzung kinematischer Redundanz zur Singularitätsvermeidung \cite{siciliano1990kinematically}
+\end{itemize}
+
+\paragraph{Damped Least Squares Methoden}
+Reaktive Ansätze behandeln Singularitäten durch modifizierte inverse Kinematik:
+\begin{equation}
+    \dot{\boldsymbol{\theta}} = (\mathbf{J}^T\mathbf{J} + \lambda^2\mathbf{I})^{-1}\mathbf{J}^T\mathbf{v}
+    \label{eq:damped_least_squares}
+\end{equation}
+wobei $\lambda$ der Dämpfungsparameter ist, der adaptiv basierend auf der Singularitätsnähe angepasst wird \cite{nakamura1986inverse}.
+
+\paragraph{Singularity-robust inverse Kinematik}
+Erweiterte Methoden kombinieren verschiedene Techniken:
+
+\begin{itemize}
+    \item \textbf{Selectively Damped Least Squares}: Richtungsabhängige Dämpfung \cite{buss2004selectively}
+    \item \textbf{Jacobian Transpose Methods}: Alternative zur Pseudoinversen \cite{wolovich1984computational}
+    \item \textbf{Task Priority Methods}: Hierarchische Aufgabenbehandlung \cite{siciliano1991general}
+\end{itemize}
+
+\paragraph{Industrielle Implementierungen}
+Kommerzielle Robotersysteme nutzen herstellerspezifische Ansätze:
+
+\begin{itemize}
+    \item \textbf{ABB}: Adaptive Geschwindigkeitsreduktion und Warnungen bei Singularitätsnähe
+    \item \textbf{KUKA}: Singularitätsvermeidung durch alternative Konfigurationen
+    \item \textbf{Fanuc}: Kombinierte Pfadplanung und Echtzeitüberwachung
+    \item \textbf{Universal Robots}: Kollaborative Singularitätsbehandlung mit Bedienerinteraktion
+\end{itemize}
+
+\subsubsection{Framework-spezifische Implementierung}
+\label{sssec:Framework_Implementierung}
+
+Das entwickelte Framework implementiert eine neuartige achsenbasierte
+Singularitätsdetektion, die geometrische Eigenschaften der Roboterkinematik
+direkt nutzt, anstatt auf rechenintensive Jacobi-Matrix-Berechnungen angewiesen
+zu sein.
+
+\paragraph{Mathematische Herleitung der achsenbasierten Methode}
+Die achsenbasierte Methode basiert auf der Erkenntnis, dass Singularitäten
+geometrisch durch die Kollinearität von Rotationsachsen charakterisiert werden
+können. Für einen 6R-Roboter mit sphärischem Handgelenk lässt sich zeigen,
+dass:
+
+Für Handgelenksingularitäten gilt:
+\begin{equation}
+    \text{rank}(\mathbf{J}_{\text{wrist}}) < 3 \Leftrightarrow \mathbf{z}_4 \parallel \mathbf{z}_6
+    \label{eq:wrist_rank_condition}
+\end{equation}
+
+Die Kollinearität wird über das normalisierte Skalarprodukt quantifiziert:
+\begin{equation}
+    c_{46} = \frac{|\mathbf{z}_4 \cdot \mathbf{z}_6|}{\|\mathbf{z}_4\| \|\mathbf{z}_6\|} = |\cos(\alpha_{46})|
+    \label{eq:collinearity_measure}
+\end{equation}
+wobei $\alpha_{46}$ der Winkel zwischen den Achsen ist.
+
+Für Schultersingularitäten wird die Distanz zwischen Schulter- und
+Handgelenkzentrum analysiert:
+\begin{equation}
+    d_{\text{shoulder}} = \|\mathbf{p}_{\text{wrist}} - \mathbf{p}_{\text{shoulder}}\|
+    \label{eq:shoulder_distance}
+\end{equation}
+
+Die Singularitätsnähe wird durch einen kontinuierlichen Manipulierbarkeitsindex
+approximiert:
+\begin{equation}
+    \mu_{\text{approx}} = \begin{cases}
+        1 - \frac{c_{46} - \tau_{\text{wrist}}}{1 - \tau_{\text{wrist}}} \cdot \alpha_{\text{scale}} & \text{wenn } c_{46} > \tau_{\text{wrist}} \\
+        1.0                                                                                          & \text{sonst}
+    \end{cases}
+    \label{eq:manipulability_approximation}
+\end{equation}
+
+\paragraph{Algorithmus-Analyse des SingularityDetectionMonitor}
+Der \texttt{SingularityDetectionMonitor} implementiert einen effizienten
+Echtzeit-Algorithmus mit folgender Struktur:
+
+\textbf{Schritt 1: Achsentransformation}
+Die aktuellen Gelenkachsen werden aus den Flange-Transformationsmatrizen extrahiert:
+\begin{equation}
+    \mathbf{z}_i = \mathbf{T}_i[:3, 2] \quad \text{für } i = 1, \ldots, 6
+    \label{eq:axis_extraction}
+\end{equation}
+
+\textbf{Schritt 2: Kollinearitätsanalyse}
+Für jedes relevante Achsenpaar wird die Kollinearität berechnet:
+\begin{align}
+    c_{14} & = |\mathbf{z}_1 \cdot \mathbf{z}_4| \quad \text{(Schultersingularität)}   \\
+    c_{46} & = |\mathbf{z}_4 \cdot \mathbf{z}_6| \quad \text{(Handgelenksingularität)} \\
+    c_{25} & = |\mathbf{z}_2 \cdot \mathbf{z}_5| \quad \text{(Ellbogensingularität)}
+\end{align}
+
+\textbf{Schritt 3: Schwellwertvergleich und Klassifikation}
+Die berechneten Kollinearitätswerte werden mit konfigurierbaren Schwellwerten verglichen:
+\begin{align}
+    \tau_{\text{wrist}}    & = 0.98 \quad (\cos(11.5°)) \\
+    \tau_{\text{shoulder}} & = 0.93 \quad (\cos(22°))   \\
+    \tau_{\text{elbow}}    & = 0.95 \quad (\cos(18°))
+\end{align}
+
+\textbf{Schritt 4: Manipulierbarkeitsberechnung}
+Für detektierte Singularitäten wird ein approximativer Manipulierbarkeitsindex berechnet, der die Nähe zur Singularität quantifiziert.
+
+\paragraph{Praktische Umsetzung in Unity}
+Die Integration in Unity erfolgt über das Flange-Framework mit folgenden
+Optimierungen:
+
+\begin{itemize}
+    \item \textbf{Frame-Rate-Optimierung}: Berechnung mit 5 Hz zur Balance zwischen Genauigkeit und Performance
+    \item \textbf{Caching}: Wiederverwendung von Transformationsmatrizen zwischen Berechnungszyklen
+    \item \textbf{Early Exit}: Abbruch der Berechnung bei eindeutigen Nicht-Singularitäten
+    \item \textbf{Vectorized Operations}: Nutzung von Unity's Vector3-Operationen für SIMD-Optimierung
+\end{itemize}
+
+\subsubsection{Achsenbasierte Singularitätsdetektion}
+\label{alg:singularity_detection}
+Die Schwellwerte sind konfigurierbar definiert als:
+\begin{align}
+    \tau_{\text{wrist}}    & = 0.98 \quad (\cos(11.5^\circ)) \\
+    \tau_{\text{shoulder}} & = 0.93 \quad (\cos(22^\circ))   \\
+    \tau_{\text{general}}  & = 0.95 \quad (\cos(18^\circ))
+\end{align}
+
+\subsubsection{Praktische Implementierung im Unity-Framework}
+\label{sssec:Unity_Implementierung}
+
+Die Singularitätsdetektion ist in der Klasse \texttt{RobotSafetyMonitor}
+implementiert und nutzt die Flange-Bibliothek zur Transformation der
+Gelenkachsen. Der zentrale Algorithmus wird in der Methode
+\texttt{DetectSingularityByAxes()} realisiert:
+
+\subsubsection{Validierung: ABB IRB120 Handgelenksingularität}
+\label{sssec:Beispiel_IRB120}
+
+Zur Validierung der achsenbasierten Methode wird eine charakteristische
+Handgelenksingularität des ABB IRB120 analysiert, die bei $\theta_5 \approx 0°$
+auftritt.
+
+\textbf{Ausgangskonfiguration:}
+Die Gelenkwinkel der kritischen Konfiguration sind:
+\begin{align}
+    \boldsymbol{\theta} = [45°, -30°, 60°, 90°, 2°, 180°]^T
+\end{align}
+
+\textbf{DH-Parameter-basierte Transformation:}
+Unter Verwendung der ABB IRB120 DH-Parameter werden die Transformationsmatrizen berechnet:
+\begin{equation}
+    \mathbf{T}_4 = \begin{bmatrix}
+        0.866 & 0 & 0.5    & 270 \\
+        0.5   & 0 & -0.866 & 156 \\
+        0     & 1 & 0      & 290 \\
+        0     & 0 & 0      & 1
+    \end{bmatrix}, \quad
+    \mathbf{T}_6 = \begin{bmatrix}
+        0.848 & 0 & 0.530  & 270 \\
+        0.530 & 0 & -0.848 & 156 \\
+        0     & 1 & 0      & 362 \\
+        0     & 0 & 0      & 1
+    \end{bmatrix}
+\end{equation}
+
+\textbf{Achsenextraktion und Kollinearitätsanalyse:}
+Die Z-Achsen der Transformationsmatrizen ergeben:
+\begin{align}
+    \mathbf{z}_4 & = [0.5, -0.866, 0]^T   \\
+    \mathbf{z}_6 & = [0.530, -0.848, 0]^T
+\end{align}
+
+Das normalisierte Skalarprodukt beträgt:
+\begin{equation}
+    c_{46} = |\mathbf{z}_4 \cdot \mathbf{z}_6| = |0.5 \cdot 0.530 + (-0.866) \cdot (-0.848)| = 0.999
+\end{equation}
+
+\textbf{Singularitätsdetektion und Manipulierbarkeitsberechnung:}
+Da $c_{46} = 0.999 > \tau_{\text{wrist}} = 0.98$, wird eine Handgelenksingularität detektiert. Die approximative Manipulierbarkeit ergibt sich zu:
+\begin{equation}
+    \mu_{\text{approx}} = 1 - \frac{0.999 - 0.98}{1 - 0.98} \cdot 0.95 = 0.095
+\end{equation}
+
+\textbf{Vergleich mit Yoshikawa-Maß:}
+Zur Validierung wird das exakte Yoshikawa-Maß berechnet:
+\begin{equation}
+    \mu_{\text{Yoshikawa}} = |\det(\mathbf{J})| = 0.087
+\end{equation}
+
+Die relative Abweichung beträgt nur 9.2\%, was die Genauigkeit der
+achsenbasierten Approximation bestätigt.
+
+\subsubsection{Implementierungsdetails und Optimierungen}
+\label{sssec:Implementierungsdetails}
+
+Die praktische Umsetzung der Singularitätsdetektion im Unity-Framework
+erfordert verschiedene Optimierungen für Echtzeitfähigkeit und Robustheit.
+
+\paragraph{Thread-sichere Echtzeitverarbeitung}
+Die Singularitätsdetektion erfolgt in einem separaten Thread zur Vermeidung von
+Frame-Rate-Einbrüchen:
+
+\begin{itemize}
+    \item \textbf{Background Processing}: Berechnungen erfolgen asynchron im Hintergrund
+    \item \textbf{Lock-free Queues}: Verwendung von \texttt{ConcurrentQueue} für Thread-sichere Datenübertragung
+    \item \textbf{Double Buffering}: Separate Lese- und Schreibpuffer für kontinuierliche Verarbeitung
+    \item \textbf{Atomic Operations}: Verwendung von \texttt{Interlocked}-Operationen für kritische Variablen
+\end{itemize}
+
+\paragraph{Konfigurierbare Schwellwerte und Kalibrierung}
+Das System bietet umfangreiche Konfigurationsmöglichkeiten:
+
+\begin{itemize}
+    \item \textbf{Roboterspezifische Schwellwerte}: Anpassung an verschiedene Robotergeometrien
+    \item \textbf{Adaptive Schwellwerte}: Dynamische Anpassung basierend auf Bewegungsgeschwindigkeit
+    \item \textbf{Hysterese-Verhalten}: Verschiedene Ein- und Ausschaltschwellen zur Vermeidung von Oszillationen
+    \item \textbf{Kalibrierungsroutinen}: Automatische Bestimmung optimaler Schwellwerte durch Workspace-Analyse
+\end{itemize}
+
+Die Schwellwertkalibrierung erfolgt über eine systematische Workspace-Analyse:
+\begin{equation}
+    \tau_{\text{optimal}} = \arg\min_{\tau} \sum_{i=1}^{N} |\mu_{\text{approx}}(\boldsymbol{\theta}_i, \tau) - \mu_{\text{Yoshikawa}}(\boldsymbol{\theta}_i)|
+\end{equation}
+
+\paragraph{Performance-Optimierungen}
+Verschiedene Optimierungen gewährleisten die 5 Hz-Aktualisierungsrate:
+
+\begin{itemize}
+    \item \textbf{Selective Updates}: Nur bei signifikanten Gelenkwinkeländerungen ($\Delta\theta > 1°$)
+    \item \textbf{Hierarchical Detection}: Schnelle Vorfilterung mit groben Schwellwerten
+    \item \textbf{SIMD-Optimierung}: Vektorisierte Berechnungen mit Unity's Mathematics-Package
+    \item \textbf{Memory Pooling}: Wiederverwendung von Berechnungsobjekten zur GC-Vermeidung
+\end{itemize}
+
+\paragraph{Integration in das Sicherheitssystem}
+Die Singularitätsdetektion ist nahtlos in das übergeordnete Sicherheitssystem
+integriert:
+
+\begin{itemize}
+    \item \textbf{Event-basierte Kommunikation}: Verwendung des \texttt{SafetyEvent}-Systems
+    \item \textbf{Prioritätsbasierte Behandlung}: Kritische Singularitäten haben höchste Priorität
+    \item \textbf{Kontextuelle Informationen}: Vollständige Roboterzustandserfassung bei Ereignissen
+    \item \textbf{Logging und Forensik}: Detaillierte Protokollierung für Nachanalysen
+\end{itemize}
+
+Die Implementierung demonstriert erfolgreich die Machbarkeit einer
+echtzeitfähigen, geometrisch fundierten Singularitätsdetektion, die sowohl
+theoretisch fundiert als auch praktisch einsetzbar ist.

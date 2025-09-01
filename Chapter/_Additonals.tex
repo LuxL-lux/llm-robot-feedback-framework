@@ -1,0 +1,444 @@
+
+\dirtree{%
+    .1 RobotSystem/.
+    .2 Core/.
+    .3 RobotManager.cs.
+    .3 RobotState.cs.
+    .3 RobotSafetyManager.cs.
+    .3 SafetyEvent.cs.
+    .3 RobotStateSnapshot.cs.
+    .3 Part.cs.
+    .3 Station.cs.
+    .3 RapidTargetGenerator.cs.
+    .2 Interfaces/.
+    .3 IRobotConnector.cs.
+    .3 IRobotDataParser.cs.
+    .3 IRobotSafetyMonitor.cs.
+    .3 IRobotVisualization.cs.
+    .2 ABB/.
+    .3 RWS/.
+    .4 ABBRWSConnectionClient.cs.
+    .4 ABBRWSDataParser.cs.
+    .4 ABBMotionDataService.cs.
+    .3 ABBFlangeAdapter.cs.
+    .2 Monitors/.
+    .3 CollisionDetectionMonitor.cs.
+    .3 JointDynamicsMonitor.cs.
+    .3 ProcessFlowMonitor.cs.
+    .3 SingularityDetectionMonitor.cs.
+}
+
+\subsubsection{Zentrale Architekturprinzipien}
+
+\paragraph{Dependency Inversion Principle}
+Das Framework implementiert konsequent das Dependency Inversion Principle
+\cite{martin2000design}. High-Level-Module wie der \texttt{RobotManager} hängen
+ausschließlich von Abstraktionen (Interfaces) ab, nicht von konkreten
+Implementierungen:
+
+\begin{itemize}
+    \item \texttt{RobotManager} arbeitet mit \texttt{IRobotConnector}-Interface
+    \item Sicherheitsmonitore implementieren \texttt{IRobotSafetyMonitor}
+    \item Datenparser folgen dem \texttt{IRobotDataParser}-Kontrakt
+    \item Visualisierungssysteme nutzen \texttt{IRobotVisualization}
+\end{itemize}
+
+\paragraph{Plugin-Architektur}
+Neue Roboterhersteller können durch einfaches Hinzufügen eines neuen
+Namespace-Verzeichnisses (z.B. \texttt{RobotSystem/KUKA/}) integriert werden,
+ohne bestehende Komponenten zu modifizieren. Dies erfüllt das
+Open-Closed-Prinzip \cite{martin2003agile}.
+
+\paragraph{Event-Driven Architecture}
+Das System nutzt ein durchgängiges Event-System für lose Kopplung:
+\begin{itemize}
+    \item \texttt{OnRobotStateUpdated}: Zustandsänderungen
+    \item \texttt{OnConnectionStateChanged}: Verbindungsstatus
+    \item \texttt{OnSafetyEventDetected}: Sicherheitsereignisse
+    \item \texttt{OnMotorStateChanged}: Motorstatusänderungen
+\end{itemize}
+
+\subsubsection{Kernkomponenten des Core-Layers}
+
+\paragraph{RobotManager - Mediator Pattern}
+Der \texttt{RobotManager} fungiert als zentraler Mediator zwischen allen
+Systemkomponenten. Er implementiert das Mediator-Pattern \cite{gamma1995design}
+und koordiniert:
+\begin{itemize}
+    \item Verbindungsmanagement zu Robotercontrollern
+    \item Event-Propagation zwischen Komponenten
+    \item Thread-sichere Zustandsverwaltung
+    \item Herstellerunabhängige API für Konsumenten
+\end{itemize}
+
+Die Klasse kapselt die Komplexität der Roboterkommunikation und bietet eine
+einheitliche Schnittstelle für alle Konsumenten. Durch die Verwendung des
+\texttt{IRobotConnector}-Interfaces ist der \texttt{RobotManager} vollständig
+entkoppelt von herstellerspezifischen Implementierungsdetails.
+
+\paragraph{RobotState - Zentraler Zustandscontainer}
+Die \texttt{RobotState}-Klasse kapselt den gesamten Roboterzustand in einem
+serialisierbaren Container:
+\begin{itemize}
+    \item \textbf{Bewegungsdaten}: Gelenkwinkel, Geschwindigkeiten, Aktualisierungsfrequenzen
+    \item \textbf{Ausführungskontext}: Programmzeiger, Zeilennummern, Ausführungsstatus
+    \item \textbf{I/O-Signale}: Digitale/analoge Ein- und Ausgänge
+    \item \textbf{Sicherheitsdaten}: Kollisionsstatus, Singularitätsinformationen
+\end{itemize}
+
+Die Klasse implementiert Convenience-Methoden für häufige Operationen wie
+\texttt{GetJointAngles()}, \texttt{UpdateJointAngles()}, und
+\texttt{GetProgramContext()}, die eine typsichere und performante
+Zustandsabfrage ermöglichen.
+
+\paragraph{RobotSafetyManager - Facade Pattern}
+Der \texttt{RobotSafetyManager} implementiert das Facade-Pattern und
+koordiniert alle Sicherheitsmonitore:
+\begin{itemize}
+    \item Thread-sichere Verteilung von Zustandsupdates über \texttt{ConcurrentQueue}
+    \item Sammlung und Aggregation von Sicherheitsereignissen
+    \item Programmbasierte Ereignisprotokollierung mit JSON-Export
+    \item Konfigurierbare Logging-Level und Filter
+\end{itemize}
+
+Die Implementierung nutzt Unity's \texttt{Update()}-Methode für die
+Hauptthread-Verarbeitung von Sicherheitsereignissen, während die
+Zustandsupdates thread-sicher über eine Queue erfolgen.
+
+\paragraph{}
+Das \texttt{SafetyEvent}-System implementiert ein umfassendes Ereignismodell:
+\begin{itemize}
+    \item \textbf{SafetyEvent}: Unveränderliches Value Object für Sicherheitsereignisse
+    \item \textbf{RobotStateSnapshot}: Immutable Zustandserfassung zum Ereigniszeitpunkt
+    \item \textbf{Ereignistypen}: Info, Warning, Critical mit konfigurierbaren Schwellwerten
+    \item \textbf{Kontextdaten}: Vollständige Roboterzustandserfassung für Forensik
+\end{itemize}
+
+\subsubsection{Interface-basierte Abstraktion}
+
+Das Framework definiert vier zentrale Interfaces als Verträge zwischen
+Systemkomponenten:
+
+\paragraph{IRobotConnector}
+Definiert die Schnittstelle für Roboterverbindungen unabhängig vom
+Kommunikationsprotokoll:
+\begin{itemize}
+    \item \texttt{Connect()/Disconnect()}: Idempotente Verbindungsoperationen
+    \item \texttt{OnRobotStateUpdated}: Event für Zustandsänderungen
+    \item \texttt{CurrentState}: Thread-sichere Zustandsabfrage
+    \item \texttt{IsConnected}: Verbindungsstatus-Property
+\end{itemize}
+
+Das Interface etabliert semantische Kontrakte im Sinne des Design by Contract
+\cite{Meyer1992}, wobei Zustandsänderungen garantiert über Events propagiert
+werden.
+
+\paragraph{IRobotSafetyMonitor}
+Standardisiert die Integration von Sicherheitsmonitoren mit Strategy-Pattern:
+\begin{itemize}
+    \item \texttt{UpdateState()}: Thread-sichere Zustandsverarbeitung
+    \item \texttt{OnSafetyEventDetected}: Event für Sicherheitsereignisse
+    \item \texttt{IsActive}: Aktivierungsstatus mit Runtime-Konfiguration
+    \item \texttt{MonitorName}: Eindeutige Identifikation für Logging
+\end{itemize}
+
+\paragraph{IRobotDataParser}
+Ermöglicht austauschbare Parser für verschiedene Datenformate mit
+Strategy-Pattern:
+\begin{itemize}
+    \item \texttt{CanParse()}: Schnelle und zuverlässige Formaterkennungslogik
+    \item \texttt{ParseData()}: Atomare Datenextraktion und Zustandsupdate
+\end{itemize}
+
+\paragraph{IRobotVisualization}
+Abstrahiert Visualisierungssysteme für verschiedene Rendering-Engines:
+\begin{itemize}
+    \item \texttt{UpdateJointAngles()}: Thread-sichere Gelenkwinkel-Updates
+    \item \texttt{IsConnected}: Visualisierungsstatus für Fehlerbehandlung
+\end{itemize}
+
+\subsubsection{Sicherheitsarchitektur und Monitoring-System}
+
+Das Framework implementiert ein umfassendes Sicherheitssystem mit
+spezialisierten Monitoren, die verschiedene Aspekte der Robotersicherheit
+überwachen. Die Architektur folgt dem Strategy-Pattern, wodurch verschiedene
+Überwachungsalgorithmen zur Laufzeit ausgetauscht werden können.
+
+\paragraph{CollisionDetectionMonitor - Physikbasierte Kollisionserkennung}
+Der \texttt{CollisionDetectionMonitor} nutzt Unity's integrierte PhysX-Engine
+für präzise Kollisionserkennung:
+
+\begin{itemize}
+    \item \textbf{Automatische Link-Erkennung}: Dynamische Identifikation von Roboter-Links über das Flange-Framework
+    \item \textbf{Hierarchische Kollisionserkennung}: Konfigurierbare Layer-Masken für selektive Kollisionsprüfung
+    \item \textbf{Selbstkollisions-Vermeidung}: Automatisches Ignorieren von Kollisionen zwischen benachbarten Gelenken in der kinematischen Kette
+    \item \textbf{Kritikalitätsbewertung}: Unterscheidung zwischen kritischen und Warn-Kollisionen basierend auf Objekt-Tags
+\end{itemize}
+
+Die Implementierung nutzt Unity's \texttt{OnTriggerEnter}-Events und
+implementiert ein Cooldown-System zur Vermeidung von Event-Spam.
+Kollisionsdaten werden in einer \texttt{CollisionInfo}-Struktur gekapselt, die
+Kollisionspunkt, Distanz und beteiligte Objekte erfasst.
+
+\paragraph{SingularityDetectionMonitor - Geometrische Singularitätserkennung}
+Der \texttt{SingularityDetectionMonitor} implementiert eine geometrisch
+fundierte Methode zur Echtzeitdetektion von Singularitäten basierend auf
+DH-Parametern:
+
+\begin{itemize}
+    \item \textbf{Handgelenk-Singularitäten}: Detektion durch Kollinearitätsanalyse der Rotationsachsen von Gelenk 4 und 6
+    \item \textbf{Schulter-Singularitäten}: Erkennung von Arbeitsraumgrenzen durch Distanzanalyse
+    \item \textbf{Ellbogen-Singularitäten}: Detektion von Gelenkgrenzpositionen
+    \item \textbf{Konfigurierbare Schwellwerte}: Anpassbare Detektionsschwellen pro Singularitätstyp
+\end{itemize}
+
+Die mathematische Grundlage basiert auf der Analyse der
+Jacobi-Matrix-Eigenschaften:
+\begin{equation}
+    \text{rank}(\mathbf{J}(\boldsymbol{\theta})) < \min(m, n)
+    \label{eq:singularity_framework}
+\end{equation}
+
+Für Handgelenk-Singularitäten wird die Kollinearität über das Skalarprodukt der
+Achsenvektoren bewertet:
+\begin{equation}
+    |\mathbf{z}_4 \cdot \mathbf{z}_6| > \tau_{\text{wrist}} = 0.98
+    \label{eq:wrist_singularity_framework}
+\end{equation}
+
+\subsection{JointDynamicsMonitor - Gelenküberwachung}
+Der \texttt{JointDynamicsMonitor} überwacht Gelenkgrenzen und -dynamik mit
+adaptiver Filterung:
+
+\begin{itemize}
+    \item \textbf{Flange-Integration}: Automatische Extraktion von herstellerspezifischen Gelenkgrenzen
+    \item \textbf{Multi-Parameter-Überwachung}: Position, Geschwindigkeit und Beschleunigung
+    \item \textbf{Adaptive Glättung}: Konfigurierbare Filterung für rauschbehaftete Sensordaten
+    \item \textbf{Kontextabhängige Überwachung}: Erweiterte Limits bei Werkstückhandhabung
+\end{itemize}
+
+Die Implementierung nutzt einen Exponential Moving Average Filter:
+\begin{equation}
+    \theta_{\text{filtered}}[n] = \alpha \cdot \theta_{\text{raw}}[n] + (1-\alpha) \cdot \theta_{\text{filtered}}[n-1]
+    \label{eq:joint_filtering}
+\end{equation}
+
+\paragraph{ProcessFlowMonitor - Semantische Prozessüberwachung}
+Der \texttt{ProcessFlowMonitor} implementiert semantische Überwachung für
+Pick-and-Place-Operationen:
+
+\begin{itemize}
+    \item \textbf{Stationsbasierte Validierung}: Überprüfung definierter Werkstück-Sequenzen
+    \item \textbf{Griff-Zustandserkennung}: Integration mit I/O-Signalen für Greifer-Status
+    \item \textbf{Prozessverletzungserkennung}: Identifikation von Sequenzfehlern und ungültigen Übergängen
+    \item \textbf{Werkstück-Tracking}: Vollständige Verfolgung von Werkstücken durch den Produktionsprozess
+\end{itemize}
+
+Das System nutzt Unity's Trigger-System in Kombination mit der \texttt{Part}-
+und \texttt{Station}-Klassen für die semantische Prozessmodellierung.
+
+\subsubsection{ABB Robot Web Services Integration}
+
+Die ABB-Integration demonstriert die Erweiterbarkeit der Plugin-Architektur
+durch eine vollständige Robot Web Services (RWS) Implementierung, die als
+Referenzimplementierung für das \texttt{IRobotConnector}-Interface dient.
+
+\paragraph{Hybride Kommunikationsarchitektur}
+Die ABB-Implementierung nutzt eine hybride Kommunikationsstrategie, die
+verschiedene Datentypen optimal behandelt:
+
+\begin{itemize}
+    \item \textbf{WebSocket-Subscriptions}: Echtzeit-Events für I/O-Signale, Ausführungsstatus und Programmzeiger
+    \item \textbf{HTTP-Polling}: Hochfrequente Gelenkwinkeldaten mit konfigurierbarer Frequenz (5-20 Hz)
+    \item \textbf{Integrierte Authentifizierung}: Einheitliche Session-Verwaltung für alle Kommunikationskanäle
+    \item \textbf{Asynchrone Verarbeitung}: Non-blocking I/O mit \texttt{async/await}-Pattern
+\end{itemize}
+
+Diese Architektur optimiert die Netzwerknutzung durch ereignisbasierte Updates
+für seltene Änderungen und kontinuierliches Polling für hochfrequente
+Bewegungsdaten.
+
+\paragraph{ABBRWSConnectionClient - Hauptconnector}
+Der \texttt{ABBRWSConnectionClient} implementiert das
+\texttt{IRobotConnector}-Interface mit folgenden Eigenschaften:
+
+\begin{itemize}
+    \item \textbf{Coroutine-basierter Lifecycle}: Unity-integrierte asynchrone Verbindungsabläufe
+    \item \textbf{Thread-sichere Datenverarbeitung}: Verwendung von \texttt{ConcurrentQueue} für Cross-Thread-Kommunikation
+    \item \textbf{Automatische Fehlerbehandlung}: Robuste Reconnection-Logic mit exponential backoff
+    \item \textbf{Service-orientierte Architektur}: Aufgliederung in spezialisierte Services (Auth, Subscription, WebSocket, Motion)
+\end{itemize}
+
+Die Klasse koordiniert vier spezialisierte Services:
+\begin{enumerate}
+    \item \texttt{ABBAuthenticationService}: Session-Management und Credential-Handling
+    \item \texttt{ABBSubscriptionService}: RWS-Subscription-Erstellung und -Verwaltung
+    \item \texttt{ABBWebSocketService}: WebSocket-Verbindung und Event-Streaming
+    \item \texttt{ABBMotionDataService}: HTTP-basiertes Joint-Angle-Polling
+\end{enumerate}
+
+\paragraph{ABBRWSDataParser - XML-Datenverarbeitung}
+Der \texttt{ABBRWSDataParser} implementiert einen spezialisierten XML-Parser
+für ABB RWS-Events:
+
+\begin{itemize}
+    \item \texttt{rap-ctrlexecstate-ev}: Programmausführungsstatus (Running/Stopped)
+    \item \texttt{rap-pp-ev}: RAPID-Programmzeiger mit Modul-, Routine- und Zeileninformationen
+    \item \texttt{ios-signalstate-ev}: I/O-Signalzustände für Greifer und Sensoren
+    \item \texttt{pnl-ctrlstate-ev}: Controller-Status (Motor ein/aus, Betriebsmodus)
+    \item \texttt{rap-execcycle-ev}: RAPID-Ausführungszyklen für Prozessmonitoring
+\end{itemize}
+
+Der Parser nutzt XPath-Queries mit Namespace-Management für robuste
+XML-Verarbeitung und implementiert defensive Programmierung gegen malformierte
+Daten.
+
+\paragraph{ABBMotionDataService - Hochfrequente Bewegungsdaten}
+Der \texttt{ABBMotionDataService} implementiert ein optimiertes Polling-System
+für Gelenkwinkeldaten:
+
+\begin{itemize}
+    \item \textbf{Adaptive Polling-Frequenz}: Dynamische Anpassung basierend auf Netzwerklatenz
+    \item \textbf{Performance-Monitoring}: Kontinuierliche Überwachung von Update-Frequenz und Latenz
+    \item \textbf{Fehlerresilienz}: Graceful degradation bei Netzwerkproblemen
+    \item \textbf{Memory-effiziente Verarbeitung}: Wiederverwendung von HTTP-Clients und Parsing-Objekten
+\end{itemize}
+
+Das Service nutzt \texttt{Task.Run()} für Background-Threading und
+\texttt{CancellationToken} für saubere Shutdown-Semantik.
+
+\paragraph{ABBFlangeAdapter - Visualisierungsintegration}
+Der \texttt{ABBFlangeAdapter} implementiert das
+\texttt{IRobotVisualization}-Interface und integriert mit dem
+Preliy.Flange-System:
+
+\begin{itemize}
+    \item \textbf{Reflection-basierte Integration}: Dynamische Bindung an Flange-APIs ohne harte Abhängigkeiten
+    \item \textbf{Thread-sichere Updates}: Queue-basierte Gelenkwinkel-Updates auf dem Unity Main Thread
+    \item \textbf{Robuste Fehlerbehandlung}: Graceful fallback bei Flange-Initialisierungsfehlern
+    \item \textbf{Performance-Optimierung}: Batch-Updates und Frame-Rate-limitierte Aktualisierungen
+\end{itemize}
+
+\paragraph{Kommunikationsprotokolle und Datenformate}
+Die ABB-Integration nutzt standardisierte Web-Protokolle:
+
+\begin{itemize}
+    \item \textbf{HTTPS/HTTP}: RESTful API-Zugriff mit Digest-Authentifizierung
+    \item \textbf{WebSocket Secure (WSS)}: Bidirektionale Echtzeit-Kommunikation
+    \item \textbf{XML}: Strukturierte Datenübertragung mit Schema-Validierung
+    \item \textbf{JSON}: Interne Datenrepräsentation und Logging-Format
+\end{itemize}
+
+Die Implementierung folgt den ABB RWS API-Spezifikationen und implementiert
+alle erforderlichen Authentifizierungs- und Session-Management-Protokolle.
+
+\subsubsection{Design Patterns und Architekturmuster}
+
+Das RobotSystem-Framework implementiert eine Vielzahl etablierter Design
+Patterns, die zur Erreichung der Architekturziele beitragen. Die konsequente
+Anwendung dieser Muster gewährleistet Wartbarkeit, Erweiterbarkeit und
+Testbarkeit des Systems.
+
+\paragraph{Mediator Pattern - RobotManager}
+Der \texttt{RobotManager} implementiert das Mediator-Pattern
+\cite{gamma1995design} und fungiert als zentraler Vermittler zwischen allen
+Systemkomponenten:
+
+\begin{itemize}
+    \item \textbf{Entkopplung}: Komponenten kommunizieren nicht direkt miteinander, sondern über den Mediator
+    \item \textbf{Zentralisierte Kontrolle}: Alle Roboteroperationen werden über eine einheitliche Schnittstelle koordiniert
+    \item \textbf{Event-Aggregation}: Sammlung und Weiterleitung von Events verschiedener Quellen
+    \item \textbf{Zustandsmanagement}: Zentrale Verwaltung des aktuellen Roboterzustands
+\end{itemize}
+
+\paragraph{Strategy Pattern - Sicherheitsmonitore}
+Die Sicherheitsmonitore implementieren das Strategy-Pattern über das
+\texttt{IRobotSafetyMonitor}-Interface:
+
+\begin{itemize}
+    \item \textbf{Austauschbare Algorithmen}: Verschiedene Überwachungsstrategien können zur Laufzeit gewechselt werden
+    \item \textbf{Erweiterbarkeit}: Neue Monitoring-Algorithmen können ohne Änderung bestehender Komponenten hinzugefügt werden
+    \item \textbf{Konfigurierbarkeit}: Monitore können individuell aktiviert/deaktiviert werden
+    \item \textbf{Polymorphismus}: Einheitliche Behandlung verschiedener Monitor-Implementierungen
+\end{itemize}
+
+\paragraph{Observer Pattern - Event-System}
+Das Framework nutzt das Observer-Pattern für lose gekoppelte Kommunikation:
+
+\begin{itemize}
+    \item \textbf{OnRobotStateUpdated}: Benachrichtigung über Zustandsänderungen
+    \item \textbf{OnSafetyEventDetected}: Propagation von Sicherheitsereignissen
+    \item \textbf{OnConnectionStateChanged}: Verbindungsstatus-Updates
+    \item \textbf{Asynchrone Benachrichtigungen}: Non-blocking Event-Propagation
+\end{itemize}
+
+\paragraph{Adapter Pattern - ABBFlangeAdapter}
+Der \texttt{ABBFlangeAdapter} implementiert das Adapter-Pattern für die
+Integration mit dem Preliy.Flange-System:
+
+\begin{itemize}
+    \item \textbf{Interface-Anpassung}: Übersetzung zwischen Framework-Interfaces und Flange-APIs
+    \item \textbf{Reflection-basierte Bindung}: Dynamische Anpassung an verschiedene Flange-Versionen
+    \item \textbf{Fehlerkapselung}: Isolation von Flange-spezifischen Fehlern
+    \item \textbf{Thread-Synchronisation}: Sichere Übertragung zwischen Background- und Main-Thread
+\end{itemize}
+
+\paragraph{Facade Pattern - RobotSafetyManager}
+Der \texttt{RobotSafetyManager} implementiert das Facade-Pattern und
+vereinfacht die Interaktion mit dem komplexen Sicherheitssystem:
+
+\begin{itemize}
+    \item \textbf{Vereinfachte Schnittstelle}: Einheitliche API für alle Sicherheitsoperationen
+    \item \textbf{Komplexitätskapselung}: Verbergung der internen Monitor-Koordination
+    \item \textbf{Zentrale Konfiguration}: Einheitliche Verwaltung aller Sicherheitseinstellungen
+    \item \textbf{Event-Aggregation}: Sammlung und Filterung von Sicherheitsereignissen
+\end{itemize}
+
+\paragraph{Factory Pattern - Datenparser}
+Das \texttt{IRobotDataParser}-System implementiert ein Factory-ähnliches
+Pattern:
+
+\begin{itemize}
+    \item \textbf{Dynamische Parser-Auswahl}: Automatische Wahl des geeigneten Parsers basierend auf Datenformat
+    \item \textbf{Erweiterbarkeit}: Neue Parser können ohne Änderung bestehender Logik hinzugefügt werden
+    \item \textbf{Kapselung}: Parser-spezifische Implementierungsdetails sind gekapselt
+    \item \textbf{Polymorphismus}: Einheitliche Behandlung verschiedener Datenformate
+\end{itemize}
+
+\paragraph{Template Method Pattern - Monitoring-Basis}
+Die Basis-Implementierung der Sicherheitsmonitore folgt dem Template Method
+Pattern:
+
+\begin{itemize}
+    \item \textbf{Gemeinsame Struktur}: Einheitlicher Ablauf für alle Monitoring-Operationen
+    \item \textbf{Spezialisierungspunkte}: Abstrakte Methoden für monitor-spezifische Logik
+    \item \textbf{Code-Wiederverwendung}: Gemeinsame Funktionalität in der Basisklasse
+    \item \textbf{Konsistenz}: Einheitliche Fehlerbehandlung und Event-Generation
+\end{itemize}
+
+\paragraph{Dependency Injection - Interface-basierte Architektur}
+Das Framework implementiert Dependency Injection über Unity's Component-System:
+
+\begin{itemize}
+    \item \textbf{Lose Kopplung}: Komponenten hängen nur von Interfaces ab
+    \item \textbf{Testbarkeit}: Einfache Mock-Implementierungen für Unit Tests
+    \item \textbf{Konfigurierbarkeit}: Runtime-Austausch von Implementierungen
+    \item \textbf{Inversion of Control}: High-Level-Module kontrollieren Low-Level-Module
+\end{itemize}
+
+\paragraph{Command Pattern - RAPID-Code-Generierung}
+Der \texttt{RapidTargetGenerator} implementiert Aspekte des Command-Patterns:
+
+\begin{itemize}
+    \item \textbf{Kapselung von Operationen}: RAPID-Befehle als ausführbare Objekte
+    \item \textbf{Parametrisierung}: Flexible Konfiguration von Roboterbewegungen
+    \item \textbf{Undo-Fähigkeit}: Möglichkeit zur Rückgängigmachung von Operationen
+    \item \textbf{Logging}: Vollständige Protokollierung aller generierten Befehle
+\end{itemize}
+
+Die systematische Anwendung dieser Design Patterns trägt wesentlich zur
+Qualität und Wartbarkeit der Framework-Architektur bei und ermöglicht die
+erfolgreiche Umsetzung der definierten Architekturziele.
+
+\section{Testszenario}
+\subsection{Versuchsaufbau}
