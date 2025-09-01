@@ -1,3 +1,5 @@
+Literature/
+
 *.acn
 *.acr
 *.alg
@@ -47,4 +49,3 @@
 
 build/
 .vscode/*
-Literature/*.pdf
