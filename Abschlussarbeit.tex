@@ -35,65 +35,63 @@ numbers=noenddot
 \raggedbottom
 
 \begin{document}
+% Titelseite
+\include{Includes/titlepage}
+\pagestyle{plain}
 
-	% Titelseite
-	\include{Includes/titlepage}
-	\pagestyle{plain}
+% Leere Seite
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
 
-	% Leere Seite
-	\newpage
-	\thispagestyle{empty}
-	\mbox{}
-	\newpage
+% Schriftart der Überschriften
+\addtokomafont{disposition}{\rmfamily}
 
-	% Schriftart der Überschriften
-	\addtokomafont{disposition}{\rmfamily}
+% Seitennummerierung
+\pagenumbering{roman}
 
-	% Seitennummerierung
-	\pagenumbering{roman}
+% Vorwort
+\include{Chapter/0-Vorwort}
 
-	% Vorwort
-	\include{Chapter/0-Vorwort}
+% Inhaltsverzeichnis
+\setcounter{tocdepth}{2}
+\tableofcontents
 
-	% Inhaltsverzeichnis
-	\setcounter{tocdepth}{2}
-	\tableofcontents
+% Leere Seite
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
 
-	% Leere Seite
-	\newpage
-	\thispagestyle{empty}
-	\mbox{}
-	\newpage
+% Hauptkapitel
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{scrheadings}
+\sloppy
 
-	% Hauptkapitel
-	\cleardoublepage
-	\pagenumbering{arabic}
-	\pagestyle{scrheadings}
-	\sloppy
+% Hier die neuen Kapitel-Dateien einbinden
+\include{Chapter/1-Einleitung}
+\include{Chapter/2-Grundlagen}
+\include{Chapter/3-Framework}
+\include{Chapter/4-Untersuchung}
+\include{Chapter/5-Ergebnisse}
+\include{Chapter/6-Fazit}
 
-	% Hier die neuen Kapitel-Dateien einbinden
-	\include{Chapter/1-Einleitung}
-	\include{Chapter/2-Grundlagen}
-	\include{Chapter/3-Framework}
-	\include{Chapter/4-Untersuchung}
-	\include{Chapter/5-Ergebnisse}
-	\include{Chapter/6-Fazit}
+% Literaturverzeichnis
+\nocite{*}
+\printbibliography
 
-	% Literaturverzeichnis
-	\nocite{*}
-	\printbibliography
+% Abbildungsverzeichnis
+\listoffigures
 
-	% Abbildungsverzeichnis
-	\listoffigures
+% Tabellenverzeichnis
+\listoftables
 
-	% Tabellenverzeichnis
-	\listoftables
+% Anhang
+\include{Chapter/99-Anhang}
 
-	% Anhang
-	\include{Chapter/99-Anhang}
-
-	% Eidesstaatliche Erklärung
-	\include{Chapter/00-Erklaerung}
-
+% Eidesstaatliche Erklärung
+\include{Chapter/00-Erklaerung}
 
 \end{document}

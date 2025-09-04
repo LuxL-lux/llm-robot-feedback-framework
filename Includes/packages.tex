@@ -7,7 +7,6 @@
 \usepackage{amscd}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{listings}
 \usepackage{xcolor}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -40,24 +39,48 @@
 \usepackage[bottom,hang]{footmisc}
 \usepackage[T1]{fontenc}
 \usepackage{microtype} % Verbesserter Randausgleich bei Silbentrennung
-\usepackage{tikz}
 \usepackage{dirtree}
-
-\usetikzlibrary{shapes.geometric, arrows, arrows.meta, fit, positioning, backgrounds, shadows}
-%Bib-LaTex (aus https://de.sharelatex.com/learn/biblatex_bibliography_styles)
-
+\usepackage{svg}
 \usepackage[
+	style=footnote-dw,      % Das ist der biblatex-dw Stil!
 	backend=biber,
-	style=authoryear-comp, 	%stylename = {numeric, alphabetic, authoryear, authortitle, verbose, reading, draft}
-	natbib=true,%sorting=none
-	sorting=nty, backend=biber, maxcitenames=2, maxbibnames=99, natbib=true,%nty: Sort by name, title, year; % nyt: Sort by name, year, title.
-	%citestyle=authoryear,
-	%bibstyle=authortitle,
-	%dashed=false,
-	%uniquelist=false,
-	%uniquename=false,
-	%urldate=comp,
-	%isbn=false,
-	%doi=false,
-]{biblatex}
-\bibliography{literatur} %where citavi_Export is the name of the bibliography .bib file (e.g. MRKLiteraturExport)
+	autocite=footnote,
+	namefont=smallcaps,
+	maxcitenames=2,
+	mincitenames=1,
+	maxbibnames=99,
+	ibidpage=false,
+	pagetracker=false,
+	citetracker=false
+]{biblatex}  % NICHT biblatex-dw!
+
+\usepackage{color}
+\definecolor{greenkeywords}{HTML}{43bcaa}
+\definecolor{greencomments}{HTML}{636da6}
+\definecolor{redstrings}{HTML}{ff757f}
+
+\usepackage{inconsolata}
+\usepackage{listings}
+\lstset{language=[Sharp]C,
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	showstringspaces=false,
+	emph={int, char, bool, str},
+	emphstyle={\color{greenkeywords}},
+	breakatwhitespace=true,
+	escapeinside={(@}{@)},
+	commentstyle=\color{greencomments},
+	keywordstyle=\color{greenkeywords},
+	stringstyle=\color{redstrings},
+	basicstyle=\ttfamily
+}
+\bibliography{literatur.bib}
+
+% Befehle für direkte und indirekte Zitate
+\newcommand{\vglcite}[2][]{\autocite[Vgl.][#1]{#2}}
+\newcommand{\directcite}[2][]{\autocite[#1]{#2}}
+
+% Anpassung für "und" zwischen Autoren
+\renewcommand*{\multinamedelim}{\addspace und\space}
+\renewcommand*{\finalnamedelim}{\addspace und\space}

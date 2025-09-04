@@ -1,0 +1,128 @@
+%% Creator: Inkscape 1.4.2 (ebf0e940, 2025-05-08), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'LayerArchitekturFramework_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1382.25bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.48507868)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.02667553,0.41616929){\color[rgb]{0.18431373,0.2,0.30196078}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}RobotCommunication\end{tabular}}}}%
+    \put(0.38885513,0.41616929){\color[rgb]{0.18431373,0.2,0.30196078}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Layer\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.02667553,1.34997287){\color[rgb]{0.18431373,0.2,0.30196078}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Monitoring Layer\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.02667553,0.67715681){\color[rgb]{0.12941176,0.14117647,0.21568627}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Core Layer\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.07392729,1.2289745){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ProcessFlowMonitor\end{tabular}}}}%
+    \put(0.07392729,1.19207813){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Prozessfolgen}\end{tabular}}}}%
+    \put(0.23874552,1.19207813){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{-}\end{tabular}}}}%
+    \put(0.24776072,1.19207813){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Validierung}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.39225719,0.58600109){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}RobotManager\end{tabular}}}}%
+    \put(0.39675529,0.54910472){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Event}\end{tabular}}}}%
+    \put(0.4623223,0.54910472){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{-}\end{tabular}}}}%
+    \put(0.47134021,0.54910472){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Dispatcher}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.3972382,0.84536082){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}SafetyManager\end{tabular}}}}%
+    \put(0.40253391,0.80846446){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Logging \& Event}\end{tabular}}}}%
+    \put(0.59741725,0.80846446){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{-}\end{tabular}}}}%
+    \put(0.42240369,0.77265328){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Weiterleitung}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.07392784,1.05805751){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}CollisionDetectionMonitor\end{tabular}}}}%
+    \put(0.07392784,1.02116115){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Kollisionserkennung}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.53317417,1.2289745){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}JointDynamicsMonitor\end{tabular}}}}%
+    \put(0.53317417,1.19207813){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Achsgeschwindigkeits}\end{tabular}}}}%
+    \put(0.79425936,1.19207813){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{-}\end{tabular}}}}%
+    \put(0.81011394,1.19207813){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{und }\end{tabular}}}}%
+    \put(0.53317417,1.15626696){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Beschleunigungvalidierung}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.53317417,1.05805751){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Singularity \end{tabular}}}}%
+    \put(0.53317417,1.01627781){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DetectionMonitor\end{tabular}}}}%
+    \put(0.53317417,0.97938144){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Achsgeschwindigkeits}\end{tabular}}}}%
+    \put(0.79425936,0.97938144){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{-}\end{tabular}}}}%
+    \put(0.81011394,0.97938144){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{und }\end{tabular}}}}%
+    \put(0.53317417,0.94357027){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Beschleunigungvalidierung}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.30386978,0.28214867){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ABBConnectionClient.cs\end{tabular}}}}%
+    \put(0.30386978,0.24525231){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Robot Web Services }\end{tabular}}}}%
+    \put(0.54680412,0.24525231){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Konnektor}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.05278622,0.13619099){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ABBMoitionDataService.cs\end{tabular}}}}%
+    \put(0.05278622,0.09929463){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{HTTP }\end{tabular}}}}%
+    \put(0.12346337,0.09929463){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Achswinkel}\end{tabular}}}}%
+    \put(0.25720836,0.09929463){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{-}\end{tabular}}}}%
+    \put(0.26622355,0.09929463){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Streaming }\end{tabular}}}}%
+    \put(0.05278622,0.06348345){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Service}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.53565925,0.13619099){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}ABBWebSocketService.cs\end{tabular}}}}%
+    \put(0.53565925,0.09929463){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Websocket}\end{tabular}}}}%
+    \put(0.53565925,0.06348345){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Metadaten}\end{tabular}}}}%
+    \put(0.66967444,0.06348345){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{-}\end{tabular}}}}%
+    \put(0.67869235,0.06348345){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{Streaming Service}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.50572979,0.34671731){\color[rgb]{0.73333333,0.43137255,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}IRobotConnector\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.46728703,0.66304938){\color[rgb]{0.73333333,0.43137255,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}IRobotManager\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.65525773,1.29137276){\color[rgb]{0.73333333,0.43137255,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}IRobotSafetyMonitor\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.34260499,1.43298969){\color[rgb]{0.18431373,0.2,0.30196078}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Unity3D Framework\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.76978296,0.74172545){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}RobotState\end{tabular}}}}%
+    \put(0.92742811,0.74172545){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}-\end{tabular}}}}%
+    \put(0.80657623,0.69994574){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Objekt\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{LayerArchitekturFramework_svg-tex.pdf}}%
+    \put(0.77091156,0.47965274){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}RobotState\end{tabular}}}}%
+    \put(0.9285567,0.47965274){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}-\end{tabular}}}}%
+    \put(0.80770483,0.43787303){\color[rgb]{1,1,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Objekt\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
