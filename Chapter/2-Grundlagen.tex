@@ -1,22 +1,66 @@
-\chapter{Grundlagen und Stand der Technik}
-\label{cap:Grundlagen}
+\chapter{Grundlagen und Stand der Technik} \label{cap:Grundlagen}
 
 \section{Grundlagen der Robotersimulation}
 \label{sec:Grundlagen_Robotersimulation}
-% Einführung in relevante Parameter...
-% Überblick über Simulationslandschaft und Vorteile von Unity...
+% Einführung in relevante Parameter... Überblick über Simulationslandschaft und
+% Vorteile von Unity...
 
-\section{Large Language Models (LLMs)}
-\label{sec:Grundlagen_LLMs}
-% Grundlegende Erklärung der Funktionsweise...
-% Abgrenzung und Definition von KI..
-\section{Stand der Technik: LLMs in der Robotik}
-\label{sec:Stand_LLMs_Robotik}
-% Aktuelle Forschungsansätze (Brain-Body, Gemini Robotics)...
-% Herausforderungen (Grounding, Sicherheit)...
-% Bestehende Frameworks...
+\section{Large Language Models (LLMs)} \label{sec:Grundlagen_LLMs}
+% Grundlegende Erklärung der Funktionsweise... Abgrenzung und Definition von
+% KI..
+\section{Stand der Technik: LLMs in der Robotik} \label{sec:Stand_LLMs_Robotik}
+% Aktuelle Forschungsansätze (Brain-Body, Gemini Robotics)... Herausforderungen
+% (Grounding, Sicherheit)... Bestehende Frameworks...
 \section{Stand der Technik: Robotersimulation}
-\label{sec:Stand_Robotersimulation}
-Bezugnahme auf aktuelle Techniken in der Robotersimulation -> Lehrbücher etc. bieten hier eine Grundlagen
-Aktualität muss nicht gewähleistet sein da relativ statisch
-Auf jeden Fall Abgrenzung warum ich Unity verwende: Open-Source von Unity
+\label{sec:Stand_Robotersimulation} Roboterprogrammierung kann als die
+Programmierung von industriellen Manipulatoren verstanden werden, die sich durch
+ihre programmierbaren und anpassungsfähigen Eigenschaften von anderen Maschinen
+abheben. Roboterprogramme enthalten präzise Anweisungen und Spezifikationen für
+die Bewegung des Roboters. Im Kern ist die Roboterprogrammierung ein
+Steuerungsproblem, das neben den allgemeinen Aspekten der Computerprogrammierung
+auch roboterspezifische Herausforderungen umfasst. \vglcite[1\psqq]{nilsson1996}
+Ein entscheidender Vorteil der Roboterprogrammierung im Gegensatz zur
+herkömmlichen Steuertechnik ist dabei die Möglichkeit, einen realen Prozess
+mittels Programmcode abbilden und verändern zu können und somit die Effizienz
+und Anpassungsfähigkeit eines industriellen Prozessen zu erhöhen.
+
+
+\subsection{Offline-Programmierung und Robotersimulationsprogramme} Da Anlagen
+oft dauerhaft in Betrieb sind un die Notwendigkeit von Prozessveränderungen bei
+der Fertigung von Produkten unabdingbar ist, wird eine Möglichkeit benötigt,
+industrielle Anlagen schon bevor der Inbetriebnahme, Umfunktionierung oder
+Verbesserung testen zu können. Auch bei Robotern ist dies, unter anderem
+aufgrund hoher Kosten und Sicherheitsrisiken bei fehlerhafter Konifguration,
+unabdingbar. Die \textbf{Offline-Programmierung (OLP)} ermöglicht die
+Entwicklung eines Steuerungsprogramms, ohne dass ein physischer Roboter
+erforderlich ist. Ein wesentlicher Vorteil ist die Möglichkeit, Programme in
+einer virtuellen Umgebung zu erstellen und zu simulieren. Die Methode nutzt
+3D-CAD-Modelle, um den Körper des Roboters möglichst originalgetreu
+darzustellen. Ziel der Offline-Programmierung ist es, den visuellen Prozess
+schon vorher evaluieren zu können und Probleme im Ablauf früher zu erkennnen.
+\vglcite[62\psqq]{holubke2014}
+
+
+\subsection{Limitierende Faktoren proprietärer Systeme} Traditionelle
+Robotersteuerungssysteme sind oft durch eine \textbf{proprietäre Hardware- und
+	Softwarearchitektur} begrenzt. \vglcite[1]{bilancia2023} Dies führt dazu, dass
+Anwender für jede Robotermarke eine spezifische Programmiersprache mit
+unterschiedlichen Befehlen und Funktionen erlernen müssen. Solche Systeme
+verursachen \textbf{Zeitverlust} in der Produktion, da jede Änderung eine
+Unterbrechung erfordert, sowie \textbf{Codeduplikation}, da Programme nicht
+zwischen Robotermarken ausgetauscht werden können \vglcite[3]{bilancia2023}.Um
+diese Beschränkungen zu überwinden, ist eine akkurate Modellierung der
+physischen Welt, in welcher der Roboter agieren soll, in der Simulation
+unabdingbar.
+
+\subsection{Physics-Engines}
+Dies führt zum Einsatz von {Physics-Engines}. Um eine
+realistische Simulation zu gewährleisten, sind diese unerlässlich. Sie
+modellieren dynamische Interaktionen wie Kollisionen, Schwerkraft und Reibung,
+was für die präzise Nachbildung des Roboterverhaltens entscheidend ist. Obwohl
+die Genauigkeit dieser Engines als nicht perfekt angesehen wird, da sie die
+reale Welt nicht exakt abbilden, sind sie für die Forschung in den Bereichen
+Deep Learning und Digital Twins von entscheidender Bedeutung
+\vglcite[1/psqq]{audonnet2022}. Die Wahl der Physics-Engine ist ein kritischer
+Faktor und beeinflusst die Stabilität und Wiederholbarkeit der Simulation.
+Häufig genutzte Engines sind PhysX, Bullet und ODE.
