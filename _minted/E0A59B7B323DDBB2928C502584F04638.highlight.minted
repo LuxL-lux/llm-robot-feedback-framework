@@ -1,0 +1,24 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{private}\PYG{+w}{ }\PYG{n}{Vector3}\PYG{+w}{ }\PYG{n+nf}{ComputeJointPosition}\PYG{p}{(}\PYG{k+kt}{float}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{jointAngles}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{jointIndex}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{Matrix4x4}\PYG{+w}{ }\PYG{n}{baseTransform}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Matrix4x4}\PYG{p}{.}\PYG{n}{identity}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{c+c1}{// Apply joint transformations to get to desired joint position}
+\PYG{+w}{    }\PYG{c+c1}{// To get joint N position, apply transformations 0 to N\PYGZhy{}1}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{jointIndex}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{robotFrames}\PYG{p}{.}\PYG{n}{Length}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kt}{var}\PYG{+w}{ }\PYG{n}{frame}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{robotFrames}\PYG{p}{[}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{];}\PYG{+w}{ }\PYG{c+c1}{// Frame i+1 corresponds to joint i}
+\PYG{+w}{        }\PYG{k+kt}{var}\PYG{+w}{ }\PYG{n}{config}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{frame}\PYG{p}{.}\PYG{n}{Config}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{c+c1}{// Create transformation matrix using DH parameters}
+\PYG{+w}{        }\PYG{k+kt}{float}\PYG{+w}{ }\PYG{n}{theta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{jointAngles}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{Mathf}\PYG{p}{.}\PYG{n}{Deg2Rad}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{config}\PYG{p}{.}\PYG{n}{Theta}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{Matrix4x4}\PYG{+w}{ }\PYG{n}{dhTransform}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{HomogeneousMatrix}\PYG{p}{.}\PYG{n}{CreateRaw}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{FrameConfig}\PYG{p}{(}
+\PYG{+w}{            }\PYG{n}{config}\PYG{p}{.}\PYG{n}{Alpha}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{config}\PYG{p}{.}\PYG{n}{A}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{config}\PYG{p}{.}\PYG{n}{D}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{theta}
+\PYG{+w}{        }\PYG{p}{));}
+
+\PYG{+w}{        }\PYG{n}{baseTransform}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{baseTransform}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{dhTransform}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{baseTransform}\PYG{p}{.}\PYG{n}{GetPosition}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

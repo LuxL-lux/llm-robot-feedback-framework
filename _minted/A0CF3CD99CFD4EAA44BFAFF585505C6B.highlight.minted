@@ -1,0 +1,16 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{RobotSystem.Interfaces}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{public}\PYG{+w}{ }\PYG{k}{interface}\PYG{+w}{ }\PYG{n}{IRobotConnector}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{event}\PYG{+w}{ }\PYG{n}{System}\PYG{p}{.}\PYG{n}{Action}\PYG{o}{\PYGZlt{}}\PYG{n}{RobotSystem}\PYG{p}{.}\PYG{n}{Core}\PYG{p}{.}\PYG{n}{RobotState}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{OnRobotStateUpdated}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{event}\PYG{+w}{ }\PYG{n}{System}\PYG{p}{.}\PYG{n}{Action}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{OnConnectionStateChanged}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{IsConnected}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{get}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{n}{RobotSystem}\PYG{p}{.}\PYG{n}{Core}\PYG{p}{.}\PYG{n}{RobotState}\PYG{+w}{ }\PYG{n}{CurrentState}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{get}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{Connect}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{Disconnect}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

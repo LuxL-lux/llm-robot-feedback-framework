@@ -1,9 +1,77 @@
-\subsection{Kollisionen}
-\subsubsection{Theoretische Grundlagen}
+\subsection{Collision Detection Monitor}
+\subsubsection{Theoretische Grundlagen der Kollisionserkennung}
+\noindent
+Die Kollisionserkennung in Unity basiert auf einem zweistufigen Verfahren, das
+von der integrierten PhysX 5.1 Engine implementiert wird
+\vglcite{nvidia2024physx5}. In der \textbf{Broad Phase} werden zunächst
+Axis-Aligned Bounding Boxes (AABB) aller Objekte auf mögliche Überlappungen
+geprüft. Dieser Schritt reduziert die Anzahl der detaillierten Prüfungen von
+$O(n^2)$ auf $O(n \log n)$ durch räumliche Partitionierung
+\vglcite{ericson2004real}. Nur Objektpaare mit überlappenden Bounding Boxes
+werden an die \textbf{Narrow Phase} weitergereicht, wo der präzise
+GJK-Algorithmus (Gilbert-Johnson-Keerthi) die tatsächliche Kollision zwischen
+konvexen Geometrien ermittelt \vglcite{gilbert1988fast}.
+\noindent
+Unity unterscheidet dabei zwischen physikalischen Kollisionen und
+Trigger-Events. Während physikalische Kollisionen Reaktionskräfte berechnen,
+detektieren Trigger lediglich Überlappungen und generieren entsprechende Events
+\vglcite{unity2024manual}. Die Layer-Matrix ermöglicht zusätzlich eine selektive
+Kollisionserkennung, indem bestimmte Layer-Kombinationen von der Prüfung
+ausgeschlossen werden können. Dies reduziert sowohl die Rechenlast als auch
+unerwünschte Kollisionsmeldungen zwischen semantisch nicht relevanten Objekten.
 
-Kollisionen eines Roboters mit Objekten im Arbeitsraum stellen eine zentrales
-Problem beim Neuentwurf und der Testung neu entwickelten Codes dar. Kollidiert
-ein industrieller Roboter unvorhergesehen mit seinem Arbeitsraum, kann dies im
-schlimmsten Fall zu einem Ausfall des am Produktionsschrit beteiligen Roboters
-\subsubsection{Implementierung}
+\subsubsection{Praktisches Vorgehen}
+\noindent
+Für die Kollisionserkennung eines Roboterarms mit sechs Freiheitsgraden müssen
+spezielle Anpassungen vorgenommen werden: Da benachbarte Glieder der
+kinematischen Kette konstruktionsbedingt immer in Kontakt stehen, würden diese
+ohne Filterung kontinuierlich Kollisionen melden. Unity's
+\texttt{Physics.IgnoreCollision()} API ermöglicht das explizite Ausschließen
+solcher Kollisionspaare.
+\noindent
+Das Layer-System wird zur semantischen Trennung verschiedener Objektkategorien
+genutzt. Der Roboter operiert auf dem Standard-Layer, während Werkstücke auf
+Layer 30 (Parts) und Stationen auf Layer 31 (ProcessFlow) (siehe Kapitel
+\ref{section:prozessfolgen}) platziert werden.
+Durch Konfiguration der Collision Layer Matrix wird sichergestellt, dass nur
+sicherheitsrelevante Kollisionen zwischen Roboter und Hindernissen detektiert
+werden, während Process Flow Trigger-Events separat behandelt werden.
+
+\subsubsection{Konkrete Implementierung}
+\noindent
+Die Implementierung nutzt Trigger-Collider für berührungslose Detektion. Jedes
+Roboterglied erhält einen konvexen Mesh-Collider mit einem dedizierten
+Detector-Komponenten. Die Filterung benachbarter Glieder erfolgt durch hierarchische Analyse der
+Roboterstruktur, dargstellent in \ref{listing:adjacentFrames}.
+
+\begin{figure}[H]
+	\inputminted[fontsize=\footnotesize]{csharp}{code-snippets/SetupAdjacentFramesIgnoring.cs}
+	\caption{Algorithmus zum Ermitteln kinematisch benachbarter Mesh-Collider}
+	\label{listing:adjacentFrames}
+\end{figure}
+\noindent
+Tritt nun eine Kollision mit einem der vordefinierten Objekte auf, wird die
+\texttt{OnRobotPartCollision()}-Methode des Monitors aufgerufen. Diese prüft
+zunächst, ob es sich um ein gegriffenes Werkstück handelt - solche Kollisionen
+werden ignoriert, da das Werkstück temporär Teil des Roboters ist. Anschließend
+wird durch einen Cooldown-Mechanismus verhindert, dass dieselbe Kollision
+innerhalb kurzer Zeit mehrfach gemeldet wird.
+
+\noindent
+Die Kollisionserkennung unterscheidet zwischen kritischen und unkritischen
+Ereignissen basierend auf konfigurierbaren Tags. Objekte mit Tags wie
+\texttt{"Machine"} oder \texttt{"Obstacles"} lösen kritische Safety Events aus,
+während andere Kollisionen als Warnungen klassifiziert werden. Der Monitor
+generiert dabei ein \texttt{SafetyEvent}-Objekt mit vollständigen Metadaten
+über die Kollision, einschließlich der beteiligten Roboterglieder, des
+Kollisionspunkts in Weltkoordinaten und der Distanz zwischen den Objekten.
+
+\noindent
+Diese Ereignisse werden an den zentralen \texttt{RobotSafetyManager}
+weitergeleitet, der sie mit dem aktuellen Roboterzustand anreichert und
+entsprechend der konfigurierten Logging-Strategie verarbeitet. Durch diese
+Architektur bleibt der Collision Detection Monitor unabhängig vom spezifischen
+Robotertyp und kann flexibel in verschiedenen Simulationsszenarien eingesetzt
+werden.
+
 

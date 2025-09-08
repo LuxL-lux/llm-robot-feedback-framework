@@ -1,66 +1,228 @@
-\chapter{Grundlagen und Stand der Technik} \label{cap:Grundlagen}
+\chapter{Stand der Technik} \label{cap:Grundlagen}
 
-\section{Grundlagen der Robotersimulation}
-\label{sec:Grundlagen_Robotersimulation}
-% Einführung in relevante Parameter... Überblick über Simulationslandschaft und
-% Vorteile von Unity...
-
-\section{Large Language Models (LLMs)} \label{sec:Grundlagen_LLMs}
-% Grundlegende Erklärung der Funktionsweise... Abgrenzung und Definition von
-% KI..
-\section{Stand der Technik: LLMs in der Robotik} \label{sec:Stand_LLMs_Robotik}
-% Aktuelle Forschungsansätze (Brain-Body, Gemini Robotics)... Herausforderungen
-% (Grounding, Sicherheit)... Bestehende Frameworks...
-\section{Stand der Technik: Robotersimulation}
-\label{sec:Stand_Robotersimulation} Roboterprogrammierung kann als die
+\section{Robotersimulation}
+\subsection{Roboterprogrammierung} Die Roboterprogrammierung kann als die
 Programmierung von industriellen Manipulatoren verstanden werden, die sich durch
 ihre programmierbaren und anpassungsfähigen Eigenschaften von anderen Maschinen
 abheben. Roboterprogramme enthalten präzise Anweisungen und Spezifikationen für
-die Bewegung des Roboters. Im Kern ist die Roboterprogrammierung ein
-Steuerungsproblem, das neben den allgemeinen Aspekten der Computerprogrammierung
-auch roboterspezifische Herausforderungen umfasst. \vglcite[1\psqq]{nilsson1996}
-Ein entscheidender Vorteil der Roboterprogrammierung im Gegensatz zur
-herkömmlichen Steuertechnik ist dabei die Möglichkeit, einen realen Prozess
-mittels Programmcode abbilden und verändern zu können und somit die Effizienz
-und Anpassungsfähigkeit eines industriellen Prozessen zu erhöhen.
+die Bewegung des Roboters. \vglcite[1\psqq]{nilsson1996} Der entscheidende
+Vorteil der Roboterprogrammierung ist somit \textbf{Flexibilität:} Roboter
+können durch einfache Software-Umprogrammierung für völlig unterschiedliche
+Aufgaben eingesetzt werden, während herkömmliche Steuerungstechnik meist auf
+fest verdrahtete, starre Abläufe beschränkt ist.
 
+\subsection{Offline-Programmierung und Robotersimulationsprogramme} Die
+Ausfallzeiten von industriellen Fertigungsanlagen werden im Allgemeinen
+möglichst gering gehalten, um profitabel zu operieren. Im Rahmen von
+Prozessveränderungen oder -verbesserungen ist es jedoch notwendig, neue
+Arbeitsabläufe, Maschineneinstellungen und auch Roboterprogramme zu testen und
+zu evaluieren. Das impliziert erhebliche Ausfallzeiten sowie finanzielle und
+sicherheitstechnische Risiken bei der Ausführung von noch nicht evaluiertem
+Programmcode auf einem Roboter.\vglcite[4]{bilancia2023} Infolgedessen können Beschädigungen am
+Roboter, Maschinen, Werkstücken und Umwelt durch Kollisionen oder fehlerhafter
+Konifguration des Roboters auftreten.
 
-\subsection{Offline-Programmierung und Robotersimulationsprogramme} Da Anlagen
-oft dauerhaft in Betrieb sind un die Notwendigkeit von Prozessveränderungen bei
-der Fertigung von Produkten unabdingbar ist, wird eine Möglichkeit benötigt,
-industrielle Anlagen schon bevor der Inbetriebnahme, Umfunktionierung oder
-Verbesserung testen zu können. Auch bei Robotern ist dies, unter anderem
-aufgrund hoher Kosten und Sicherheitsrisiken bei fehlerhafter Konifguration,
-unabdingbar. Die \textbf{Offline-Programmierung (OLP)} ermöglicht die
-Entwicklung eines Steuerungsprogramms, ohne dass ein physischer Roboter
+Die \textbf{Offline-Programmierung (OLP)} schafft hier Abhilfe und ermöglicht
+die Entwicklung eines Steuerungsprogramms, ohne dass ein physischer Roboter
 erforderlich ist. Ein wesentlicher Vorteil ist die Möglichkeit, Programme in
-einer virtuellen Umgebung zu erstellen und zu simulieren. Die Methode nutzt
-3D-CAD-Modelle, um den Körper des Roboters möglichst originalgetreu
-darzustellen. Ziel der Offline-Programmierung ist es, den visuellen Prozess
-schon vorher evaluieren zu können und Probleme im Ablauf früher zu erkennnen.
-\vglcite[62\psqq]{holubke2014}
+einer virtuellen Umgebung zu erstellen und zu simulieren. Die OLP nutzt
+originalgetreue 3D-CAD-Modelle des Roboters und dessen Umwelt, welche oft vom
+Hersteller zur Verfügung gestellet werden, um die tatsächliche Umgebung
+,öglichst originalgetreu darzustellen. Ziel der Offline-Programmierung ist es,
+den visuellen Prozess schon vorher evaluieren zu können und Probleme im Ablauf
+früher zu erkennnen. \vglcite[62\psqq]{holubke2014}
 
-
-\subsection{Limitierende Faktoren proprietärer Systeme} Traditionelle
-Robotersteuerungssysteme sind oft durch eine \textbf{proprietäre Hardware- und
-	Softwarearchitektur} begrenzt. \vglcite[1]{bilancia2023} Dies führt dazu, dass
-Anwender für jede Robotermarke eine spezifische Programmiersprache mit
-unterschiedlichen Befehlen und Funktionen erlernen müssen. Solche Systeme
-verursachen \textbf{Zeitverlust} in der Produktion, da jede Änderung eine
-Unterbrechung erfordert, sowie \textbf{Codeduplikation}, da Programme nicht
-zwischen Robotermarken ausgetauscht werden können \vglcite[3]{bilancia2023}.Um
-diese Beschränkungen zu überwinden, ist eine akkurate Modellierung der
-physischen Welt, in welcher der Roboter agieren soll, in der Simulation
-unabdingbar.
+\subsection{Landschaft der Offline-Robotersimulationsprogramme} Im Gegensatz zur
+Werkzeugmaschinenprogrammierung, die auf standardisierten Sprachen wie G-Code
+basiert, erschwert das Fehlen einer universellen, herstellerunabhängigen
+Programmiersprache die Integration verschiedener Robotertechnologien in einer
+Produktionsanlage \vglcite[4]{bilancia2023}. Jeder Roboterhersteller verwendet
+eine eigene Programmiersprache, die sich in Komplexität, Syntax und Semantik
+unterscheidet. KUKA, ABB, Fanuc und Stäubli setzen beispielsweise jeweils
+unterschiedliche Sprachen ein, weshalb Unternehmen spezialisiertes Personal
+benötigen. Zudem müssen Roboterprogrammierer mit eingeschränkten Basisbefehlen
+und Bibliotheken arbeiten. Diese decken zwar die meisten Standardanforderungen
+ab, ermöglichen jedoch keine fortgeschrittenen Berechnungen oder komplexen
+Steuerungsstrategien. Offline-Programmierwerkzeuge wie RoboDK oder Siemens
+Process Simulate übersetzen 3D-Modellierungsbefehle mithilfe spezifischer
+Postprozessoren in herstellerspezifische Robotercodes. Allerdings unterstützen
+diese Werkzeuge nicht die vollständigen Funktionsbibliotheken der kommerziellen
+Robotersprachen und können erfahrene Programmierer bei komplexen
+Programmierroutinen nicht ersetzen\vglcite[4]{bilancia2023}. Fuktional wird
+inerhalb einer Robotersimulationsumgebung Programmiercode in einer simulierten
+Umgebung ausgeführt. Dazu kann mithilfe von Simulationssoftware die isolierte
+Arbeitsumgebung, beispielsweise eine Roboterzelle mit Bearbeitungsstationen,
+oder auch ganze Produktionslinien und -prozesse simuliert werden und das
+Verhalten des Roboters beobachtet. Durch externen Faktoren wie verformbare
+Objekte, Flüssigkeiten oder Personen im Kontext von
+Mensch-Maschine-Kollaborationen (MRK) bringt die Erprobung möglichst realer
+Szenarien eine erhöhte Komplexität mit sich. Dabei treten in realen Szenarien,
+beispielsweise bei der automatisierten Montage von Steckverbindungen in
+Schaltkästen oder dem Giessen mit flüssigem Metall in der Motorenfertigung,
+unvorhergesehene Verhaltensweisen der Werkstoffe und damit einhergehende
+Wechselwirkungen mit dem Roboter auf. Um diesen Beschränkungen entgegenzuwirken
+ist eine akkurate Modellierung der physischen Welt, in welcher der Roboter
+agieren soll, nötig.
 
 \subsection{Physics-Engines}
-Dies führt zum Einsatz von {Physics-Engines}. Um eine
-realistische Simulation zu gewährleisten, sind diese unerlässlich. Sie
-modellieren dynamische Interaktionen wie Kollisionen, Schwerkraft und Reibung,
-was für die präzise Nachbildung des Roboterverhaltens entscheidend ist. Obwohl
-die Genauigkeit dieser Engines als nicht perfekt angesehen wird, da sie die
-reale Welt nicht exakt abbilden, sind sie für die Forschung in den Bereichen
-Deep Learning und Digital Twins von entscheidender Bedeutung
-\vglcite[1/psqq]{audonnet2022}. Die Wahl der Physics-Engine ist ein kritischer
-Faktor und beeinflusst die Stabilität und Wiederholbarkeit der Simulation.
-Häufig genutzte Engines sind PhysX, Bullet und ODE.
+Mit dem Einsatz von {Physics-Engines} soll eine Umgebung geschaffen werden, in
+dem ein nahezu realistisches Bild der Realität digital abgebildet werden kann
+und so ein digitaler Zwilling eines realen Roboters und seiner Umgebung
+geschaffen werden. Sie modellieren dynamische Interaktionen wie Kollisionen,
+Schwerkraft und Reibung, was für die präzise Nachbildung des Roboterverhaltens
+entscheidend ist. Obwohl die Genauigkeit dieser Engines als nicht perfekt
+angesehen wird, da sie die reale Welt nicht exakt abbilden\vglcite[1\psqq]{audonnet2022}, sind sie für
+Forschung und Entwikcklung essentiell, um physikalisch anspruchsvolle Prozesse
+zuverlässig simulieren zu können. Die Wahl der Physics-Engine beeinflusst die Stabilität und Wiederholbarkeit der
+Simulation. Häufig genutzte Engines sind PhysX, Bullet und ODE, abgebildet in
+Tabelle \ref{table:simuplattform}.
+
+\begin{table}
+	\begin{tabularx}{\columnwidth}{X|X|X|X|X}
+		\toprule
+		\thead{\textbf{Name}} & \thead{\textbf{Physics \newline Engine}} & \thead{\textbf{Open Source}} & \thead{\textbf{ROS-Integration}} & \thead{\textbf{ML-Support}} \\
+		\midrule
+		Gazebo                & Bullet, DART, ODE, Simbody               & Ja                           & Ja                               & Extern                      \\
+		\hline
+		Ignition              & DART                                     & Ja                           & Ja                               & Extern                      \\
+		\hline
+		Webots                & ODE                                      & Ja                           & Ja                               & Extern                      \\
+		\hline
+		Isaac Sim             & PhysX                                    & Nein                         & Ja                               & Integriert                  \\
+		\hline
+		Unity                 & Havok, PhysX, RaiSim                     & Nein                         & Nein                             & Extern                      \\
+		\hline
+		PyBullet              & Bullet                                   & Ja                           & Nein                             & Extern                      \\
+		\hline
+		CoppeliaSim (V-rep)   & Newton, Bullet, ODE,Vortex Dynamics      & Nein                         & Ja                               & Extern                      \\
+		\hline
+		Mujoco                & Mujoco                                   & Ja                           & Nein                             & Extern                      \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Vergleich verschiedener Robotik-Simulationsplattformen}\label{table:simuplattform}
+\end{table}
+
+\section{Large Language Models (LLMs)} \label{sec:Grundlagen_LLMs}
+\subsection{Funktionsweise und Architektur}
+Bei grossen Sprachmodellen (LLMs) handelt es sich um statistische Modelle,
+welche in der Lage sind textuelle Inhalte zu übersetzen, zusammenzufassen,
+Informationen abzurufen und Konversation zu betreiben. Historisch sind LLMs aus
+der Möglichkeit, neuronale Netze im Modus des \textit{self-supervised learning}
+und anhand grosser Mengen textueller Trainingsdaten zu trainieren, entstanden.
+Dabei haben sich LLMs innerhalb der letzten 10 Jahre aufgrund der hohen Verfügbarkeit digitaler
+textueller Daten sowie Innovationen im Bereich der Hardware-Technologie zur
+wichtigsten Technologie im Bereich KI entwickelt. \vglcite[1\psq]{naveed2024}
+
+
+Den entscheidenden Durchbruch für moderne LLMs lieferte die
+Transformer-Architektur, die sequenzielle Abhängigkeiten durch parallele
+Attention-Mechanismen ersetzt.\vglcite[1\psqq]{vaswani2023attentionneed} Der Self-Attention-Mechanismus berechnet für
+jedes Token die Relevanz zu allen anderen Tokens der Sequenz, wodurch das Modell
+kontextuelle Beziehungen direkt erfasst, ohne Informationen sequenziell durch
+versteckte Schichten propagieren zu müssen. Diese Parallelisierung ermöglicht
+nicht nur schnelleres Training auf den erwähnten großen Datensätzen, sondern
+schafft auch die Grundlage für das Skalierungsverhalten moderner Sprachmodelle.
+Folglich basieren aktuelle Large Language Models wie GPT-4 oder Claude auf
+dieser Architektur, da Transformer sowohl lokale als auch globale Sprachmuster
+effizient modellieren und emergente Fähigkeiten wie In-Context-Learning
+entwickeln.
+
+\subsection{Programmcodegenerierung durch LLMs}%
+Large Language Models haben bemerkenswerte Fortschritte in der automatischen
+Code-Generierung erzielt und revolutionieren damit die Softwareentwicklung.
+Code-LLMs sind in der Lage erfolgreich Quellcode aus natürlichsprachlichen
+Beschreibungen generieren zu generieren .Aktuelle LLMs demonstrieren anhand von
+empirischen Vergleichen mit HumanEval, MBPP und BigCodeBench Benchmarks, dass
+sie in der Lage sind progressiv bessere Leistungen bei verschiedenen
+Schwierigkeitsgraden und Programmieraufgaben erzielen. \vglcite{jiang2024}
+Vorraussetzungen für die erfolgreiche Programmierung mithilfe von LLMs sind die
+Inkludierung der Konzepte und Programmiersprachen in die Trainingsdaten des
+jeweiligen Modells.
+
+Domänenspezifische Code-Generierung stellt LLMs vor besondere Herausforderungen,
+die ihre praktische Anwendbarkeit erheblich einschränken. Low-Resource
+Programming Languages und Domain-Specific Languages begegnen besonderen
+Hindernissen durch Datenmangel und spezialisierte Syntax, die in allgemeinen
+Datensätzen schlecht repräsentiert sind \vglcite{joel2024}. Diese Problematik
+betrifft Millionen von Entwicklern - beispielsweise allein 3,5 Millionen
+Rust-Nutzer können LLM-Funktionen nicht vollständig ausschöpfen. LLMs zeigen
+ausserdem suboptimale Performance bei domänenspezifischem Code aufgrund ihrer
+begrenzten Kompetenz bei domänenspezifischen Bibliotheken. \vglcite{gu2025}
+Folglich benötigen LLMs zusätzlichen Kontext, um Probleme zu lösen, die nicht in
+ihren eigenen Trainingsdaten veranktert sind.
+
+Agentische KI-Systeme entwickeln sich zu einer neuen Generation autonomer
+Softwareagenten, die komplexe Aufgaben ohne kontinuierliche menschliche
+Anleitung ausführen können. Diese Systeme adressieren teilweise die zuvor
+beschriebenen Herausforderungen bei domänenspezifischer Code-Generierung, indem
+sie über Command-Line-Interfaces und externe Tools Zugang zu spezialisierten
+Bibliotheken und APIs erhalten. Das Model Context Protocol etabliert sich als
+offener Standard zur Verbindung von AI-Assistenten mit Datensystemen,
+Business-Tools und Enticklungsumgebungen. \vglcite{anthropic2024} Viele Softwareentwicklungstools
+bieten bereits MCP-Unterstützung, um KI-Agenten besseren Zugang
+zu domänenspezifischen Kontextinformationen und Code-Repositories zu
+ermöglichen. Die Standardisierung solcher Protokolle kann eine Lösung für die
+Datenmangel-Problematik bei Low-Resource Programming Languages und
+Domain-Specific Languages darstellen, wobei die praktische Wirksamkeit noch
+evaluiert werden muss.
+
+\section{LLMs in der Robotik} \subsection{Aktuelle
+	Forschungansätze} Die Integration von Large Language Models in die Robotik
+verfolgt drei komplementäre Paradigmen: Vision-Language-Action Modelle,
+Code-Generation und Embodied Reasoning. Google DeepMinds RT-2 repräsentiert den
+Vision-Language-Action Ansatz, bei dem Roboter-Aktionen als Text-Token behandelt
+und gemeinsam mit visuellen und sprachlichen Daten trainiert werden \vglcite{brohan2023}. Dieser Ansatz ermöglicht emergente Fähigkeiten wie das Verstehen von
+Zahlen oder Icons ohne explizites Training. Code as Policies verfolgt hingegen
+die direkte Generierung von ausführbarem Python-Code aus natürlichsprachlichen
+Befehlen, wobei hierarchische Code-Generation komplexe Kontrollstrukturen wie
+Schleifen und Bedingungen erzeugt \vglcite{liang2024}. PaLM-E demonstriert
+einen dritten Weg durch multimodale Embodied Language Models, die Sprache,
+Vision und kontinuierliche Sensordaten in einem gemeinsamen Embedding-Raum
+verarbeiten\vglcite{driess2023}. Parallel entwickeln Forscher Brain-Body-Problem Ansätze, die
+kognitive Architekturen mit physischen Roboterkörpern verbinden, sowie
+Prompt-basierte Methoden, bei denen LLMs direkt Low-Level-Kontrollaktionen
+vorhersagen. Diese Vielfalt der Ansätze zeigt, dass die Forschung noch keine
+dominante Architektur etabliert hat und verschiedene Wege zur Integration von
+Sprache und Robotik exploriert.
+
+\subsection{Herausforderungen in der Inegration}
+%Grounding-Problem: Verbindung von Sprache und physischer Welt
+%Sicherheitsaspekte und Validierung Echtzeitfähigkeit und Latenz
+Die Verankerung abstrakter Sprachkonzepte in physischen Robotersystemen
+scheitert an drei fundamentalen Problemen. Erstens müssen Roboter symbolische
+Repräsentationen mit sensomotorischen Erfahrungen verknüpfen - das von Harnad
+definierte Symbol-Grounding-Problem bleibt trotz jahrzehntelanger Forschung
+ungelöst \vglcite{ (Survey on Robotic Language Grounding, 2024) }. Zweitens fehlen
+standardisierte Schnittstellen zwischen hochabstrakten Sprachbefehlen und
+niedrigstufigen Motorkommandos, wodurch jede Roboterplattform individuelle
+Übersetzungsmechanismen benötigt. Drittens limitieren Echtzeitanforderungen die
+Komplexität der Verarbeitung, da Roboter innerhalb von Millisekunden auf
+Umweltveränderungen reagieren müssen. Moderne Systeme versuchen diese
+Herausforderungen durch die Integration dreier Wahrnehmungsebenen zu lösen:
+Interozeption erfasst interne Zustände, Propriozeption überwacht
+Gelenkstellungen und Bewegungen, während Exterozeption die Umgebung durch
+Kameras und Sensoren interpretiert \vglcite{valenzo2022}. Jedoch führt diese
+Komplexität zu erhöhtem Rechenaufwand und erschwert die Fehlerdiagnose bei
+unerwarteten Verhaltensweisen. Folglich benötigen robotische Systeme neue
+Architekturen, die effizient zwischen abstrakten Sprachmodellen und konkreten
+Aktionsräumen vermitteln.
+
+\subsection{Bestehende Frameworks und Tools} Aktuelle Frameworks standardisieren
+die Integration von LLMs in robotische Systeme durch modulare Architekturen.
+ROS-LLM verbindet das Robot Operating System mit verschiedenen Sprachmodellen
+und transformiert natürlichsprachliche Befehle automatisch in ausführbare
+Aktionssequenzen \vglcite{(Mower et al., 2024)}. Das Framework implementiert
+drei Ausführungsmodi: sequenzielle Abarbeitung für einfache Aufgaben,
+Verhaltensbäume für reaktive Systeme und Zustandsautomaten für komplexe
+Ablaufsteuerungen. Entwickler konfigurieren atomare Aktionen wie das Greifen
+eines Objektes oder bestimmte Pfadnavigationen, die das LLM dann zu komplexen
+Verhaltensketten kombiniert. Simulationsumgebungen beschleunigen parallel die
+Entwicklung durch massiv-parallele GPU-Berechnungen: Isaac Sim von NVIDIA
+simuliert Tausende Roboterinstanzen gleichzeitig, mit MuJoCo lassen sich präzise
+Kontaktdynamiken für Manipulationsaufgaben berechnet \vglcite{(Padalkar et al.,
+	2023)}. Solche Plattformen ermöglichen einen theoretischen Zero-Shot-Transfer
+von der Simulation zur Realität durch systematische simulierte
+Domänenrandomisierung von Physikparametern, Sensorauschen und
+Umgebungsvariationen. Die Standardisierung solcher Werkzeugketten soll
+Entwicklungszeiten reduzieren und die Programmierung von Roboter
+niederschwelliger machen.

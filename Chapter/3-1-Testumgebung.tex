@@ -1,0 +1,29 @@
+\subsection{Flange als Visualisierungstool}
+
+Im Rahmen dieses Frameworks wird das Unity-Package
+\textit{Flange} genutzt. Implementiert durch GitHub-User \textit{Preliy} und frei
+verfügbar im Rahmen einer BSD 3-Clause Lizenz, bietet ein spezialisiertes
+Framework für die Robotersteuerung in Unity mit modularer Architektur, die
+Gelenksteuerung, Kinematik, Koordinatentransformationen und Echtzeitüberwachung
+als separate Komponenten organisiert. Das System unterstützt sowohl direkte
+Gelenkmanipulation auf niedriger Ebene als auch kartesische Steuerung auf
+höherer Abstraktionsebene, wodurch es für verschiedene Roboteranwendungen
+einsetzbar ist.\vglcite{preliyflange2024} Im Kontext dieser Entwicklungsarbeit wird Flange zur
+Implementierung und Visualisierung der Denavit-Hartenberg-Parameter und damit
+einhergehender Achstransformationen eingesetzt,
+da diese Notation als fundamentales Werkzeug der Robotik eine systematische
+Beschreibung der Geometrie serieller Robotermechanismen ermöglicht und somit die
+Anwendung etablierter algorithmischer Verfahren für kinematische Berechnungen,
+Jacobi-Matrizen sowie Bewegungsplanung unterstützt.\vglcite[590]{corke2007}
+
+Flange ermöglicht eine direkte Konfiguration des Roboters über \textit{Frame}
+und \textit{JointTransformation} Scripts. Ein Frame definiert dabei die
+Denavit-Hartenberg-Parameter für einen Teil der kinematischen Kette, eine
+JointTransformation die Paramter des Gelenks, also möglicher maximaler Ausschlag
+in positive und negative Achsrotationsrichtung sowie maximale Geschwindigkeit
+und Beschleunigung. Diese Funktion werden im Rahmen dieser Implentierung
+genutzt, um den zu simulierenden Roboter theoretisch nachvollziehbar im Raum
+bewegen zu können.
+
+\subsection{Aufbau der Roboterzelle}
+
