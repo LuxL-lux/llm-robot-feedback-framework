@@ -1,0 +1,37 @@
+[
+  {
+    "monitorName": "Collision Detector",
+    "eventType": 2,
+    "description": "CRITICAL COLLISION: Gripper -> Sauele",
+    "robotStateSnapshot": "[...]",
+    "eventDataJson": "{\"robotLink\":\"Gripper\",\"collisionObject\":\"Sauele\",\"collisionPoint\":{\"x\":-1.146544337272644,\"y\":0.038220398128032687,\"z\":1.1465449333190919},\"distance\":1.6219075918197632}"
+  },
+  {
+    "monitorName": "Collision Detector",
+    "eventType": 2,
+    "description": "CRITICAL COLLISION: Joint_4 -> Sauele",
+    "robotStateSnapshot": "[...]",
+    "eventDataJson": "{\"robotLink\":\"Joint_4\",\"collisionObject\":\"Sauele\",\"collisionPoint\":{\"x\":-1.146544337272644,\"y\":0.038220398128032687,\"z\":1.1465449333190919},\"distance\":1.6219075918197632}"
+  },
+  {
+    "monitorName": "Collision Detector",
+    "eventType": 2,
+    "description": "CRITICAL COLLISION: Joint_6 -> Sauele",
+    "robotStateSnapshot": "[...]",
+    "eventDataJson": "{\"robotLink\":\"Joint_6\",\"collisionObject\":\"Sauele\",\"collisionPoint\":{\"x\":-1.146544337272644,\"y\":0.038220398128032687,\"z\":1.1465449333190919},\"distance\":1.6219075918197632}"
+  },
+  {
+    "monitorName": "Collision Detector",
+    "eventType": 2,
+    "description": "CRITICAL COLLISION: Joint_5 -> Sauele",
+    "robotStateSnapshot": "[...]",
+    "eventDataJson": "{\"robotLink\":\"Joint_5\",\"collisionObject\":\"Sauele\",\"collisionPoint\":{\"x\":-1.146544337272644,\"y\":0.038220398128032687,\"z\":1.1465449333190919},\"distance\":1.6219075918197632}"
+  },
+  {
+    "monitorName": "Collision Detector",
+    "description": "Collision detected between Gripper and CylinderHead (8)",
+    "eventType": 1,
+    "robotStateSnapshot": "[...]",
+    "eventDataJson": "{\"robotLink\":\"Gripper\",\"collisionObject\":\"CylinderHead (8)\",\"collisionPoint\":{\"x\":-1.9333001375198365,\"y\":0.5249927043914795,\"z\":-1.1674463748931885},\"distance\":2.3186628818511965}"
+  }
+]

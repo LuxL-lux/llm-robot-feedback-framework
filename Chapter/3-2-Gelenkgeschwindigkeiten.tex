@@ -36,6 +36,11 @@ Zur Stabilisierung implementiert das Framework einen dreistufigen Filteransatz:
 	\item \textbf{Outlier Rejection:}
 	      $|\dot{\theta}_{i,\text{final}}[k] - \dot{\theta}_{i,\text{final}}[k-1]| \leq \tau_v \cdot \dot{\theta}_{i,\text{max}}$ mit $\tau_v = 0.2$
 \end{enumerate}
+\noindent
+Durch die verwendete Glättung werden schnelle Änderungen in den Gelenkwerten
+erst zeitverzögert sichtbar. Dies wirkt sich unmittelbar auf die Erkennung von
+Geschwindigkeitsverletzungen aus, da der Monitor die Ereignisse nicht exakt im
+Moment des Überschreitens ausgibt, sondern nach einigen Abtastungen.
 
 \paragraph{Grenzwertdefinition} Die Grenzwerte werden aus den
 Flange-Framework-Konfigurationen extrahiert oder manuell spezifiziert. Ein

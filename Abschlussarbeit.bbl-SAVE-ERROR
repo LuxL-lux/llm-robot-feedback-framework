@@ -18,7 +18,42 @@
 
 
 \refsection{0}
-  \datalist[entry]{nty/global//global/global/global}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{robotwebservices2025}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=8c0d39874f7284349b7a1ba8e5063e84}{%
+           family={{ABB}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {ABB}%
+      }
+      \strng{namehash}{8c0d39874f7284349b7a1ba8e5063e84}
+      \strng{fullhash}{8c0d39874f7284349b7a1ba8e5063e84}
+      \strng{fullhashraw}{8c0d39874f7284349b7a1ba8e5063e84}
+      \strng{bibnamehash}{8c0d39874f7284349b7a1ba8e5063e84}
+      \strng{authorbibnamehash}{8c0d39874f7284349b7a1ba8e5063e84}
+      \strng{authornamehash}{8c0d39874f7284349b7a1ba8e5063e84}
+      \strng{authorfullhash}{8c0d39874f7284349b7a1ba8e5063e84}
+      \strng{authorfullhashraw}{8c0d39874f7284349b7a1ba8e5063e84}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{url}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Robot Web Services API Documentation}
+      \field{urlday}{20}
+      \field{urlmonth}{8}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb hhttps://developercenter.robotstudio.com/api/RWS
+      \endverb
+      \verb{url}
+      \verb hhttps://developercenter.robotstudio.com/api/RWS
+      \endverb
+    \endentry
     \entry{Albahari2022}{book}{}{}
       \name{author}{2}{}{%
         {{hash=4d458ac7ef22f277eb5c034e366d8197}{%
@@ -48,6 +83,8 @@
       \strng{authorfullhashraw}{d27bde4ec67b48c3f4415168c8dfbebd}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-1098121952}
@@ -125,6 +162,8 @@
       \strng{editorfullhashraw}{8c8332c07c2b4c5cdb5c5045bec59b48}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This paper presents the implementation of a new 3D simulator applied to the area of robotics. The simulator allows to analyze the performance of different schemes of autonomous and/or tele-operated control in structured environments, partially structured and unstructured. For robot-environment interaction is considered virtual reality software Unity3D, this software exchanges information with MATLAB to execute different control algorithms proposed through the use of shared memory. The exchange of information in real time between the two software is essential because the advanced control algorithms require a feedback from the robot-environment interaction to close the control loop, while the simulated robot updates its kinematic and dynamic parameters depending on controllability variables calculated by MATLAB. Finally, the 3D simulator is evaluated by implementing an autonomous control scheme to solve the problem of path following of a 6DOF robot arm, also the results obtained by implementing the tele-operation scheme for said robot are presented.}
@@ -151,6 +190,8 @@
       \strng{authorfullhashraw}{f431db65cea024a5f19eab835afefee2}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.anthropic.com/news/model-context-protocol}}
@@ -164,6 +205,8 @@
       }
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
       \field{note}{Document ID: 3HAC050435-001, Revision: M}
       \field{title}{Application Manual - Robot Web Services}
@@ -204,6 +247,8 @@
       \strng{authorfullhashraw}{ae8f0709843b592e8c1fbefe03a4d297}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{ACM Transactions on Software Engineering and Methodology}
@@ -244,6 +289,8 @@
       \strng{authorfullhashraw}{d2a031809349bc6c9f570a6a84b700f6}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{2022 22nd International Conference on Control, Automation and Systems (ICCAS)}
@@ -291,6 +338,8 @@
       \strng{authorfullhashraw}{80f504849bc79cf199b3cd55289180e2}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{2015 24th IEEE International Symposium on Robot and Human Interactive Communication (RO-MAN)}
@@ -336,6 +385,8 @@
       \strng{authorfullhashraw}{f3c472223052fa8f8a1c396381e08cd3}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3}
@@ -381,6 +432,8 @@
       \strng{authorfullhashraw}{7d7af5527143ce4d2da2eae4f44a118b}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{2076-3417}
@@ -443,6 +496,8 @@
       \strng{authorfullhashraw}{6279fe502a51119abf4ec29a5c1d4257}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0471958697}
@@ -475,6 +530,8 @@
       \strng{authorfullhashraw}{1764b95256df68c84d8a593fc2dfa143}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{2nd}
@@ -500,6 +557,8 @@
       \strng{authorfullhashraw}{ba5ce54787abcff8c806d8a8c4d85c30}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Transactions on Robotics}
@@ -539,6 +598,9 @@
       \field{extraname}{1}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3}
@@ -572,6 +634,9 @@
       \field{extraname}{2}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3rd}
@@ -615,6 +680,8 @@
       \strng{authorfullhashraw}{7c874055be849f7e83ca96ec831c6d5b}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of IEEE International Conference on Robotics and Automation}
@@ -650,6 +717,8 @@
       \strng{authorfullhashraw}{f563d58361174ec9d94b3bbc2ced478d}
       \field{sortinit}{D}
       \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{IEEE International Conference on Robotics and Automation (ICRA)}
@@ -683,6 +752,8 @@
       \strng{authorfullhashraw}{2855afd48412fc77268f258a0ccf7a9c}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0131177055}
@@ -714,6 +785,8 @@
       \strng{authorfullhashraw}{312ac886938a9b2be4f8eb607567fe4c}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0321127426}
@@ -760,6 +833,8 @@
       \strng{authorfullhashraw}{5cb4a6d7baf30d11bae6682eca698b4f}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Design Patterns: Elements of Reusable Object-Oriented Software}
@@ -789,6 +864,8 @@
       \strng{authorfullhashraw}{b97f772b60bfb5bf77251b45263e44dd}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3}
@@ -858,6 +935,8 @@
       \strng{authorfullhashraw}{cec5af542c737969cf280bb800772c8e}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{1557-7392}
@@ -879,7 +958,7 @@
       \verb http://dx.doi.org/10.1145/3697012
       \endverb
     \endentry
-    \entry{haas_realtime_2022}{inproceedings}{}{}
+    \entry{haas2022}{inproceedings}{}{}
       \name{author}{1}{}{%
         {{hash=d1509999021fa57e7dc5c2512ef2e2ee}{%
            family={Haas},
@@ -903,6 +982,8 @@
       \strng{authorfullhashraw}{d1509999021fa57e7dc5c2512ef2e2ee}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the International Conference on Robotics and Automation (ICRA)}
@@ -944,6 +1025,8 @@
       \strng{authorfullhashraw}{ef8d11fef21891211b7954891a5f3547}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Applied Mechanics and Materials}
@@ -982,6 +1065,8 @@
       \strng{authorfullhashraw}{d2f34fd84b513e7e72ac48dfda4b5daf}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Final program - Thirteenth World Congress in Mechanism and Machine Science, Robotics and Mechatronics}
@@ -1011,6 +1096,8 @@
       \strng{authorfullhashraw}{7058e4bd76f877c52b621c942b30613c}
       \field{sortinit}{I}
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{number}{ISO 10218-1:2011}
@@ -1024,6 +1111,8 @@
       }
       \field{sortinit}{I}
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
       \field{note}{Document ID: 3HAC020738-001}
       \field{title}{IRC5 Controller - Technical Reference Manual}
@@ -1074,6 +1163,8 @@
       \strng{authorfullhashraw}{45bb348ade1a31477c495763fa2a2dbe}
       \field{sortinit}{J}
       \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CL}
@@ -1118,6 +1209,8 @@
       \strng{authorfullhashraw}{c009bb742577fa99936234e2e6346180}
       \field{sortinit}{J}
       \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.SE}
@@ -1205,6 +1298,8 @@
       \strng{authorfullhashraw}{7fc8f8d53ed93ab8067ca3825e53205d}
       \field{sortinit}{J}
       \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the AAAI Conference on Artificial Intelligence}
@@ -1240,11 +1335,14 @@
       \strng{authorfullhashraw}{f1b7494703264d3e562759a836f6d716}
       \field{sortinit}{L}
       \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0792391296}
       \field{title}{Robot Motion Planning}
       \field{year}{1991}
+      \true{nocite}
       \verb{doi}
       \verb 10.1007/978-1-4615-4022-9
       \endverb
@@ -1302,6 +1400,8 @@
       \strng{authorfullhashraw}{9692292a58ec5bcd6a07bdfcb33be3cb}
       \field{sortinit}{L}
       \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.RO}
@@ -1337,6 +1437,8 @@
       \strng{authorfullhashraw}{8d8bf2803c6ae711dd3210bfe6b7086f}
       \field{sortinit}{L}
       \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the OOPSLA '87 Conference}
@@ -1370,12 +1472,78 @@
       \strng{authorfullhashraw}{40d489c3db5826c3527517212fb3c173}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Schriftenreihe des Instituts für Angewandte Informatik / Automatisierungstechnik, Universität Karlsruhe (TH), Band 28}
       \field{title}{Eine neue Methodik zur modellbasierten Bestimmung dynamischer Betriebslasten im mechatronischen Fahrwerkentwicklungsprozess}
       \field{year}{2009}
       \true{nocite}
+    \endentry
+    \entry{Martin1996}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=6f41df64eb0dc4855be70172368604c2}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Robert\bibnamedelima C.},
+           giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{fullhash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{fullhashraw}{6f41df64eb0dc4855be70172368604c2}
+      \strng{bibnamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorbibnamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
+      \field{extraname}{1}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{C++ Report}
+      \field{number}{6}
+      \field{title}{The Dependency Inversion Principle}
+      \field{volume}{8}
+      \field{year}{1996}
+      \true{nocite}
+      \field{pages}{61\bibrangedash 66}
+      \range{pages}{6}
+    \endentry
+    \entry{martin2000design}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=6f41df64eb0dc4855be70172368604c2}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Robert\bibnamedelima C.},
+           giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{fullhash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{fullhashraw}{6f41df64eb0dc4855be70172368604c2}
+      \strng{bibnamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorbibnamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
+      \field{extraname}{2}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Object Mentor}
+      \field{number}{34}
+      \field{title}{Design Principles and Design Patterns}
+      \field{volume}{1}
+      \field{year}{2000}
+      \true{nocite}
+      \field{pages}{597}
+      \range{pages}{1}
     \endentry
     \entry{Martin2003}{book}{}{}
       \name{author}{1}{}{%
@@ -1399,9 +1567,12 @@
       \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
       \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
       \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
-      \field{extraname}{1}
+      \field{extraname}{3}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0135974445}
@@ -1427,9 +1598,12 @@
       \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
       \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
       \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
-      \field{extraname}{2}
+      \field{extraname}{4}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Agile Software Development: Principles, Patterns, and Practices}
@@ -1458,9 +1632,12 @@
       \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
       \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
       \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
-      \field{extraname}{3}
+      \field{extraname}{5}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0134494166}
@@ -1486,74 +1663,17 @@
       \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
       \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
       \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
-      \field{extraname}{4}
+      \field{extraname}{6}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Clean Architecture: A Craftsman's Guide to Software Structure and Design}
       \field{year}{2017}
       \true{nocite}
-    \endentry
-    \entry{martin2000design}{article}{}{}
-      \name{author}{1}{}{%
-        {{hash=6f41df64eb0dc4855be70172368604c2}{%
-           family={Martin},
-           familyi={M\bibinitperiod},
-           given={Robert\bibnamedelima C.},
-           giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
-      }
-      \strng{namehash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{fullhash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{fullhashraw}{6f41df64eb0dc4855be70172368604c2}
-      \strng{bibnamehash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{authorbibnamehash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
-      \field{extraname}{5}
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Object Mentor}
-      \field{number}{34}
-      \field{title}{Design Principles and Design Patterns}
-      \field{volume}{1}
-      \field{year}{2000}
-      \true{nocite}
-      \field{pages}{597}
-      \range{pages}{1}
-    \endentry
-    \entry{Martin1996}{article}{}{}
-      \name{author}{1}{}{%
-        {{hash=6f41df64eb0dc4855be70172368604c2}{%
-           family={Martin},
-           familyi={M\bibinitperiod},
-           given={Robert\bibnamedelima C.},
-           giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
-      }
-      \strng{namehash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{fullhash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{fullhashraw}{6f41df64eb0dc4855be70172368604c2}
-      \strng{bibnamehash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{authorbibnamehash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
-      \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
-      \field{extraname}{6}
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{C++ Report}
-      \field{number}{6}
-      \field{title}{The Dependency Inversion Principle}
-      \field{volume}{8}
-      \field{year}{1996}
-      \true{nocite}
-      \field{pages}{61\bibrangedash 66}
-      \range{pages}{6}
     \endentry
     \entry{Meyer1992}{article}{}{}
       \name{author}{1}{}{%
@@ -1577,6 +1697,8 @@
       \field{extraname}{1}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Computer}
@@ -1616,6 +1738,8 @@
       \field{extraname}{2}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{2}
@@ -1645,6 +1769,8 @@
       \strng{authorfullhashraw}{2560ea2b72a42fd61ec4171a19d9de93}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Patricia Seybold Group Research Report}
@@ -1657,6 +1783,36 @@
       \verb{url}
       \verb https://www.psgroup.com/detail.aspx?ID=632
       \endverb
+    \endentry
+    \entry{mueller:06}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{hash=7adc992010f84609a311006546c23441}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{7adc992010f84609a311006546c23441}
+      \strng{fullhash}{7adc992010f84609a311006546c23441}
+      \strng{fullhashraw}{7adc992010f84609a311006546c23441}
+      \strng{bibnamehash}{7adc992010f84609a311006546c23441}
+      \strng{authorbibnamehash}{7adc992010f84609a311006546c23441}
+      \strng{authornamehash}{7adc992010f84609a311006546c23441}
+      \strng{authorfullhash}{7adc992010f84609a311006546c23441}
+      \strng{authorfullhashraw}{7adc992010f84609a311006546c23441}
+      \field{extraname}{1}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2006 IEEE International Conference on Robotics and Automation}
+      \field{title}{Stiffness Control of redundantly actuated Parallel Manipulators}
+      \field{year}{2006}
+      \true{nocite}
+      \field{pages}{1153\bibrangedash 1158}
+      \range{pages}{6}
     \endentry
     \entry{mueller:11}{incollection}{}{}
       \name{author}{1}{}{%
@@ -1677,9 +1833,11 @@
       \strng{authornamehash}{7adc992010f84609a311006546c23441}
       \strng{authorfullhash}{7adc992010f84609a311006546c23441}
       \strng{authorfullhashraw}{7adc992010f84609a311006546c23441}
-      \field{extraname}{1}
+      \field{extraname}{2}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Meccanica}
@@ -1689,34 +1847,6 @@
       \true{nocite}
       \field{pages}{41\bibrangedash 49}
       \range{pages}{9}
-    \endentry
-    \entry{mueller:06}{incollection}{}{}
-      \name{author}{1}{}{%
-        {{hash=7adc992010f84609a311006546c23441}{%
-           family={Müller},
-           familyi={M\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{7adc992010f84609a311006546c23441}
-      \strng{fullhash}{7adc992010f84609a311006546c23441}
-      \strng{fullhashraw}{7adc992010f84609a311006546c23441}
-      \strng{bibnamehash}{7adc992010f84609a311006546c23441}
-      \strng{authorbibnamehash}{7adc992010f84609a311006546c23441}
-      \strng{authornamehash}{7adc992010f84609a311006546c23441}
-      \strng{authorfullhash}{7adc992010f84609a311006546c23441}
-      \strng{authorfullhashraw}{7adc992010f84609a311006546c23441}
-      \field{extraname}{2}
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of the 2006 IEEE International Conference on Robotics and Automation}
-      \field{title}{Stiffness Control of redundantly actuated Parallel Manipulators}
-      \field{year}{2006}
-      \true{nocite}
-      \field{pages}{1153\bibrangedash 1158}
-      \range{pages}{6}
     \endentry
     \entry{nakamura1991advanced}{book}{}{}
       \name{author}{1}{}{%
@@ -1742,6 +1872,8 @@
       \strng{authorfullhashraw}{9b20cab1212374ead2722ffc6828f603}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0201151985}
@@ -1771,6 +1903,8 @@
       \strng{authorfullhashraw}{7463084f6769bec115efe2f07b4399cb}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Dynamic Systems, Measurement, and Control}
@@ -1778,6 +1912,7 @@
       \field{title}{Inverse Kinematic Solutions With Singularity Robustness for Robot Manipulator Control}
       \field{volume}{108}
       \field{year}{1986}
+      \true{nocite}
       \field{pages}{163\bibrangedash 171}
       \range{pages}{9}
       \verb{doi}
@@ -1842,6 +1977,8 @@
       \strng{authorfullhashraw}{284731eecb06d3d5e9bc985b5f5c8214}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CL}
@@ -1876,6 +2013,8 @@
       \strng{authorfullhashraw}{c34a5092013ac7ed690625f215699309}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Industrial Robot Programming}
@@ -1906,6 +2045,8 @@
       \strng{authorfullhashraw}{9ad14fae09b617d96cb4af76c555b394}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{PhysX SDK Documentation}
@@ -1943,11 +2084,14 @@
       \strng{authorfullhashraw}{26313e6493577f16e529ef2698d1a15c}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0990582908}
       \field{title}{Game Programming Patterns}
       \field{year}{2014}
+      \true{nocite}
       \verb{urlraw}
       \verb https://gameprogrammingpatterns.com/
       \endverb
@@ -1971,6 +2115,8 @@
       \strng{authorfullhashraw}{c19a8acbb5c4c1cca1561e2880651160}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Kinematic solver with Denavit-Hartenberg parameter implementation}
@@ -1992,6 +2138,8 @@
       }
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
       \field{number}{ISO 10218-1:2025}
       \field{title}{Robotics -- Safety requirements -- Part 1: Industrial robots}
@@ -2008,6 +2156,8 @@
       }
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
       \field{number}{ISO 10218-1:2011}
       \field{title}{Robots and Robotic Devices -- Safety Requirements for Industrial Robots -- Part 1: Robots}
@@ -2024,6 +2174,8 @@
       }
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
       \field{number}{ISO 10218-1:2011}
       \field{title}{Robots and robotic devices -- Safety requirements for industrial robots -- Part 1: Robots}
@@ -2040,6 +2192,8 @@
       }
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
       \field{number}{ISO 10218-2:2011}
       \field{title}{Robots and Robotic Devices -- Safety Requirements for Industrial Robots -- Part 2: Robot Systems and Integration}
@@ -2056,6 +2210,8 @@
       }
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labeltitlesource}{title}
       \field{number}{ISO 10218-2:2011}
       \field{title}{Robots and robotic devices -- Safety requirements for industrial robots -- Part 2: Robot systems and integration}
@@ -2086,6 +2242,8 @@
       \strng{authorfullhashraw}{95b84e576ef256e22f172e04f43fe1da}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Simulation Engineering}
@@ -2119,12 +2277,15 @@
       \strng{authorfullhashraw}{38f7a70abf2d86e432d63826f560ab93}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Springer Handbook of Robotics}
       \field{note}{Chapter 11}
       \field{title}{Kinematically Redundant Robot Manipulators}
       \field{year}{1990}
+      \true{nocite}
       \field{pages}{245\bibrangedash 268}
       \range{pages}{24}
     \endentry
@@ -2158,12 +2319,16 @@
       \field{extraname}{1}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{2nd}
       \field{journaltitle}{Springer Handbooks}
       \field{title}{Springer Handbook of Robotics}
       \field{year}{2016}
+      \true{nocite}
       \field{pages}{1\bibrangedash 2227}
       \range{pages}{2227}
     \endentry
@@ -2197,6 +2362,9 @@
       \field{extraname}{2}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{editor}
       \field{labeltitlesource}{title}
       \field{edition}{2}
@@ -2242,6 +2410,8 @@
       \field{extraname}{1}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Robotics: Modelling, Planning and Control}
@@ -2294,6 +2464,8 @@
       \field{extraname}{2}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-1-84628-641-4}
@@ -2337,6 +2509,8 @@
       \strng{authorfullhashraw}{d6482215384c9e79f8244e09185e7fc5}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-0471649908}
@@ -2367,6 +2541,8 @@
       \strng{authorfullhashraw}{3b888dabd874dce1a9c3942201f04eb6}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{2}
@@ -2404,6 +2580,8 @@
       \strng{authorfullhashraw}{220c15e9b4e262787da9d07f11625ee3}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{5}
@@ -2412,7 +2590,7 @@
       \field{year}{2011}
       \true{nocite}
     \endentry
-    \entry{Unity2025PhysicsOverview}{online}{}{}
+    \entry{unityjobsystem2023}{manual}{}{}
       \name{author}{1}{}{%
         {{hash=3f56ad8f8e05fcad24de3fcf878fb50b}{%
            family={{Unity Technologies}},
@@ -2432,23 +2610,26 @@
       \field{extraname}{1}
       \field{sortinit}{U}
       \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Unity 6000.2 Documentation Manual}
-      \field{title}{Built-in 3D physics}
-      \field{urlday}{1}
-      \field{urlmonth}{9}
-      \field{urlyear}{2025}
-      \field{year}{2025}
+      \field{title}{C\# Job System}
+      \field{urlday}{15}
+      \field{urlmonth}{1}
+      \field{urlyear}{2024}
+      \field{year}{2023}
       \field{urldateera}{ce}
+      \true{nocite}
       \verb{urlraw}
-      \verb https://docs.unity3d.com/6000.2/Documentation/Manual/PhysicsOverview.html
+      \verb https://developercenter.robotstudio.com/api/RWS
       \endverb
       \verb{url}
-      \verb https://docs.unity3d.com/6000.2/Documentation/Manual/PhysicsOverview.html
+      \verb https://developercenter.robotstudio.com/api/RWS
       \endverb
     \endentry
-    \entry{unity_jobsystem_2023}{manual}{}{}
+    \entry{unitycoroutines2023}{manual}{}{}
       \name{author}{1}{}{%
         {{hash=3f56ad8f8e05fcad24de3fcf878fb50b}{%
            family={{Unity Technologies}},
@@ -2468,41 +2649,9 @@
       \field{extraname}{2}
       \field{sortinit}{U}
       \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{C\# Job System}
-      \field{urlday}{15}
-      \field{urlmonth}{1}
-      \field{urlyear}{2024}
-      \field{year}{2023}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://docs.unity3d.com/Manual/JobSystem.html
-      \endverb
-      \verb{url}
-      \verb https://docs.unity3d.com/Manual/JobSystem.html
-      \endverb
-    \endentry
-    \entry{unity_coroutines_2023}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=3f56ad8f8e05fcad24de3fcf878fb50b}{%
-           family={{Unity Technologies}},
-           familyi={U\bibinitperiod}}}%
-      }
-      \list{organization}{1}{%
-        {Unity Technologies}%
-      }
-      \strng{namehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \strng{fullhash}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \strng{fullhashraw}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \strng{bibnamehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \strng{authorbibnamehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \strng{authornamehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \strng{authorfullhash}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \strng{authorfullhashraw}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \field{extraname}{3}
-      \field{sortinit}{U}
-      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Coroutines}
@@ -2511,6 +2660,7 @@
       \field{urlyear}{2024}
       \field{year}{2023}
       \field{urldateera}{ce}
+      \true{nocite}
       \verb{urlraw}
       \verb https://docs.unity3d.com/Manual/Coroutines.html
       \endverb
@@ -2535,9 +2685,12 @@
       \strng{authornamehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
       \strng{authorfullhash}{3f56ad8f8e05fcad24de3fcf878fb50b}
       \strng{authorfullhashraw}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \field{extraname}{4}
+      \field{extraname}{3}
       \field{sortinit}{U}
       \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradate}{3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Custom Editors}
@@ -2546,6 +2699,7 @@
       \field{urlyear}{2024}
       \field{year}{2023}
       \field{urldateera}{ce}
+      \true{nocite}
       \verb{urlraw}
       \verb https://docs.unity3d.com/ScriptReference/Editor.html
       \endverb
@@ -2570,9 +2724,12 @@
       \strng{authornamehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
       \strng{authorfullhash}{3f56ad8f8e05fcad24de3fcf878fb50b}
       \strng{authorfullhashraw}{3f56ad8f8e05fcad24de3fcf878fb50b}
-      \field{extraname}{5}
+      \field{extraname}{4}
       \field{sortinit}{U}
       \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradate}{4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Gizmos and Handles}
@@ -2581,6 +2738,7 @@
       \field{urlyear}{2024}
       \field{year}{2023}
       \field{urldateera}{ce}
+      \true{nocite}
       \verb{urlraw}
       \verb https://docs.unity3d.com/Manual/GizmosAndHandles.html
       \endverb
@@ -2588,7 +2746,46 @@
       \verb https://docs.unity3d.com/Manual/GizmosAndHandles.html
       \endverb
     \endentry
-    \entry{Unity2025SystemRequirements}{online}{}{}
+    \entry{unityprofiler2023}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=3f56ad8f8e05fcad24de3fcf878fb50b}{%
+           family={{Unity Technologies}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Unity Technologies}%
+      }
+      \strng{namehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
+      \strng{fullhash}{3f56ad8f8e05fcad24de3fcf878fb50b}
+      \strng{fullhashraw}{3f56ad8f8e05fcad24de3fcf878fb50b}
+      \strng{bibnamehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
+      \strng{authorbibnamehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
+      \strng{authornamehash}{3f56ad8f8e05fcad24de3fcf878fb50b}
+      \strng{authorfullhash}{3f56ad8f8e05fcad24de3fcf878fb50b}
+      \strng{authorfullhashraw}{3f56ad8f8e05fcad24de3fcf878fb50b}
+      \field{extraname}{5}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradate}{5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Unity Profiler Window}
+      \field{urlday}{15}
+      \field{urlmonth}{1}
+      \field{urlyear}{2024}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://docs.unity3d.com/Manual/ProfilerWindow.html
+      \endverb
+      \verb{url}
+      \verb https://docs.unity3d.com/Manual/ProfilerWindow.html
+      \endverb
+    \endentry
+    \entry{unityasync2023}{manual}{}{}
       \name{author}{1}{}{%
         {{hash=3f56ad8f8e05fcad24de3fcf878fb50b}{%
            family={{Unity Technologies}},
@@ -2608,23 +2805,26 @@
       \field{extraname}{6}
       \field{sortinit}{U}
       \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradate}{6}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Unity 6000.2 Documentation}
-      \field{title}{System requirements for Unity 6.2 Beta}
-      \field{urlday}{1}
-      \field{urlmonth}{9}
-      \field{urlyear}{2025}
-      \field{year}{2025}
+      \field{title}{Unity Scripting Reference: Async and Await}
+      \field{urlday}{15}
+      \field{urlmonth}{1}
+      \field{urlyear}{2024}
+      \field{year}{2023}
       \field{urldateera}{ce}
+      \true{nocite}
       \verb{urlraw}
-      \verb https://docs.unity3d.com/6000.2/Documentation/Manual/system-requirements.html
+      \verb https://docs.unity3d.com/Manual/JobSystemAsyncAwait.html
       \endverb
       \verb{url}
-      \verb https://docs.unity3d.com/6000.2/Documentation/Manual/system-requirements.html
+      \verb https://docs.unity3d.com/Manual/JobSystemAsyncAwait.html
       \endverb
     \endentry
-    \entry{unity_profiler_2023}{manual}{}{}
+    \entry{Unity2025PhysicsOverview}{online}{}{}
       \name{author}{1}{}{%
         {{hash=3f56ad8f8e05fcad24de3fcf878fb50b}{%
            family={{Unity Technologies}},
@@ -2644,22 +2844,27 @@
       \field{extraname}{7}
       \field{sortinit}{U}
       \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Unity Profiler Window}
-      \field{urlday}{15}
-      \field{urlmonth}{1}
-      \field{urlyear}{2024}
-      \field{year}{2023}
+      \field{note}{Unity 6000.2 Documentation Manual}
+      \field{title}{Built-in 3D physics}
+      \field{urlday}{1}
+      \field{urlmonth}{9}
+      \field{urlyear}{2025}
+      \field{year}{2025}
       \field{urldateera}{ce}
+      \true{nocite}
       \verb{urlraw}
-      \verb https://docs.unity3d.com/Manual/ProfilerWindow.html
+      \verb https://docs.unity3d.com/6000.2/Documentation/Manual/PhysicsOverview.html
       \endverb
       \verb{url}
-      \verb https://docs.unity3d.com/Manual/ProfilerWindow.html
+      \verb https://docs.unity3d.com/6000.2/Documentation/Manual/PhysicsOverview.html
       \endverb
     \endentry
-    \entry{unity_async_2023}{manual}{}{}
+    \entry{Unity2025SystemRequirements}{online}{}{}
       \name{author}{1}{}{%
         {{hash=3f56ad8f8e05fcad24de3fcf878fb50b}{%
            family={{Unity Technologies}},
@@ -2679,19 +2884,24 @@
       \field{extraname}{8}
       \field{sortinit}{U}
       \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Unity Scripting Reference: Async and Await}
-      \field{urlday}{15}
-      \field{urlmonth}{1}
-      \field{urlyear}{2024}
-      \field{year}{2023}
+      \field{note}{Unity 6000.2 Documentation}
+      \field{title}{System requirements for Unity 6.2 Beta}
+      \field{urlday}{1}
+      \field{urlmonth}{9}
+      \field{urlyear}{2025}
+      \field{year}{2025}
       \field{urldateera}{ce}
+      \true{nocite}
       \verb{urlraw}
-      \verb https://docs.unity3d.com/Manual/JobSystemAsyncAwait.html
+      \verb https://docs.unity3d.com/6000.2/Documentation/Manual/system-requirements.html
       \endverb
       \verb{url}
-      \verb https://docs.unity3d.com/Manual/JobSystemAsyncAwait.html
+      \verb https://docs.unity3d.com/6000.2/Documentation/Manual/system-requirements.html
       \endverb
     \endentry
     \entry{vahrenkamp2009manipulability}{inproceedings}{}{}
@@ -2725,11 +2935,14 @@
       \strng{authorfullhashraw}{5a199d44296115f8fe1d266c48ce3b95}
       \field{sortinit}{V}
       \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE International Conference on Robotics and Automation (ICRA)}
       \field{title}{Manipulability Analysis for Mobile Manipulators}
       \field{year}{2009}
+      \true{nocite}
       \field{pages}{2317\bibrangedash 2323}
       \range{pages}{7}
       \verb{doi}
@@ -2789,6 +3002,8 @@
       \strng{authorfullhashraw}{f82970bbd2bdd7a002d2af62b743d5cc}
       \field{sortinit}{V}
       \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CL}
@@ -2826,6 +3041,8 @@
       \strng{authorfullhashraw}{10fad6d49e80589b09b0aea94ea7a215}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Game Developers Conference 2007}
@@ -2857,6 +3074,8 @@
       \strng{authorfullhashraw}{8bf0475a36770043382909d5f848644b}
       \field{sortinit}{Y}
       \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{The International Journal of Robotics Research}
@@ -2903,6 +3122,8 @@
       \strng{authorfullhashraw}{942be51838168ccd2017e7b7e9916c10}
       \field{sortinit}{Y}
       \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{IEEE International Conference on Robotics and Automation (ICRA)}

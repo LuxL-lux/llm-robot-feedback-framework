@@ -1,0 +1,29 @@
+{
+  "programName": "Module1",
+  "totalSafetyEvents": 1,
+  "safetyEvents": [
+    {
+      "monitorName": "Process Flow Monitor",
+      "eventType": 1,
+      "description": "Process flow violation: Part 'CylinderHead1' attempted invalid transition from StorageIn to StorageOut. Expected: Machine. Violation type: SkippedStation",
+      "robotStateSnapshot": {
+        "isProgramRunning": true,
+        "currentModule": "Module1",
+        "currentRoutine": "PlaceinStorageOut",
+        "currentLine": 99,
+        "currentColumn": 9,
+        "executionCycle": "once",
+        "motorState": "running",
+        "controllerState": "motoron",
+        "jointAngles": [
+          "..."
+        ],
+        "hasValidJointData": true,
+        "motionUpdateFrequencyHz": 18.038461607840238,
+        "gripperOpen": true,
+        "robotType": "ABB",
+        "robotIP": "127.0.0.1"
+      }
+    }
+  ]
+}

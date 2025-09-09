@@ -1,18 +1,44 @@
 \chapter{Framework}
-\label{cap:framework}
+\label{sec:framework}
+
 In diesem Kapitel werden die technischen Grundlagen sowie das Vorgehen zur
 Implementierung des Frameworks beschrieben.
 
-\section{Testumgebung in Unity}
-\input{Chapter/3-1-Testumgebung.tex}
-
 \section{Architektur des Frameworks}
 \label{sec:architektur_frameowork}
-\input{Chapter/3-1-Architektur.tex}
+\input{Chapter/3-0-Architektur-new.tex}
 
 \section{Implementierung der Module}
 
-\input{Chapter/3-2-Gelenkgeschwindigkeiten.tex}
+\subsection*{Überblick}
+Zur Orientierung sind die im Framework implementierten Monitore in
+Tabelle~\ref{tab:monitor_overview_arch} zusammengefasst. Die Tabelle zeigt Ziel,
+Eingabedaten und Art der generierten Events. Dadurch wird die Einordnung der
+folgenden Abschnitte erleichtert.
+
+\begin{table}[H]
+	\centering
+	\small
+	\begin{tabularx}{\textwidth}{lXX}
+		\toprule
+		\textbf{Monitor}        & \textbf{Ziel}                                                         & \textbf{Eingabedaten / Events} \\
+		\midrule
+		Prozessfolgen           & Einhaltung der definierten Abfolge von Arbeitsschritten               &
+		Aktuelle Sequenz, Soll-Sequenz / Event bei Abweichung                                                                            \\
+		\addlinespace
+		Kollisionen             & Erkennung von Zusammenstößen zwischen Roboter und Umgebung            &
+		Geometrieinformationen / Event mit Schweregrad und beteiligten Objekten                                                          \\
+		\addlinespace
+		Singularitäten          & Detektion von Wrist-, Elbow- und Shoulder-Singularitäten              &
+		Gelenkwinkel, Jacobian / ENTERING- und EXITING-Events mit Manipulierbarkeit                                                      \\
+		\addlinespace
+		Gelenkgeschwindigkeiten & Überwachung von Winkel-, Geschwindigkeits- und Beschleunigungsgrenzen &
+		Gelenkwinkel / exceeded- und resolved-Events bei Grenzwertverletzung                                                             \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Überblick über die implementierten Monitore im Framework}
+	\label{tab:monitor_overview_arch}
+\end{table}
 
 \input{Chapter/3-2-Prozessfolgen.tex}
 
@@ -20,9 +46,17 @@ Implementierung des Frameworks beschrieben.
 
 \input{Chapter/3-2-Singularitaeten}
 
+\input{Chapter/3-2-Gelenkgeschwindigkeiten.tex}
+
 \section{Testumgebung und -setup}
-\subsection{Aufbau der Roboterzelle}
-\subsection{Implementierung in Unity}
+\label{sec:aufbauTestszenario}
+\input{Chapter/3-3-Testumgebung.tex}
+
 \section{Datenaufzeichung und Logging}
-\subsection{JSON-Struktur}
-\subsection{Speicherung}
+\input{Chapter/3-4-Datenlogging.tex}
+
+
+\subsection*{Einordnung im Gesamtkontext}
+Die Architektur des Frameworks besteht somit aus den genannten Modulen, die in
+Kapitel~\ref{sec:framework} im Detail beschrieben werden. Ihre Funktionsweise wird in
+Kapitel~\ref{sec:ergebnisse} anhand von Testszenarien überprüft und ausgewertet.

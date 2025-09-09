@@ -1,0 +1,44 @@
+[
+  {
+    "monitorName": "Singularity Detector",
+    "eventType": 2,
+    "description": "Entering Wrist Singularity (\u03B85 \u2248 0\u00B0)",
+    "robotStateSnapshot": "[...]",
+    "eventDataJson": {
+      "singularityType": "Wrist Singularity (θ₅ ≈ 0°)",
+      "jointAngles": [
+        -82.7,
+        -6.9,
+        36.6,
+        -112.8,
+        -4.9,
+        -153.5
+      ],
+      "wristThreshold": 5.0,
+      "manipulability": 0.191,
+      "isEntering": true,
+      "[...]": "[...]"
+    }
+  },
+  {
+    "monitorName": "Singularity Detector",
+    "eventType": 1,
+    "description": "Exiting Wrist Singularity (\u03B85 \u2248 0\u00B0)",
+    "robotStateSnapshot": "[...]",
+    "eventDataJson": {
+      "singularityType": "Wrist Singularity (θ₅ ≈ 0°)",
+      "jointAngles": [
+        -91.8,
+        -8.3,
+        37.8,
+        -91.3,
+        5.2,
+        -182.6
+      ],
+      "wristThreshold": 5.0,
+      "manipulability": 0.197,
+      "isEntering": false,
+      "[...]": "[...]"
+    }
+  }
+]

@@ -1,0 +1,10 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{public}\PYG{+w}{ }\PYG{n+nf}{SafetyEvent}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{monitorName}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SafetyEventType}\PYG{+w}{ }\PYG{n}{eventType}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{description}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{RobotState}\PYG{+w}{ }\PYG{n}{currentState}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{this}\PYG{p}{.}\PYG{n}{monitorName}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{monitorName}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{this}\PYG{p}{.}\PYG{n}{eventType}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{eventType}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{this}\PYG{p}{.}\PYG{n}{description}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{description}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{this}\PYG{p}{.}\PYG{n}{timestamp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DateTime}\PYG{p}{.}\PYG{n}{Now}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{this}\PYG{p}{.}\PYG{n}{robotStateSnapshot}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{currentState}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{k}{null}\PYG{+w}{ }\PYG{o}{?}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{RobotStateSnapshot}\PYG{p}{(}\PYG{n}{currentState}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{k}{null}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

@@ -1,0 +1,27 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{public}\PYG{+w}{ }\PYG{n+nf}{RobotStateSnapshot}\PYG{p}{(}\PYG{n}{RobotState}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{state}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{k}{null}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{captureTime}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DateTime}\PYG{p}{.}\PYG{n}{Now}\PYG{p}{;}
+\PYG{+w}{        }\PYG{c+c1}{// Program info}
+\PYG{+w}{        }\PYG{n}{isProgramRunning}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{isRunning}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{currentModule}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{currentModule}\PYG{+w}{ }\PYG{o}{??}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{currentRoutine}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{currentRoutine}\PYG{+w}{ }\PYG{o}{??}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{currentLine}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{currentLine}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{currentColumn}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{currentColumn}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{executionCycle}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{executionCycle}\PYG{+w}{ }\PYG{o}{??}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{motorState}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{motorState}\PYG{+w}{ }\PYG{o}{??}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{controllerState}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{controllerState}\PYG{+w}{ }\PYG{o}{??}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{        }\PYG{c+c1}{// Abrufen der aktuellen Achswinkel}
+\PYG{+w}{        }\PYG{n}{jointAngles}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{GetJointAngles}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{hasValidJointData}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{hasValidJointData}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{motionUpdateFrequencyHz}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{motionUpdateFrequencyHz}\PYG{p}{;}
+\PYG{+w}{        }\PYG{c+c1}{// IO Signale}
+\PYG{+w}{        }\PYG{n}{gripperOpen}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{GripperOpen}\PYG{p}{;}
+\PYG{+w}{        }\PYG{c+c1}{// Verbindungsinformationen}
+\PYG{+w}{        }\PYG{n}{robotType}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{robotType}\PYG{+w}{ }\PYG{o}{??}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{robotIP}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{state}\PYG{p}{.}\PYG{n}{robotIP}\PYG{+w}{ }\PYG{o}{??}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

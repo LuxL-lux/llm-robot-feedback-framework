@@ -1,0 +1,39 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Collision Detector\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}CRITICAL COLLISION: Gripper \PYGZhy{}\PYGZgt{} Sauele\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventDataJson\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZob{}\PYGZbs{}\PYGZdq{}robotLink\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Gripper\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionObject\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Sauele\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionPoint\PYGZbs{}\PYGZdq{}:\PYGZob{}\PYGZbs{}\PYGZdq{}x\PYGZbs{}\PYGZdq{}:\PYGZhy{}1.146544337272644,\PYGZbs{}\PYGZdq{}y\PYGZbs{}\PYGZdq{}:0.038220398128032687,\PYGZbs{}\PYGZdq{}z\PYGZbs{}\PYGZdq{}:1.1465449333190919\PYGZcb{},\PYGZbs{}\PYGZdq{}distance\PYGZbs{}\PYGZdq{}:1.6219075918197632\PYGZcb{}\PYGZdq{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Collision Detector\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}CRITICAL COLLISION: Joint\PYGZus{}4 \PYGZhy{}\PYGZgt{} Sauele\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventDataJson\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZob{}\PYGZbs{}\PYGZdq{}robotLink\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Joint\PYGZus{}4\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionObject\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Sauele\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionPoint\PYGZbs{}\PYGZdq{}:\PYGZob{}\PYGZbs{}\PYGZdq{}x\PYGZbs{}\PYGZdq{}:\PYGZhy{}1.146544337272644,\PYGZbs{}\PYGZdq{}y\PYGZbs{}\PYGZdq{}:0.038220398128032687,\PYGZbs{}\PYGZdq{}z\PYGZbs{}\PYGZdq{}:1.1465449333190919\PYGZcb{},\PYGZbs{}\PYGZdq{}distance\PYGZbs{}\PYGZdq{}:1.6219075918197632\PYGZcb{}\PYGZdq{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Collision Detector\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}CRITICAL COLLISION: Joint\PYGZus{}6 \PYGZhy{}\PYGZgt{} Sauele\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventDataJson\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZob{}\PYGZbs{}\PYGZdq{}robotLink\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Joint\PYGZus{}6\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionObject\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Sauele\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionPoint\PYGZbs{}\PYGZdq{}:\PYGZob{}\PYGZbs{}\PYGZdq{}x\PYGZbs{}\PYGZdq{}:\PYGZhy{}1.146544337272644,\PYGZbs{}\PYGZdq{}y\PYGZbs{}\PYGZdq{}:0.038220398128032687,\PYGZbs{}\PYGZdq{}z\PYGZbs{}\PYGZdq{}:1.1465449333190919\PYGZcb{},\PYGZbs{}\PYGZdq{}distance\PYGZbs{}\PYGZdq{}:1.6219075918197632\PYGZcb{}\PYGZdq{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Collision Detector\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}CRITICAL COLLISION: Joint\PYGZus{}5 \PYGZhy{}\PYGZgt{} Sauele\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventDataJson\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZob{}\PYGZbs{}\PYGZdq{}robotLink\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Joint\PYGZus{}5\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionObject\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Sauele\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionPoint\PYGZbs{}\PYGZdq{}:\PYGZob{}\PYGZbs{}\PYGZdq{}x\PYGZbs{}\PYGZdq{}:\PYGZhy{}1.146544337272644,\PYGZbs{}\PYGZdq{}y\PYGZbs{}\PYGZdq{}:0.038220398128032687,\PYGZbs{}\PYGZdq{}z\PYGZbs{}\PYGZdq{}:1.1465449333190919\PYGZcb{},\PYGZbs{}\PYGZdq{}distance\PYGZbs{}\PYGZdq{}:1.6219075918197632\PYGZcb{}\PYGZdq{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Collision Detector\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Collision detected between Gripper and CylinderHead (8)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventDataJson\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZob{}\PYGZbs{}\PYGZdq{}robotLink\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Gripper\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionObject\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}CylinderHead (8)\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}collisionPoint\PYGZbs{}\PYGZdq{}:\PYGZob{}\PYGZbs{}\PYGZdq{}x\PYGZbs{}\PYGZdq{}:\PYGZhy{}1.9333001375198365,\PYGZbs{}\PYGZdq{}y\PYGZbs{}\PYGZdq{}:0.5249927043914795,\PYGZbs{}\PYGZdq{}z\PYGZbs{}\PYGZdq{}:\PYGZhy{}1.1674463748931885\PYGZcb{},\PYGZbs{}\PYGZdq{}distance\PYGZbs{}\PYGZdq{}:2.3186628818511965\PYGZcb{}\PYGZdq{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{]}
+\end{MintedVerbatim}

@@ -1,0 +1,34 @@
+
+\begin{figure}[H]
+	\inputminted[fontsize=\footnotesize]{csharp}{code-snippets/SafetyEvent.cs}
+	\caption{SafetyEvent-Klasse mit Zuordnung zum Monitor und Kritikalität}
+	\label{listing:SafetyEvent}
+\end{figure}
+
+Als zentrales Aufzeichnungsformat implementiert der \texttt{SafetyMonitor} eine
+JSON-Struktur für die durch die einzelnen Module erzeugten Ereignisse.
+Die Key-Value-Paare dieser Objekte sind durch die Klassen
+\texttt{RobotStateSnapshot} und \texttt{SafetyEvent} vordefiniert.
+Wird ein Ereignis ausgelöst, so wird ein neues \texttt{SafetyEvent} instanziert
+(vgl. Abbildung~\ref{listing:SafetyEvent}).
+
+Der \texttt{RobotStateSnapshot} kann initial leer sein, da durch Multithreading
+nicht in jedem Fall eine direkte Referenz zum aktuellen Roboterzustand vorliegt.
+Über die Methode \texttt{SetEventData()} der \texttt{SafetyEvent}-Klasse werden
+anschließend die spezifischen Daten ergänzt, beispielsweise die Kollisionsposition
+bei einer Kollisionserkennung.
+
+\begin{figure}[H]
+	\inputminted[fontsize=\footnotesize]{csharp}{code-snippets/RobotStateSnapshot.cs}
+	\caption{RobotStateSnapshot-Klasse mit formalisieren Attributen}
+	\label{listing:RobotStateSnapshot}
+\end{figure}
+
+Der \texttt{SafetyMonitor} ergänzt das Ereignis um den aktuellen
+\texttt{RobotStateSnapshot}, der zusätzliche Informationen wie aktuelle Achswinkel,
+Motordaten, Programmzeiger und Programmname enthält
+(vgl. Abbildung~\ref{listing:RobotStateSnapshot}).
+Die Events werden zwischengespeichert und am Ende der Ausführung gesammelt
+als \texttt{.json}-Datei in einem vordefinierten Ordner abgelegt.
+
+

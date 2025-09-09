@@ -1,0 +1,68 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Joint Dynamics Monitor\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Joint 1 velocity limit exceeded: 53.95°/s\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}jointAngles\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}2.12}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}4.52}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{31.67}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{196.26}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}57.86}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}74.34}
+\PYG{+w}{      }\PYG{p}{],}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Joint Dynamics Monitor\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Joint 1 velocity limit resolved: 48.63°/s\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}jointAngles\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{l+m+mf}{110.21}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}15.07}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{55.12}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{151.90}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}46.42}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{43.80}
+\PYG{+w}{      }\PYG{p}{],}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Joint Dynamics Monitor\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Joint 1 velocity limit exceeded: \PYGZhy{}51.31°/s\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}jointAngles\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{l+m+mf}{74.19}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}18.18}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{53.54}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{183.81}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}43.66}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}18.10}
+\PYG{+w}{      }\PYG{p}{],}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Joint Dynamics Monitor\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Joint 1 velocity limit resolved: \PYGZhy{}45.10°/s\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}jointAngles\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}45.21}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{11.70}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{6.11}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{172.58}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}70.18}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}84.52}
+\PYG{+w}{      }\PYG{p}{],}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{]}
+\end{MintedVerbatim}

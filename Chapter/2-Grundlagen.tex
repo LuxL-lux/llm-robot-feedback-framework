@@ -99,7 +99,7 @@ Tabelle \ref{table:simuplattform}.
 		Mujoco                & Mujoco                                   & Ja                           & Nein                             & Extern                      \\
 		\bottomrule
 	\end{tabularx}
-	\caption{Vergleich verschiedener Robotik-Simulationsplattformen}\label{table:simuplattform}
+	\caption{Vergleich verschiedener Robotik-Simulationsplattformen, nach \citesingle{bilancia2023}}\label{table:simuplattform}
 \end{table}
 
 \section{Large Language Models (LLMs)} \label{sec:Grundlagen_LLMs}
@@ -111,9 +111,9 @@ der Möglichkeit, neuronale Netze im Modus des \textit{self-supervised learning}
 und anhand grosser Mengen textueller Trainingsdaten zu trainieren, entstanden.
 Dabei haben sich LLMs innerhalb der letzten 10 Jahre aufgrund der hohen Verfügbarkeit digitaler
 textueller Daten sowie Innovationen im Bereich der Hardware-Technologie zur
-wichtigsten Technologie im Bereich KI entwickelt. \vglcite[1\psq]{naveed2024}
+wichtigsten Technologie im Bereich KI entwickelt. \vglcite[1\psq]{naveed2024}\\
 
-
+\noindent
 Den entscheidenden Durchbruch für moderne LLMs lieferte die
 Transformer-Architektur, die sequenzielle Abhängigkeiten durch parallele
 Attention-Mechanismen ersetzt.\vglcite[1\psqq]{vaswani2023attentionneed} Der Self-Attention-Mechanismus berechnet für
@@ -122,23 +122,22 @@ kontextuelle Beziehungen direkt erfasst, ohne Informationen sequenziell durch
 versteckte Schichten propagieren zu müssen. Diese Parallelisierung ermöglicht
 nicht nur schnelleres Training auf den erwähnten großen Datensätzen, sondern
 schafft auch die Grundlage für das Skalierungsverhalten moderner Sprachmodelle.
-Folglich basieren aktuelle Large Language Models wie GPT-4 oder Claude auf
-dieser Architektur, da Transformer sowohl lokale als auch globale Sprachmuster
-effizient modellieren und emergente Fähigkeiten wie In-Context-Learning
-entwickeln.
+Folglich basieren aktuelle LLMs wie GPT-4 oder Claude auf
+dieser Architektur.
 
 \subsection{Programmcodegenerierung durch LLMs}%
 Large Language Models haben bemerkenswerte Fortschritte in der automatischen
 Code-Generierung erzielt und revolutionieren damit die Softwareentwicklung.
 Code-LLMs sind in der Lage erfolgreich Quellcode aus natürlichsprachlichen
-Beschreibungen generieren zu generieren .Aktuelle LLMs demonstrieren anhand von
+Beschreibungen generieren zu generieren. Aktuelle LLMs demonstrieren anhand von
 empirischen Vergleichen mit HumanEval, MBPP und BigCodeBench Benchmarks, dass
 sie in der Lage sind progressiv bessere Leistungen bei verschiedenen
 Schwierigkeitsgraden und Programmieraufgaben erzielen. \vglcite{jiang2024}
 Vorraussetzungen für die erfolgreiche Programmierung mithilfe von LLMs sind die
 Inkludierung der Konzepte und Programmiersprachen in die Trainingsdaten des
-jeweiligen Modells.
+jeweiligen Modells.\\
 
+\noindent
 Domänenspezifische Code-Generierung stellt LLMs vor besondere Herausforderungen,
 die ihre praktische Anwendbarkeit erheblich einschränken. Low-Resource
 Programming Languages und Domain-Specific Languages begegnen besonderen
@@ -147,10 +146,11 @@ Datensätzen schlecht repräsentiert sind \vglcite{joel2024}. Diese Problematik
 betrifft Millionen von Entwicklern - beispielsweise allein 3,5 Millionen
 Rust-Nutzer können LLM-Funktionen nicht vollständig ausschöpfen. LLMs zeigen
 ausserdem suboptimale Performance bei domänenspezifischem Code aufgrund ihrer
-begrenzten Kompetenz bei domänenspezifischen Bibliotheken. \vglcite{gu2025}
+begrenzten Kompetenz mit dem Umgang mit omänenspezifischen Bibliotheken. \vglcite{gu2025}
 Folglich benötigen LLMs zusätzlichen Kontext, um Probleme zu lösen, die nicht in
-ihren eigenen Trainingsdaten veranktert sind.
+ihren eigenen Trainingsdaten verankert sind.\\
 
+\noindent
 Agentische KI-Systeme entwickeln sich zu einer neuen Generation autonomer
 Softwareagenten, die komplexe Aufgaben ohne kontinuierliche menschliche
 Anleitung ausführen können. Diese Systeme adressieren teilweise die zuvor
@@ -158,7 +158,7 @@ beschriebenen Herausforderungen bei domänenspezifischer Code-Generierung, indem
 sie über Command-Line-Interfaces und externe Tools Zugang zu spezialisierten
 Bibliotheken und APIs erhalten. Das Model Context Protocol etabliert sich als
 offener Standard zur Verbindung von AI-Assistenten mit Datensystemen,
-Business-Tools und Enticklungsumgebungen. \vglcite{anthropic2024} Viele Softwareentwicklungstools
+Business-Tools und Entwicklungsumgebungen. \vglcite{anthropic2024} Viele Softwareentwicklungstools
 bieten bereits MCP-Unterstützung, um KI-Agenten besseren Zugang
 zu domänenspezifischen Kontextinformationen und Code-Repositories zu
 ermöglichen. Die Standardisierung solcher Protokolle kann eine Lösung für die
@@ -166,8 +166,10 @@ Datenmangel-Problematik bei Low-Resource Programming Languages und
 Domain-Specific Languages darstellen, wobei die praktische Wirksamkeit noch
 evaluiert werden muss.
 
-\section{LLMs in der Robotik} \subsection{Aktuelle
-	Forschungansätze} Die Integration von Large Language Models in die Robotik
+\section{LLMs in der Robotik}
+\subsection{Aktuelle Forschungansätze}
+
+Die Integration von Large Language Models in die Robotik
 verfolgt drei komplementäre Paradigmen: Vision-Language-Action Modelle,
 Code-Generation und Embodied Reasoning. Google DeepMinds RT-2 repräsentiert den
 Vision-Language-Action Ansatz, bei dem Roboter-Aktionen als Text-Token behandelt
@@ -186,8 +188,7 @@ dominante Architektur etabliert hat und verschiedene Wege zur Integration von
 Sprache und Robotik exploriert.
 
 \subsection{Herausforderungen in der Inegration}
-%Grounding-Problem: Verbindung von Sprache und physischer Welt
-%Sicherheitsaspekte und Validierung Echtzeitfähigkeit und Latenz
+
 Die Verankerung abstrakter Sprachkonzepte in physischen Robotersystemen
 scheitert an drei fundamentalen Problemen. Erstens müssen Roboter symbolische
 Repräsentationen mit sensomotorischen Erfahrungen verknüpfen - das von Harnad
@@ -207,20 +208,21 @@ unerwarteten Verhaltensweisen. Folglich benötigen robotische Systeme neue
 Architekturen, die effizient zwischen abstrakten Sprachmodellen und konkreten
 Aktionsräumen vermitteln.
 
-\subsection{Bestehende Frameworks und Tools} Aktuelle Frameworks standardisieren
-die Integration von LLMs in robotische Systeme durch modulare Architekturen.
-ROS-LLM verbindet das Robot Operating System mit verschiedenen Sprachmodellen
-und transformiert natürlichsprachliche Befehle automatisch in ausführbare
-Aktionssequenzen \vglcite{(Mower et al., 2024)}. Das Framework implementiert
-drei Ausführungsmodi: sequenzielle Abarbeitung für einfache Aufgaben,
-Verhaltensbäume für reaktive Systeme und Zustandsautomaten für komplexe
-Ablaufsteuerungen. Entwickler konfigurieren atomare Aktionen wie das Greifen
-eines Objektes oder bestimmte Pfadnavigationen, die das LLM dann zu komplexen
-Verhaltensketten kombiniert. Simulationsumgebungen beschleunigen parallel die
-Entwicklung durch massiv-parallele GPU-Berechnungen: Isaac Sim von NVIDIA
-simuliert Tausende Roboterinstanzen gleichzeitig, mit MuJoCo lassen sich präzise
-Kontaktdynamiken für Manipulationsaufgaben berechnet \vglcite{(Padalkar et al.,
-	2023)}. Solche Plattformen ermöglichen einen theoretischen Zero-Shot-Transfer
+\subsection{Bestehende Frameworks und Tools}
+
+Aktuelle Frameworks standardisieren die Integration von LLMs in robotische
+Systeme durch modulare Architekturen. ROS-LLM verbindet das Robot Operating
+System mit verschiedenen Sprachmodellen und transformiert natürlichsprachliche
+Befehle automatisch in ausführbare Aktionssequenzen \vglcite{(Mower et al.,
+	2024)}. Das Framework implementiert drei Ausführungsmodi: sequenzielle
+Abarbeitung für einfache Aufgaben, Verhaltensbäume für reaktive Systeme und
+Zustandsautomaten für komplexe Ablaufsteuerungen. Entwickler konfigurieren
+atomare Aktionen wie das Greifen eines Objektes oder bestimmte Pfadnavigationen,
+die das LLM dann zu komplexen Verhaltensketten kombiniert. Simulationsumgebungen
+beschleunigen parallel die Entwicklung durch massiv-parallele GPU-Berechnungen:
+Isaac Sim von NVIDIA simuliert Tausende Roboterinstanzen gleichzeitig, mit
+MuJoCo lassen sich präzise Kontaktdynamiken für Manipulationsaufgaben berechnet
+\vglcite{(Padalkar et al., 2023)}. Solche Plattformen ermöglichen einen theoretischen Zero-Shot-Transfer
 von der Simulation zur Realität durch systematische simulierte
 Domänenrandomisierung von Physikparametern, Sensorauschen und
 Umgebungsvariationen. Die Standardisierung solcher Werkzeugketten soll

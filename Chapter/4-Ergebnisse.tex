@@ -1,0 +1,338 @@
+\chapter{Ergebnisse}
+\label{sec:ergebnisse}
+
+\section{Überblick und Zielsetzung}
+
+In diesem Kapitel werden die Ergebnisse der im vorherigen Kapitel beschriebenen
+Implementierung vorgestellt. Im Fokus steht die Überprüfung der vier
+entwickelten Safetymodule – Prozessfolgenüberwachung, Kollisionserkennung,
+Achsgeschwindigkeits- und Beschleunigungsüberwachung sowie
+Singularitätserkennung – innerhalb der aufgebauten Simulationsumgebung. Ziel ist
+es zu überprüfen, inwiefern im gewählten Testsetup eine Erkennung von Fehlern in
+der Roboterbewegung und Interaktion, welche mit den vier untersuchten Parametern
+zusammenhängen, auftreten. iel ist es zu überprüfen, inwiefern im gewählten
+Testsetup eine Erkennung von Fehlern in der Roboterbewegung und Interaktion,
+welche mit den vier untersuchten Parametern zusammenhängen, auftreten.\\
+
+\noindent
+Für jedes Modul wurden gezielte Testfälle definiert, die sowohl korrekte als
+auch fehlerhafte Szenarien abbilden, um die Funktionsweise und Zuverlässigkeit
+der Module zu überprüfen. Die Ergebnisse werden anhand von Beobachtungen aus der
+Simulation, gespeicherten Zustands- und Ereignisdaten sowie grafischen
+Darstellungen aufgezeigt. Die Testfälle wurden dabei als Pfade in RobotStudio
+definiert. Diese Pfade werden von RobotStudio in RAPID-Code umgewandelt und
+gespeichert. Durch die Synchronisation mit dem Controller und dem Setzen des
+aktuellen Programms als Standardprogramm lässt sich das Programm in RobotStudio
+simulieren. So wurde für jedes Szenario vorgegangen.\\
+
+\noindent
+Zur zusätzlichen Validierung wurde ein Experteninterview durchgeführt, in dem
+die Testcases vorgestellt und die Funktionsweise des Frameworks diskutiert
+wurden. Die Aussagen des Experten werden an geeigneter Stelle in diesem Kapitel
+dargestellt und in Kapitel 5 kritisch eingeordnet.
+\newpage
+\section{Prozessflussüberwachung}
+\label{sec:processauswertung}
+
+\subsection{Testszenario mit veränderter Prozessabfolge}
+
+Die Validierung der Prozessflussüberwachung erfolgt über die Ausführung eines
+korrekten Szenarios als auch eines fehlerhaften Szenarios. Der Fehler soll
+provoziert werden, in dem das Werkstück abweichend zum in Abbildung
+\ref{figure:Prozessfluss} gezeigten gewünschten Ablauf direkt in das zweite
+Regal bewegt wird. Semantisch bedeutet dies ein Überspringen der Station
+\textit{Machine}. Das soll ein SafetyEvent triggern, sobald das Werkstück im
+falschen Regal abgelegt wird.\\
+
+\noindent
+\textbf{Korrekter Prozessfluss}
+\begin{enumerate}
+	\item Bewegung von Home-Position zu linkem Regal
+	\item Greifen des Werkstücks
+	\item Bewegung zu Maschine
+	\item Platzieren des Werkstücks in Maschine
+	\item Warten auf Beendigung des Bearbeitungsprozesses in Warteposition (Bearbeitung hier nur simuliert)
+	\item Bewegen zum Werkstück und Greifen aus Maschine
+	\item Bewegung zu rechtem Regal
+	\item Platzieren des Objekts in rechtem Regal
+	\item Rückkehr zur Home-Position
+\end{enumerate}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Figures/Prozessfolge.png}
+	\caption{Visuelle Darstellung des Prozessflusses durch Konfiguration der Parts
+		und Stations}
+	\label{figure:Prozessfluss}
+\end{figure}
+
+Im veränderten Prozessfluss wird nun der Schritt der Bearbeitung übersprungen.
+Dies kann in der Praxis durch eine inkorrekte Abfolge im Roboterprogrammcode
+passieren. Somit ist der veränderte Prozessfluss wie folgt definiert.\\
+
+\noindent
+\textbf{Abgewandelter Prozessfluss}
+\begin{enumerate}
+	\item Bewegung von Home-Position zu linkem Regal
+	\item Greifen des Werkstücks
+	\item Bewegung zu Maschine
+	\item Bewegung zu rechtem Regal
+	\item Platzieren des Objekts in rechtem Regal
+	\item Rückkehr zur Home-Position
+\end{enumerate}
+
+\subsection{Auswertung der Simulation}
+Wird der korrekte Prozessfluss abgespielt, werden im Bezug auf den
+ProcessFlowMonitor keine Ereignisse protokolliert.
+Bei der Ausführung des Robotercodes mit verändertem Prozessfluss findet sich in
+der nach Beendigung des Programms mit Zeitstempel und Modulname versehenem
+JSON-Log ein Eintrag mit einem SafetyEvent getriggert durch den
+Process Flow Monitor:
+\begin{figure}[H]
+	\inputminted[fontsize=\footnotesize]{json}{code-snippets/processflowerror.json}
+	\caption{JSON-Log zum Prozessfolgenfehler, Achswinkel wurden im Nachhinein
+		entfernt}
+	\label{listing:processflowerror}
+\end{figure}
+
+\noindent In Abbildung \ref{listing:processflowerror} ist abzulesen, dass der
+Fehler hier korrekt erkannt und klassifiziert wurde. Dabei zeigt das Feld
+\texttt{description} den genauen Hergang des Events an. Hier wurde eine invalide
+Transistion von StorageIn zu StoraeOut versucht. Das Framework erkennt
+ebenfalls, welcher Prozessschritt der Richtige gewesen wäre. Ausserdem wird hier
+als Violation Type der Type \texttt{SkippedStation} angegeben. Dieser ist als
+übersprungene Station zu klassifizieren, was in diesem Fall korrekt ist.
+Zusätzlich werden weitere Parameter der Simulation und des Controllers
+weitergegeben, unter anderem welches Modul und welche Routine des Moduls zum
+Zeitpunkt des Auftretens ausgeführt wurde sowie welcher Programmzeile der
+ProgramPointer sich zum Zeitpunkt der Event-Auslösung befand. Durch den Wert des
+Keys \texttt{totalSafetyEvents} ist zu erkennen, wie viele Ereignisse bei der
+Ausführung vom Programm getriggert wurden. Hier is es lediglich der oben
+Genannte.
+
+\section{Auswertung Collision Detection Monitor}
+\label{sec:collisionauswertung}
+
+\subsection{Abgewandlung des Pfads} Zur Auswertung des Collision Detection
+Monitors wurde der oben bereits genannte Prozess genutzt. Anschliessend wurde
+der Pfad, auf dem sich der Roboter zwischen seiner Home-Position und dem linken
+Regal, in dem er ein Werkstück greifen soll, verändert. Rechts dargstellt in
+Abbildung \ref{figure:kollision}, führt der Pfad im Gegensatz zum
+kollisionfreien, näher am Roboter verlaufenden Pfad aufgrund des ausladenden
+Umschwungs durch die Säulengeometrie. Durch das Abfahren des Pfades gegen den
+Uhrzeigersinnd wird proviziert, dass der Roboter sich durch die in Abbildung
+\ref{figure:kollision} links blau eingefärbte Säule hindurch bewegen muss. Die Säule selbst
+bekommt den Tag \texttt{Obstacle} und wird durch einen vorhandenen Collider,
+welcher den Dimensionen der Säule entspricht, zum Kollisonshindernis.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{.535\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{Figures/CollisionUnity.png}
+	\end{minipage}%
+	\begin{minipage}{0.465\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{Figures/CollisionPathRobotStudio.png}
+	\end{minipage}
+	\caption{Kollision in Unity (links) und zugehörige Position auf Pfad in
+		RobotStudio (rechts). Gelenk 4, 5 und 6 sowie Greifer befinden sich innerhalb der
+		Säulengeometrie.}
+	\label{figure:kollision}
+\end{figure}
+
+\subsection{Auswertung der Simulation}
+
+In Abbildung \ref{listing:collisiondetectionerror} ist der Output nach Kollision
+mit der der Säule dargestellet. Dem Event wurden zusätzlich Eventdaten angefügt,
+welche hier den Punkt der Kollision im Unity Koordinatensystem als auch die
+Entfernung zum Zentrum des kollidierenden Objekts darstellen. Die Kollision wird
+somit zuverlässig erkannt. Wichtig ist dabei zu erwähnen, dass die
+Kollisionserkennung stark von den verwendeten Collidern abhängt. Hier verwendet
+das Framework Mesh-Collider zur genauen Abbildung der Robotergeometrie, das
+Kollisionobjekt wird durch einen primitiven zylindrischen Collider definiert.
+Beim Outputformat der eventDataJson handelt es sich um string-escaped JSON. Die
+Daten sind also als Event-Daten in einem String komprimiert.\\
+
+\begin{figure}[H]
+	\inputminted[fontsize=\footnotesize]{json}{code-snippets/collisiondetection.json}
+	\caption{JSON-Log zur Kollisionserkennung. Sich wiederholende Key-Value Paare wurden
+		verkürzt}
+	\label{listing:collisiondetectionerror}
+\end{figure}
+
+\noindent
+Weiterführend ist zu erkennen, dass die Kollison mit verschiedenen Gliedern des
+Roboters sequentiell erkannt wird. Sobald der Roboter sich visuell weiter in die
+Säule bewegt, wird jeweils bei der Kollison mit einem weiteren Glied eine
+weitere Kollision erkannt und ein eigenes Event getriggert. Die Reihenfolge der
+Joints in diesem Szenario ist nach eingehender Überprüfung als korrekt zu
+bewerten, da die Robotergeometrie dafür sorgt, dass Gelenk 4 deutlich breiter
+ist als 5 und 6. Gelenk 5 und 6 sind in die Geometrie von Gelenk 4 eingefasst,
+daher kollidert der Roboter inital mit Gelenk 4, bevor eine Kollision an den
+kinematisch dahinterliegenden Gelenken erkannt wird.\\
+
+\noindent Weiterführend lässt sich beim Greifen des Werkstücks feststellen, dass
+hier ebenfalls eine Kollison erkannt wird: Durch das Greifen des Werkstücks wird
+eine falsch-positive Kollison getriggert, da bevor das Werkstück gegriffen wird
+und semantisch in die kinematische Kette des Roboters verschoben wird, für einen
+kurzen Zeitpunk eine Kollision stattfindet. Ein Beispiel dazu findet sich im
+letzten Block von Abbildung \ref{listing:collisiondetectionerror}. Gleiches
+lässt sich beim Ablegen desn Werkstücks beobachten. Wichtig zu erwähnen ist der
+unterschiedliche EventType, da das Werkstück aufgrund von fehlendem Tag nicht
+als kritisch eingestuft wird.
+
+\section{Auswertung Singularity Detection Monitor}
+\label{sec:singularityauswertung}
+Zur Untersuchung der Singularitätserkennung wurde in RobotStudio ein Szenario erstellt,
+das gezielt eine Wrist-Singularität provoziert. Dabei wurde der Roboter in eine Pose
+geführt, in der die Achsen~4 und~6 nahezu kollinear verlaufen und somit die Bedingung
+$\theta_{5} \approx 0^\circ$ erfüllt ist.
+
+Die vom Monitor in Unity aufgezeichneten Safety Events sind in
+Listing~\ref{lst:singularity_json} als gekürzter Auszug dargestellt. Es werden sowohl
+das \enquote{Entering}- als auch das \enquote{Exiting}-Ereignis erfasst, jeweils mit den
+zugehörigen Gelenkwinkeln und einem berechneten Manipulierbarkeitswert. Nicht relevante
+Felder des Snapshots wurden entfernt, da die Gelenkwinkel bereits im \texttt{eventDataJson}
+enthalten sind. Zusätzliche Informationen wurden mit \texttt{"[...]"} abgekürzt.
+
+\begin{listing}[H]
+	\centering
+	\inputminted[fontsize=\footnotesize,breaklines]{json}{code-snippets/singularityerror.json}
+	\caption{Gekürzter Auszug der in Unity aufgezeichneten Safety Events zur Wrist-Singularität}
+	\label{lst:singularity_json}
+\end{listing}
+
+Abbildung~\ref{fig:wrist_singularity} zeigt die simulierte Pose im RobotStudio, in der die
+Singularität hervorgerufen wurde.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/wristSingularityScreenshot.jpg}
+	\caption{Pose mit Wrist-Singularität ($\theta_{5} \approx 0^\circ$) im RobotStudio}
+	\label{fig:wrist_singularity}
+\end{figure}
+
+Die Analyse der Ereignisse zeigt, dass der Monitor den Eintritt in die Wrist-Singularität
+bei einer Gelenkkonfiguration von etwa
+$[-82.7, -6.9, 36.6, -112.8, -4.9, -153.5]^\circ$ registrierte. Der berechnete
+Manipulierbarkeitswert lag hier bei $w \approx 0.19$. Beim Verlassen der Pose
+($[-91.8, -8.3, 37.8, -91.3, 5.2, -182.6]^\circ$) wurde das \enquote{EXITING}-Ereignis
+ausgegeben, wobei der Manipulierbarkeitswert mit $w \approx 0.20$ ebenfalls sehr niedrig blieb.
+Die Ereignisse decken sich mit dem in RobotStudio provozierten Szenario und markieren den
+Übergang in und aus einer singulären Konfiguration.
+Zur Detektion von Singularitäten wird das gleiche Verfahren angewendet. Hier
+lässt sich ebenfalls eine Abweichung
+
+\section{Auswertung Joint Dynamics Monitor}
+\label{sec:Analyse_Sicherheit}
+
+Der \textit{Joint Dynamics Monitor} erfasst kontinuierlich die Dynamik der sechs Roboterachsen.
+Die Implementierung in Unity basiert auf den vom digitalen Zwilling gestreamten Gelenkwinkeln,
+aus denen Geschwindigkeiten und Beschleunigungen differenziell berechnet werden.
+Zur Signalanalyse werden mehrere Mechanismen kombiniert, darunter exponentielle Glättung
+sowie Fenster-basiertes Mittel zur Dämpfung von Ausreißern. Zusätzlich wird ein
+Sicherheitsfaktor von 0{,}8 auf die in RobotStudio spezifizierten Maximalwerte angewendet,
+sodass die Schwellwerte im Monitor niedriger liegen als die realen physikalischen Limits
+(vgl. Implementierung in \texttt{JointDynamicsMonitor.cs}).
+
+Während der Testsimulation wurden durch den Monitor zwei Überschreitungen der
+Geschwindigkeitsgrenzen auf \textbf{Joint 1} registriert. Diese Ereignisse sind in der
+aus Unity aufgezeichneten Logdatei dokumentiert. Ein Auszug befindet sich in
+\texttt{code-snippets/jointdynamicserror.json} und ist in
+Listing~\ref{lst:jointdynamics_json} dargestellt. Dort wird jeweils die Überschreitung der
+Geschwindigkeit und das nachfolgende \enquote{resolved}-Ereignis vermerkt, zusammen mit dem
+aktuellen Gelenkwinkelzustand des Roboters.
+
+\begin{listing}[H]
+	\centering
+	\inputminted[fontsize=\footnotesize,breaklines]{json}{code-snippets/jointdynamicserror.json}
+	\caption{Gekürzter Auszug der in Unity aufgezeichneten Safety Events des Joint Dynamics Monitor}
+	\label{lst:jointdynamics_json}
+\end{listing}
+
+Zum Vergleich wurden die Gelenkwinkel aus RobotStudio exportiert und anhand der berechneten
+Achsgeschwindigkeiten ausgewertet. Abbildung~\ref{fig:jointdynamics} zeigt die Ergebnisse:
+Im oberen Diagramm sind die Achswinkel aller sechs Gelenke dargestellt (J1 hervorgehoben in rot),
+darunter die berechneten Geschwindigkeiten mit markierten Schwellwertbereichen.
+Die rot eingefärbten Abschnitte kennzeichnen Intervalle, in denen die aus RobotStudio
+exportierten Daten die definierte Grenze von $\pm 50\,^\circ$/s überschreiten.
+Die blau markierten Bereiche repräsentieren die durch den Monitor in Unity ausgegebenen
+Safety Events.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Figures/achsgeschwindigkeitPlot.png}
+	\caption{Achswinkel (oben) und Achsgeschwindigkeiten (unten) mit markierten
+		Bereichen (rot: Schwellenübertritte in den Rohdaten, blau: Safety Events aus Unity).}
+	\label{fig:jointdynamics}
+\end{figure}
+
+Eine Gegenüberstellung der Zeitintervalle ist in Tabelle~\ref{tab:jointdynamics} enthalten.
+Dort werden die Start- und Endzeitpunkte der Abschnitte, die Dauer sowie die Gelenkwinkel
+und -geschwindigkeiten an diesen Punkten angegeben. Anhand dieser Darstellung wird sichtbar,
+dass die blau markierten Safety Events zeitlich nach den rot markierten Schwellenübertritten
+liegen. Die in Tabelle~\ref{tab:jointdynamics} und Abbildung \ref{fig:jointdynamics} dargestellten Intervalle wurden ermittelt,
+indem die aus RobotStudio exportierten Gelenkwinkel mit den in den Safety Events
+gespeicherten Zuständen verglichen wurden. Dazu wurde der euklidische Abstand zwischen
+den Vektoren der Achswinkel berechnet, um den jeweils nächstliegenden Zeitpunkt in
+den Referenzdaten zu bestimmen. Auf diese Weise lassen sich die vom Monitor in Unity
+gemeldeten Ereignisse mit den in den Rohdaten beobachteten Schwellenübertritten
+korrelieren.
+
+\begin{table}[H]
+	\centering
+	\small
+	\begin{tabularx}{\textwidth}{lrrrrrrX}
+		\toprule
+		Typ               & Start [ms] & Ende [ms] & Dauer [ms] & Start J1 [°] & Ende J1 [°] \\
+		\midrule
+		Dynamik (rot)     & 216        & 1800      & 1584       & -40.35       & 107.62      \\
+		Zielwinkel (blau) & 624        & 1848      & 1224       & -1.25        & 109.89      \\
+		Dynamik (rot)     & 7824       & 9408      & 1584       & 107.08       & -41.88      \\
+		Zielwinkel (blau) & 8208       & 9552      & 1344       & 74.15        & -45.24      \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Zeitintervalle und Zustände der Joint-Dynamics-Auswertung}
+	\label{tab:jointdynamics}
+\end{table}
+
+\section{Zusammenfassung der Ergebnisse}
+Die Ergebnisse zeigen, dass die in Unity implementierten Monitore in allen Testfällen
+die in RobotStudio provozierten Szenarien widerspiegeln konnten.
+Dabei wurde deutlich, dass sich für jedes Modul charakteristische Muster
+im Logging abzeichnen: Prozessabweichungen wurden sequenziell dokumentiert,
+Kollisionen mit Schweregraden versehen, Singularitäten mit Gelenkwinkeln und
+Manipulierbarkeitswerten erfasst, und Geschwindigkeitsverletzungen durch
+Event-Paare (exceeded/resolved) gekennzeichnet.\\
+
+\begin{table}[H]
+	\centering
+	\small
+	\begin{tabularx}{\textwidth}{lXX}
+		\toprule
+		\textbf{Monitor}      & \textbf{Getestetes Szenario}                                                               & \textbf{Erkannte Ereignisse / Beobachtungen}                                                                                               \\
+		\midrule
+		Process Flow          & Ablauf mit bewusst fehlerhafter Reihenfolge der Operationen                                & Abweichung von der erwarteten Sequenz korrekt erkannt, Events dokumentieren Verletzung der Prozessfolge.                                   \\
+		\addlinespace
+		Collision Detection   & Simulation mit Kollision zwischen Greifer und Werkstück bzw. Störkörper                    & Mehrere Kollisionen aufgezeichnet, inklusive beteiligter Objekte; Events mit Schweregrad (critical/warning) unterschieden.                 \\
+		\addlinespace
+		Singularity Detection & Pose in RobotStudio, die eine Wrist-Singularität ($\theta_{5} \approx 0^\circ$) provoziert & ENTERING- und EXITING-Events erfasst; Gelenkwinkel und Manipulierbarkeitswerte im JSON protokolliert; Szenario deckt sich mit RobotStudio. \\
+		\addlinespace
+		Joint Dynamics        & Bewegung mit Überschreitung der Geschwindigkeitsgrenzen auf J1 ($\pm 50^\circ$/s)          & Zwei Event-Paare (exceeded/resolved) aufgezeichnet; Verzögerung zwischen Schwellenübertritt (Rohdaten) und Event (Monitor) sichtbar.       \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Übersicht der getesteten Monitore, Szenarien und erkannten Ereignisse im Ergebnisteil}
+	\label{tab:monitor_overview}
+\end{table}
+
+\noindent
+Die Übersicht in Tabelle~\ref{tab:monitor_overview} verdeutlicht die Unterschiede
+zwischen den Monitoren hinsichtlich Art der Szenarien und Form der erfassten Events.
+Auffällig ist, dass sich in einigen Fällen eine zeitliche Verzögerung zwischen
+den in den Rohdaten beobachteten Zuständen und den vom Monitor generierten
+Ereignissen zeigt. Diese Beobachtung ergibt sich aus den in Kapitel~3 beschriebenen
+Mechanismen (z.\,B. Glättung, Abtastrate).
+
+Im nächsten Abschnitt wird ein Experteninterview herangezogen, um die hier
+dargestellten Ergebnisse einzuordnen und im Hinblick auf ihre Relevanz für
+praktische Anwendungen zu reflektieren.

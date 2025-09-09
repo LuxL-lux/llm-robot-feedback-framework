@@ -1,3 +1,61 @@
+
+Das entwickelte Framework ist in Unity implementiert und basiert auf einem digitalen
+Zwilling des Roboters, der die Zustände der einzelnen Achsen und relevanten
+Systemkomponenten kontinuierlich bereitstellt. Darauf aufbauend sind die
+Überwachungsmodule (\textit{Monitore}) integriert, die unterschiedliche
+Aspekte des Roboterverhaltens beobachten und als Safety Events dokumentieren.
+
+
+Im Folgenden wird erläutert, wie das Framework funktional, architektonisch und
+algorithmisch implemeniert ist. Wichtig dabei sind dabei folgende Annahmen zu
+beachten, die sich in Kapitel \ref{sec:aufbauTestszenario} wiederfinden: Als
+Testobjekt wird ein ABB IRB 6700-235/2.65 Roboter verwendet. Dabei handelt es
+sich um einen Knickarmroboter mit 6 Freiheitsgraden und 6
+Gelenken.\vglcite{abbirb2025} Dieser wird in RobotStudio Version 2025.3
+simuliert und mittels eines OmniCore-Controllers gesteuert.
+
+\subsection{Funktionale Anforderungen}
+
+Die funktionalen Anforderungen an das Framework
+lassen sich in zwei Hauptkategorien unterteilen: die \textbf{Echtzeitüberwachung
+	kritischer Roboterzustände} und Programmablaufereignisse sowie die \textbf{systematische
+	Protokollierung} der auftretenden Ereignisse.
+
+\subsubsection{Überwachungsfunktionen}
+
+Das Framework muss vier zentrale Überwachungsfunktionen implementieren:
+
+\begin{enumerate}
+	\item \textbf{Kollisionserkennung}: Identifikation von Kontakten zwischen Roboterkomponenten und Objekten in der Arbeitsumgebung sowie Selbstkollisionen zwischen benachbarten Gliedern der kinematischen Kette.
+
+	\item \textbf{Singularitätserkennung}: Frühzeitige Erkennung kinematischer Singularitäten (Handgelenk-, Schulter- und Ellbogensingularitäten), die zu Kontrollverlust oder undefinierten Bewegungen führen können.
+
+	\item \textbf{Prozessflussüberwachung}: Validierung der korrekten Abfolge von Bearbeitungsstationen für Werkstücke und Erkennung von Abweichungen von der spezifizierten Sequenz.
+
+	\item \textbf{Gelenkdynamiküberwachung}: Kontinuierliche Überprüfung von Gelenkwinkeln, -geschwindigkeiten und -beschleunigungen auf Grenzwertüberschreitungen, insbesondere während der Handhabung von Werkstücken.
+\end{enumerate}
+
+\subsubsection{Systematische Ereignisprotokollierung}
+
+Mithilfe des Frameworks soll es möglichh sein, die genannten Fehlerarten
+systematisch debuggen zu können und die Fehlersuche in Roboterprogrammcode zu
+vereinfachen. Neben der reinen Erkennung ist die folglich eine formalisierte
+Dokumentation der Ereignisse notwendig. Jedes detektierte Ereignis soll mit
+entsprechenden Metadaten zum aktuellen Status des Roboters angereicht werden.
+Folgende Metadaten lassen sich nach initialem Testen mithilfe der zur Verfügung
+stehenden Tools extrahieren:
+
+\begin{itemize}
+	\item \textbf{Zeitlicher Kontext}: Präziser Zeitstempel des Ereignisses mit Millisekunden-Auflösung
+	\item \textbf{Räumlicher Kontext}: Vollständige Gelenkwinkelkonfiguration und TCP-Position zum Ereigniszeitpunkt
+	\item \textbf{Programmkontext}: Aktuelles Modul, Routine und Programmzeile der Robotersteuerung
+	\item \textbf{Ereignisspezifische Daten}: Je nach Ereignistyp relevante Zusatzinformationen (Kollisionspunkt, Singularitätstyp, Sequenzabweichung, Grenzwertüberschreitung)
+\end{itemize}
+\noindent
+Diese strukturierte Erfassung ermöglicht die nachgelagerte genaue Auswertung der
+vorhandenen Daten und soll das Debuggen des Programmcodes und das Erkennen von
+Schwachstellen erleichtern.
+
 \subsection{Zielsetzung und architektonische Anforderungen}
 Der Stand der Technik aktueller Simulationsplattformen für Roboter zeigt, dass
 virtuelle Steuerungen und damit zusammenhängende Simulationsplattformen
@@ -37,17 +95,17 @@ Die Engine wurde bereits erfolgreich in der wissenschaftlichen Forschung
 eingesetzt und bietet Module und Plugins für spezifische Anwendungsfälle im
 Simulationsbereich. Unity3D ermöglicht es auch Nicht-Programmierern,
 leistungsstarke Animations- und Interaktionsdesign-Tools zu nutzen, um Roboter
-visuell zu programmieren und zu animieren vgl. \vglcite[431]{bartneck2015}.\\
+visuell zu programmieren und zu animieren.\vglcite[431]{bartneck2015}\\
 
 \noindent
 Technisch ermöglicht Unity3D durch seine Scripting-Runtime (basierend auf
 Mono/.NET Framework) die Verwendung moderner C\#-Sprachfeatures für
 nebenläufige Prozesse und asynchroner Programmierung
-\vglcite[45-52]{unity_async_2023}, was es ermöglicht, Visualisierung,
+\vglcite{unity_async_2023}, was es ermöglicht, Visualisierung,
 Datenakquise und Überwachung zu trennen. Die .NET-basierte Architektur
 unterstützt dabei sowohl Task-basierte asynchrone Operationen als auch
 Coroutines für zeitgesteuerte Prozesse
-\vglcite[123-135]{unity_coroutines_2023}, welche die notwendige periodische
+\vglcite{unity_coroutines_2023}, welche die notwendige periodische
 Ausführung von Prozessen auf verschiedenen Ebenen des Frameworks stark
 vereinfacht.\\
 
@@ -57,7 +115,7 @@ Verfügbarkeit visueller Programmiertools und der integrierten
 Entwicklungsumgebung. Die Plattform bietet umfangreiche Debugging- und
 Profiling-Werkzeuge (Unity Profiler, Frame Debugger), die während der
 Entwicklung und zur Laufzeit genutzt werden können
-\vglcite[S.~67-89]{unity_profiler_2023}. Diese Werkzeuge ermöglichen die
+\vglcite{unity_profiler_2023}. Diese Werkzeuge ermöglichen die
 Analyse von Performance-Engpässen bei der Verarbeitung von Roboterdaten und die
 Optimierung der Sicherheitsmonitor-Updates.
 
@@ -66,109 +124,74 @@ Roboterzelle) als auch Komponenten-Parameter in Echtzeit bearbeiten und
 einsehen \vglcite[1236]{haas2022}, was das Debuggen und Testen
 beschleunigt.
 
-\subsection{Design Patterns und Prinzipien}
 
-Die Entwicklung eines modularen und erweiterbaren Robotersicherheitssystems
-erfordert eine fundierte methodische Herangehensweise, die auf bewährten
-Software-Engineering-Prinzipien basiert. Die Auswahl geeigneter Design Patterns
-und Architekturprinzipien determiniert maßgeblich die Qualitätsattribute des
-Systems wie Wartbarkeit, Testbarkeit und
-Erweiterbarkeit.\vglcite[73\psqq]{Bass2012} Im Folgenden werden die für diese
-Arbeit gewählten Entwurfsmuster und deren Begründung dargelegt.
+\subsection{Systemarchitektur}
 
-Für die Realisierung der systemweiten Kommunikation wird das Observer
-Pattern\vglcite[293-303]{Gamma1994} als zentrales Entwurfsmuster gewählt. Diese
-Entscheidung basiert auf einer zentralen Überlegung: Zunächst muss gewährleistet sein,
-dass alle relevanten Ereignisse an relevante Systemkomponenten weitergegeben
-werden. Daher ermöglicht das Muster die dynamische Registrierung
-und Deregistrierung von Beobachtern zur Laufzeit\vglcite[127\psq]{Buschmann1996} Drittens
-reduziert die lose Kopplung zwischen Publisher und Subscriber die
-Systemkomplexität erheblich, da Komponenten ohne Kenntnis voneinander
-interagieren können.
+Das entwickelte Framework implementiert eine vierschichtige Architektur, die
+eine klare Trennung der Verantwortlichkeiten gewährleistet (siehe Abbildung
+\ref{fig:layer_architecture}). Diese Strukturierung folgt etablierten
+Software-Engineering-Prinzipien, um Wartbarkeit und Erweiterbarkeit zu
+gewährleisten.
 
-
-Die Vorteile dieser Architekturentscheidung manifestiert sich vornehmlich
-darin, dass so Robotertypen ohne Modifikation des Kernsystems integriert
-werden. \textsc{Martin2003} spricht hier vom Open-Closed-Prinzip, welches die
-Offenheit von Software-Entitäten (Funktionen, Klassen, Module, Komponenten
-usw.) zur Extension und die gleichzeitige Geschlossenheit zur Modfikation
-beschreibt.\vglcite{Martin2003}
-
-\subsubsection{Adapter Pattern zur Hardware-Abstraktion}
-Die Integration heterogener Hardware-Komponenten erfordert eine
-Abstraktionsschicht zwischen der Anwendungslogik und den hardware-spezifischen
-Schnittstellen. Das Adapter Pattern (vgl. \vglcite{Gamma1994}, S. 139-150) wird
-gewählt, um diese Abstraktion zu realisieren. Die Notwendigkeit ergibt sich aus
-der Vielfalt der Robotersteuerungen und Visualisierungssysteme, die jeweils
-eigene APIs und Datenformate verwenden (vgl. \vglcite{Craig2005}, S. 412-415).
-
-Durch die Adapter-Schicht wird eine einheitliche Schnittstelle zur Verfügung
-gestellt, die es ermöglicht, verschiedene Robotersysteme ohne Änderung der
-Kernlogik anzubinden. Dies reduziert nicht nur die Komplexität des Systems,
-sondern erhöht auch dessen Portabilität und Wiederverwendbarkeit (vgl.
-\vglcite{Vlissides1995}, S. 89-91).
-
-\subsubsection{SOLID-Prinzipien als Qualitätsfundament}
-Die konsequente Anwendung der SOLID-Prinzipien \vglcite{Martin2003} bildet das methodische Fundament der Systemarchitektur. Das
-\textit{Single Responsibility Principle} wird angewendet, um kohäsive Module zu
-schaffen, die genau eine Verantwortlichkeit haben. Dies reduziert die Kopplung
-und erhöht die Verständlichkeit des Codes \vglcite{Martin2017}. Das \textit{Open-Closed Principle} gewährleistet, dass das System für
-Erweiterungen offen, aber für Modifikationen geschlossen ist – eine essenzielle
-Eigenschaft für langlebige Industriesysteme.
-
-Das \textit{Dependency Inversion Principle} wird konsequent angewendet, indem
-High-Level-Module von Abstraktionen abhängen, nicht von konkreten
-Implementierungen. Dies ermöglicht die flexible Konfiguration des Systems zur
-Laufzeit und vereinfacht die Integration in verschiedene Produktionsumgebungen
-\vglcite[112\psqq]{Fowler2018}
-
-\subsubsection{Event-Driven Architecture für Echtzeitfähigkeit}
-Die Entscheidung für eine event-getriebene Architektur basiert auf den
-Echtzeitanforderungen industrieller Robotersysteme. Sicherheitskritische
-Ereignisse müssen innerhalb definierter Zeitschranken verarbeitet werden, was
-durch synchrone Aufrufketten nicht gewährleistet werden kann
-\vglcite[97\psqq]{Hohpe2003}. Die event-getriebene Architektur ermöglicht die
-asynchrone Verarbeitung von Ereignissen und die Priorisierung kritischer
-Sicherheitsereignisse.
-
-Zudem adressiert dieser Ansatz die Herausforderung der Integration verschiedener
-Datenquellen – von zyklischen Sensordaten über sporadische Alarme bis zu
-kontinuierlichen Videoströmen. Jede Datenquelle kann Events in ihrem eigenen
-Takt generieren, ohne andere Systemkomponenten zu blockieren
-\vglcite[234\psqq]{Vernon2013}.
-
-\section{Schichtenarchitektur des Frameworks}
-
-Aufbauend auf den oben genannte Prinzipien
-teilt sich das Framework in 4 logisch getrennte Module auf:
-
-\begin{enumerate}
-	\item \textbf{Kernlogik}, welches den Status des Roboters beinhaltet und
-	      verwaltet als zentrale Schnittstelle (Core)\item \textbf{Interfaces},
-	      welche die Kommunkationsschnittstellen und -methoden zwischen den Modulen
-	      implementiert (Interfaces) \item \textbf{Monitoring}, welches die einzelnen
-	      Komponenten des Monitoring-Systems implementiert (Monitors) \item
-	      \textbf{Adapters}, welches potenziell Adapter zu veschiedenen physischen oder
-	      simulierten Steuerungen von Robotern beinhaltet (Hier ABB gennant)
-\end{enumerate}
-
-
-
-\begin{figure}[H] \centering
-	\includegraphics[width=10cm]{Figures/LayerArchitekturFramework.png}
-	\caption{Schichtenarchitektur des Frameworks mit den wichtigsten zugehörigen
-		Modulen. Module mit grüner Umrandung werden durch eine Interface formalisiert}
-	\label{figure:layer}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{figures/LayerArchitekturFramework.png}
+	\caption{Schichtenarchitektur des Frameworks. Orange umrandete Module implementieren formalisierte Interfaces (\texttt{IRobotSafetyMonitor}, \texttt{IRobotConnector}). Das \texttt{RobotState}-Objekt dient als gemeinsame Datenstruktur zwischen den Schichten.}
+	\label{fig:layer_architecture}
 \end{figure}
 
-Die Trennung der Module ermöglicht eine formalisierte
-Schnittstellenkommunikation, dargestellt in Abbildung \ref{figure:layer}.
-Jede Schicht hat verschiedene Verantwortlichkeiten und Schnittstellen innerhalb
-des Monitoring-Systems. Zentrales Element des Systems stellt der RobotManager
-dar. Er dient als Bindeglied zwischen den Monitoring-Komponenten, welche für die
-Überwachung des Systems verantworlich sind und der Adapter-Schicht,
-verantwortlich für die Kommunikation und das Spiegeln des Roboters aus der
-initialen Umgebung (hier RobotStudio) in Unity.
+Die Architektur gliedert sich in vier logisch getrennte Schichten:
+
+\begin{enumerate}
+	\item \textbf{Unity3D Framework}: Bereitstellung der Simulationsumgebung und Physics-Engine
+	\item \textbf{Monitoring Layer}: Implementierung der Sicherheitsmonitore
+	\item \textbf{Core Layer}: Zentrales State-Management und Event-Koordination
+	\item \textbf{Robot Communication Layer}: Adapter für herstellerspezifische Robotersteuerungen
+\end{enumerate}
+
+Der \texttt{RobotManager} im Core Layer fungiert als zentraler Event-Dispatcher,
+der Zustandsänderungen an alle registrierten Monitoring-Komponenten propagiert.
+Diese Implementierung des Observer Patterns \vglcite[293-303]{Gamma1994}
+ermöglicht eine lose Kopplung zwischen den Komponenten: Die Sicherheitsmonitore
+müssen lediglich das \texttt{IRobotSafetyMonitor}-Interface implementieren und
+können zur Laufzeit dynamisch registriert oder entfernt werden, ohne andere
+Systemteile zu beeinflussen.
+
+Die in Abbildung \ref{fig:layer_architecture} orange markierten Module
+definieren standardisierte Interfaces, die als Verträge zwischen den Schichten
+dienen. Diese Interface-basierte Abstraktion realisiert das Open-Closed
+Principle \vglcite{Martin2003}: Neue Robotertypen können durch Implementierung
+des \texttt{IRobotConnector}-Interfaces integriert werden, ohne den Core Layer
+zu modifizieren. Analog können zusätzliche Sicherheitsmonitore über das
+\texttt{IRobotSafetyMonitor}-Interface hinzugefügt werden. Diese
+Architekturentscheidung gewährleistet, dass das System für Erweiterungen offen
+bleibt, während die Kernfunktionalität stabil und unverändert bleibt.
+
+Die Kommunikation zwischen den Schichten erfolgt ereignisgesteuert über das
+\texttt{RobotState}-Objekt als gemeinsame Datenstruktur. Die Communication Layer
+aktualisiert kontinuierlich den Roboterzustand durch WebSocket-Events für
+Metadaten und HTTP-Polling für Bewegungsdaten. Der \texttt{RobotManager}
+verteilt diese Zustandsänderungen asynchron an alle registrierten Observer.
+Diese Event-Driven Architecture \vglcite[97\psqq]{Hohpe2003} adressiert die
+Echtzeitanforderungen industrieller Robotersysteme: Kritische
+Sicherheitsereignisse wie Kollisionen werden mit minimaler Latenz erkannt und
+priorisiert verarbeitet, während weniger kritische Ereignisse gepuffert werden
+können.
+
+Der \texttt{SafetyManager} aggregiert die von den Monitoren generierten
+Sicherheitsereignisse und implementiert eine kontextabhängige Logging-Strategie.
+Bei laufendem Roboterprogramm werden detaillierte JSON-Logs für spätere Analyse
+erstellt, während im Idle-Zustand nur kritische Ereignisse in die Konsole
+geloggt werden. Diese Differenzierung optimiert sowohl die Performance als auch
+die Nachvollziehbarkeit von Sicherheitsvorfällen.
+
+Die gewählte Schichtenarchitektur ermöglicht die unabhängige Entwicklung und
+Testung einzelner Komponenten. Horizontale Erweiterungen (neue Monitore) und
+vertikale Erweiterungen (neue Robotertypen) können ohne Seiteneffekte auf
+bestehende Komponenten implementiert werden. Die Unity3D-spezifischen Aspekte
+sind in der obersten Schicht gekapselt, wodurch perspektivisch auch andere
+Simulationsumgebungen integriert werden könnten, solange die definierten
+Interfaces beibehalten werden.
 
 \subsection{Robot Communcation Layer}
 Die Robot Communication Layer organisiert die Kommunkation mit der zugrundeliegenden Robotersteuerung und
@@ -268,35 +291,3 @@ werden. Zusammenfassend bestehn ein SafetyEvent aus folgenden Komponenten:
 	\item \textbf{Ereignistypen}: Info, Warning, Critical mit konfigurierbaren Schwellwerten
 	\item \textbf{Kontextdaten}: Vollständige Roboterzustandserfassung für Forensik
 \end{itemize}
-\noindent
-
-\dirtree{%
-	.1 RobotSystem/.
-	.2 Core/.
-	.3 RobotManager.cs.
-	.3 RobotState.cs.
-	.3 RobotSafetyManager.cs.
-	.3 SafetyEvent.cs.
-	.3 RobotStateSnapshot.cs.
-	.3 Part.cs.
-	.3 Station.cs.
-	.3 RapidTargetGenerator.cs.
-	.2 Interfaces/.
-	.3 IRobotConnector.cs.
-	.3 IRobotDataParser.cs.
-	.3 IRobotSafetyMonitor.cs.
-	.3 IRobotVisualization.cs.
-	.2 ABB/.
-	.3 RWS/.
-	.4 ABBRWSConnectionClient.cs.
-	.4 ABBRWSDataParser.cs.
-	.4 ABBMotionDataService.cs.
-	.3 ABBFlangeAdapter.cs.
-	.2 Monitors/.
-	.3 CollisionDetectionMonitor.cs.
-	.3 JointDynamicsMonitor.cs.
-	.3 ProcessFlowMonitor.cs.
-	.3 SingularityDetectionMonitor.cs.
-}
-
-s

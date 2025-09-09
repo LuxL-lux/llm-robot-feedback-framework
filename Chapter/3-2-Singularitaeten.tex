@@ -111,7 +111,11 @@ wobei höhere Werte bessere Manipulierbarkeit indizieren. Die Robotik-Literatur
 bietet verschiedene Ansätze zur Behandlung von Singularitäten, die sich in
 präventive und reaktive Strategien unterteilen lassen. Um diese in der Praxis
 anzuwenden, müssen jedoch teilweise numerische Auswertungen durchgeführt werden,
-um Schwellwerte zu generieren. Daher kommen diese hier nicht zum Einsatz.
+um Schwellwerte zu erfassen. Daher kommen diese hier nicht zum Einsatz.
+
+Zur zusätzlichen Charakterisierung wird jedoch die Yoshikawa-Manipulierbarkeit
+berechnet, da der Wert als Kennzahl für die Nähe zu einer Singularität verwendet
+werden kann. Er wird in den Ergebnissen in Kapitel \ref{sec:singularityauswertung} aufgeführt.
 
 \subsubsection{Praktisches Vorgehen} \label{sssec:Framework_Implementierung}
 
@@ -124,9 +128,10 @@ um Schwellwerte zu generieren. Daher kommen diese hier nicht zum Einsatz.
 \end{figure}
 
 \paragraph{Schritt 1: Positionsberechnung und Achsentransformation}~\\
-Die Positionen der relevanten Gelenke werden aus den Forward-Kinematics berechnet:
+Die Positionen der relevanten Gelenke werden durch die Anwendung der
+Vorwärtstransformation nach Denavit-Hartenberg berechnet:
 \begin{equation}
-	\vec{p}_i = \text{FK}(\theta_1, \ldots, \theta_i) \quad \text{für } i = 2, 3, 5
+	\vec{p}_i = \text{DH}(\theta_1, \ldots, \theta_i) \quad \text{für } i = 2, 3, 5
 	\label{eq:position_calculation}
 \end{equation}
 \noindent
@@ -174,8 +179,8 @@ Für jeden Singularitätstyp wird die entsprechende Bedingung überprüft:
 \end{table}
 
 \paragraph{Schritt 4: Manipulierbarkeitsberechnung}~\\
-Für detektierte Singularitäten wird ein approximativer Manipulierbarkeitsindex
-nach dem Yoshikawa-Maß berechnet:
+Für detektierte Singularitäten wird ein approximierter Manipulierbarkeitsindex
+nach Yoshikawa berechnet:
 
 \begin{equation}
 	w = \sqrt{\det(\mathbf{J}(\theta)\mathbf{J}^T(\theta))}
@@ -187,8 +192,9 @@ Das entwickelte Framework implementiert eine winkelbasierte
 Singularitätsdetektion, die geometrische Eigenschaften der Roboterkinematik
 direkt nutzt, anstatt auf rechenintensive Jacobi-Matrix-Berechnungen angewiesen
 zu sein. Die achsenbasierte Methode basiert auf der Erkenntnis, dass
-Singularitäten geometrisch durch die Kollinearität von Rotationsachsen
-charakterisiert werden können.
+Handgelenks- und Ellbogensingularitäten geometrisch durch die Kollinearität von Rotationsachsen
+charakterisiert werden können. Schultersingularitäten werden analog durch die
+Entfernung des ersten Gelenks zum Handgelenkzentrum in der XY-Ebene festgestellt.
 
 \subsubsection{Konkrete Implementierung der Detektionsmethoden}
 \label{sssec:Implementierung_Detektionsmethoden}

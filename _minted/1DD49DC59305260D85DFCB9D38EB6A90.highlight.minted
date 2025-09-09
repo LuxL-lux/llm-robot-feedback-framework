@@ -1,0 +1,46 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{p}{[}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Singularity Detector\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Entering Wrist Singularity (\PYGZbs{}u03B85 \PYGZbs{}u2248 0\PYGZbs{}u00B0)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventDataJson\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}singularityType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Wrist Singularity (θ₅ ≈ 0°)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}jointAngles\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}82.7}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}6.9}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{36.6}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}112.8}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}4.9}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}153.5}
+\PYG{+w}{      }\PYG{p}{],}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}wristThreshold\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mf}{5.0}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}manipulability\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mf}{0.191}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}isEntering\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{k+kc}{true}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{},}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}monitorName\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Singularity Detector\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}description\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Exiting Wrist Singularity (\PYGZbs{}u03B85 \PYGZbs{}u2248 0\PYGZbs{}u00B0)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}robotStateSnapshot\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{    }\PYG{n+nt}{\PYGZdq{}eventDataJson\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}singularityType\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Wrist Singularity (θ₅ ≈ 0°)\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}jointAngles\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}91.8}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}8.3}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{37.8}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}91.3}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{5.2}\PYG{p}{,}
+\PYG{+w}{        }\PYG{l+m+mf}{\PYGZhy{}182.6}
+\PYG{+w}{      }\PYG{p}{],}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}wristThreshold\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mf}{5.0}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}manipulability\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mf}{0.197}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}isEntering\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{k+kc}{false}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}[...]\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}[...]\PYGZdq{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{]}
+\end{MintedVerbatim}
