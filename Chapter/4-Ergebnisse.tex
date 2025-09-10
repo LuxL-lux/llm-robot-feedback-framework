@@ -181,6 +181,7 @@ lässt sich beim Ablegen desn Werkstücks beobachten. Wichtig zu erwähnen ist d
 unterschiedliche EventType, da das Werkstück aufgrund von fehlendem Tag nicht
 als kritisch eingestuft wird.
 
+\newpage
 \section{Auswertung Singularity Detection Monitor}
 \label{sec:singularityauswertung}
 Zur Untersuchung der Singularitätserkennung wurde in RobotStudio ein Szenario erstellt,
@@ -188,27 +189,27 @@ das gezielt eine Wrist-Singularität provoziert. Dabei wurde der Roboter in eine
 geführt, in der die Achsen~4 und~6 nahezu kollinear verlaufen und somit die Bedingung
 $\theta_{5} \approx 0^\circ$ erfüllt ist.
 
-Die vom Monitor in Unity aufgezeichneten Safety Events sind in
-Listing~\ref{lst:singularity_json} als gekürzter Auszug dargestellt. Es werden sowohl
-das \enquote{Entering}- als auch das \enquote{Exiting}-Ereignis erfasst, jeweils mit den
-zugehörigen Gelenkwinkeln und einem berechneten Manipulierbarkeitswert. Nicht relevante
-Felder des Snapshots wurden entfernt, da die Gelenkwinkel bereits im \texttt{eventDataJson}
-enthalten sind. Zusätzliche Informationen wurden mit \texttt{"[...]"} abgekürzt.
-
-\begin{listing}[H]
-	\centering
+\begin{figure}[H]
 	\inputminted[fontsize=\footnotesize,breaklines]{json}{code-snippets/singularityerror.json}
 	\caption{Gekürzter Auszug der in Unity aufgezeichneten Safety Events zur Wrist-Singularität}
 	\label{lst:singularity_json}
-\end{listing}
+\end{figure}
 
-Abbildung~\ref{fig:wrist_singularity} zeigt die simulierte Pose im RobotStudio, in der die
-Singularität hervorgerufen wurde.
+\noindent
+Die vom Monitor in Unity aufgezeichneten Safety Events sind in
+Abbildung~\ref{lst:singularity_json} als gekürzter Auszug dargestellt. Es werden sowohl
+das \enquote{Entering}- als auch das \enquote{Exiting}-Ereignis erfasst, jeweils mit den
+zugehörigen Gelenkwinkeln und einem berechneten Manipulierbarkeitswert. Nicht relevante
+Felder des Snapshots wurden entfernt, da die Gelenkwinkel bereits im \texttt{eventDataJson}
+enthalten sind. Zusätzliche Informationen wurden mit \texttt{"[...]"}
+abgekürzt.\\
+
+\noindent
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figures/wristSingularityScreenshot.jpg}
-	\caption{Pose mit Wrist-Singularität ($\theta_{5} \approx 0^\circ$) im RobotStudio}
+	\includegraphics[width=0.7\textwidth]{figures/wristSingularity.png}
+	\caption{Pose in Unity, bei der eine Wrist-Singularität mit ($\theta_{5} \approx 0^\circ$) entsteht}
 	\label{fig:wrist_singularity}
 \end{figure}
 
@@ -216,12 +217,13 @@ Die Analyse der Ereignisse zeigt, dass der Monitor den Eintritt in die Wrist-Sin
 bei einer Gelenkkonfiguration von etwa
 $[-82.7, -6.9, 36.6, -112.8, -4.9, -153.5]^\circ$ registrierte. Der berechnete
 Manipulierbarkeitswert lag hier bei $w \approx 0.19$. Beim Verlassen der Pose
-($[-91.8, -8.3, 37.8, -91.3, 5.2, -182.6]^\circ$) wurde das \enquote{EXITING}-Ereignis
+($[-91.8, -8.3, 37.8, -91.3, 5.2, -182.6]^\circ$) wurde das \enquote{Exiting}-Ereignis
 ausgegeben, wobei der Manipulierbarkeitswert mit $w \approx 0.20$ ebenfalls sehr niedrig blieb.
 Die Ereignisse decken sich mit dem in RobotStudio provozierten Szenario und markieren den
 Übergang in und aus einer singulären Konfiguration.
-Zur Detektion von Singularitäten wird das gleiche Verfahren angewendet. Hier
-lässt sich ebenfalls eine Abweichung
+Zur Detektion von Singularitäten anderen Typs (hier Schulter- und
+Ellbogensingularitäten) wird das gleiche Verfahren angewendet. Hier decken sich
+die Ergebnisse mit den oben Beschriebenen.
 
 \section{Auswertung Joint Dynamics Monitor}
 \label{sec:Analyse_Sicherheit}
@@ -236,19 +238,18 @@ sodass die Schwellwerte im Monitor niedriger liegen als die realen physikalische
 (vgl. Implementierung in \texttt{JointDynamicsMonitor.cs}).
 
 Während der Testsimulation wurden durch den Monitor zwei Überschreitungen der
-Geschwindigkeitsgrenzen auf \textbf{Joint 1} registriert. Diese Ereignisse sind in der
-aus Unity aufgezeichneten Logdatei dokumentiert. Ein Auszug befindet sich in
-\texttt{code-snippets/jointdynamicserror.json} und ist in
-Listing~\ref{lst:jointdynamics_json} dargestellt. Dort wird jeweils die Überschreitung der
-Geschwindigkeit und das nachfolgende \enquote{resolved}-Ereignis vermerkt, zusammen mit dem
-aktuellen Gelenkwinkelzustand des Roboters.
+Geschwindigkeitsgrenzen auf \textbf{Joint 1} registriert. Diese Ereignisse sind
+in der aus Unity aufgezeichneten Logdatei dokumentiert. Ein Auszug ist in
+Abbildung~\ref{lst:jointdynamics_json} dargestellt. Dort wird jeweils die
+Überschreitung der Geschwindigkeit und das nachfolgende
+\enquote{resolved}-Ereignis vermerkt, zusammen mit dem aktuellen
+Gelenkwinkelzustand des Roboters.
 
-\begin{listing}[H]
-	\centering
+\begin{figure}[H]
 	\inputminted[fontsize=\footnotesize,breaklines]{json}{code-snippets/jointdynamicserror.json}
-	\caption{Gekürzter Auszug der in Unity aufgezeichneten Safety Events des Joint Dynamics Monitor}
+	\caption{Gekürzter Auszug der in Unity aufgezeichneten Safety Events des Joint Dynamics Monitor, Ereignis widerholt sich}
 	\label{lst:jointdynamics_json}
-\end{listing}
+\end{figure}
 
 Zum Vergleich wurden die Gelenkwinkel aus RobotStudio exportiert und anhand der berechneten
 Achsgeschwindigkeiten ausgewertet. Abbildung~\ref{fig:jointdynamics} zeigt die Ergebnisse:
@@ -258,6 +259,11 @@ Die rot eingefärbten Abschnitte kennzeichnen Intervalle, in denen die aus Robot
 exportierten Daten die definierte Grenze von $\pm 50\,^\circ$/s überschreiten.
 Die blau markierten Bereiche repräsentieren die durch den Monitor in Unity ausgegebenen
 Safety Events.
+Zu erkennen ist eine starke Überschneidung der Bereiche.
+Weiterführend zeichnet sich vor allem in der zweiten
+Geschwindigkeitsüberschreitung eine Verzögerung beim Ein- und Austritt in den
+kritischen Zustand ab. Die Events in Unity werden hier zeitverzögert
+weitergegeben.
 
 \begin{figure}[H]
 	\centering
@@ -273,7 +279,7 @@ und -geschwindigkeiten an diesen Punkten angegeben. Anhand dieser Darstellung wi
 dass die blau markierten Safety Events zeitlich nach den rot markierten Schwellenübertritten
 liegen. Die in Tabelle~\ref{tab:jointdynamics} und Abbildung \ref{fig:jointdynamics} dargestellten Intervalle wurden ermittelt,
 indem die aus RobotStudio exportierten Gelenkwinkel mit den in den Safety Events
-gespeicherten Zuständen verglichen wurden. Dazu wurde der euklidische Abstand zwischen
+gespeicherten Zuständen vergleichar sind. Dazu wurde der euklidische Abstand zwischen
 den Vektoren der Achswinkel berechnet, um den jeweils nächstliegenden Zeitpunkt in
 den Referenzdaten zu bestimmen. Auf diese Weise lassen sich die vom Monitor in Unity
 gemeldeten Ereignisse mit den in den Rohdaten beobachteten Schwellenübertritten
@@ -284,7 +290,7 @@ korrelieren.
 	\small
 	\begin{tabularx}{\textwidth}{lrrrrrrX}
 		\toprule
-		Typ               & Start [ms] & Ende [ms] & Dauer [ms] & Start J1 [°] & Ende J1 [°] \\
+		Typ               & Start [ms] & Ende [ms] & Dauer [ms] & Start J1 [\textdegree] & Ende J1 [\textdegree] \\
 		\midrule
 		Dynamik (rot)     & 216        & 1800      & 1584       & -40.35       & 107.62      \\
 		Zielwinkel (blau) & 624        & 1848      & 1224       & -1.25        & 109.89      \\

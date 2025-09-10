@@ -7,7 +7,7 @@ Robotersteuerung dar und treten auf, wenn die Jacobi-Matrix des Roboters ihren
 vollen Rang verliert. In diesen Konfigurationen verliert der Roboter die
 Fähigkeit, sich in bestimmte Richtungen im kartesischen Raum zu bewegen, was zu
 Kontrollverlust und potentiell gefährlichen Situationen führen
-kann.\vglcite{siciliano2010robotics}
+kann.\vglcite{siciliano2016robotics}
 
 \paragraph{Mathematische Definition} Eine kinematische Singularität tritt auf,
 wenn die Jacobi-Matrix $\mathbf{J}(\boldsymbol{\theta})$, welche des Roboters
@@ -62,12 +62,12 @@ Arbeitsraums erreicht. Dies geschieht typischerweise bei vollständig
 ausgestreckter oder eingeklappter Konfiguration. Beim Knickarmrobotern wie dem IRB 6700
 verläuft die Rotationsachse des vierten Gelenks nicht direkt durch den Ursprung vom
 dritten Gelenk, sondern ist durch eine Translation verschoben. Das impliziert,
-dass die vollständige Streckung des Armes nicht durch einen Winkel von $0°$ bzw.
-$180°$ auftritt. Hier lässt sich allgemeiner der Zusammenhang der Vektoren
+dass die vollständige Streckung des Armes nicht durch einen Winkel von $0^\circ$ bzw.
+$180^\circ$ auftritt. Hier lässt sich allgemeiner der Zusammenhang der Vektoren
 zwischen Gelenk 2 und 3 sowie 2 und 5 anwenden:
 
 \begin{equation}
-	\theta = \angle(\vec{v}_{23}, \vec{v}_{25}) \approx 0° \text{ oder } \theta \approx 180°
+	\theta = \angle(\vec{v}_{23}, \vec{v}_{25}) \approx 0^\circ \text{ oder } \theta \approx 180^\circ
 	\label{eq:elbow_singularity}
 \end{equation}
 
@@ -79,12 +79,12 @@ wobei:
 
 mit $\vec{p}_i$ als Position des Gelenks $i$. Die Singularitätsbedingung lautet:
 \begin{equation}
-	\theta < \epsilon \quad \text{oder} \quad \theta > 180° - \epsilon
+	\theta < \epsilon \quad \text{oder} \quad \theta > 180^\circ - \epsilon
 \end{equation}
 
 \paragraph{Handgelenksingularitäten} entstehen, wenn die Rotationsachsen der
 letzten drei Gelenke (Gelenke 4, 5, 6) kollinear werden. Dies tritt
-typischerweise auf, wenn $\theta_5 = 0°$ oder $\theta_5 = 180°$. Mathematisch
+typischerweise auf, wenn $\theta_5 = 0^\circ$ oder $\theta_5 = 180^\circ$. Mathematisch
 beschrieben durch:
 
 \begin{equation}
@@ -170,7 +170,7 @@ Für jeden Singularitätstyp wird die entsprechende Bedingung überprüft:
 		\hline
 		Schulter                  & $\tau_{\text{shoulder}} = 100$ mm  & $d_{wc} < \tau_{\text{shoulder}}$             \\
 		Ellbogen                  & $\tau_{\text{elbow}} = 5^{^\circ}$ & $\theta_{elbow} < \tau_{\text{elbow}}$ oder   \\
-		                          &                                    & $\theta_{elbow} > 180° - \tau_{\text{elbow}}$ \\
+		                          &                                    & $\theta_{elbow} > 180^\circ - \tau_{\text{elbow}}$ \\
 		Handgelenk                & $\tau_{\text{wrist}} = 5^{^\circ}$ & $c_{46} > \tau_{\text{wrist}}$                \\
 		\hline
 	\end{tabular}

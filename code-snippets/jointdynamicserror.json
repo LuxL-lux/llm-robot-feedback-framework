@@ -20,46 +20,7 @@
     "eventType": 1,
     "description": "Joint 1 velocity limit resolved: 48.63°/s",
     "robotStateSnapshot": {
-      "jointAngles": [
-        110.21,
-        -15.07,
-        55.12,
-        151.90,
-        -46.42,
-        43.80
-      ],
-      "[...]": "[...]"
-    }
-  },
-  {
-    "monitorName": "Joint Dynamics Monitor",
-    "eventType": 1,
-    "description": "Joint 1 velocity limit exceeded: -51.31°/s",
-    "robotStateSnapshot": {
-      "jointAngles": [
-        74.19,
-        -18.18,
-        53.54,
-        183.81,
-        -43.66,
-        -18.10
-      ],
-      "[...]": "[...]"
-    }
-  },
-  {
-    "monitorName": "Joint Dynamics Monitor",
-    "eventType": 1,
-    "description": "Joint 1 velocity limit resolved: -45.10°/s",
-    "robotStateSnapshot": {
-      "jointAngles": [
-        -45.21,
-        11.70,
-        6.11,
-        172.58,
-        -70.18,
-        -84.52
-      ],
+      "jointAngles": "[...]",
       "[...]": "[...]"
     }
   }

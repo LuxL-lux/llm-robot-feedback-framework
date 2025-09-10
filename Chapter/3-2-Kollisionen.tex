@@ -7,16 +7,16 @@ von der integrierten PhysX 5.1 Engine implementiert wird
 Axis-Aligned Bounding Boxes (AABB) aller Objekte auf mögliche Überlappungen
 geprüft. Dieser Schritt reduziert die Anzahl der detaillierten Prüfungen von
 $O(n^2)$ auf $O(n \log n)$ durch räumliche Partitionierung
-\vglcite{ericson2004real}. Nur Objektpaare mit überlappenden Bounding Boxes
+\vglcite[14]{ericson2004real}. Nur Objektpaare mit überlappenden Bounding Boxes
 werden an die \textbf{Narrow Phase} weitergereicht, wo der präzise
 GJK-Algorithmus (Gilbert-Johnson-Keerthi) die tatsächliche Kollision zwischen
-konvexen Geometrien ermittelt \vglcite{gilbert1988fast}.\\
+konvexen Geometrien ermittelt.\vglcite[399\psqq]{ericson2004real}\\
 
 \noindent
 Unity unterscheidet dabei zwischen physikalischen Kollisionen und
 Trigger-Events. Während physikalische Kollisionen Reaktionskräfte berechnen,
 detektieren Trigger lediglich Überlappungen und generieren entsprechende Events
-\vglcite{unity2024manual}. Hier kommen lediglich Trigger-Collider zum Einsatz,
+\vglcite{unity2025collisions}. Hier kommen lediglich Trigger-Collider zum Einsatz,
 da sich sonst die Umgebung durch physikalische Wechselwirkungen während der
 Simulation verändern würde. Die Layer-Matrix ermöglicht zusätzlich eine selektive
 Kollisionserkennung, indem bestimmte Layer-Kombinationen von der Prüfung

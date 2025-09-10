@@ -37,7 +37,7 @@ Das Framework muss vier zentrale Überwachungsfunktionen implementieren:
 
 \subsubsection{Systematische Ereignisprotokollierung}
 
-Mithilfe des Frameworks soll es möglichh sein, die genannten Fehlerarten
+Mithilfe des Frameworks soll es möglich sein, die genannten Fehlerarten
 systematisch debuggen zu können und die Fehlersuche in Roboterprogrammcode zu
 vereinfachen. Neben der reinen Erkennung ist die folglich eine formalisierte
 Dokumentation der Ereignisse notwendig. Jedes detektierte Ereignis soll mit
@@ -78,51 +78,17 @@ Zusammenfassend verfolgt die Architektur des Frameworks drei zentrale Ziele:
 
 \subsection{Unity3D als Simulationsplattform}
 
-Die Wahl von Unity3D als zugrundeliegende Simulationsplattform basiert auf
-mehreren technischen und praktischen Erwägungen. Während es bereits mehrere
-kommerzielle Programme für die Gestaltung und Simulation von Robotern in
-virtuellen Umgebungen gibt, sind diese nur selten mit anderen CAD-Systemen und
-Robotern kompatibel, unterstützen nicht alle Roboterbibliotheken oder werden
-nur plattformabhängig angeboten (vgl. \vglcite[247]{andaluz2016}). Unity3D
-hingegen ist mit den meisten CAD-Systemen kompatibel und bietet eine
-plattformübergreifende Lösung.\\
-
 \noindent
-Unity3D bietet eine ausgereifte 3D-Rendering-Pipeline mit integrierter
-Physik-Engine, welche zur Simulation von Gegenständen mit realitätsnahem
-Verhalten sowie komplexen Arbeitsräumen geeignet ist \vglcites{\cite@single{Unity2025SystemRequirements};\cite@single{Unity2025PhysicsOverview}}.
-Die Engine wurde bereits erfolgreich in der wissenschaftlichen Forschung
-eingesetzt und bietet Module und Plugins für spezifische Anwendungsfälle im
-Simulationsbereich. Unity3D ermöglicht es auch Nicht-Programmierern,
-leistungsstarke Animations- und Interaktionsdesign-Tools zu nutzen, um Roboter
-visuell zu programmieren und zu animieren.\vglcite[431]{bartneck2015}\\
-
-\noindent
-Technisch ermöglicht Unity3D durch seine Scripting-Runtime (basierend auf
-Mono/.NET Framework) die Verwendung moderner C\#-Sprachfeatures für
-nebenläufige Prozesse und asynchroner Programmierung
-\vglcite{unity_async_2023}, was es ermöglicht, Visualisierung,
-Datenakquise und Überwachung zu trennen. Die .NET-basierte Architektur
-unterstützt dabei sowohl Task-basierte asynchrone Operationen als auch
-Coroutines für zeitgesteuerte Prozesse
-\vglcite{unity_coroutines_2023}, welche die notwendige periodische
-Ausführung von Prozessen auf verschiedenen Ebenen des Frameworks stark
-vereinfacht.\\
-
-\noindent
-in weiterer Vorteil für die Robotik-Simulation liegt in der
-Verfügbarkeit visueller Programmiertools und der integrierten
-Entwicklungsumgebung. Die Plattform bietet umfangreiche Debugging- und
-Profiling-Werkzeuge (Unity Profiler, Frame Debugger), die während der
-Entwicklung und zur Laufzeit genutzt werden können
-\vglcite{unity_profiler_2023}. Diese Werkzeuge ermöglichen die
-Analyse von Performance-Engpässen bei der Verarbeitung von Roboterdaten und die
-Optimierung der Sicherheitsmonitor-Updates.
-
-Darüber hinaus lassen sich während der Laufzeit sowohl die Szene (hier: die
-Roboterzelle) als auch Komponenten-Parameter in Echtzeit bearbeiten und
-einsehen \vglcite[1236]{haas2022}, was das Debuggen und Testen
-beschleunigt.
+Unity3D wird in dieser Arbeit ausschließlich als \emph{Simulations\-laufzeit} verwendet.
+Die Engine stellt Szene, Physik und Rendering bereit und bietet dank ihrer ausgereiften
+3D/Physik‑Infrastruktur eine plattformübergreifende Grundlage für den
+digitalen Zwilling des Roboters.\vglcite[247]{andaluz2016} Die eigentliche
+Anwendungslogik wird durch klar definierte Adapter von der Engine entkoppelt,
+wodurch eine strikte Trennung zwischen Simulation und Domäne gewahrt bleibt.
+Asynchrone Abläufe im Update‑Loop dienen lediglich der Taktung und greifen
+nicht direkt auf Unity‑APIs zu. Die Wahl von Unity begründet sich zudem durch
+die breite Tooling‑Unterstützung und die Möglichkeit, sowohl visuelle als auch
+programmatische Arbeitsabläufe zu kombinieren.\vglcite[431]{bartneck2015}
 
 
 \subsection{Systemarchitektur}
@@ -149,49 +115,79 @@ Die Architektur gliedert sich in vier logisch getrennte Schichten:
 	\item \textbf{Robot Communication Layer}: Adapter für herstellerspezifische Robotersteuerungen
 \end{enumerate}
 
-Der \texttt{RobotManager} im Core Layer fungiert als zentraler Event-Dispatcher,
-der Zustandsänderungen an alle registrierten Monitoring-Komponenten propagiert.
-Diese Implementierung des Observer Patterns \vglcite[293-303]{Gamma1994}
-ermöglicht eine lose Kopplung zwischen den Komponenten: Die Sicherheitsmonitore
-müssen lediglich das \texttt{IRobotSafetyMonitor}-Interface implementieren und
-können zur Laufzeit dynamisch registriert oder entfernt werden, ohne andere
-Systemteile zu beeinflussen.
+% Ergänzende Beschreibung der drei oberen Schichten. Die Layer werden
+% jeweils kurz nach Zweck, Verantwortung und Schnittstellen eingeordnet,
+% um eine einheitliche Detailtiefe herzustellen.
 
+\paragraph{Unity3D Framework (Simulationsschicht)}
+\begin{itemize}
+	\item \textbf{Zweck}: Bereitstellung der Simulationslaufzeit.
+	\item \textbf{Verantwortung}: Taktung des Systems (Update‑Loop), Szenenhosting und Bootstrap der Adapter. Abseits des Szenenlayouts und der Darstellung der Objekte soll hier keine tiefergehende Prozesslogik implementiert werden.
+	\item \textbf{Schnittstellen}: Registrierung der Adapter über ein Dependency‑Injection‑Konzept; Monitore greifen nicht direkt auf Engine‑APIs, lediglich Collider-Objekte werden weitergegeben.
+\end{itemize}
+
+\paragraph{Core Layer}
+\begin{itemize}
+	\item \textbf{Zweck}: Domänenkern für den Roboterzustand und die Ereignisverteilung.
+	\item \textbf{Verantwortung}: Aktualisierung des \texttt{RobotState}, Verteilung von Zustandsänderungen an registrierte Monitore (Observer) und Aggregation von \texttt{SafetyEvent}s.
+	\item \textbf{Schnittstellen}: \texttt{RobotManager}, \texttt{RobotSafetyManager} und \texttt{RobotState} bilden die Kernklassen für Dispatch und Aggregation \vglcite[293\psq]{Gamma1994}.
+\end{itemize}
+
+\paragraph{Monitoring Layer}
+\begin{itemize}
+	\item \textbf{Zweck}: Kapselung der Prüfregeln als Policies für einzelne Fehlertypen (Kollision, Prozessfolge, Singularität, Dynamik).
+	\item \textbf{Verantwortung}: Erzeugung normalisierter \texttt{SafetyEvent}s und Meldung von Grenzverletzungen.
+	\item \textbf{Schnittstellen}: Einheitliches Kerninterface \texttt{IRobotSafetyMonitor} definiert die Bindung für alle Monitore.
+\end{itemize}
+
+\noindent Der \texttt{RobotManager} im Core Layer fungiert als zentraler
+Event-Dispatcher, der Zustandsänderungen an alle registrierten
+Monitoring-Komponenten propagiert. Diese Implementierung des Observer Patterns
+ermöglicht eine lose Kopplung zwischen den
+Komponenten\vglcite[293-303]{Gamma1994}: Die Sicherheitsmonitore müssen
+lediglich das \texttt{IRobotSafetyMonitor}-Interface implementieren und können
+zur Laufzeit dynamisch registriert oder entfernt werden, ohne andere Systemteile
+zu beeinflussen.\\
+
+\noindent
 Die in Abbildung \ref{fig:layer_architecture} orange markierten Module
 definieren standardisierte Interfaces, die als Verträge zwischen den Schichten
 dienen. Diese Interface-basierte Abstraktion realisiert das Open-Closed
-Principle \vglcite{Martin2003}: Neue Robotertypen können durch Implementierung
+Principle, welches festlegt, dass Komponenten einerseits offfen für Erweiterung
+sein sollen, andererseits geschlossen für Veränderung\vglcite{Martin2003}: Neue Robotertypen können durch Implementierung
 des \texttt{IRobotConnector}-Interfaces integriert werden, ohne den Core Layer
 zu modifizieren. Analog können zusätzliche Sicherheitsmonitore über das
 \texttt{IRobotSafetyMonitor}-Interface hinzugefügt werden. Diese
 Architekturentscheidung gewährleistet, dass das System für Erweiterungen offen
-bleibt, während die Kernfunktionalität stabil und unverändert bleibt.
+bleibt, während die Kernfunktionalität stabil und unverändert bleibt.\\
 
+\noindent
 Die Kommunikation zwischen den Schichten erfolgt ereignisgesteuert über das
 \texttt{RobotState}-Objekt als gemeinsame Datenstruktur. Die Communication Layer
 aktualisiert kontinuierlich den Roboterzustand durch WebSocket-Events für
 Metadaten und HTTP-Polling für Bewegungsdaten. Der \texttt{RobotManager}
 verteilt diese Zustandsänderungen asynchron an alle registrierten Observer.
-Diese Event-Driven Architecture \vglcite[97\psqq]{Hohpe2003} adressiert die
-Echtzeitanforderungen industrieller Robotersysteme: Kritische
-Sicherheitsereignisse wie Kollisionen werden mit minimaler Latenz erkannt und
-priorisiert verarbeitet, während weniger kritische Ereignisse gepuffert werden
-können.
+Diese Event-Driven Architecture adressiert die Anforderungen an ein
+erweiterbares und gleichzeitiges Nachrichtenfluss-Modell. So lassen sich Events
+an mehrere Teilnehmer gleichzeitig weitergeben und verarbeiten, ohne dabei auf
+den Processing-Zyklus zu warten. Weiterführend werden Events getrennt voneinader
+verarbeitet, das heisst der Main-Thread muss nicht auf die Fertigstellung der
+Abarbeitung von Events durch Empfänger warten.\vglcite[1\psqq]{hohpe2006}\\
 
+\noindent
 Der \texttt{SafetyManager} aggregiert die von den Monitoren generierten
 Sicherheitsereignisse und implementiert eine kontextabhängige Logging-Strategie.
 Bei laufendem Roboterprogramm werden detaillierte JSON-Logs für spätere Analyse
 erstellt, während im Idle-Zustand nur kritische Ereignisse in die Konsole
 geloggt werden. Diese Differenzierung optimiert sowohl die Performance als auch
-die Nachvollziehbarkeit von Sicherheitsvorfällen.
+die Nachvollziehbarkeit von Sicherheitsvorfällen.\\
 
+\noindent
 Die gewählte Schichtenarchitektur ermöglicht die unabhängige Entwicklung und
 Testung einzelner Komponenten. Horizontale Erweiterungen (neue Monitore) und
-vertikale Erweiterungen (neue Robotertypen) können ohne Seiteneffekte auf
-bestehende Komponenten implementiert werden. Die Unity3D-spezifischen Aspekte
-sind in der obersten Schicht gekapselt, wodurch perspektivisch auch andere
-Simulationsumgebungen integriert werden könnten, solange die definierten
-Interfaces beibehalten werden.
+vertikale Erweiterungen (neue Robotertypen) können ohne ungewollte Seiteneffekte auf
+bestehende Komponenten implementiert werden.
+
 
 \subsection{Robot Communcation Layer}
 Die Robot Communication Layer organisiert die Kommunkation mit der zugrundeliegenden Robotersteuerung und
@@ -291,3 +287,9 @@ werden. Zusammenfassend bestehn ein SafetyEvent aus folgenden Komponenten:
 	\item \textbf{Ereignistypen}: Info, Warning, Critical mit konfigurierbaren Schwellwerten
 	\item \textbf{Kontextdaten}: Vollständige Roboterzustandserfassung für Forensik
 \end{itemize}
+
+\paragraph{Einordnung}
+Die folgenden Kapitel beschreiben die Implementierung der vier Monitore auf Basis
+der zuvor skizzierten Schichten. In Kapitel~\ref{sec:ergebnisse} werden die
+Ergebnisse anhand gezielter Testszenarien dargestellt und in gekürzten
+Log‑Auszügen (\texttt{minted}) veranschaulicht.

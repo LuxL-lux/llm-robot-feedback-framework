@@ -5,7 +5,7 @@
     "description": "Entering Wrist Singularity (\u03B85 \u2248 0\u00B0)",
     "robotStateSnapshot": "[...]",
     "eventDataJson": {
-      "singularityType": "Wrist Singularity (θ₅ ≈ 0°)",
+      "singularityType": "Wrist Singularity (theta_5 approx 0 deg)",
       "jointAngles": [
         -82.7,
         -6.9,
@@ -25,20 +25,6 @@
     "eventType": 1,
     "description": "Exiting Wrist Singularity (\u03B85 \u2248 0\u00B0)",
     "robotStateSnapshot": "[...]",
-    "eventDataJson": {
-      "singularityType": "Wrist Singularity (θ₅ ≈ 0°)",
-      "jointAngles": [
-        -91.8,
-        -8.3,
-        37.8,
-        -91.3,
-        5.2,
-        -182.6
-      ],
-      "wristThreshold": 5.0,
-      "manipulability": 0.197,
-      "isEntering": false,
-      "[...]": "[...]"
-    }
+    "eventDataJson": "[...]"
   }
 ]
