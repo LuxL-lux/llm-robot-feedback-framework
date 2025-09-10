@@ -1,5 +1,5 @@
 \chapter{Ergebnisse}
-\label{sec:ergebnisse}
+\label{cap:Ergebnisse}
 
 \section{Überblick und Zielsetzung}
 
@@ -29,12 +29,12 @@ simulieren. So wurde für jedes Szenario vorgegangen.\\
 Zur zusätzlichen Validierung wurde ein Experteninterview durchgeführt, in dem
 die Testcases vorgestellt und die Funktionsweise des Frameworks diskutiert
 wurden. Die Aussagen des Experten werden an geeigneter Stelle in diesem Kapitel
-dargestellt und in Kapitel 5 kritisch eingeordnet.
+dargestellt und in Kapitel \ref{cap:diskussion} kritisch eingeordnet.
 \newpage
 \section{Prozessflussüberwachung}
 \label{sec:processauswertung}
 
-\subsection{Testszenario mit veränderter Prozessabfolge}
+\subsection{Abwandlung der Prozessfolge}
 
 Die Validierung der Prozessflussüberwachung erfolgt über die Ausführung eines
 korrekten Szenarios als auch eines fehlerhaften Szenarios. Der Fehler soll
@@ -80,7 +80,7 @@ passieren. Somit ist der veränderte Prozessfluss wie folgt definiert.\\
 	\item Rückkehr zur Home-Position
 \end{enumerate}
 
-\subsection{Auswertung der Simulation}
+\subsection{Simulationsergebnis}
 Wird der korrekte Prozessfluss abgespielt, werden im Bezug auf den
 ProcessFlowMonitor keine Ereignisse protokolliert.
 Bei der Ausführung des Robotercodes mit verändertem Prozessfluss findet sich in
@@ -112,7 +112,7 @@ Genannte.
 \section{Auswertung Collision Detection Monitor}
 \label{sec:collisionauswertung}
 
-\subsection{Abgewandlung des Pfads} Zur Auswertung des Collision Detection
+\subsection{Abwandlung des Pfads} Zur Auswertung des Collision Detection
 Monitors wurde der oben bereits genannte Prozess genutzt. Anschliessend wurde
 der Pfad, auf dem sich der Roboter zwischen seiner Home-Position und dem linken
 Regal, in dem er ein Werkstück greifen soll, verändert. Rechts dargstellt in
@@ -140,7 +140,7 @@ welcher den Dimensionen der Säule entspricht, zum Kollisonshindernis.
 	\label{figure:kollision}
 \end{figure}
 
-\subsection{Auswertung der Simulation}
+\subsection{Simulationsergebnis}
 
 In Abbildung \ref{listing:collisiondetectionerror} ist der Output nach Kollision
 mit der der Säule dargestellet. Dem Event wurden zusätzlich Eventdaten angefügt,
@@ -184,11 +184,25 @@ als kritisch eingestuft wird.
 \newpage
 \section{Auswertung Singularity Detection Monitor}
 \label{sec:singularityauswertung}
+
+\subsection{Künstliche Singularitätserzeugung}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/wristSingularity.png}
+	\caption{Pose in Unity, bei der eine Wrist-Singularität mit ($\theta_{5} \approx 0^\circ$) entsteht}
+	\label{fig:wristSingularity}
+\end{figure}
+
 Zur Untersuchung der Singularitätserkennung wurde in RobotStudio ein Szenario erstellt,
 das gezielt eine Wrist-Singularität provoziert. Dabei wurde der Roboter in eine Pose
 geführt, in der die Achsen~4 und~6 nahezu kollinear verlaufen und somit die Bedingung
-$\theta_{5} \approx 0^\circ$ erfüllt ist.
+$\theta_{5} \approx 0^\circ$ erfüllt ist. Die Pose ist in Abbildung
+	{fig:wristSingularity} zu erkennen, hier befindet sich der Roboter nach dem
+Greifen des Werkstücks auf dem Weg zum rechten Regal, muss sich für das
+Platzieren des Werkstücks im Regal jedoch umorienten. So kommt die Singularität
+zustande.
 
+\subsection{Simulationsergebnis}
 \begin{figure}[H]
 	\inputminted[fontsize=\footnotesize,breaklines]{json}{code-snippets/singularityerror.json}
 	\caption{Gekürzter Auszug der in Unity aufgezeichneten Safety Events zur Wrist-Singularität}
@@ -205,14 +219,6 @@ enthalten sind. Zusätzliche Informationen wurden mit \texttt{"[...]"}
 abgekürzt.\\
 
 \noindent
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figures/wristSingularity.png}
-	\caption{Pose in Unity, bei der eine Wrist-Singularität mit ($\theta_{5} \approx 0^\circ$) entsteht}
-	\label{fig:wrist_singularity}
-\end{figure}
-
 Die Analyse der Ereignisse zeigt, dass der Monitor den Eintritt in die Wrist-Singularität
 bei einer Gelenkkonfiguration von etwa
 $[-82.7, -6.9, 36.6, -112.8, -4.9, -153.5]^\circ$ registrierte. Der berechnete
@@ -228,14 +234,26 @@ die Ergebnisse mit den oben Beschriebenen.
 \section{Auswertung Joint Dynamics Monitor}
 \label{sec:Analyse_Sicherheit}
 
-Der \textit{Joint Dynamics Monitor} erfasst kontinuierlich die Dynamik der sechs Roboterachsen.
-Die Implementierung in Unity basiert auf den vom digitalen Zwilling gestreamten Gelenkwinkeln,
-aus denen Geschwindigkeiten und Beschleunigungen differenziell berechnet werden.
-Zur Signalanalyse werden mehrere Mechanismen kombiniert, darunter exponentielle Glättung
-sowie Fenster-basiertes Mittel zur Dämpfung von Ausreißern. Zusätzlich wird ein
-Sicherheitsfaktor von 0{,}8 auf die in RobotStudio spezifizierten Maximalwerte angewendet,
-sodass die Schwellwerte im Monitor niedriger liegen als die realen physikalischen Limits
-(vgl. Implementierung in \texttt{JointDynamicsMonitor.cs}).
+\subsection{Überhöhung der Gelenkgeschwindigkeiten}
+
+Der \textit{Joint Dynamics Monitor} erfasst kontinuierlich die Dynamik der sechs
+Roboterachsen. Die Implementierung in Unity basiert auf den vom digitalen
+Zwilling gestreamten Gelenkwinkeln, aus denen Geschwindigkeiten und
+Beschleunigungen differenziell berechnet werden. Zur Signalanalyse werden
+mehrere Mechanismen kombiniert, darunter exponentielle Glättung sowie
+Fenster-basiertes Mittel zur Dämpfung von Ausreißern. Zusätzlich wird ein
+Sicherheitsfaktor von 0{,}8 auf die in RobotStudio spezifizierten Maximalwerte
+angewendet, sodass die Schwellwerte im Monitor niedriger liegen als die realen
+physikalischen Limits (vgl. Implementierung in
+\texttt{JointDynamicsMonitor.cs}). Hier wird mittels des Befehl \texttt{v7000}
+im RAPID-Code in RobotStudio die Geschwindigkeit auf den programmierbaren
+Maximalwert gesetzt. Dies wurde an zwei Stellen der Roboterbewegung umgesetzt:
+Bei der Bewegung von der Home-Position zum linken Regal und bei der Bewegung
+nach dem Greifen des Werkstücks zur Maschine. Als primäre Drehachse ist hier
+eine Überhöhung der Geschwindigkeit von Gelenk 1 (zentrale horizontale Drehachse
+des Roboters) zu erwarten.
+
+\subsection{Simulationsergebnis}
 
 Während der Testsimulation wurden durch den Monitor zwei Überschreitungen der
 Geschwindigkeitsgrenzen auf \textbf{Joint 1} registriert. Diese Ereignisse sind
@@ -292,21 +310,81 @@ korrelieren.
 		\toprule
 		Typ               & Start [ms] & Ende [ms] & Dauer [ms] & Start J1 [\textdegree] & Ende J1 [\textdegree] \\
 		\midrule
-		Dynamik (rot)     & 216        & 1800      & 1584       & -40.35       & 107.62      \\
-		Zielwinkel (blau) & 624        & 1848      & 1224       & -1.25        & 109.89      \\
-		Dynamik (rot)     & 7824       & 9408      & 1584       & 107.08       & -41.88      \\
-		Zielwinkel (blau) & 8208       & 9552      & 1344       & 74.15        & -45.24      \\
+		Dynamik (rot)     & 216        & 1800      & 1584       & -40.35                 & 107.62                \\
+		Zielwinkel (blau) & 624        & 1848      & 1224       & -1.25                  & 109.89                \\
+		Dynamik (rot)     & 7824       & 9408      & 1584       & 107.08                 & -41.88                \\
+		Zielwinkel (blau) & 8208       & 9552      & 1344       & 74.15                  & -45.24                \\
 		\bottomrule
 	\end{tabularx}
 	\caption{Zeitintervalle und Zustände der Joint-Dynamics-Auswertung}
 	\label{tab:jointdynamics}
 \end{table}
 
+\section{Validierung durch Experteninterview}
+
+Im Rahmen der Ergebnisdarstellung wurde ein Experteninterview mit Daniel Syniawa
+(M.Sc.) durchgeführt. Ziel war es, die
+Funktionsfähigkeit des Frameworks praxisnah zu validieren und Einschätzungen zur
+industriellen Einordnung zu gewinnen. Das Interview diente ausschließlich der
+\emph{deskriptiven} Ergänzung der Ergebnisse; eine vertiefte Interpretation
+erfolgt in Kapitel~\ref{cap:diskussion}.
+
+\subsection{Vorgehen und Gegenstand}
+
+Im Interview wurden die Software und ihre Architektur vorgestellt. Anschließend
+wurden die in Kapitel~4 beschriebenen Testfälle gemeinsam in \emph{RobotStudio}
+nachvollzogen: Der Roboter führte die Szenarien aus, während parallel beobachtet
+wurde, ob und wie die Module Ereignisse auslösen und ob diese im Logging erfasst
+werden. Damit wurde die grundsätzliche Funktionsweise des Frameworks
+demonstriert (Auslösen von Safety-Events, Erzeugung von JSON-Logs mit
+Programmkontext).
+
+\subsection{Beobachtungen}
+
+Prinzipiell konnte ein schnelles Verständnis für die Anwendung des Frameworks
+und dessen Funktionsweise gewonnen werden. Bei der Testung der Fälle wurde der
+praktische Nutzen der abgespeicherten JSON-Logs hervorgehoben: Für jedes
+Ereignis liegen der aktuelle Programmzeiger, das aktuell ausgeführte Programm
+sowie die relevante Roboterpose bzw.\ Kontextinformationen vor. Dies erleichtert
+die Fehlersuche und macht die Analyse auch für weniger erfahrene Anwender
+nachvollziehbar.
+
+\subsection{Hinweis zur Evaluationsmethodik}
+
+Für eine belastbare Evaluation schlug Syniawa vor, die Leistung des Frameworks
+\emph{quantitativ} gegen manuelle Verfahren zu vergleichen. Konkret: Wie schnell
+findet eine Person den Fehler (z.\,B.\ Auftreten einer Singularität) im
+RAPID-Code in \emph{RobotStudio} im Vergleich zur Erkennung durch Ausführung und
+Logging im Framework? Ein solcher Vergleich wäre mit erheblichem Aufwand
+verbunden, würde aber die Einordnung der Wirksamkeit deutlich schärfen.
+
+\subsection{Einordnung des Robotersimulations-Ökosystems}
+
+Syniawa wies darauf hin, dass die aktuelle Werkzeuglandschaft stark proprietär
+geprägt ist und es nur wenige plattformübergreifende Lösungen mit integrierter
+Physik gibt. Häufig ist bereits die stabile Anbindung eines Roboters
+herausfordernd; Simulation in \emph{RobotStudio} erfordert viel Expertenwissen
+und Zeit. Die \emph{Robot Web Services} (RWS) seien komplex und eher knapp
+dokumentiert; insgesamt sei die Nutzerbasis in diesem Bereich klein. Diese
+Beobachtungen unterstreichen die Relevanz eines modularen, erweiterbaren
+Ansatzes wie in dieser Arbeit umgesetzt.
+
+\subsection{Zusammenfassung}
+
+Das Interview bestätigte die grundsätzliche
+Funktionalität des Frameworks in den demonstrierten Testfällen und
+identifizierte einen klaren Pfad für eine zukünftige, quantitative Evaluation.
+Zudem wurde der praktische Mehrwert der strukturierten Logs (Programmzeiger,
+laufendes Programm, Pose/Kontext) betont. Die Einordnung der industriellen
+Robotersimulationslandschaft liefert den Rahmen, in dem die vorgestellten Ergebnisse zu
+sehen sind.
+
 \section{Zusammenfassung der Ergebnisse}
-Die Ergebnisse zeigen, dass die in Unity implementierten Monitore in allen Testfällen
-die in RobotStudio provozierten Szenarien widerspiegeln konnten.
-Dabei wurde deutlich, dass sich für jedes Modul charakteristische Muster
-im Logging abzeichnen: Prozessabweichungen wurden sequenziell dokumentiert,
+
+Die Ergebnisse zeigen, dass die in Unity implementierten Monitore in allen
+Testfällen die in RobotStudio provozierten Szenarien widerspiegeln konnten.
+Dabei wurde deutlich, dass sich für jedes Modul charakteristische Muster im
+Logging abzeichnen: Prozessabweichungen wurden sequenziell dokumentiert,
 Kollisionen mit Schweregraden versehen, Singularitäten mit Gelenkwinkeln und
 Manipulierbarkeitswerten erfasst, und Geschwindigkeitsverletzungen durch
 Event-Paare (exceeded/resolved) gekennzeichnet.\\
@@ -337,8 +415,9 @@ zwischen den Monitoren hinsichtlich Art der Szenarien und Form der erfassten Eve
 Auffällig ist, dass sich in einigen Fällen eine zeitliche Verzögerung zwischen
 den in den Rohdaten beobachteten Zuständen und den vom Monitor generierten
 Ereignissen zeigt. Diese Beobachtung ergibt sich aus den in Kapitel~3 beschriebenen
-Mechanismen (z.\,B. Glättung, Abtastrate).
+Mechanismen (z.\,B. Glättung, Abtastrate).\\
 
+\noindent
 Im nächsten Abschnitt wird ein Experteninterview herangezogen, um die hier
 dargestellten Ergebnisse einzuordnen und im Hinblick auf ihre Relevanz für
 praktische Anwendungen zu reflektieren.
