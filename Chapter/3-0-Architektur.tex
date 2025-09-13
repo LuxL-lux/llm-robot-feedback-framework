@@ -51,10 +51,10 @@ stehenden Tools extrahieren:
 	\item \textbf{Programmkontext}: Aktuelles Modul, Routine und Programmzeile der Robotersteuerung
 	\item \textbf{Ereignisspezifische Daten}: Je nach Ereignistyp relevante Zusatzinformationen (Kollisionspunkt, Singularitätstyp, Sequenzabweichung, Grenzwertüberschreitung)
 \end{itemize}
-\noindent
+
 Diese strukturierte Erfassung ermöglicht die nachgelagerte genaue Auswertung der
 vorhandenen Daten und soll das Debuggen des Programmcodes und das Erkennen von
-Schwachstellen erleichtern.
+Fehlern im Programmablauf erleichtern.
 
 \subsection{Zielsetzung und architektonische Anforderungen}
 Der Stand der Technik aktueller Simulationsplattformen für Roboter zeigt, dass
@@ -64,9 +64,9 @@ Schnittstelle zur Kommunikation mit externen Plattformen oder Physik-Engines
 bieten. Somit muss für jeden Robotertyp ein designierter Konnektor genutzt
 werden, um diesen mit einer externen, herstellerunabhängigen Simulationplattform
 zu verbinden. Um eine herstellerunabhängige und erweiterbare Plattform zu
-entwickeln, sollte also eine gemeinsame Schnittstelle implementiert werden.\\
+entwickeln, sollte also eine gemeinsame Schnittstelle implementiert werden.
 
-\noindent
+
 Zusammenfassend verfolgt die Architektur des Frameworks drei zentrale Ziele:
 \begin{enumerate}
 	\item \textbf{Vendor-Agnostik}: Abstraktion verschiedener Roboterhersteller durch einheitliche Interface-basierte Architektur ohne herstellerspezifische Abhängigkeiten im Kern-Framework
@@ -78,7 +78,7 @@ Zusammenfassend verfolgt die Architektur des Frameworks drei zentrale Ziele:
 
 \subsection{Unity3D als Simulationsplattform}
 
-\noindent
+
 Unity3D wird in dieser Arbeit ausschließlich als \emph{Simulations\-laufzeit} verwendet.
 Die Engine stellt Szene, Physik und Rendering bereit und bietet dank ihrer ausgereiften
 3D/Physik‑Infrastruktur eine plattformübergreifende Grundlage für den
@@ -140,28 +140,28 @@ Die Architektur gliedert sich in vier logisch getrennte Schichten:
 	\item \textbf{Schnittstellen}: Einheitliches Kerninterface \texttt{IRobotSafetyMonitor} definiert die Bindung für alle Monitore.
 \end{itemize}
 
-\noindent Der \texttt{RobotManager} im Core Layer fungiert als zentraler
+Der \texttt{RobotManager} im Core Layer fungiert als zentraler
 Event-Dispatcher, der Zustandsänderungen an alle registrierten
 Monitoring-Komponenten propagiert. Diese Implementierung des Observer Patterns
 ermöglicht eine lose Kopplung zwischen den
 Komponenten\vglcite[293-303]{Gamma1994}: Die Sicherheitsmonitore müssen
 lediglich das \texttt{IRobotSafetyMonitor}-Interface implementieren und können
 zur Laufzeit dynamisch registriert oder entfernt werden, ohne andere Systemteile
-zu beeinflussen.\\
+zu beeinflussen.
 
-\noindent
-Die in Abbildung \ref{fig:layer_architecture} orange markierten Module
-definieren standardisierte Interfaces, die als Verträge zwischen den Schichten
-dienen. Diese Interface-basierte Abstraktion realisiert das Open-Closed
-Principle, welches festlegt, dass Komponenten einerseits offfen für Erweiterung
-sein sollen, andererseits geschlossen für Veränderung\vglcite{Martin2003}: Neue Robotertypen können durch Implementierung
+Die in Abbildung \ref{fig:layer_architecture}
+orange markierten Module definieren standardisierte Interfaces, die als Verträge
+zwischen den Schichten dienen. Diese Interface-basierte Abstraktion realisiert
+das Open-Closed-Prinzip, welches festlegt, dass Komponenten einerseits offfen
+für Erweiterung sein sollen, andererseits geschlossen für
+Veränderung\vglcite{Martin2003}: Neue Robotertypen können durch Implementierung
 des \texttt{IRobotConnector}-Interfaces integriert werden, ohne den Core Layer
 zu modifizieren. Analog können zusätzliche Sicherheitsmonitore über das
 \texttt{IRobotSafetyMonitor}-Interface hinzugefügt werden. Diese
 Architekturentscheidung gewährleistet, dass das System für Erweiterungen offen
-bleibt, während die Kernfunktionalität stabil und unverändert bleibt.\\
+bleibt, während die Kernfunktionalität stabil und unverändert bleibt.
 
-\noindent
+
 Die Kommunikation zwischen den Schichten erfolgt ereignisgesteuert über das
 \texttt{RobotState}-Objekt als gemeinsame Datenstruktur. Die Communication Layer
 aktualisiert kontinuierlich den Roboterzustand durch WebSocket-Events für
@@ -172,17 +172,17 @@ erweiterbares und gleichzeitiges Nachrichtenfluss-Modell. So lassen sich Events
 an mehrere Teilnehmer gleichzeitig weitergeben und verarbeiten, ohne dabei auf
 den Processing-Zyklus zu warten. Weiterführend werden Events getrennt voneinader
 verarbeitet, das heisst der Main-Thread muss nicht auf die Fertigstellung der
-Abarbeitung von Events durch Empfänger warten.\vglcite[1\psqq]{hohpe2006}\\
+Abarbeitung von Events durch Empfänger warten.\vglcite[1\psqq]{hohpe2006}
 
-\noindent
+
 Der \texttt{SafetyManager} aggregiert die von den Monitoren generierten
 Sicherheitsereignisse und implementiert eine kontextabhängige Logging-Strategie.
 Bei laufendem Roboterprogramm werden detaillierte JSON-Logs für spätere Analyse
 erstellt, während im Idle-Zustand nur kritische Ereignisse in die Konsole
 geloggt werden. Diese Differenzierung optimiert sowohl die Performance als auch
-die Nachvollziehbarkeit von Sicherheitsvorfällen.\\
+die Nachvollziehbarkeit von Sicherheitsvorfällen.
 
-\noindent
+
 Die gewählte Schichtenarchitektur ermöglicht die unabhängige Entwicklung und
 Testung einzelner Komponenten. Horizontale Erweiterungen (neue Monitore) und
 vertikale Erweiterungen (neue Robotertypen) können ohne ungewollte Seiteneffekte auf
@@ -202,30 +202,30 @@ implementiert:
 	\caption{Implementierung der IRobotConnector-Interface als Verbidung zwischen
 		RobotState und Roboter-Controller}
 \end{figure}
-\noindent
-Eine Interface lässt sich anhand dieses Beispiels in \textbf{3
-	Funktionsbereiche} aufteilen: Events, Attribute und Methoden.\\
 
-\noindent
+Eine Interface lässt sich anhand dieses Beispiels in \textbf{3
+	Funktionsbereiche} aufteilen: Events, Attribute und Methoden.
+
+
 Die Interface definiert \textbf{Events (Aktionen)} die bei definierten Zustandsänderungen
 in der Laufzeit ausgeführt werden. Andere Bestandteile des Framework sind in der
-Lage, ein Event zu abonnieren und eine Methode registieren, welche ausgeführt
+Lage, ein Event zu abonnieren und eine Methode zu registrieren, welche ausgeführt
 werden soll, wenn dieses Event auftritt. Ist dies der Fall, wird das
 entsprechende Modul über die Änderung benachrichtigt und bekommt gegebenfalls
 neue Daten zur Verfügung gestellt. Diese event-getriebene Kommunikation sorgt
 dafür, dass einerseits alle Komponenten proaktiv auf den neusten Stand der Daten gebracht
 und gehalten werden, andererseits aber keine ressourcenblockierenden Prozesse
-ausgeführt werden müssen, um gegebenfalls Statusänderungen abzufragen.\\
+ausgeführt werden müssen, um gegebenfalls Statusänderungen abzufragen.
 
-\noindent
+
 Weiterführend definiert die Interface IRobotConnector \textbf{Attribute}, welche den
 aktuellen Verbindungsstatus (verbunden = \texttt{true}, getrennt = \texttt{false}) speichern sowie das
 State-Objekt des Roboters. Definiert durch die schreibgeschützten, automatisch
 implementierte Eigenschaft mit einem Getter \textit{\{ get; \}} können Attribute
 auch von ausserhalb des RobotConnectors abgefragt werden, jedoch nicht
-überschrieben.\\
+überschrieben.
 
-\noindent
+
 Zuletzt gibt die Interface die Methoden \textit{\textbf{Connect}} und \textit{\textbf{Disconnect}}
 vor, welche hier die wichtigsten Methoden zum Verbinden und
 Trennen von der jeweiligen Robotersteuerung darstellen.
@@ -244,7 +244,7 @@ Die RWS-Schnittstelle bietet einerseits die Möglichkeiten,
 aktuellen Achswinkel und TCP-Werte (Tool Center Point) abzurufen, als auch
 weitere Metadaten, wie das aktuell laufende Programm, den aktuellen Motorstatus
 oder auch die Codezeile, welche aktuell vom Programmzeiger ausgeführt wird.
-Weiterführend bietet RWS die Möglichkeit, die aktuelle digitale und analoge
+Weiterführend bietet RWS die Möglichkeit, aktuelle digitale und analoge
 Signale abzurufen, was nötig ist, um den Greifer steuern zu können.
 
 Bei den oben genannten Daten mit Ausnahme der Achswinkel handelt es sich um
@@ -261,7 +261,7 @@ Der Client implementiert dabei die Interface IRobotConnector und gibt ein
 RobotState-Objekt mit den empfangenen Daten an den RobotManager weiter, welcher hier
 als zentraler Koordinator des aktuellen RobotState fungiert.
 
-\noindent
+
 \paragraph{Event-Driven Architecture}
 as System nutzt ein durchgängiges Event-System für lose Kopplung:
 \begin{itemize}
@@ -273,8 +273,8 @@ as System nutzt ein durchgängiges Event-System für lose Kopplung:
 
 \paragraph{SafetyEvent und RobotStateSnapshot}
 Als für die Auswertung der Simulationsergebnisse relevantes Teil des Frameworks
-wird eine SaftetyEvent-Objekt implementiert. Jedes Mal, wenn ein Ereignis,
-welches mit der tatsächlichen Simluation eines Roboterpgrogramms zusammenhängt,
+wird die SafetyEvent-Klasse implementiert. Jedes Mal, wenn ein Ereignis,
+welches mit der tatsächlichen Simluation eines Roboterprogramms zusammenhängt,
 auftritt, wird ein SafetyEvent instanziert. Dieses wird initial von der
 jeweiligen überwachenden Komponente (einem SafetyMonitor) instanziert und mit
 dem aktuellsten RobotState als unveränderliches Objekt (RobotStateSnapshot) befüllt.

@@ -6,7 +6,7 @@ Implementierung des Frameworks beschrieben.
 
 \section{Architektur des Frameworks}
 \label{sec:architektur_frameowork}
-\input{Chapter/3-0-Architektur-new.tex}
+\input{Chapter/3-0-Architektur.tex}
 
 \section{Implementierung der Module}
 
@@ -17,27 +17,37 @@ Eingabedaten und Art der generierten Events. Dadurch wird die Einordnung der
 folgenden Abschnitte erleichtert.
 
 \begin{table}[H]
-	\centering
-	\small
-	\begin{tabularx}{\textwidth}{lXX}
-		\toprule
-		\textbf{Monitor}        & \textbf{Ziel}                                                         & \textbf{Eingabedaten / Events} \\
-		\midrule
-		Prozessfolgen           & Einhaltung der definierten Abfolge von Arbeitsschritten               &
-		Aktuelle Sequenz, Soll-Sequenz / Event bei Abweichung                                                                            \\
-		\addlinespace
-		Kollisionen             & Erkennung von Zusammenstößen zwischen Roboter und Umgebung            &
-		Geometrieinformationen / Event mit Schweregrad und beteiligten Objekten                                                          \\
-		\addlinespace
-		Singularitäten          & Detektion von Wrist-, Elbow- und Shoulder-Singularitäten              &
-		Gelenkwinkel, Jacobian / ENTERING- und EXITING-Events mit Manipulierbarkeit                                                      \\
-		\addlinespace
-		Gelenkgeschwindigkeiten & Überwachung von Winkel-, Geschwindigkeits- und Beschleunigungsgrenzen &
-		Gelenkwinkel / exceeded- und resolved-Events bei Grenzwertverletzung                                                             \\
-		\bottomrule
-	\end{tabularx}
-	\caption{Überblick über die implementierten Monitore im Framework}
-	\label{tab:monitor_overview_arch}
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{lXX}
+    \toprule
+    \textbf{Monitor}        & \textbf{Ziel}
+    & \textbf{Eingabedaten / Events} \\
+    \midrule
+    Prozessfolgen           & Einhaltung der definierten Abfolge von
+    Arbeitsschritten               &
+    Aktuelle Sequenz, Soll-Sequenz / Event bei Abweichung
+    \\
+    \addlinespace
+    Kollisionen             & Erkennung von Zusammenstößen zwischen
+    Roboter und Umgebung            &
+    Geometrieinformationen / Event mit Schweregrad und beteiligten
+    Objekten                                                          \\
+    \addlinespace
+    Singularitäten          & Detektion von Wrist-, Elbow- und
+    Shoulder-Singularitäten              &
+    Gelenkwinkel, Jacobian / ENTERING- und EXITING-Events mit
+    Manipulierbarkeit                                                      \\
+    \addlinespace
+    Gelenkgeschwindigkeiten & Überwachung von Winkel-,
+    Geschwindigkeits- und Beschleunigungsgrenzen &
+    Gelenkwinkel / exceeded- und resolved-Events bei
+    Grenzwertverletzung
+    \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Überblick über die implementierten Monitore im Framework}
+  \label{tab:monitor_overview_arch}
 \end{table}
 
 \input{Chapter/3-2-Prozessfolgen.tex}
@@ -54,8 +64,8 @@ folgenden Abschnitte erleichtert.
 \section{Datenaufzeichung und Logging}
 \input{Chapter/3-4-Datenlogging.tex}
 
-
 \subsection*{Einordnung im Gesamtkontext}
 Die Architektur des Frameworks besteht somit aus den genannten Modulen, die in
-Kapitel~\ref{sec:framework} im Detail beschrieben werden. Ihre Funktionsweise wird in
+Kapitel~\ref{sec:framework} im Detail beschrieben werden. Ihre
+Funktionsweise wird in
 Kapitel~\ref{cap:Ergebnisse} anhand von Testszenarien überprüft und ausgewertet.

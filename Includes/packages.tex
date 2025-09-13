@@ -1,82 +1,118 @@
-\usepackage{longtable}
+% === Document Layout & Geometry ===
 \usepackage{geometry}
-\usepackage[utf8]{inputenc}
-\usepackage{ae,aecompl}
+\usepackage{microtype} % Verbesserter Randausgleich bei Silbentrennung
+
+% === Fonts (LuaLaTeX) ===
+\usepackage{fontspec}
+
+% Set Times New Roman as main font (12pt is set in document class)
+\setmainfont{Times New Roman}
+
+% Define RUB Flama font family
+\newfontfamily\rubflama[
+  Path = Includes/fonts/,
+  Extension = .ttf,
+  UprightFont = RUB-Flama-Regular,
+  BoldFont = RUB-Flama-Bold,
+  ItalicFont = RUB-Flama-Italic,
+  FontFace = {l}{n}{RUB-Flama-Light-Regular},
+  FontFace = {l}{it}{RUB-Flama-Light-Italic}
+]{RUB-Flama}
+
+% === Language & Typography ===
+\usepackage[german,ngerman]{babel}
+\usepackage{csquotes}
+
+% === Mathematics ===
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amscd}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{xcolor}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-\usepackage[german,ngerman]{babel}
-\usepackage{csquotes}
-\usepackage{graphicx}
-\usepackage{rotating}
-\usepackage{tocbasic}
-\usepackage[
-	pdfauthor={Vor- und Nachname},
-	pdftitle={Titel der Arbeit},
-	pdfsubject={Bachelor-Thesis, RUB},
-	hypertexnames=false,
-	pdfdisplaydoctitle
-]{hyperref}
-\usepackage{url}
-\usepackage[automark]{scrlayer-scrpage}
 \usepackage{bbm}
+
+% === Graphics & Colors ===
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{rotating}
+\usepackage[percent]{overpic}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% === Tables ===
 \usepackage{array}
+\usepackage{longtable}
 \usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{tabularx}
 \usepackage{threeparttable}
-\usepackage{pifont}
+\usepackage{multirow}
+
+% === Floats & Captions ===
+\usepackage{float}
 \usepackage{placeins}
 \usepackage[]{caption}
 \usepackage[normal]{subfigure}
-\usepackage[percent]{overpic}
-\usepackage{multirow}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
-\usepackage{filecontents}
-\usepackage[bottom,hang]{footmisc}
-\usepackage[T1]{fontenc}
-\usepackage{microtype} % Verbesserter Randausgleich bei Silbentrennung
-\usepackage{dirtree}
-\usepackage{svg}
 
+% === Code Listings ===
+\usepackage{listings}
+\usepackage{minted}
+\setminted[csharp]{style=friendly,breaklines,breakanywhere,fontfamily=tt}
+\setminted[json]{style=friendly,breaklines,breakanywhere,fontfamily=tt}
+
+% === Algorithms ===
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% === Bibliography ===
 \usepackage[
-	style=authoryear,       % Autor-Jahr Stil für kompakte Zitate
-	backend=biber,
-	autocite=footnote,
-	maxcitenames=2,
-	mincitenames=1,
-	maxbibnames=99,
-	uniquelist=false,
-	uniquename=false,
-	giveninits=true,        % Nur Initialen der Vornamen
-	terseinits=true,        % Keine Punkte nach Initialen
-	dashed=false
+  style=authoryear,       % Autor-Jahr Stil für kompakte Zitate
+  backend=biber,
+  autocite=footnote,
+  maxcitenames=2,
+  mincitenames=1,
+  maxbibnames=99,
+  uniquelist=false,
+  uniquename=false,
+  giveninits=true,        % Nur Initialen der Vornamen
+  terseinits=true,        % Keine Punkte nach Initialen
+  dashed=false
 ]{biblatex}
 
+% === KOMA-Script & Page Layout ===
+\usepackage{tocbasic}
+\usepackage[automark]{scrlayer-scrpage}
 
-\usepackage{float}
-\usepackage{minted}
-\setminted[csharp]{style=friendly,breaklines,breakanywhere}
-\setminted[json]{style=friendly,breaklines,breakanywhere}
+% === Miscellaneous ===
+\usepackage{pifont}
+\usepackage{dirtree}
+\usepackage[bottom,hang]{footmisc}
 
-\usepackage{inconsolata}
-\usepackage{listings}
+% === Hyperlinks (load late) ===
+\usepackage{url}
+\usepackage[
+  pdfauthor={Vor- und Nachname},
+  pdftitle={Titel der Arbeit},
+  pdfsubject={Bachelor-Thesis, RUB},
+  hypertexnames=false,
+  pdfdisplaydoctitle
+]{hyperref}
 
 \addbibresource{literatur.bib}
 % Befehle für f. und ff.
 \newcommand{\psq}{\,f.}
 \newcommand{\psqq}{\,ff.}
 
-% Befehle für direkte und indirekte Zitate  
-\newcommand{\vglcite}[2][]{\footnote{Vgl. \citeauthor{#2} \citeyear{#2}\ifx&#1&\else, S.~#1\fi}}
-\newcommand{\directcite}[2][]{\footnote{\citeauthor{#2} \citeyear{#2}\ifx&#1&\else, S.~#1\fi}}
+% Befehle für direkte und indirekte Zitate
+\newcommand{\vglcite}[2][]{\footnote{Vgl. \citeauthor{#2}
+\citeyear{#2}\ifx&#1&\else, S.~#1\fi}}
+\newcommand{\directcite}[2][]{\footnote{\citeauthor{#2}
+\citeyear{#2}\ifx&#1&\else, S.~#1\fi}}
 
 % Hilfsbefehle für einzelne Zitate ohne Fußnote (für Mehrfachzitate)
-\newcommand{\citesingle}[2][]{\citeauthor{#2} \citeyear{#2}\ifx&#1&\else, S.~#1\fi}
+\newcommand{\citesingle}[2][]{\citeauthor{#2}
+\citeyear{#2}\ifx&#1&\else, S.~#1\fi}
 
 % Befehle für mehrere Zitate in einer Fußnote
 \newcommand{\vglcites}[1]{\footnote{Vgl. #1}}
@@ -84,14 +120,7 @@
 
 % "et al." statt "u.a."
 \DefineBibliographyStrings{ngerman}{
-	andothers = {et al\adddot},
+  andothers = {et al\adddot},
 }
 
-% Table Pacakges
-\usepackage{booktabs}
-\usepackage{makecell}
-\usepackage{tabularx}
-
-\usepackage{array}
-\usepackage{graphicx}
-\usepackage{graphicx}
+\definecolor{rubgreen}{HTML}{8DAE10}

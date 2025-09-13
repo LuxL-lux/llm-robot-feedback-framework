@@ -1,5 +1,6 @@
 % Seitengeometrie
-\geometry{a4paper,inner=32mm,outer=24mm,top=30mm,bottom=40mm}
+% Default margins for normal pages
+\geometry{a4paper,left=25mm,right=25mm,top=20mm,bottom=23mm}
 
 % Farben definieren
 \definecolor{lightgrey}{rgb}{0.99,0.99,0.99}
@@ -23,13 +24,11 @@
 \lstset{
 		language=C++,
     float=hbp,
-    keywordstyle=\color{colKeys},
-    stringstyle=\color{colString},
-    commentstyle=\color{gray3},
-     basicstyle=\ttfamily,
-		%basicstyle=\footnotesize\ttfamily,
-		%basicstyle=\texttt\small,
-    identifierstyle=\color{colIdentifier},
+    keywordstyle=\color{colKeys}\ttfamily,
+    stringstyle=\color{colString}\ttfamily,
+    commentstyle=\color{gray3}\ttfamily,
+    basicstyle=\footnotesize\ttfamily,
+    identifierstyle=\color{colIdentifier}\ttfamily,
     columns=flexible,
     tabsize=2,
     frame=bt,
@@ -68,20 +67,48 @@
 \lehead[]{\small{\textnormal{\headmark}}}
 %\rehead[]{\small{\textnormal{\pagemark}}}
 %\lohead[]{\small{\textnormal{\pagemark}}}
-\rohead[]{\small{\textnormal{\headmark}}}
+\rohead[\pagemark]{\small{\textnormal{\headmark}} \hfill \pagemark}% Headmark left, page number right
 
+% Also set headers for chapter pages (plain style)
+\defpagestyle{plain}{%
+  {\pagemark\hfill}{\hfill\pagemark}{\hfill\pagemark}
+}{%
+  {}{}{}
+}
+
+% Customize chapter markings - remove "Kapitel" prefix and use number + name format
+\renewcommand*{\chaptermarkformat}{\thechapter.\enskip}
+\renewcommand*{\chaptermark}[1]{\markboth{\chaptermarkformat#1}{}}
+
+% Set spacing for headings
+\RedeclareSectionCommand[
+  beforeskip=18pt,
+  afterskip=12pt
+]{chapter}
+
+\RedeclareSectionCommand[
+  beforeskip=12pt,
+  afterskip=6pt
+]{section}
+
+% Subsection uses default behavior for normal paragraph break
+\RedeclareSectionCommand[
+  beforeskip=6pt
+]{subsection}
+
+% Font sizes for headings are set in main document
 
 \ifoot[]{}
-\cfoot[\pagemark]{\pagemark}% Seitenzahl (c = centered)
+\cfoot[]{}% No page number in footer anymore
 \ofoot[]{}
 
 % Absätze
-\setlength{\parindent}{3ex}
-\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}  % No indentation for new paragraphs
+\setlength{\parskip}{6pt}  % 6pt space before new paragraph
 
 % Zeilenabstand
 \usepackage{setspace}            % Zeilenabstand einstellbar
-%\onehalfspacing                  % eineinhalbzeilig einstellen
+\onehalfspacing                  % eineinhalbzeilig einstellen (1.5 line spacing)
 
 % Fußnoten
 \setlength{\footnotemargin}{0pt}
@@ -99,7 +126,8 @@ citecolor=black
 \def\bottomfraction{1.0}
 \def\textfraction{0.0}
 
-\renewcommand*{\partpagestyle}{empty}
+\renewcommand*{\partpagestyle}{plain}
+\renewcommand*{\chapterpagestyle}{plain}
 
 % Hurenkinder und Schusterjungen verhindern
 \clubpenalty10000

@@ -1,18 +1,14 @@
 \documentclass[
-12pt,
-titlepage,
-a4paper,
-abstract=true,
-oneside,
-openright,
-chapterprefix,
-appendixprefix=false,
-headsepline,
-cleardoublepage=plain,
-bibliography=totoc,
-numbers=noenddot
+  12pt,
+  titlepage,
+  a4paper,
+  abstract=true,
+  oneside,
+  openright,
+  headsepline,
+  cleardoublepage=plain,
+  bibliography=totoc
 ]{scrreprt}
-
 
 %% ++++++++++++++++++++++++++++++++
 %% Includes
@@ -27,7 +23,6 @@ numbers=noenddot
 % Header
 \input{Includes/header}
 
-
 %% +++++++++++++++++++++++++++++++++
 %% Start des Dokuments
 %% +++++++++++++++++++++++++++++++++
@@ -35,39 +30,39 @@ numbers=noenddot
 \raggedbottom
 
 \begin{document}
-% Titelseite
-\include{Includes/titlepage}
-\pagestyle{plain}
+% Apply special margins for title and front matter
+\newgeometry{left=30mm,right=30mm,top=25mm,bottom=25mm}
 
-% Leere Seite
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\newpage
+% Titelseite
+\include{Includes/titlepage-new}
+\pagestyle{plain}
 
 % Schriftart der Überschriften
 \addtokomafont{disposition}{\rmfamily}
+% Set font sizes for headings with 1.5 line spacing
+\addtokomafont{chapter}{\fontsize{16}{24}\selectfont}% 16pt × 1.5 = 24pt line spacing
+\addtokomafont{section}{\fontsize{14}{21}\selectfont}% 14pt × 1.5 = 21pt line spacing
 
 % Seitennummerierung
 \pagenumbering{roman}
-
-% Vorwort
-\include{Chapter/0-Vorwort}
+\setcounter{tocdepth}{2}
+\pagestyle{scrheadings}
 
 % Inhaltsverzeichnis
-\setcounter{tocdepth}{2}
 \tableofcontents
 
-% Leere Seite
-\newpage
-\thispagestyle{empty}
-\mbox{}
-\newpage
+% Abbildungsverzeichnis
+\listoffigures
+
+% Tabellenverzeichnis
+\listoftables
+
+% Restore normal page margins for main content
+\restoregeometry
 
 % Hauptkapitel
 \cleardoublepage
 \pagenumbering{arabic}
-\pagestyle{scrheadings}
 \sloppy
 
 % Hier die neuen Kapitel-Dateien einbinden
@@ -80,12 +75,6 @@ numbers=noenddot
 
 % Literaturverzeichnis
 \printbibliography
-
-% Abbildungsverzeichnis
-\listoffigures
-
-% Tabellenverzeichnis
-\listoftables
 
 % Anhang
 \include{Chapter/99-Anhang}
