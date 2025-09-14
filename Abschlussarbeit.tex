@@ -7,7 +7,9 @@
   openright,
   headsepline,
   cleardoublepage=plain,
-  bibliography=totoc
+  bibliography=totoc,
+  listof=totoc,
+  listof=entryprefix,
 ]{scrreprt}
 
 %% ++++++++++++++++++++++++++++++++
@@ -23,6 +25,18 @@
 % Header
 \input{Includes/header}
 
+% 1) Chapters as letters A, B, C...
+\renewcommand{\thechapter}{\Alph{chapter}}
+
+% Number the table of contents like a chapter (for lettered front-matter)
+\makeatletter
+\renewcommand*{\tableofcontents}{%
+  \chapter{\contentsname}% prints "A Inhaltsverzeichnis" when
+  % chapters are lettered
+  \@starttoc{toc}%
+}
+\makeatother
+
 %% +++++++++++++++++++++++++++++++++
 %% Start des Dokuments
 %% +++++++++++++++++++++++++++++++++
@@ -30,6 +44,8 @@
 \raggedbottom
 
 \begin{document}
+
+\pagenumbering{Roman}
 % Apply special margins for title and front matter
 \newgeometry{left=30mm,right=30mm,top=25mm,bottom=25mm}
 
@@ -40,29 +56,33 @@
 % Schriftart der Überschriften
 \addtokomafont{disposition}{\rmfamily}
 % Set font sizes for headings with 1.5 line spacing
-\addtokomafont{chapter}{\fontsize{16}{24}\selectfont}% 16pt × 1.5 = 24pt line spacing
-\addtokomafont{section}{\fontsize{14}{21}\selectfont}% 14pt × 1.5 = 21pt line spacing
+\addtokomafont{chapter}{\fontsize{16}{24}\selectfont}% 16pt × 1.5 =
+% 24pt line spacing
+\addtokomafont{section}{\fontsize{14}{21}\selectfont}% 14pt × 1.5 =
+% 21pt line
 
 % Seitennummerierung
-\pagenumbering{roman}
 \setcounter{tocdepth}{2}
 \pagestyle{scrheadings}
 
-% Inhaltsverzeichnis
-\tableofcontents
+\include{Chapter/Zusammenfassung}
+\include{Chapter/Abstract}
 
-% Abbildungsverzeichnis
+% Start lettered chapters at the TOC:
+\setcounter{chapter}{0}        % optional, if anything incremented it before
+\tableofcontents               % now numbered like a chapter
+
+% Number the lists so they become chapters "B" and "C"
+\KOMAoptions{listof=numbered}
 \listoffigures
-
-% Tabellenverzeichnis
 \listoftables
 
-% Restore normal page margins for main content
 \restoregeometry
 
-% Hauptkapitel
 \cleardoublepage
 \pagenumbering{arabic}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\setcounter{chapter}{0}
 \sloppy
 
 % Hier die neuen Kapitel-Dateien einbinden

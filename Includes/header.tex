@@ -61,13 +61,15 @@
 
 % Kopf- und Fußzeilen
 \pagestyle{scrheadings}
+% Ensure automatic running marks for chapters (and sections if needed)
+\automark[section]{chapter}
 
 \clearscrheadfoot
 
-\lehead[]{\small{\textnormal{\headmark}}}
-%\rehead[]{\small{\textnormal{\pagemark}}}
-%\lohead[]{\small{\textnormal{\pagemark}}}
-\rohead[\pagemark]{\small{\textnormal{\headmark}} \hfill \pagemark}% Headmark left, page number right
+% Left header: chapter mark; Right header: page number
+% Use inner/outer fields to be robust in oneside/twoside
+\ihead{\small{\textnormal{\leftmark}}}
+\ohead{\pagemark}
 
 % Also set headers for chapter pages (plain style)
 \defpagestyle{plain}{%
@@ -76,9 +78,8 @@
   {}{}{}
 }
 
-% Customize chapter markings - remove "Kapitel" prefix and use number + name format
-\renewcommand*{\chaptermarkformat}{\thechapter.\enskip}
-\renewcommand*{\chaptermark}[1]{\markboth{\chaptermarkformat#1}{}}
+% Customize chapter markings to show "Kapitel X: Title"
+\renewcommand*{\chaptermarkformat}{Kapitel~\thechapter:\enskip}
 
 % Set spacing for headings
 \RedeclareSectionCommand[
@@ -127,7 +128,8 @@ citecolor=black
 \def\textfraction{0.0}
 
 \renewcommand*{\partpagestyle}{plain}
-\renewcommand*{\chapterpagestyle}{plain}
+% Show headers also on chapter-opening pages
+\renewcommand*{\chapterpagestyle}{scrheadings}
 
 % Hurenkinder und Schusterjungen verhindern
 \clubpenalty10000

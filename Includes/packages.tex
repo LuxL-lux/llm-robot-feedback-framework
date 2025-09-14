@@ -54,6 +54,7 @@
 \usepackage{placeins}
 \usepackage[]{caption}
 \usepackage[normal]{subfigure}
+\usepackage{calc}
 
 % === Code Listings ===
 \usepackage{listings}
@@ -81,9 +82,26 @@
 ]{biblatex}
 
 % === KOMA-Script & Page Layout ===
-\usepackage{tocbasic}
 \usepackage[automark]{scrlayer-scrpage}
 
+\renewcaptionname{german}{\figurename}{Abbildung}
+\renewcaptionname{german}{\tablename}{Tabelle}
+
+\BeforeStartingTOC[lof]{\def\autodot{:}}
+\BeforeStartingTOC[lot]{\def\autodot{:}}
+
+% Figures: continuous numbering 1,2,3… (not per chapter) and no trailing dot
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\renewcommand{\thefigure}{\arabic{figure}}
+\KOMAoptions{numbers=noenddot}
+
+% Tables: continuous numbering 1,2,3… (not per chapter)
+\counterwithout{table}{chapter}
+\renewcommand{\thetable}{\arabic{table}}
+
+% Footnotes: continuous numbering across chapters
+\counterwithout{footnote}{chapter}
 % === Miscellaneous ===
 \usepackage{pifont}
 \usepackage{dirtree}

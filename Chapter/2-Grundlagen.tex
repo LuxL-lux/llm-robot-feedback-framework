@@ -19,10 +19,10 @@ Prozessveränderungen oder -verbesserungen ist es jedoch notwendig, neue
 Arbeitsabläufe, Maschineneinstellungen und auch Roboterprogramme zu testen und
 zu evaluieren. Das impliziert erhebliche Ausfallzeiten sowie finanzielle und
 sicherheitstechnische Risiken bei der Ausführung von noch nicht evaluiertem
-Programmcode auf einem Roboter.\vglcite[4]{bilancia2023} Infolgedessen können Beschädigungen am
+Programmcode auf einem Roboter.\vglcite[4]{bilancia2023}
+Infolgedessen können Beschädigungen am
 Roboter, Maschinen, Werkstücken und Umwelt durch Kollisionen oder fehlerhafter
 Konfiguration des Roboters auftreten.
-
 
 Die \textbf{Offline-Programmierung (OLP)} adressiert diese Risiken, da sie die
 Entwicklung und Evaluierung von Roboterprogrammen ohne physischen Roboter
@@ -66,9 +66,11 @@ und so ein digitaler Zwilling eines realen Roboters und seiner Umgebung
 geschaffen werden. Sie modellieren dynamische Interaktionen wie Kollisionen,
 Schwerkraft und Reibung, was für die präzise Nachbildung des Roboterverhaltens
 entscheidend ist. Obwohl die Genauigkeit dieser Engines als nicht perfekt
-angesehen wird, da sie die reale Welt nicht exakt abbilden\vglcite[1\psqq]{audonnet2022}, sind sie für
+angesehen wird, da sie die reale Welt nicht exakt
+abbilden\vglcite[1\psqq]{audonnet2022}, sind sie für
 Forschung und Entwicklung essentiell, um physikalisch anspruchsvolle Prozesse
-zuverlässig simulieren zu können. Die Wahl der Physics-Engine beeinflusst die Stabilität und Wiederholbarkeit der
+zuverlässig simulieren zu können. Die Wahl der Physics-Engine
+beeinflusst die Stabilität und Wiederholbarkeit der
 Simulation. Häufig genutzte Engines sind PhysX, Bullet und ODE, abgebildet in
 Tabelle \ref{table:simuplattform}.
 \noindent
@@ -77,29 +79,38 @@ Reproduzierbarkeit (Determinismus) und physikalischer Genauigkeit. Die Wahl der
 Engine beeinflusst daher nicht nur die Plausibilität der Dynamik, sondern auch
 die Vergleichbarkeit von Simulationsergebnissen \vglcite[1\psqq]{audonnet2022}.
 
-\begin{table} \begin{tabularx}{\columnwidth}{X|X|X|X|X} \toprule
-		\thead{\textbf{Name}}        & \thead{\textbf{Physics \newline Engine}} &
-		\thead{\textbf{Open Source}} & \thead{\textbf{ROS-Integration}}         &
-		\thead{\textbf{ML-Support}}                                                          \\ \midrule Gazebo                & Bullet, DART,
-		ODE, Simbody                 & Ja                                       & Ja
-		                             & Extern                                                \\ \hline Ignition
-		                             & DART                                     & Ja
-		                             & Ja                                       & Extern
-		\\ \hline Webots                & ODE                                      &
-		Ja                           & Ja                                       & Extern
-		\\ \hline Isaac Sim             & PhysX                                    &
-		Nein                         & Ja                                       & Integriert
-		\\ \hline Unity                 & Havok, PhysX, RaiSim                     &
-		Nein                         & Nein                                     & Extern
-		\\ \hline PyBullet              & Bullet                                   &
-		Ja                           & Nein                                     & Extern
-		\\ \hline CoppeliaSim (V-rep)   & Newton, Bullet, ODE,Vortex Dynamics      &
-		Nein                         & Ja                                       & Extern
-		\\ \hline Mujoco                & Mujoco                                   &
-		Ja                           & Nein                                     & Extern
-		\\ \bottomrule\end{tabularx} \caption{Vergleich verschiedener
-		Robotik-Simulationsplattformen, nach \vglcite{bilancia2023}}
-	\label{table:simuplattform}
+\begin{table}
+  \begin{tabularx}{\columnwidth}{X|X|X|X|X} \toprule
+    \thead{\textbf{Name}}        & \thead{\textbf{Physics \newline Engine}} &
+    \thead{\textbf{Open Source}} & \thead{\textbf{ROS-Integration}}         &
+    \thead{\textbf{ML-Support}}
+    \\ \midrule Gazebo                & Bullet, DART,
+    ODE, Simbody                 & Ja                                       & Ja
+    & Extern                                                \\ \hline Ignition
+    & DART                                     & Ja
+    & Ja                                       & Extern
+    \\ \hline Webots                & ODE                                      &
+    Ja                           & Ja
+    & Extern
+    \\ \hline Isaac Sim             & PhysX                                    &
+    Nein                         & Ja
+    & Integriert
+    \\ \hline Unity                 & Havok, PhysX, RaiSim                     &
+    Nein                         & Nein
+    & Extern
+    \\ \hline PyBullet              & Bullet                                   &
+    Ja                           & Nein
+    & Extern
+    \\ \hline CoppeliaSim (V-rep)   & Newton, Bullet, ODE,Vortex Dynamics      &
+    Nein                         & Ja
+    & Extern
+    \\ \hline Mujoco                & Mujoco                                   &
+    Ja                           & Nein
+    & Extern
+    \\ \bottomrule
+  \end{tabularx} \caption{Vergleich verschiedener
+  Robotik-Simulationsplattformen, nach \vglcite{bilancia2023}}
+  \label{table:simuplattform}
 \end{table}
 
 \section{Large Language Models (LLMs)} \label{sec:Grundlagen_LLMs}
@@ -109,7 +120,8 @@ welche in der Lage sind textuelle Inhalte zu übersetzen, zusammenzufassen,
 Informationen abzurufen und Konversation zu betreiben. Historisch sind LLMs aus
 der Möglichkeit, neuronale Netze im Modus des \textit{self-supervised learning}
 und anhand grosser Mengen textueller Trainingsdaten zu trainieren, entstanden.
-Dabei haben sich LLMs innerhalb der letzten 10 Jahre aufgrund der hohen Verfügbarkeit digitaler
+Dabei haben sich LLMs innerhalb der letzten 10 Jahre aufgrund der
+hohen Verfügbarkeit digitaler
 textueller Daten sowie Innovationen im Bereich der Hardware-Technologie zur
 wichtigsten Technologie im Bereich KI entwickelt. \vglcite[1\psq]{naveed2024}\\
 
@@ -169,7 +181,6 @@ entscheidend, dass agentische Systeme nicht nur natürlichsprachliche
 Spezifikationen interpretieren, sondern deterministische, zeitkritische
 Ausführungspfade erzeugen und an bestehende Steuerungsstacks andocken können.
 
-
 \section{LLMs in der Robotik}
 \subsection{Aktuelle Forschungsansätze}
 
@@ -179,9 +190,12 @@ Embodied Reasoning.\vglcite[2\psqq]{salimpour2025}
 
 \noindent Die zentralen Linien lassen sich knapp gliedern:
 \begin{itemize}
-	\item \textbf{Vision-Language-Action (VLA)}: gemeinsame Repräsentation von Wahrnehmung, Sprache und Aktion.
-	\item \textbf{Code-Generierung}: Synthese ausführbarer Kontrollprogramme aus natürlichsprachlichen Spezifikationen.
-	\item \textbf{Embodied Reasoning}: multimodale Modelle mit kontinuierlichen Sensordaten und Weltmodellen.
+  \item \textbf{Vision-Language-Action (VLA)}: gemeinsame
+    Repräsentation von Wahrnehmung, Sprache und Aktion.
+  \item \textbf{Code-Generierung}: Synthese ausführbarer
+    Kontrollprogramme aus natürlichsprachlichen Spezifikationen.
+  \item \textbf{Embodied Reasoning}: multimodale Modelle mit
+    kontinuierlichen Sensordaten und Weltmodellen.
 \end{itemize}
 
 Google DeepMinds RT-2 repräsentiert den Vision-Language-Action Ansatz, bei dem
@@ -198,7 +212,7 @@ Embedding-Raum verarbeiten\vglcite[2\psq]{driess2023}. Parallel entwickeln
 Forscher Brain-Body-Problem Ansätze, die kognitive Architekturen mit physischen
 Roboterkörpern verbinden, sowie Prompt-basierte Methoden, bei denen LLMs direkt
 Low-Level-Kontrollaktionen vorhersagen.\vglcites{\cite[1]{wang2024};
-	\cite[2]{bhat2024}} Diese Vielfalt der Ansätze zeigt, dass die Forschung noch
+\cite[2]{bhat2024}} Diese Vielfalt der Ansätze zeigt, dass die Forschung noch
 keine dominante Architektur etabliert hat\vglcite[3\psqq]{salimpour2025} und
 verschiedene Wege zur Integration von Sprache und Robotik exploriert.
 
@@ -240,11 +254,13 @@ das Greifen eines Objektes oder bestimmte Pfadnavigationen, die das LLM dann zu
 komplexen Verhaltensketten kombiniert. Simulationsumgebungen beschleunigen
 parallel die Entwicklung durch massiv-parallele GPU-Berechnungen: mit Isaac Sim
 von NVIDIA lassen sich beispielsweise Tausende Roboterinstanzen gleichzeitig
-simulieren.\vglcite{NVIDIATechBlog2018} Solche Plattformen ermöglichen einen theoretischen
+simulieren.\vglcite{NVIDIATechBlog2018} Solche Plattformen
+ermöglichen einen theoretischen
 Zero-Shot-Transfer von der Simulation zur Realität durch systematische
 simulierte Domänenrandomisierung von Physikparametern, Sensorauschen und
 Umgebungsvariationen.\vglcite[1]{fickinger2025} Die Standardisierung solcher
-Werkzeugketten soll Entwicklungszeiten in Zukunft reduzieren und die Programmierung von
+Werkzeugketten soll Entwicklungszeiten in Zukunft reduzieren und die
+Programmierung von
 Roboter niederschwelliger machen.
 
 \section*{Zwischenfazit}
@@ -260,6 +276,3 @@ Code-Generierung, Embodied Reasoning), ohne dass sich eine dominante Architektur
 abgezeichnet hat. Die Integration in Robotersteuerungen stellt weiterhin
 Anforderungen an Determinismus, Schnittstellenstandardisierung und
 Validierbarkeit.
-
-
-
