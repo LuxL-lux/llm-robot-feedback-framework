@@ -1,16 +1,94 @@
-
 \chapter{Stand der Technik} \label{cap:Grundlagen}
 
-\section{Robotersimulation}
-\subsection{Roboterprogrammierung} Die Roboterprogrammierung kann als die
+\section{Roboterprogrammierung}
+Die Roboterprogrammierung kann als die
 Programmierung von industriellen Manipulatoren verstanden werden, die sich durch
 ihre programmierbaren und anpassungsfähigen Eigenschaften von anderen Maschinen
 abheben. Roboterprogramme enthalten präzise Anweisungen und Spezifikationen für
-die Bewegung des Roboters. \vglcite[1\psqq]{nilsson1996} Der entscheidende
-Vorteil der Roboterprogrammierung ist somit \textbf{Flexibilität:} Roboter
+die Bewegung des Roboters.  Der entscheidende
+Vorteil der Roboterprogrammierung ist somit Flexibilität: Roboter
 können durch einfache Software-Umprogrammierung für völlig unterschiedliche
 Aufgaben eingesetzt werden, während herkömmliche Steuerungstechnik meist auf
-fest verdrahtete, starre Abläufe beschränkt ist.
+vordefinierte starre Abläufe beschränkt ist.\vglcite[1\psqq]{nilsson1996}
+
+\subsection{Verfahren der Roboterprogrammierung}
+Roboterprogrammierung lässt sich grundsätzlich in manuelle und
+automatische Verfahren unterteilen.\vglcite[1]{biggs2003}
+Manuelle Systeme erfordern die explizite Erstellung des Programms
+durch den Anwender, wobei textbasierte Programmiersprachen (z.\,B.
+  herstellerspezifische Sprachen wie KUKA Robot Language (KRL) oder ABB
+RAPID) oder grafische Oberflächen genutzt werden. Diese Sprachen sind in der
+Regel textbasiert und bieten die Möglichkeit, roboter-spezifische
+Datentypen zu deklarieren, einfache Bewegungen zu spezifizieren und
+über E/A-Operationen mit Werkzeugen
+und Sensoren zu interagieren. Um ein solches Programm auszuführen,
+wird es an die Robotersteuerung übertragen, wo es
+unter Einhaltung von Echtzeitbeschränkungen ausgeführt
+wird.\vglcite[1]{muehe2010}
+
+Automatische Systeme zur Roboterprogrammierung lassen sich im Gegensatz dazu in
+lernende Systeme, instruktive Systeme sowie demonstrative Systeme
+gliedern. Lernende und instruktive Systeme nutzen dabei Techniken des
+maschinellen Lernens wie Eyetracking oder Reinforcement Learning und spielem im
+Kontext der Programmierung industrieller Roboter eine untergeordnete
+Rolle. Ein typisches Verfahren demonstrativer Systeme ist das
+Führen des Roboters über ein Teach Pendant oder durch direkte
+Handführung, wobei die dabei entstehenden Gelenkwinkel oder
+kartesische Tool Center Point Positionen (TCP-Positionen)
+aufgezeichnet und im Programm hinterlegt werden.\vglcite[4\psqq]{biggs2003}
+
+\subsection{Landschaft gängiger Programmierumgebungen}
+Im Gegensatz zur
+Werkzeugmaschinenprogrammierung, die auf standardisierten Sprachen wie G-Code
+basiert, erschwert das Fehlen einer universellen, herstellerunabhängigen
+Programmiersprache die Integration verschiedener Robotertechnologien in einer
+Produktionsanlage.\vglcite[4]{bilancia2023} Industrielle
+Roboterhersteller, beispielsweise KUKA, ABB,
+Fanuc oder Stäubli, bieten und unterstützen lediglich eigene,
+proprietäre Programmiersprachen
+und Programmierschnittstellen, wobei diese sich in
+Komplexität, Syntax und Semantik
+unterscheiden.\vglcites{\citesingle[116]{lambrecht2011};
+\citesingle[4]{bilancia2023}} Zudem müssen Roboterprogrammierer mit
+eingeschränkten Basisbefehlen
+und Bibliotheken arbeiten. Diese decken zwar die meisten Standardanforderungen
+ab, ermöglichen jedoch keine fortgeschrittenen Berechnungen oder komplexen
+Steuerungsstrategien. Offline-Programmierwerkzeuge wie RoboDK oder Siemens
+Process Simulate übersetzen 3D-Modellierungsbefehle mithilfe spezifischer
+Postprozessoren in herstellerspezifische Robotercodes. Allerdings unterstützen
+diese Werkzeuge nicht die vollständigen Funktionsbibliotheken der kommerziellen
+Robotersprachen und können erfahrene Programmierer bei komplexen
+Programmierroutinen nicht ersetzen.\vglcite[4]{bilancia2023} Der
+Versuch, eine einheitliche, standardisierte Programmiersprache für
+alle Industrieroboter zu definieren und zu
+verbreiten, scheitert dabei an der mangelnden Kooperation der
+Hersteller industrieller Roboter.\vglcite[116]{lambrecht2011}
+
+Um herstellerunabhängig Roboterprogrammcode entwickeln zu können und
+herstellerspezifisch notwendiges Expertenwissen über Syntax, Semantik und
+Limitationen herstellerspezifischer Programmiersprachen
+zu überbrücken, wurde das Robot Operating System (ROS) entwickelt.
+ROS ist ein quelloffenes
+Middleware-Framework, das Bibliotheken und Werkzeuge für
+Nachrichtenübertragung, Paketverwaltung und Hardwareabstraktion
+bereitstellt und damit eine hersteller- und
+plattformunabhängige Integrationsschicht
+anstrebt.\vglcite[1]{quigley2009ros} In der industriellen Praxis wird
+ROS/ROS~2 primär als Integrations-/Orchestrierungsebene
+eingesetzt (z.\,B. Wahrnehmung, Planung, Zellenkoordination).
+Echtzeitkritische Bewegungs- und Sicherheitsfunktionen verbleiben
+üblicherweise auf herstellerseitig eingesetzten Robotersteuerungen, und der
+dokumentierte industrielle Einsatz bleibt anwendungs- und
+treiberabhängig.\vglcite[3-6]{bonci2023ros2} Da ROS~1
+keine harten Echtzeitanforderungen der Robotersteuerung erfüllen
+kann, soll ROS~2 dieses Defizit erfüllen.
+Das erfordert in der Praxis jedoch ein RT-fähiges
+Betriebssystem (z.\,B. PREEMPT\_RT) und sorgfältiges Systemtuning,
+sodass ein reproduzierbares, deterministisches Ausführungsverhalten
+weiterhin von Konfiguration und
+Implementierung
+abhängt.\vglcites{\citesingle[1]{maruyama2016ros2};
+\citesingle[3-5]{bonci2023ros2}}
 
 \subsection{Offline-Programmierung und Robotersimulationsprogramme} Die
 Ausfallzeiten von industriellen Fertigungsanlagen werden im Allgemeinen
@@ -24,33 +102,19 @@ Infolgedessen können Beschädigungen am
 Roboter, Maschinen, Werkstücken und Umwelt durch Kollisionen oder fehlerhafter
 Konfiguration des Roboters auftreten.
 
-Die \textbf{Offline-Programmierung (OLP)} adressiert diese Risiken, da sie die
+Die Offline-Programmierung (OLP) adressiert diese Risiken, da sie die
 Entwicklung und Evaluierung von Roboterprogrammen ohne physischen Roboter
 ermöglicht. Programme werden in einer virtuellen Umgebung erstellt, getestet und
-iterativ verfeinert. Hierfür werden originalgetreue 3D-CAD-Modelle des Roboters
+iterativ verfeinert. Hierfür werden originalgetreue dreidimensionale
+Computer Aided Design Modelle (3D-CAD-Modelle) des Roboters
 und seiner Umgebung eingesetzt, die vom Hersteller bereitgestellt werden, um den
 Zielkontext möglichst realitätsnah abzubilden. Ziel ist die frühzeitige
-Erkennung von Ablaufproblemen und Nebenwirkungen im Prozess
-\vglcite[62\psqq]{holubke2014}.
+Erkennung von Ablaufproblemen und Nebenwirkungen im Prozess.
+\vglcite[62\psqq]{holubke2014}
 
-\subsection{Landschaft der Offline-Robotersimulationsprogramme} Im Gegensatz zur
-Werkzeugmaschinenprogrammierung, die auf standardisierten Sprachen wie G-Code
-basiert, erschwert das Fehlen einer universellen, herstellerunabhängigen
-Programmiersprache die Integration verschiedener Robotertechnologien in einer
-Produktionsanlage \vglcite[4]{bilancia2023}. Jeder Roboterhersteller verwendet
-eine eigene Programmiersprache, die sich in Komplexität, Syntax und Semantik
-unterscheidet. KUKA, ABB, Fanuc und Stäubli setzen beispielsweise jeweils
-unterschiedliche Sprachen ein, weshalb Unternehmen spezialisiertes Personal
-benötigen. Zudem müssen Roboterprogrammierer mit eingeschränkten Basisbefehlen
-und Bibliotheken arbeiten. Diese decken zwar die meisten Standardanforderungen
-ab, ermöglichen jedoch keine fortgeschrittenen Berechnungen oder komplexen
-Steuerungsstrategien. Offline-Programmierwerkzeuge wie RoboDK oder Siemens
-Process Simulate übersetzen 3D-Modellierungsbefehle mithilfe spezifischer
-Postprozessoren in herstellerspezifische Robotercodes. Allerdings unterstützen
-diese Werkzeuge nicht die vollständigen Funktionsbibliotheken der kommerziellen
-Robotersprachen und können erfahrene Programmierer bei komplexen
-Programmierroutinen nicht ersetzen.\vglcite[4]{bilancia2023} Funktional werden
-Roboterprogramme in einer simulierten Umgebung ausgeführt: von isolierten Zellen
+\subsection{Landschaft der Offline-Robotersimulationsprogramme}
+Funktional werden Roboterprogramme in einer simulierten Umgebung
+ausgeführt: von isolierten Zellen
 (z.\,B. Bearbeitungsstationen) bis hin zu verketteten Produktionslinien. Externe
 Faktoren wie verformbare Objekte, Fluide oder Personen (MRK) erhöhen die
 Komplexität. In realitätsnahen Szenarien (z.\,B. automatisierte
@@ -59,8 +123,8 @@ materialbedingte Nichtidealitäten auf, die zu Wechselwirkungen mit dem Roboter
 führen. Eine hinreichend genaue physikalische Modellierung des Zielsystems ist
 daher Voraussetzung.
 
-\subsection{Physics-Engines}
-Mit dem Einsatz von {Physics-Engines} soll eine Umgebung geschaffen werden, in
+\subsection{Physik-Engines}
+Mit dem Einsatz von Physik-Engines soll eine Umgebung geschaffen werden, in
 dem ein nahezu realistisches Bild der Realität digital abgebildet werden kann
 und so ein digitaler Zwilling eines realen Roboters und seiner Umgebung
 geschaffen werden. Sie modellieren dynamische Interaktionen wie Kollisionen,
@@ -68,20 +132,20 @@ Schwerkraft und Reibung, was für die präzise Nachbildung des Roboterverhaltens
 entscheidend ist. Obwohl die Genauigkeit dieser Engines als nicht perfekt
 angesehen wird, da sie die reale Welt nicht exakt
 abbilden\vglcite[1\psqq]{audonnet2022}, sind sie für
-Forschung und Entwicklung essentiell, um physikalisch anspruchsvolle Prozesse
-zuverlässig simulieren zu können. Die Wahl der Physics-Engine
+Forschung und Entwicklung essenziell, um physikalisch anspruchsvolle Prozesse
+zuverlässig simulieren zu können. Die Wahl der Physik-Engine
 beeinflusst die Stabilität und Wiederholbarkeit der
-Simulation. Häufig genutzte Engines sind PhysX, Bullet und ODE, abgebildet in
-Tabelle \ref{table:simuplattform}.
-\noindent
-In der Praxis besteht ein Zielkonflikt zwischen numerischer Stabilität,
+Simulation. Häufig genutzte Physik-Engines sind PhysX, Bullet und
+ODE, abgebildet in
+Tabelle \ref{table:simuplattform}. In der Praxis besteht ein
+Zielkonflikt zwischen numerischer Stabilität,
 Reproduzierbarkeit (Determinismus) und physikalischer Genauigkeit. Die Wahl der
 Engine beeinflusst daher nicht nur die Plausibilität der Dynamik, sondern auch
-die Vergleichbarkeit von Simulationsergebnissen \vglcite[1\psqq]{audonnet2022}.
+die Vergleichbarkeit von Simulationsergebnissen.\vglcite[1\psqq]{audonnet2022}
 
 \begin{table}
   \begin{tabularx}{\columnwidth}{X|X|X|X|X} \toprule
-    \thead{\textbf{Name}}        & \thead{\textbf{Physics \newline Engine}} &
+    \thead{\textbf{Name}}        & \thead{\textbf{Physik- \newline Engine}} &
     \thead{\textbf{Open Source}} & \thead{\textbf{ROS-Integration}}         &
     \thead{\textbf{ML-Support}}
     \\ \midrule Gazebo                & Bullet, DART,
@@ -113,7 +177,13 @@ die Vergleichbarkeit von Simulationsergebnissen \vglcite[1\psqq]{audonnet2022}.
   \label{table:simuplattform}
 \end{table}
 
-\section{Large Language Models (LLMs)} \label{sec:Grundlagen_LLMs}
+\section{Large Language Models} \label{sec:Grundlagen_LLMs}
+%TODO Schreiben von Einleitung warum jetzt LLMS
+% Offensichtlich ist es sehr schwierig sowas zu programmieriegen und man braucht
+% viel fachwissen
+% es ist ja zu erkenenn das auch im roboter programm game llms stark sind
+% daher kann man doch llms dafuer nehmen
+
 \subsection{Funktionsweise und Architektur}
 Bei grossen Sprachmodellen (LLMs) handelt es sich um statistische Modelle,
 welche in der Lage sind textuelle Inhalte zu übersetzen, zusammenzufassen,
@@ -136,7 +206,7 @@ den erwähnten großen Datensätzen, sondern schafft auch die Grundlage für das
 Skalierungsverhalten moderner Sprachmodelle. Folglich basieren aktuelle LLMs wie
 GPT-4 oder Claude auf dieser Architektur.
 
-\subsection{Programmcodegenerierung durch LLMs}%
+\subsection{Programmcodegenerierung durch Large Language Models}%
 Large Language Models haben bemerkenswerte Fortschritte in der automatischen
 Code-Generierung erzielt und revolutionieren damit die Softwareentwicklung.
 Code-LLMs sind in der Lage erfolgreich Quellcode aus natürlichsprachlichen

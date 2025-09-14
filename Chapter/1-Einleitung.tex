@@ -1,14 +1,13 @@
-\chapter{Einleitung}
-\label{cap:Einleitung}
+% \chapter{Einleitung}
+% \label{cap:Einleitung}
 
-\section{Motivation und Relevanz}
-\label{sec:Motivation}
-% Hier fügen Sie den Text für die Motivation ein.
+% \section{Motivation und Relevanz}
+% \label{sec:Motivation}
 % Warum lohnt es sich mit dem Thema zu beschäftigen
 % Wie relevant ist es in Forschung sowie Praxis
 
-\section{Zielsetzung und Aufbau der Arbeit}
-\label{sec:Zielsetzung}
+% \section{Zielsetzung und Aufbau der Arbeit}
+% \label{sec:Zielsetzung}
 % Was will ich mit der Arbeit erreichen
 % Versuchsaufbau
 % In kapitel 2 wird, Kapitel 3 das, 4 das, 5 das
@@ -16,3 +15,91 @@
 % Entwicklungsziel: Konzeption und prototypische Implementierung...
 % Untersuchungsziel: Methodische Untersuchung der Formalisierung...
 % Überblick über den Aufbau der Arbeit...
+%
+
+\chapter{Einleitung}
+\label{cap:Einleitung}
+
+\section{Motivation und Relevanz}
+\label{sec:Motivation}
+
+Die rasante technologische Entwicklung und die zunehmende Vielfalt
+kundenindividuell konfigurierbarer Produkte führen dazu, dass
+industrielle Produktionsanlagen immer häufiger neu eingerichtet oder
+umgerüstet werden müssen. In der Robotik erfordert dies die
+Erstellung und Anpassung von Programmen, die Bewegungsabläufe,
+Bearbeitungsschritte und Sicherheitsfunktionen eines Roboters
+definieren. Traditionelle Programmiermethoden sind komplex,
+controller‑spezifisch und setzen ein profundes Verständnis der
+jeweiligen Kinematik und proprietären Sprachen voraus. Für kleine und
+mittlere Unternehmen sowie für Fertigungsbereiche mit hoher
+Variantenvielfalt stellt dies eine Hemmschwelle dar, zumal sich in
+vielen Branchen ein Mangel an qualifizierten Fachkräften bemerkbar macht.
+
+Gleichzeitig halten generative Sprachmodelle Einzug in die
+Softwareentwicklung. Sie können aus natürlichsprachlichen
+Beschreibungen ausführbaren Code erzeugen und versprechen so, die
+Hürden der Roboterprogrammierung zu senken. In der Praxis ist der
+direkte Einsatz solcher Large‑Language‑Modelle (LLMs) im
+industriellen Kontext jedoch riskant: Fehlerhafte Bewegungssequenzen
+oder fehlerhafte Prozesslogiken können zu Kollisionen, Schäden und
+Produktionsausfällen führen. Im Zusammenspiel mit den vorherrschenden
+Sicherheitsanforderungen ist daher eine sorgfältige Validierung des
+generierten Codes unerlässlich. Simulationstools bieten die
+Möglichkeit, Roboterprogramme risikofrei zu testen und Abweichungen
+vom Soll‑Verhalten systematisch zu untersuchen. Die vorliegende
+Arbeit verknüpft diese beiden Entwicklungen: Sie verknüpft
+LLM‑basierte Codegenerierung mit einer simulationsbasierten Prüfung,
+die sicherheitskritische Aspekte des Programmablaufs überwacht und
+strukturierte Ereignisprotokolle liefert. Damit wird eine Lücke
+zwischen der schnellen, aber potenziell unsicheren Codeerzeugung und
+der industriellen Praxis geschlossen.
+
+\section{Zielsetzung und Aufbau der Arbeit}
+\label{sec:Zielsetzung}
+
+Ziel dieser Arbeit ist die Konzeption, Umsetzung und Evaluation eines
+Frameworks zur simulationsbasierten Validierung von mit LLMs
+generiertem Robotercode. Kernidee ist, dass während der Simulation
+auftretende Ereignisse – insbesondere Abweichungen in der
+Prozessabfolge, Kollisionen mit der Umgebung oder dem Werkstück,
+kinematische Singularitäten sowie Grenzwertverletzungen von
+Achsgeschwindigkeiten – automatisch detektiert und in einer
+standardisierten Form gespeichert werden. Diese sogenannten Safety
+Events umfassen neben einer Beschreibung des erkannten Problems stets
+einen vollständigen Zustandsabzug der Steuerung (RobotStateSnapshot),
+der Positionsdaten, Programmzeiger und Metadaten umfasst. Durch die
+Formalisierung in JSON können die Ergebnisse sowohl für eine manuelle
+Analyse als auch für eine mögliche Rückkopplung an generative
+Sprachmodelle genutzt werden. Auf diese Weise soll ein iterativer
+Verbesserungsprozess entstehen, der die Qualität der erzeugten
+Programme steigert und die Eintrittsbarrieren für den Einsatz von
+Robotik reduziert.
+
+Um dieses Ziel zu erreichen, wird zunächst der Stand der Technik zu
+Robotersimulation, Offline‑Programmierung und LLMs zusammengefasst.
+Darauf aufbauend wird die Architektur des Frameworks beschrieben, die
+eine herstellerunabhängige Einbindung unterschiedlicher
+Robotersteuerungen (über ein Adaptermuster) sowie die modulare
+Erweiterung um weitere Safety‑Monitore ermöglicht. Die
+Implementierung der vier Überwachungsmodule – Process Flow Monitor,
+Collision Detection Monitor, Joint Dynamics Monitor und Singularity
+Detection Monitor – wird anschließend detailliert erläutert. In einem
+realitätsnahen Beispielszenario mit einer Roboterzelle werden die
+Module getestet; spezifische Szenarien provozieren Abweichungen im
+Ablauf, Kollisionen und Grenzwertverletzungen, um die Detektion zu
+verifizieren. Ein Experteninterview ergänzt die Evaluation und
+reflektiert die Eignung des Ansatzes aus praktischer Sicht.
+Abschließend werden die gewonnenen Erkenntnisse diskutiert, Grenzen
+des Prototyps aufgezeigt und zukünftige Erweiterungsschritte skizziert.
+
+Der Aufbau der Arbeit gliedert sich wie folgt: Kapitel~2 stellt den
+Stand der Technik dar und ordnet die Problemstellung in den Kontext
+bestehender Forschungsarbeiten ein. Kapitel~3 beschreibt die
+Konzeption und Implementierung des Frameworks sowie der einzelnen
+Safetymodule. Kapitel~4 präsentiert die Ergebnisse der Simulationen
+und des Experteninterviews. In Kapitel~5 werden die Resultate
+kritisch diskutiert und die Leistungsfähigkeit, Grenzen und
+Generalisierbarkeit des Ansatzes bewertet. Kapitel~6 schließt die
+Arbeit mit Fazit und Ausblick ab und zeigt potenzielle Wege zur
+Weiterentwicklung auf.
