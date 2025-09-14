@@ -353,16 +353,30 @@ Werkzeugketten soll Entwicklungszeiten in Zukunft reduzieren und die
 Programmierung von
 Robotern niederschwelliger machen.
 
-\section*{Zwischenfazit}
+\section{Zwischenfazit und Forschungsfrage}
 
-Der Stand der Technik zeigt: Offline-Programmierung und physikbasierte
-Simulation sind etablierte Mittel, um robotische Abläufe vorab zu prüfen. Die
-Aussagekraft hängt dabei stark von Modelltreue und Reproduzierbarkeit der
-Simulationsumgebung ab. Große Sprachmodelle erweitern das Spektrum um
-semantische Beschreibung und automatische Synthese von Steuerungslogik,
-erfordern für domänenspezifische Aufgaben jedoch zusätzlichen Kontext. In der
-Robotik kristallisieren sich drei Entwicklungsrichtungen heraus (VLA,
-Code-Generierung, Embodied Reasoning), ohne dass sich eine dominante Architektur
-abgezeichnet hat. Die Integration in Robotersteuerungen stellt weiterhin
-Herausforderungen an Determinismus, Schnittstellenstandardisierung und
-Validierbarkeit.
+Die bisherigen Grundlagen zeigen: Simulation und
+Offline-Programmierung sind zentrale Bausteine, um Robotikprozesse
+vorab sicher und nachvollziehbar zu prüfen. LLMs eröffnen dabei die
+Möglichkeit, Roboterprogrammcode aus natürlicher Sprache zu generieren,
+stoßen in industriellen Kontexten jedoch auf die Anforderung,
+Ergebnisse systematisch und reproduzierbar zu validieren.
+
+Daraus leitet sich die zentrale Frage, wie gut sich
+von LLMs erzeugter Robotercode in einer simulationsbasierten
+Umgebung hinsichtlich prozessrelevanter Aspekte
+prüfen und bewerten lässt.
+
+Zur Beantwortung wird in den folgenden Kapiteln eine geeignete
+Umgebung zur Simulation eines Roboters aufgebaut und an einem
+kompakten, realitätsnahen
+Szenario erprobt. Ziel ist das Ausführen von Robotercode innerhalb dieser
+Umgebung und belastbare Prüfung nach definierten möglichen Fehler im
+Programmablauf mit nachvollziehbarer Dokumentation der Ergebnisse.
+Dazu beschreibt Kapitel~\ref{sec:framework} dazu die Architektur der Frameworks,
+die verschiedenen zu prüfenden Fehlerarten sowie das
+Testszenario. Weiterführend wird durch Anwendung des Frameworks in
+Kapitel~\ref{cap:Ergebnisse} ausgewertet,
+inwiefern Fehler im Roboterprogrammcode
+erkannt werden sowie welche
+Struktur und Inhalt dessen Dokumentation folgen.

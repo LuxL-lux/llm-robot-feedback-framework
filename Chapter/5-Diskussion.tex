@@ -1,7 +1,6 @@
 \chapter{Diskussion}
 \label{cap:diskussion}
 
-
 \section{Einleitung} In diesem Kapitel werden die in
 Kapitel~\ref{cap:Ergebnisse} präsentierten
 Ergebnisse kritisch reflektiert und in den fachlichen Kontext eingeordnet. Im
@@ -47,7 +46,8 @@ sich im Rahmen der Entwicklung dieses Frameworks bestätigen.
 
 Als hilfreich lässt sich ausserdem der Output des JSON-basierten Loggings
 werten: Syniawa spricht hier vor allem von den mit einem SafetyEvent zusammen
-herausgegebenen Metadaten zum aktuellen Stand des Programmzeigers und der aktuellen
+herausgegebenen Metadaten zum aktuellen Stand des Programmzeigers und
+der aktuellen
 ausgeführten Routine. Dies stellt einen vielversprechenden Ansatz zum Debugging
 im Roboterprogrammcode dar, welcher manuell mit deutlich mehr Aufwand verbunden
 wäre. Hier gilt es weiter zu evaluieren, inwiefern sich dies quantitativ
@@ -91,7 +91,8 @@ Referenzdaten und der Detektion in Unity: Überschreitungen wurden etwas später
 erkannt und endeten geringfügig später. Dieser Versatz ist plausibel auf
 Aktualisierungsrate und eingesetzten Glättungsalgorithmus zurückzuführen, dessen
 Parameter konfigurierbar sind. Ob dadurch ein Versatz mit den in der Praxis
-vom Roboter gefahrenen Achsgeschwindigkeiten und -beschleunigungen entsteht, lässt sich hier
+vom Roboter gefahrenen Achsgeschwindigkeiten und -beschleunigungen
+entsteht, lässt sich hier
 nicht abschliessend bewerten.
 
 \subsection{Singularitätserkennung}
@@ -103,9 +104,8 @@ der kleinste Singulärwert der Jacobi-Matrix als Abstandsmaß zur Singularität.
 Eine generische, Jacobian-basierte Methode zur Erkennung von
 Freiheitsgradverlusten wurde implementiert, im Rahmen der vorliegenden Tests
 jedoch nicht eingesetzt; eine Erweiterung auf andere Roboter wäre möglich, wurde
-aber nicht vorgenommen.\\
+aber nicht vorgenommen.
 
-\noindent
 Im Interview formulierte Syniawa einen pragmatischen Maßstab für die Evaluation:
 Für eine belastbare Beurteilung wäre ein direkter Vergleich mit manuellem
 Debugging in RobotStudio sinnvoll, also ein Messaufbau, der die Zeit bis zur
@@ -114,6 +114,51 @@ Fehlerlokalisierung im RAPID-Code der Zeit gegenüberstellt, die das Framework
 automatische Bereitstellung von Programmzeiger, aktueller Pose und Kontext im
 Event-Log eine erhebliche Arbeitserleichterung darstellt und die Analyse
 prinzipiell auch weniger erfahrenen Anwendern ermöglicht.
+
+\section{LLM-gestützte Rückkopplung auf Basis der Safety-Events}
+
+Die Ergebnisse zeigen, dass das Framework Fehlerzustände konsistent
+und kontextreich protokolliert: Für jedes Ereignis liegen
+Aktuelle Bewegungs- und Programmdaten, beispielsweise das aktuelles
+Modul, Routine,
+Programmzeile sowie Motordaten und Achswinkel vor. Hinzu kommen
+event-spezifische Felder im \texttt{eventDataJson}, etwa
+Kollisionspunkt und Distanz oder Gelenkwinkel und
+Manipulierbarkeitswert bei Singularitäten\footnote{Vgl. u.\,a.
+  Process-Flow-Event inkl.\ Programmpointer und RobotStateSnapshot
+  sowie die Beschreibung des JSON-Aufbaus; Kollisionsevents mit
+  \texttt{collisionPoint} und Distanz; Singularitätsevents mit
+  Gelenkwinkeln und Manipulierbarkeitswert; Joint-Dynamics-Events als
+\enquote{exceeded}/\enquote{resolved}.}. Diese maschinenlesbare
+Struktur eignet sich unmittelbar als gezielter Eingabekontext für
+generative Modelle: Der Fehler wird präzise beschrieben, der
+relevante Zustandsausschnitt ist enthalten, und die Semantik stammt
+aus den domänenspezifischen Monitoren. Das bietet eine gute Basis, um Code-
+oder Pfadänderungen vorzuschlagen und anschließend identisch zu
+verifizieren.
+
+Operativ lässt sich darauf ein kurzer Iterationszyklus aufbauen: Aus
+einem fehlgeschlagenen Lauf durch Nutzer- oder LLM-generierten
+Roboterprogrammcode wird ein kompakter Fehlerkontext aus
+gebildet und an ein LLM übergeben: Das
+LLM liefert einen minimalen Änderungsvorschlag am Robotercode
+bzw.\ an der Pfaddefinition und durch die Re-Simulation kann eine erneute
+Prüfung des Codes stattfinden. Die Akzeptanzkriterien für eine erfolgreiche
+Behebung des Fehlers beispielsweise mit dem minimalen Achswinkel bereits
+im Rahmen der Eventdaten und Monitorlogik im System vor wodurch die
+Bewertung reproduzierbar bleibt.
+Damit kann das Framework als
+Schnittstelle zwischen realitätsnaher Ausführung und
+LLM-gestützter Verbesserung dienen. Praktisch sind drei Punkte entscheidend
+und aus den Ergebnissen ableitbar: erstens ein schlanker, stabiler
+Prompt-Ausschnitt aus genau den Feldern, die im Logging ohnehin
+verfügbar sind (z.\,B.\ Programmpointer, Gelenkwinkel,
+Kollisionspunkt), zweitens feste Akzeptanzregeln in der Simulation,
+drittens Versionierung und Wiederholbarkeit der Läufe. Auf dieser
+Basis lässt sich in zukünftiger Arbeit untersuchen, in welchem Umfang
+sich Fehlerquote und Nachbearbeitungszeit durch die Rückkopplung
+tatsächlich reduzieren – die in den Ergebnissen sichtbaren Muster wie
+liefern bereits geeignete Zielgrößen.
 
 \section{Reflexion des eigenen Vorgehens}
 
@@ -135,5 +180,3 @@ proprietäre Ökosysteme, komplexe Schnittstellen und eine kleine Nutzerbasis
 zusätzliche Hürden für Verallgemeinerung und Transfer darstellen. Diese Punkte
 markieren bewusste Grenzen des aktuellen Stands und leiten unmittelbar zu
 Folgestudien über.
-
-
