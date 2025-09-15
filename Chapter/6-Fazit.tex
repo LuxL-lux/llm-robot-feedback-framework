@@ -1,8 +1,6 @@
 \chapter{Fazit und Ausblick}
 \label{cap:Fazit}
 
-\section{Zusammenfassung}
-
 Das entwickelte Framework demonstriert die Machbarkeit eines modularen,
 eventgetriebenen Ansatzes für sicherheitsrelevante Überwachungsaufgaben in der
 Roboterprogrammierung. Die Module erfüllten ihre Kernfunktionen, zugleich wurden
@@ -13,21 +11,19 @@ einen belastbaren Proof-of-Concept dar, der durch quantitative Evaluationen und
 architektonische Erweiterungen in Richtung eines praxistauglichen Systems
 weitergeführt werden kann.
 
-\section{Ausblick}
-
-Aus den Diskussionen ergeben sich zwei unmittelbare Schienen:
-Erstens eine \emph{quantitative} Evaluation, die die Leistungsfähigkeit des
+Aus den Diskussionen ergeben sich zwei unmittelbare Blickrichtungen:
+Erstens eine quantitative Evaluation, die die Leistungsfähigkeit des
 Frameworks systematisch gegen manuelle Verfahren stellt. Mögliche Metriken
 umfassen etwa Erkennungszeit, Zuverlässigkeit (Recall) der Detektion und
 Fehlalarmrate; für die Dynamiküberwachung sind zudem akzeptable Toleranzbänder
-zu definieren und transparent zu begründen. Zweitens eine
-\emph{architektonische} Weiterentwicklung: engere Kopplung an
+zu definieren und transparent zu begründen. Zweitens ergibt sich eine
+architektonische Weiterentwicklung: engere Kopplung an
 Controllerschnittstellen, Erweiterung auf weitere Herstelleradapter sowie die
 Prüfung echtzeitnaher Ausführungsumgebungen.
 
 Langfristig eröffnet die strukturierte JSON-Ausgabe eine Brücke zu
 automatisierten Analyse- und Korrekturprozessen. Eine naheliegende Linie ist die
-Einbindung von Large Language Models (LLMs), die auf Basis von Logdaten und
+Einbindung von LLMs, die auf Basis von Logdaten und
 Layoutinformationen Roboterprogramme analysieren und Verbesserungsvorschläge
 generieren. In einem nächsten Schritt ließe sich dies als MCP-Server
 konzipieren, der Rückmeldungen zyklisch in das Framework einspeist und damit den

@@ -13,7 +13,6 @@ entwickelt, welches zur Validierung des entwickelten Frameworks dienen soll.
 
 \section{Implementierung der Monitore zur Fehlererkennung}
 
-\subsection*{Überblick}
 Zur Orientierung sind die im Framework implementierten Monitore in
 Tabelle~\ref{tab:monitor_overview_arch} zusammengefasst. Die Tabelle zeigt Ziel,
 Eingabedaten und Art der generierten Events. Dadurch wird die Einordnung der
@@ -37,9 +36,9 @@ folgenden Abschnitte erleichtert.
     Geometrieinformationen / Event mit Schweregrad und beteiligten
     Objekten                                                          \\
     \addlinespace
-    Singularitäten          & Detektion von Wrist-, Elbow- und
-    Shoulder-Singularitäten              &
-    Gelenkwinkel, Jacobian / ENTERING- und EXITING-Events mit
+    Singularitäten          & Detektion von Handgelenks-, Ellbogen- und
+    Schulter-Singularitäten              &
+    Gelenkwinkel, Jacobi-Matrix / Entering- und Exiting-Events mit
     Manipulierbarkeit                                                      \\
     \addlinespace
     Gelenkgeschwindigkeiten & Überwachung von Winkel-,
@@ -64,11 +63,5 @@ folgenden Abschnitte erleichtert.
 \section{Testumgebung und -setup}
 \input{Chapter/3-3-Testumgebung.tex}
 
-\section{Datenaufzeichung und Logging}
+\section{Datenaufzeichnung und Logging}
 \input{Chapter/3-4-Datenlogging.tex}
-
-\subsection*{Einordnung im Gesamtkontext}
-Die Architektur des Frameworks besteht somit aus den genannten Modulen, die in
-Kapitel~\ref{sec:framework} im Detail beschrieben werden. Ihre
-Funktionsweise wird in
-Kapitel~\ref{cap:Ergebnisse} anhand von Testszenarien überprüft und ausgewertet.

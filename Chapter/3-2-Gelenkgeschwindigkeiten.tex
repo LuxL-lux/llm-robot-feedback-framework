@@ -1,76 +1,99 @@
 \subsection{Joint Dynamics Monitor}
 \label{sssec:joint_dynamics_monitor}
+Im Folgenden wird der Joint Dynamics Monitor, welcher als Aufgabe die Erkennung
+zu hoher Gelenkgeschwindigkeiten und Beschleunigungen hat, erläutert. Ziel ist
+es, Überschreitungen von Gelenkgeschwindigkeiten und -beschleunigungen
+festzustellen und Events, welche relevante Zustandsdaten wie das Robotergelenk,
+Position und Zeitpunkt der Überschreitung enthalten, ausgeben.
 
-\paragraph{Theoretische Grundlagen} Die Überwachung kinematischer Grenzwerte
-während der Werkstückhandhabung stellt eines der zentralen Ziele des Frameworks dar. Die besondere Herausforderung in HTTP-basierten Systemen
+\subsubsection{Theoretische Grundlagen}
+Die Überwachung kinematischer Grenzwerte
+während der Werkstückhandhabung stellt eines der zentralen Ziele des
+Frameworks dar. Die besondere Herausforderung in HTTP-basierten Systemen
 liegt in der diskreten Datenakquisition mit Polling-Intervallen von 50-1000ms,
 wodurch die numerische Differentiation zu erheblichen Instabilitäten
 führt.
 
-Geschwindigkeit $\dot{\theta}_i$ und Beschleunigung $\ddot{\theta}_i$ können folgendermassen aus der diskreten Zeitreihe approximiert werden:
+Geschwindigkeit $\dot{\theta}_i$ und Beschleunigung $\ddot{\theta}_i$
+können folgendermaßen aus der diskreten Zeitreihe approximiert werden:
 \begin{equation}
-	\dot{\theta}_i[k] = \frac{\theta_i[k] - \theta_i[k-1]}{\Delta t_k}, \quad
-	\ddot{\theta}_i[k] = \frac{\dot{\theta}_i[k] - \dot{\theta}_i[k-1]}{\Delta t_k}
-	\label{eq:discrete_derivatives}
+  \dot{\theta}_i[k] = \frac{\theta_i[k] - \theta_i[k-1]}{\Delta t_k}, \quad
+  \ddot{\theta}_i[k] = \frac{\dot{\theta}_i[k] -
+  \dot{\theta}_i[k-1]}{\Delta t_k}
+  \label{eq:discrete_derivatives}
 \end{equation}
 
-In der Praxis und nach initalem Testen hat sich herausgestellt, dass die
-Berechnung dessen durch die untstetige Bewegung unrealistische Werte liefert.
+In der Praxis und nach initialem Testen hat sich herausgestellt, dass die
+Berechnung dessen durch die unstetige Bewegung unrealistische Werte liefert.
 Das hängt damit zusammen, dass der HTTP-Endpunkt des Robotercontrollers in
 festgelegten Zeitabständen abgefragt wird und so die Gelenkpositionen des
 Roboters erneuert werden. Bewegt sich der Roboter über eine bestimmte Strecke,
 wird die von Unity lediglich als unstetige Bewegung mit theoretisch unendlich
-grosser Geschwindigkeit wahrgenommen. Daher ist hier eine Glättung der Werte
+großer Geschwindigkeit wahrgenommen. Daher ist hier eine Glättung der Werte
 nötig, um eine stetige Bewegung zu simulieren.
 
-\paragraph{Mehrstufiger Filteransatz}
 Zur Stabilisierung implementiert das Framework einen dreistufigen Filteransatz:
-
 \begin{enumerate}
-	\item \textbf{Exponential Moving Average (EMA):}
-	      $\dot{\theta}_{i,\text{EMA}}[k] = \alpha \cdot \dot{\theta}_{i,\text{raw}}[k] + (1-\alpha) \cdot \dot{\theta}_{i,\text{EMA}}[k-1]$ mit $\alpha = 0.2$
+  \item \textbf{Exponential Moving Average (EMA):}
+    \begin{equation}
+      \dot{\theta}_{i,\mathrm{EMA}}[k]
+      = \alpha \,\dot{\theta}_{i,\mathrm{raw}}[k]
+      + (1-\alpha)\,\dot{\theta}_{i,\mathrm{EMA}}[k-1],
+      \quad \alpha = 0.2
+    \end{equation}
 
-	\item \textbf{Moving Window Average:}
-	      $\dot{\theta}_{i,\text{MW}}[k] = \frac{1}{N} \sum_{j=0}^{N-1} \dot{\theta}_{i,\text{EMA}}[k-j]$ mit Fenstergröße $N = 8$
+  \item \textbf{Moving Window Average:}
+    \begin{equation}
+      \dot{\theta}_{i,\mathrm{MW}}[k]
+      = \frac{1}{N}\sum_{j=0}^{N-1} \dot{\theta}_{i,\mathrm{EMA}}[k-j],
+      \quad N = 8
+    \end{equation}
 
-	\item \textbf{Outlier Rejection:}
-	      $|\dot{\theta}_{i,\text{final}}[k] - \dot{\theta}_{i,\text{final}}[k-1]| \leq \tau_v \cdot \dot{\theta}_{i,\text{max}}$ mit $\tau_v = 0.2$
+  \item \textbf{Outlier Rejection:}
+    \begin{equation}
+      \left|\dot{\theta}_{i,\mathrm{final}}[k]
+      - \dot{\theta}_{i,\mathrm{final}}[k-1]\right|
+      \le \tau_v \cdot \dot{\theta}_{i,\max},
+      \quad \tau_v = 0.2
+    \end{equation}
 \end{enumerate}
-\noindent
+
 Durch die verwendete Glättung werden schnelle Änderungen in den Gelenkwerten
 erst zeitverzögert sichtbar. Dies wirkt sich unmittelbar auf die Erkennung von
 Geschwindigkeitsverletzungen aus, da der Monitor die Ereignisse nicht exakt im
 Moment des Überschreitens ausgibt, sondern nach einigen Abtastungen.
 
-\paragraph{Grenzwertdefinition} Die Grenzwerte werden aus den
+\subsubsection{Grenzwertdefinition}
+Die Grenzwerte werden aus den
 Flange-Framework-Konfigurationen extrahiert oder manuell spezifiziert. Ein
 Sicherheitsfaktor $\lambda = 0.8$ reduziert die nominellen Maximalwerte
 präventiv. Für den ABB IRB 6700 ergeben sich beispielsweise
-Geschwindigkeitsgrenzen von 88\textdegree/s für die Hauptachsen und bis zu 168\textdegree/s für das
+Geschwindigkeitsgrenzen von 88\textdegree/s für die Hauptachsen und
+bis zu 168\textdegree/s für das
 Handgelenk.
 
-\paragraph{Implementierung der Smoothing-Pipeline}
-Die zentrale Smoothing-Methode kombiniert die Filteransätze:
+\subsubsection{Implementierung der Smoothing-Pipeline}
+Die zentrale Smoothing-Methode kombiniert die Filteransätze, dargestell in
+Abbildung~\ref{listing:smoothing_pipeline}.
 
 \begin{figure}[H]
-	\inputminted[fontsize=\footnotesize]{csharp}{code-snippets/SmoothVelocities.cs}
-	\caption{Mehrstufige Smoothing-Pipeline zur Geschwindigkeitsberechnung}
-	\label{listing:smoothing_pipeline}
+  \inputminted[fontsize=\footnotesize]{csharp}{code-snippets/SmoothVelocities.cs}
+  \caption{Mehrstufige Smoothing-Pipeline zur Geschwindigkeitsberechnung}
+  \label{listing:smoothing_pipeline}
 \end{figure}
 
-\noindent
 Als weiteres Feature implementiert der Monitor eine Methode, welche sich an die
 Update-Rate der State-Updates (also die Rate neuer Gelenkdaten) anpasst. So kann
 garantiert werden, dass ein State nicht doppelt verarbeitet und so
 beispielsweise die Geschwindigkeit falsch interpretiert wird, da es sich um den
 immer gleichen State des Roboters handelt.\\
 
-\noindent
 Bei der Überschreitung der Schwellwerte wird der \texttt{SafetyMonitor}
-mittels eines \texttt{SafetyEvents} benachrichtigt. Als zusätzliche Metadaten enthält
-diese Meldung die Eventart (Geschwindigkeits oder
--Beschleunigungsüberschreitung) und die damit zusammenhängenden Schwellwerte und
+mittels eines \texttt{SafetyEvents} benachrichtigt. Als zusätzliche
+Metadaten enthält
+diese Meldung die Eventart (Geschwindigkeits- oder
+Beschleunigungsüberschreitung) und die damit zusammenhängenden Schwellwerte und
 aktuellen Werte. Da es in dem Rahmen vorkommen kann, dass hier die
 Geschwindigkeit über einen längeren Zeitraum überschritten wird, gibt der
 Monitor ebenfalls ein SafetyEvent aus, wenn die Geschwindigkeit unter den
-gegebenen Schwelllwert sinkt.
+gegebenen Schwellwert sinkt.

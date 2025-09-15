@@ -92,7 +92,8 @@ Simulationsplattform
 zu verbinden. Um eine herstellerunabhängige und erweiterbare Plattform zu
 entwickeln, sollte also eine gemeinsame Schnittstelle implementiert werden.
 
-Zusammenfassend verfolgt die Architektur des Frameworks drei zentrale Ziele:
+Um dies zu ermöglichen, verfolgt die Architektur des Frameworks drei
+zentrale Ziele:
 \begin{enumerate}
   \item \textbf{Vendor-Agnostik}: Abstraktion verschiedener
     Roboterhersteller durch einheitliche Interface-basierte
@@ -221,13 +222,14 @@ Diese Event-Driven Architecture adressiert die Anforderungen an ein
 erweiterbares und gleichzeitiges Messaging-Modell. So lassen sich Events
 an mehrere Teilnehmer gleichzeitig weitergeben und verarbeiten, ohne dabei auf
 den Processing-Zyklus zu warten. Weiterführend werden Events getrennt
-voneinander
-verarbeitet, das heißt der Main-Thread muss nicht auf die Fertigstellung der
-Abarbeitung von Events durch Empfänger warten.\vglcite[1\psqq]{hohpe2006}
+voneinander verarbeitet, das heißt der Main-Thread muss nicht auf die
+Fertigstellung der Abarbeitung von Events durch Empfänger
+warten.\vglcite[1\psqq]{hohpe2006}
 
 Der \texttt{SafetyManager} aggregiert die von den Monitoren generierten
 Sicherheitsereignisse und implementiert eine kontextabhängige Logging-Strategie.
-Bei laufendem Roboterprogramm werden detaillierte JSON-Logs für spätere Analyse
+Bei laufendem Roboterprogramm werden detaillierte Logs im Format
+JavaScript Object Notation {JSON-Logs} zur späteren Analyse
 erstellt, während im Leerlauf-Zustand nur kritische Ereignisse in die Konsole
 geloggt werden. Diese Differenzierung optimiert sowohl die Performance als auch
 die Nachvollziehbarkeit von Sicherheitsvorfällen.
@@ -244,7 +246,7 @@ zugrundeliegenden Robotersteuerung und
 implementiert das Interface des Typs IRobotConnector. Als Verbindungsclient
 zwischen Unity3D und externer Schnittstelle des Robotersystems implementiert
 dieser das IRobotConnector Interface, welches als Vorlage für eine Anbindung an
-eine Robotersteuerung jedes Typs fungiert und standardisierte Methoden
+eine Robotersteuerung jeden Typs fungiert und standardisierte Methoden
 implementiert (vgl. Abbildung~\ref{figure:irobotconnector}).
 
 \begin{figure}[H]
@@ -265,7 +267,7 @@ Lage, ein Event zu abonnieren und eine Methode zu registrieren,
 welche ausgeführt
 werden soll, wenn dieses Event auftritt. Ist dies der Fall, wird das
 entsprechende Modul über die Änderung benachrichtigt und bekommt gegebenenfalls
-neue Daten zur Verfügung gestellt. Diese event-getriebene Kommunikation sorgt
+neue Daten zur Verfügung gestellt. Diese eventgetriebene Kommunikation sorgt
 dafür, dass einerseits alle Komponenten proaktiv auf den neusten
 Stand der Daten gebracht
 und gehalten werden, andererseits aber keine ressourcenblockierenden Prozesse
@@ -297,9 +299,10 @@ also auch der Roboter selbst gesteuert werden.\vglcite{robotwebservices2025}
 
 Die RWS-Schnittstelle bietet einerseits die Möglichkeiten,
 aktuelle Achswinkel und TCP-Werte abzurufen, als auch
-weitere Metadaten, wie das aktuell laufende Programm, den aktuellen Motorstatus
+weitere Zustandsdaten der Steuerung, wie das aktuell laufende
+Programm, den aktuellen Motorstatus
 oder auch die Codezeile, welche aktuell vom Programmzeiger ausgeführt wird.
-Weiterführend bietet RWS die Möglichkeit, aktuellen analogen und digitalen
+Weiterführend bietet RWS die Möglichkeit, aktuelle analoge und digitale
 Signale abzurufen, was nötig ist, um den Greifer steuern zu können.
 
 Bei den oben genannten Daten mit Ausnahme der Achswinkel handelt es sich um
@@ -348,9 +351,6 @@ werden. Zusammenfassend bestehn ein SafetyEvent aus folgenden Komponenten:
     für Forensik
 \end{itemize}
 
-\paragraph{Einordnung}
-Die folgenden Kapitel beschreiben die Implementierung der vier
-Monitore auf Basis
-der zuvor skizzierten Schichten. In Kapitel~\ref{cap:Ergebnisse} werden die
-Ergebnisse anhand gezielter Testszenarien dargestellt und in gekürzten
-Log‑Auszügen (\texttt{minted}) veranschaulicht.
+Basierend auf den dargestellten Schichten erfolgt in den
+nachfolgenden Abschnitten die Implementierung der vier
+Monitore auf Basis der zuvor skizzierten Schichten.

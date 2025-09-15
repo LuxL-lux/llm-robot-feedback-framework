@@ -1,12 +1,11 @@
 \chapter{Diskussion}
 \label{cap:diskussion}
-
-\section{Einleitung} In diesem Kapitel werden die in
+Im Folgenden werden die in
 Kapitel~\ref{cap:Ergebnisse} präsentierten
 Ergebnisse kritisch reflektiert und in den fachlichen Kontext eingeordnet. Im
 Zentrum stehen die Gesamtarchitektur des Frameworks und die vier implementierten
 Safetymodule. Ergänzend wird ein Experteninterview mit Daniel Syniawa
-herangezogen, in dem die Software, die Architektur sowie konkrete Testcases in
+herangezogen, in dem die Software, die Architektur sowie konkrete Testfälle in
 RobotStudio gemeinsam betrachtet wurden. Ziel ist es, die Stärken und Grenzen
 der Arbeit transparent zu machen und konkrete Ansatzpunkte für zukünftige
 Arbeiten zu identifizieren.
@@ -15,28 +14,28 @@ Arbeiten zu identifizieren.
 
 Die Architektur hat sich als tragfähige Grundlage erwiesen: Durch den
 adapterbasierten Zugriff auf die Roboterschnittstelle (z.\,B. ABB Robot Web
-Services) und eine konsequent \emph{event-getriebene} Struktur konnten
+Services) und eine konsequent eventgetriebene Struktur konnten
 Safetymodule unabhängig voneinander entwickelt und über ein gemeinsames
-Interface in das \emph{RobotSystem} integriert werden. Das Event-System
+Interface in das RobotSystem integriert werden. Das Event-System
 (Observer-Pattern) entkoppelt Erkennung und Verarbeitung; die JSON-basierte
 Persistenz vereinfacht Nachvollziehbarkeit und Weiterverarbeitung. Positiv
 wirkte sich zudem die Nutzung der Denavit–Hartenberg-Parameter aus, die eine
-konsistente kinematische Modellierung verschiedener Robotermodlle erlaubt.\\
+konsistente kinematische Modellierung verschiedener Robotermodelle erlaubt.
 
-\noindent Gleichzeitig bleiben offen, inwiefern einzelne Simulationsparameter
+Gleichzeitig bleibt offen, inwiefern einzelne Simulationsparameter
 oder Modellierungsentscheidungen in Unity bei hochkomplexen Geometrien eine
 Limitation darstellen \emph{könnten}. Die Unity-Engine bietet hier zwar eine
-Grundlage physischer Modellerung, abschliessende Aussagen zur Genauigkeit in
-sehr dynamischen oder kleinschrittigen Prozessen können aber nicht getrofen
+Grundlage physischer Modellierung, abschließende Aussagen zur Genauigkeit in
+sehr dynamischen oder kleinschrittigen Prozessen können aber nicht getroffen
 werden. Diese Aspekte wurden nicht systematisch untersucht und markieren Raum
-für künftige Studien.\\
+für künftige Studien.
 
 \noindent Das Experteninterview mit Daniel Syniawa ordnet die Arbeit in die
 Praxis ein: Er bestätigte, dass es insgesamt nur wenige plattformübergreifende
 Werkzeuge mit integrierter Physik gibt und dass die Tool-Landschaft stark
 proprietär geprägt ist. Nach seiner Erfahrung ist bereits die stabile
 Inbetriebnahme und Anbindung von Robotern für viele Firmen aufwendig;
-physikalische Simulation mit einer Modellerung des Arbeitsraumes in RobotStudio
+physikalische Simulation mit einer Modellierung des Arbeitsraumes in RobotStudio
 sowie die Auswertung der hier untersuchten Parameter ist nur in begrenztem
 Umfang möglich und benötigt beträchtliches Expertenwissen und Zeit. Syniawa wies
 außerdem darauf hin, dass Services proprietär Hersteller wie die RobotStudio-API
@@ -65,118 +64,130 @@ wird. Die Praxistauglichkeit hängt damit von der Qualität der
 Prozessmodellierung und der Art des Prozesses ab. Im aktuellen Fokus stand hier
 ein sequentieller Prozess, die Literatur beschreibt hier im Kontext
 industrieller Fertigung jedoch mehrere Prozessarten und theoretische
-Modellierungsansätze. Im Interview wurde die grundsätzliche Relevanz dieses
-Moduls bestätigt; zugleich wird deutlich, dass die industrielle Praxis oft
-komplexere Ablaufmodelle erfordert.
+Modellierungsansätze.{\vglcite[39\psq]{cassandras2021} Im Interview
+  wurde die grundsätzliche Relevanz dieses
+  Moduls bestätigt – zugleich wird deutlich, dass die industrielle Praxis oft
+  komplexere Ablaufmodelle erfordert.
 
-\subsection{Kollisionserkennung}
+  \subsection{Kollisionserkennung}
 
-In der Simulation wurden die vorgesehenen Kollisionsfälle erkannt; zugleich
-traten Fehlalarme auf, insbesondere beim Greifen und Loslassen von Werkstücken.
-Wie stark Modellierungsdetails oder Simulationsparameter das Verhalten in
-Grenzfällen beeinflussen, wurde in dieser Arbeit nicht systematisch untersucht
-und ist als potenzielle Limitation zu betrachten. Weiterführend ist die
-Genauigkeit der Modellierung der Meshes des Roboters und der Umgebung hier
-essentiell: Unity modelliert konvexe Meshes, welche die räumlichen Grenzen
-darstellen mit maximal 255 Kanten. Daher kann es passieren, dass die
-tatsächliche Topologie des Robotermodells vom Kollisionskörper abweicht.
-Insgesamt liefert das Modul einen belastbaren Proof-of-Concept, dessen
-Generalisierung im Rahmen weiterführender Evaluierungen zu prüfen ist.
+  In der Simulation wurden die vorgesehenen Kollisionsfälle erkannt. Zugleich
+  traten Fehlalarme auf, insbesondere beim Greifen und Loslassen von
+  Werkstücken. Wie stark Modellierungsdetails oder
+  Simulationsparameter das Verhalten in Grenzfällen beeinflussen,
+  wurde in dieser Arbeit nicht systematisch untersucht
+  und ist als potenzielle Limitation zu betrachten. Weiterführend ist die
+  Genauigkeit der Modellierung der Meshes des Roboters und der Umgebung hier
+  essenziell: Unity modelliert konvexe Meshes, welche die räumlichen Grenzen
+  darstellen mit maximal 255 Kanten. Daher kann es passieren, dass die
+  tatsächliche Topologie des Robotermodells vom Kollisionskörper abweicht.
+  Insgesamt liefert das Modul einen belastbaren Proof-of-Concept, dessen
+  Generalisierung im Rahmen weiterführender Evaluierungen zu prüfen ist.
 
-\subsection{Achsgeschwindigkeiten und -beschleunigungen}
+  \subsection{Achsgeschwindigkeiten und -beschleunigungen}
 
-Grenzwertverletzungen wurden zuverlässig detektiert. In den Ergebnissen zeigte
-sich allerdings ein zeitlicher Versatz zwischen den in RobotStudio vorliegenden
-Referenzdaten und der Detektion in Unity: Überschreitungen wurden etwas später
-erkannt und endeten geringfügig später. Dieser Versatz ist plausibel auf
-Aktualisierungsrate und eingesetzten Glättungsalgorithmus zurückzuführen, dessen
-Parameter konfigurierbar sind. Ob dadurch ein Versatz mit den in der Praxis
-vom Roboter gefahrenen Achsgeschwindigkeiten und -beschleunigungen
-entsteht, lässt sich hier
-nicht abschliessend bewerten.
+  Grenzwertverletzungen wurden zuverlässig detektiert. In den Ergebnissen zeigte
+  sich allerdings ein zeitlicher Versatz zwischen den in RobotStudio
+  vorliegenden
+  Referenzdaten und der Detektion in Unity3D. Dies ist plausibel auf
+  Aktualisierungsrate und eingesetzten Glättungsalgorithmus
+  zurückzuführen, dessen
+  Parameter konfigurierbar sind. Ob dadurch ein Versatz mit den in der Praxis
+  vom Roboter gefahrenen Achsgeschwindigkeiten und -beschleunigungen
+  entsteht, lässt sich hier
+  nicht abschließend bewerten.
 
-\subsection{Singularitätserkennung}
+  \subsection{Singularitätserkennung}
 
-Die gewählte, winkelbasierte Heuristik funktionierte für den betrachteten
-Roboter, ist jedoch nicht universell. Alternativ bieten sich Kennzahlen an, die
-näher an der Kinematik operieren, etwa das Manipulability-Maß (Yoshikawa) oder
-der kleinste Singulärwert der Jacobi-Matrix als Abstandsmaß zur Singularität.
-Eine generische, Jacobian-basierte Methode zur Erkennung von
-Freiheitsgradverlusten wurde implementiert, im Rahmen der vorliegenden Tests
-jedoch nicht eingesetzt; eine Erweiterung auf andere Roboter wäre möglich, wurde
-aber nicht vorgenommen.
+  Die gewählte, winkelbasierte Heuristik funktionierte für den betrachteten
+  Roboter, ist jedoch nicht universell. Alternativ bieten sich
+  Kennzahlen an, die
+  näher an der Kinematik operieren, etwa das Manipulierbarkeits-Maß
+  nach Yoshikawa oder
+  der kleinste Singulärwert der Jacobi-Matrix als Abstandsmaß zur Singularität.
+  Eine generische, Jacobi-basierte Methode zur Erkennung von
+  Freiheitsgradverlusten wurde implementiert, im Rahmen der vorliegenden Tests
+  jedoch nicht eingesetzt; eine Erweiterung auf andere Roboter wäre
+  möglich, wurde
+  aber nicht vorgenommen.
 
-Im Interview formulierte Syniawa einen pragmatischen Maßstab für die Evaluation:
-Für eine belastbare Beurteilung wäre ein direkter Vergleich mit manuellem
-Debugging in RobotStudio sinnvoll, also ein Messaufbau, der die Zeit bis zur
-Fehlerlokalisierung im RAPID-Code der Zeit gegenüberstellt, die das Framework
-über Ausführung und Logging benötigt. Zugleich hob er hervor, dass die
-automatische Bereitstellung von Programmzeiger, aktueller Pose und Kontext im
-Event-Log eine erhebliche Arbeitserleichterung darstellt und die Analyse
-prinzipiell auch weniger erfahrenen Anwendern ermöglicht.
+  Im Interview formulierte Syniawa einen pragmatischen Maßstab für
+  die Evaluation:
+  Für eine belastbare Beurteilung wäre ein direkter Vergleich mit manuellem
+  Debugging in RobotStudio sinnvoll, also ein Messaufbau, der die Zeit bis zur
+  Fehlerlokalisierung im RAPID-Code der Zeit gegenüberstellt, die das Framework
+  über Ausführung und Logging benötigt. Zugleich hob er hervor, dass die
+  automatische Bereitstellung von Programmzeiger, aktueller Pose und Kontext im
+  Event-Log eine erhebliche Arbeitserleichterung darstellt und die Analyse
+  prinzipiell auch weniger erfahrenen Anwendern ermöglicht.
 
-\section{LLM-gestützte Rückkopplung auf Basis der Safety-Events}
+  \section{LLM-gestützte Rückkopplung der Simulationsergebnisse}
 
-Die Ergebnisse zeigen, dass das Framework Fehlerzustände konsistent
-und kontextreich protokolliert: Für jedes Ereignis liegen
-Aktuelle Bewegungs- und Programmdaten, beispielsweise das aktuelles
-Modul, Routine,
-Programmzeile sowie Motordaten und Achswinkel vor. Hinzu kommen
-event-spezifische Felder im \texttt{eventDataJson}, etwa
-Kollisionspunkt und Distanz oder Gelenkwinkel und
-Manipulierbarkeitswert bei Singularitäten\footnote{Vgl. u.\,a.
-  Process-Flow-Event inkl.\ Programmpointer und RobotStateSnapshot
-  sowie die Beschreibung des JSON-Aufbaus; Kollisionsevents mit
-  \texttt{collisionPoint} und Distanz; Singularitätsevents mit
-  Gelenkwinkeln und Manipulierbarkeitswert; Joint-Dynamics-Events als
-\enquote{exceeded}/\enquote{resolved}.}. Diese maschinenlesbare
-Struktur eignet sich unmittelbar als gezielter Eingabekontext für
-generative Modelle: Der Fehler wird präzise beschrieben, der
-relevante Zustandsausschnitt ist enthalten, und die Semantik stammt
-aus den domänenspezifischen Monitoren. Das bietet eine gute Basis, um Code-
-oder Pfadänderungen vorzuschlagen und anschließend identisch zu
-verifizieren.
+  Die Ergebnisse zeigen, dass das Framework Fehlerzustände konsistent
+  und kontextreich protokolliert: Für jedes Ereignis liegen
+  Aktuelle Bewegungs- und Programmdaten, beispielsweise das aktuelle
+  Modul, Routine,
+  Programmzeile sowie Motordaten und Achswinkel vor. Hinzu kommen
+  event-spezifische Felder im \texttt{eventDataJson}, etwa
+  Kollisionspunkt und Distanz oder Gelenkwinkel und
+  Manipulierbarkeitswert bei Singularitäten\footnote{Vgl. u.\,a.
+    Process-Flow-Event inkl.\ Programmpointer und RobotStateSnapshot
+    sowie die Beschreibung des JSON-Aufbaus; Kollisionsevents mit
+    \texttt{collisionPoint} und Distanz; Singularitätsevents mit
+    Gelenkwinkeln und Manipulierbarkeitswert; Joint-Dynamics-Events als
+  \enquote{exceeded}/\enquote{resolved}.}. Diese maschinenlesbare
+  Struktur eignet sich unmittelbar als gezielter Eingabekontext für
+  generative Modelle: Der Fehler wird präzise beschrieben, der
+  relevante Zustandsausschnitt ist enthalten, und die Semantik stammt
+  aus den domänenspezifischen Monitoren. Das bietet eine gute Basis, um Code-
+  oder Pfadänderungen vorzuschlagen und anschließend identisch zu
+  verifizieren.
 
-Operativ lässt sich darauf ein kurzer Iterationszyklus aufbauen: Aus
-einem fehlgeschlagenen Lauf durch Nutzer- oder LLM-generierten
-Roboterprogrammcode wird ein kompakter Fehlerkontext aus
-gebildet und an ein LLM übergeben: Das
-LLM liefert einen minimalen Änderungsvorschlag am Robotercode
-bzw.\ an der Pfaddefinition und durch die Re-Simulation kann eine erneute
-Prüfung des Codes stattfinden. Die Akzeptanzkriterien für eine erfolgreiche
-Behebung des Fehlers beispielsweise mit dem minimalen Achswinkel bereits
-im Rahmen der Eventdaten und Monitorlogik im System vor wodurch die
-Bewertung reproduzierbar bleibt.
-Damit kann das Framework als
-Schnittstelle zwischen realitätsnaher Ausführung und
-LLM-gestützter Verbesserung dienen. Praktisch sind drei Punkte entscheidend
-und aus den Ergebnissen ableitbar: erstens ein schlanker, stabiler
-Prompt-Ausschnitt aus genau den Feldern, die im Logging ohnehin
-verfügbar sind (z.\,B.\ Programmpointer, Gelenkwinkel,
-Kollisionspunkt), zweitens feste Akzeptanzregeln in der Simulation,
-drittens Versionierung und Wiederholbarkeit der Läufe. Auf dieser
-Basis lässt sich in zukünftiger Arbeit untersuchen, in welchem Umfang
-sich Fehlerquote und Nachbearbeitungszeit durch die Rückkopplung
-tatsächlich reduzieren – die in den Ergebnissen sichtbaren Muster wie
-liefern bereits geeignete Zielgrößen.
+  Operativ lässt sich darauf ein kurzer Iterationszyklus aufbauen: Aus
+  einem fehlgeschlagenen Lauf durch Nutzer- oder LLM-generierten
+  Roboterprogrammcode wird ein kompakter Fehlerkontext aus
+  gebildet und an ein LLM übergeben: Das
+  LLM liefert einen minimalen Änderungsvorschlag am Robotercode
+  bzw.\ an der Pfaddefinition und durch die Re-Simulation kann eine erneute
+  Prüfung des Codes stattfinden. Die Akzeptanzkriterien für eine erfolgreiche
+  Behebung des Fehlers beispielsweise mit dem minimalen Achswinkel bereits
+  im Rahmen der Eventdaten und Monitorlogik im System vor wodurch die
+  Bewertung reproduzierbar bleibt.
+  Damit kann das Framework als
+  Schnittstelle zwischen realitätsnaher Ausführung und
+  LLM-gestützter Verbesserung dienen. Praktisch sind drei Punkte entscheidend
+  und aus den Ergebnissen ableitbar: erstens ein schlanker, stabiler
+  Prompt-Ausschnitt aus genau den Feldern, die im Logging ohnehin
+  verfügbar sind (z.\,B.\ Programmpointer, Gelenkwinkel,
+  Kollisionspunkt), zweitens feste Akzeptanzregeln in der Simulation,
+  drittens Versionierung und Wiederholbarkeit der Läufe. Auf dieser
+  Basis lässt sich in zukünftiger Arbeit untersuchen, in welchem Umfang
+  sich Fehlerquote und Nachbearbeitungszeit durch die Rückkopplung
+  tatsächlich reduzieren – die in den Ergebnissen sichtbaren Muster wie
+  liefern bereits geeignete Zielgrößen.
 
-\section{Reflexion des eigenen Vorgehens}
+  \section{Reflexion des eigenen Vorgehens}
 
-Die Entwicklung folgte bewusst einem iterativen Vorgehen: von einem kleinen
-Testfall hin zu einer breiteren Abdeckung, mit Zwischenstufen des Refactorings.
-Dieses Vorgehen erwies sich als geeignet, um Architekturentscheidungen
-(Adapter/Observer) empirisch zu validieren. Rückblickend entstanden stellenweise
-Komponenten, die für den unmittelbaren Use-Case komplexer waren als nötig;
-gleichwohl war die iterativ-explorative Herangehensweise im Kontext einer
-Framework-Entwicklung zweckmäßig und hat zur jetzigen Struktur geführt.
+  Die Entwicklung folgte bewusst einem iterativen Vorgehen: von einem kleinen
+  Testfall hin zu einer breiteren Abdeckung, mit Zwischenstufen des
+  Refactorings. Dieses Vorgehen erwies sich als geeignet, um
+  Architekturentscheidungen
+  (Adapter/Observer) empirisch zu validieren. Rückblickend entstanden
+  stellenweise Komponenten, die für den unmittelbaren Use-Case
+  komplexer waren als nötig – gleichwohl war die iterativ-explorative
+  Herangehensweise im Kontext einer Framework-Entwicklung zweckmäßig
+  und hat zu einer für die durchzuführenden Analysen geeigneten
+  Struktur geführt.
 
-\section{Grenzen und Generalisierbarkeit}
+  \section{Grenzen und Generalisierbarkeit}
 
-Die vorliegende Arbeit wurde in der Simulation evaluiert; Echtzeitverhalten,
-Sensitivität gegenüber Simulationsparametern sowie Übertragbarkeit auf weitere
-Roboter wurden nicht systematisch untersucht. Darüber hinaus beschränkt sich die
-Adaptervalidierung auf ABB Robot Web Services. Das Interview verdeutlicht, dass
-proprietäre Ökosysteme, komplexe Schnittstellen und eine kleine Nutzerbasis
-zusätzliche Hürden für Verallgemeinerung und Transfer darstellen. Diese Punkte
-markieren bewusste Grenzen des aktuellen Stands und leiten unmittelbar zu
-Folgestudien über.
+  Die vorliegende Arbeit wurde innerhalb einer vorkonfigurierten
+  Simulationsumgebung evaluiert. Echtzeitverhalten,
+  Sensitivität gegenüber Simulationsparametern sowie Übertragbarkeit auf weitere
+  Roboter wurden nicht systematisch untersucht. Darüber hinaus
+  beschränkt sich die Implementierung der Adapter auf die RWS API. Das Interview
+  verdeutlicht, dass proprietäre Ökosysteme, komplexe Schnittstellen
+  und eine kleine Nutzerbasis zusätzliche Hürden für
+  Verallgemeinerung und Transfer darstellen. Diese Punkte markieren
+  bewusste Grenzen des aktuellen Stands und leiten unmittelbar zu
+  Folgestudien über.

@@ -1,73 +1,76 @@
 \subsection{Process Flow Monitor}
 \label{section:prozessfolgen}
+Im Folgenden wird die Implementierung des Process Flow
+Monitors zur Erkennung von Fehlern im Prozessablauf, genauer der
+Einhaltung der definierten Abfolge von Arbeitsschritten, dargestellt.
+Ziel ist es, Abweichungen festzustellen und darauf basierende Events mit
+aktuellem Sequenzschritt, Soll-Sequenz sowie relevanten Zustandsinformationen
+des Roboters auszugeben.
+
 \subsubsection{Theoretische Grundlagen der Prozessflussüberwachung}
-\noindent
-Die Überwachung von Produktionsabläufen in der Robotik basiert auf der Validierung
+Die Überwachung von Produktionsabläufen in der Robotik basiert auf
+der Validierung
 deterministischer Werkstückpfade durch diskrete Fertigungsstationen. In der
 Literatur werden solche Systeme als Discrete Event Systems (DES) modelliert, bei
-denen Zustandsübergänge durch definierte Ereignisse ausgelöst werden.\vglcite[39\psq]{cassandras2021}
+denen Zustandsübergänge durch definierte Ereignisse ausgelöst
+werden.\vglcite[39\psq]{cassandras2021}
 
 \subsubsection{Praktisches Vorgehen}
-\noindent
 Das System modelliert den Fertigungsprozess durch zwei zentrale Domänenobjekte.
 Die \texttt{Part}-Klasse repräsentiert Werkstücke mit eindeutiger ID, Name und
 Typ. Jedes Werkstück speichert seine erforderliche Bearbeitungssequenz als
 Array von Station-Referenzen und verfolgt seinen aktuellen Fortschritt durch
 einen Sequenzindex. Die \texttt{Station}-Klasse definiert Bearbeitungsbereiche
 durch Trigger-Collider an den physischen Positionen der Arbeitsstationen. Jede
-Station besitzt einen eindeutigen Namen und numerischen Index zur Sortierung.\\
+Station besitzt einen eindeutigen Namen und numerischen Index zur Sortierung.
 
-\noindent
 Die Prozesspfade werden deklarativ im Unity-Inspector durch Zuweisung der
 Station-Referenzen definiert. Diese Konfiguration ermöglicht die flexible
 Modellierung verschiedener Fertigungsabläufe ohne Programmänderungen. Zur
 Laufzeit validiert das System automatisch die Einhaltung der definierten
 Sequenzen und protokolliert jeden Stationsbesuch mit Zeitstempel für spätere
-Analysen.\\
+Analysen.
 
-\noindent
-Die Schwierigkeit liegt hier in der korrekten Interpretation von
 Trigger-Events unter Berücksichtigung der dynamischen Objekthierarchie. Wenn ein
-Werkstück gegriffen wird, wechselt es in Unity vom Weltkoordinatensystem in das
+Werkstück gegriffen wird, wechselt es in Unity3D vom
+Weltkoordinatensystem in das
 lokale Koordinatensystem des Greifers. Diese Hierarchieänderung erzeugt
 scheinbare Ein- und Austritts-Events an Stationen, die nicht als
-Prozessübergänge interpretiert werden dürfen.\\
+Prozessübergänge interpretiert werden dürfen.
 
-\noindent
 Der Monitor implementiert daher eine Grip-State-Awareness, die vier
-relevante Zustandsübergänge unterscheidet: Ablegen (Validierung der Zielstation),
+relevante Zustandsübergänge unterscheidet: Ablegen (Validierung der
+Zielstation),
 Aufnehmen (Protokollierung der Quellstation), Transport (wird ignoriert) und
-ungegriffene Bewegungen (Fehlererkennung). Diese Unterscheidung erfolgt durch
+nicht erfolgreich gegriffene Bewegungen (Fehlererkennung). Diese
+Unterscheidung erfolgt durch
 hierarchische Analyse der Transform-Komponente - ein Werkstück gilt als
-gegriffen, wenn es Kind-Objekt des Roboters ist.\\
+gegriffen, wenn es Kind-Objekt des Roboters ist.
 
-\noindent
 Die Implementierung nutzt ein Layer-System zur Ereignisfilterung. Werkstücke
 operieren auf Layer 30 (Parts), Stationen auf Layer 31 (ProcessFlow). Diese
 Trennung ermöglicht selektive Trigger-Erkennung ohne Interferenz mit der
 physikalischen Kollisionserkennung des Roboters.
 
 \subsubsection{Konkrete Implementierung}
-\noindent
 Der \texttt{ProcessFlowMonitor} koordiniert die Überwachung durch Subscription
 auf Station-Events. Bei jedem Trigger-Event korreliert er den Grip-State mit
 der Werkstückbewegung und validiert Transitionen gegen die definierte Sequenz.
 Der Monitor klassifiziert drei Fehlertypen: \texttt{WrongSequence} für
 nicht-sequenzielle Bewegungen, \texttt{SkippedStation} für übersprungene
-Stationen und \texttt{UnknownStation} für undefinierte Ziele.\\
+Stationen und \texttt{UnknownStation} für undefinierte Ziele.
 
-\noindent
-Bei Erkennung eines Prozessfolgenfehlers generiert der Monitor ein \texttt{SafetyEvent} mit
+Bei Erkennung eines Prozessfolgenfehlers generiert der Monitor ein
+\texttt{SafetyEvent} mit
 vollständigen Metadaten. Die Schweregrade sind konfigurierbar - standardmäßig
 werden falsche Sequenzen als kritisch und übersprungene Stationen als Warnungen
 klassifiziert. Ein Cooldown-Mechanismus verhindert mehrfache Meldungen
 identischer Verletzungen. Das Event wird an den \texttt{RobotSafetyManager}
 weitergeleitet, der es mit dem aktuellen Roboterzustand anreichert und gemäß
-der konfigurierten Logging-Strategie verarbeitet.\\
+der konfigurierten Logging-Strategie verarbeitet.
 
-\noindent
 Die Überwachung der Prozessfolgen ist insbesondere in realen
 Produktionsszenarien relevant, da eine fehlerhafte Reihenfolge
 zu Sicherheitsrisiken oder Ausschuss führen kann.
-In Kapitel \ref{sec:processauswertung} wird ein Beispiel gezeigt, in dem eine bewusst
-abweichende Abfolge simuliert wurde.
+In Kapitel \ref{sec:processauswertung} wird ein Beispiel gezeigt, in
+dem eine bewusst abweichende Abfolge simuliert wurde.
