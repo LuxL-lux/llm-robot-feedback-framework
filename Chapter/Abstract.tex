@@ -1,7 +1,33 @@
 \addchap{Abstract}
-% Was war konkret die Fragegestellung
-% Wie hab das durchgeführt
-% Simulationsaufbau
-% Wie habe ich das überprüft
-% Was waren die Ergebnisse
-% Ansatz zeigt anhand der Ergebnisse dass..
+The programming of industrial robots traditionally requires detailed
+knowledge of vendor-specific programming languages as well as a
+profound understanding of kinematics. With the availability of
+generative language models (LLMs), the possibility arises to generate
+robot programs from natural language descriptions. However, directly
+applying such approaches in industrial environments entails
+considerable risks, as faulty motion sequences or process logic may
+lead to collisions, production downtime, or safety-critical
+situations. Simulation-based validation therefore represents a
+necessary intermediate step to virtually test generated code and
+reduce risks before transferring it to real systems.
+
+Within the scope of this thesis, a framework for simulation-based
+validation of LLM-generated robot code is developed, implemented, and
+evaluated. The framework is realized in Unity3D using an ABB
+articulated robot as test system. It follows a modular, event-driven
+architecture and integrates monitoring mechanisms that validate
+process flows, detect collisions, identify kinematic singularities,
+and monitor joint positions, velocities, and accelerations. All
+detected deviations are systematically recorded and enriched with
+temporal and contextual information to enable subsequent analysis.
+
+The functionality was examined in a realistic pick-and-place
+scenario, in which faulty sequences and critical robot states were
+deliberately provoked. In addition, a qualitative reflection was
+carried out in the form of an expert interview. The results
+demonstrate that process deviations, collisions, singularities, and
+limit violations can be reliably detected and reproducibly
+documented. Thus, this work contributes to the safe integration of
+LLMs into industrial robotics by providing a methodological basis for
+the validation of generated code and by outlining a perspective for
+feeding simulation results back into language models.

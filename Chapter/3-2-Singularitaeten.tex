@@ -24,15 +24,15 @@ ihren vollen Rang verliert:
 $\mathbf{J}(\boldsymbol{\theta}) \in \mathbb{R}^{m \times n}$ die Jacobi-Matrix,
 $\boldsymbol{\theta}$ der Gelenkwinkelvektor, $m$ die Anzahl der Freiheitsgrade
 im kartesischen Raum und $n$ die Anzahl der Robotergelenke darstellt.
- 
+
 Die Jacobi-Matrix beschreibt die Beziehung zwischen Gelenkgeschwindigkeiten
 $\dot{\boldsymbol{\theta}}$ und kartesischen Geschwindigkeiten des TCP
 $\mathbf{v}$:
 \begin{equation} \mathbf{v} = \mathbf{J}(\boldsymbol{\theta})
   \dot{\boldsymbol{\theta}} \label{eq:jacobian_velocity}
 \end{equation}
- 
-Tritt eine Singularität auf, so wird die Jacobi-Matrix singulär.
+
+Tritt eine Singularität auf, so wird die Jacobi-Matrix singulär:
 \begin{equation} \det(\mathbf{J}) = 0 \label{eq:jacobian_singularity}
 \end{equation} Dadurch wird die inverse Kinematik nicht
 eindeutig lösbar ist und es können theoretisch unendliche
@@ -60,7 +60,7 @@ Rotationsachse des ersten Gelenks befindet:
   \sqrt{x_{wc}^2 + y_{wc}^2} < \epsilon
   \label{eq:shoulder_singularity}
 \end{equation}
- 
+
 wobei $(x_{wc}, y_{wc})$ die Position des Handgelenkszentrums in der XY-Ebene
 und $\epsilon$ der Singularitätsschwellenwert ist.
 
@@ -105,13 +105,13 @@ beschrieben durch:
   \cdot \mathbf{z}_6| \approx 1
   \label{eq:wrist_singularity}
 \end{equation}
- 
+
 wobei $\mathbf{z}_i$ die Rotationsachse (Z-Achse) des $i$-ten Gelenks im
 Weltkoordinatensystem darstellt. Beispielhaft ist das Auftreten einer
 Handgelenkssingularität in Abbildung~\ref{figure:wristSingularity}
 in Unity3D.
 
-\paragraph{Manipulierbarkeitsindex (Yoshikawa-Maß)} Der von Yoshikawa
+\subsubsection{Manipulierbarkeitsindex (Yoshikawa-Maß)} Der von Yoshikawa
 \cite{yoshikawa1985manipulability} eingeführte Manipulierbarkeitsindex ist eine
 der am häufigsten verwendeten Metriken:
 \begin{equation}
@@ -125,7 +125,7 @@ Für quadratische Jacobi-Matrizen vereinfacht sich dies zu:
   \mu(\boldsymbol{\theta}) = |\det(\mathbf{J}(\boldsymbol{\theta}))|
   \label{eq:yoshikawa_simplified}
 \end{equation}
- 
+
 Der Index nimmt Werte zwischen 0 (Singularität) und einem maximalen Wert an,
 wobei höhere Werte bessere Manipulierbarkeit indizieren. Die Robotik-Literatur
 bietet verschiedene Ansätze zur Behandlung von Singularitäten, die sich in
@@ -142,7 +142,7 @@ werden kann. Er wird in den Ergebnissen in Kapitel
   \centering
   \includegraphics[width=\linewidth]{Figures/wristSingularityScreenshot.jpg}
   \caption{Screenshot einer Handgelenksingularität in Unity mit farbig
-  dargestellten Koordinatensystemen der DH-Transformationen}
+  dargestellten Koordinatensystemen der Denavit-Hartenberg-Transformationen}
   \label{figure:wristSingularity}
 \end{figure}
 
@@ -152,13 +152,14 @@ einer Singularität dargestellt.
 
 \paragraph{Schritt 1: Positionsberechnung und Achsentransformation}~\\
 Die Positionen der relevanten Gelenke werden durch die Anwendung der
-Vorwärtstransformation nach Denavit-Hartenberg berechnet\vglcite{denavit1955}:
+Vorwärtstransformation nach Denavit-Hartenberg (DH)
+berechnet\vglcite{denavit1955}:
 \begin{equation}
   \vec{p}_i = \text{DH}(\theta_1, \ldots, \theta_i) \quad \text{für }
   i = 2, 3, 5
   \label{eq:position_calculation}
 \end{equation}
- 
+
 Die Rotationsachsen werden aus den Transformationsmatrizen extrahiert:
 \begin{equation}
   \mathbf{z}_i = \mathbf{T}_i[:3, 2] \quad \text{für } i = 1, 4, 6
@@ -216,7 +217,7 @@ nach Yoshikawa berechnet:
   w = \sqrt{\det(\mathbf{J}(\theta)\mathbf{J}^T(\theta))}
   \label{eq:manipulability}
 \end{equation}
- 
+
 Ein kleiner Wert von $w$ indiziert die Nähe zu einer singulären Konfiguration.
 Das entwickelte Framework implementiert eine winkelbasierte
 Singularitätsdetektion, die geometrische Eigenschaften der Roboterkinematik
@@ -243,7 +244,6 @@ Abbildung~\ref{listing:forwardKinematic}).
   \label{listing:forwardKinematic}
 \end{figure}
 
- 
 Die Methode \texttt{ComputeJointPosition} in Abbildung
 \ref{listing:forwardKinematic} implementiert die klassische
 Vorwärtskinematik durch
@@ -253,7 +253,6 @@ $\theta_i$ der aktuelle Gelenkwinkel plus einem konstanten Offset ist. Die
 resultierende Transformationsmatrix beschreibt die Position und Orientierung des
 Gelenks im Basiskoordinatensystem.\\
 
- 
 Das Framework nutzt Unitys \texttt{Matrix4x4}-Klasse für die
 Transformationsberechnungen und die \texttt{GetPosition()}-Methode zur
 Extraktion der Translationskomponente. Die Koordinatentransformation zwischen

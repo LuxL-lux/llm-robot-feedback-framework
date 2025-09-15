@@ -76,17 +76,11 @@ Handgelenk.
 Die zentrale Smoothing-Methode kombiniert die Filteransätze, dargestell in
 Abbildung~\ref{listing:smoothing_pipeline}.
 
-\begin{figure}[H]
-  \inputminted[fontsize=\footnotesize]{csharp}{code-snippets/SmoothVelocities.cs}
-  \caption{Mehrstufige Smoothing-Pipeline zur Geschwindigkeitsberechnung}
-  \label{listing:smoothing_pipeline}
-\end{figure}
-
 Als weiteres Feature implementiert der Monitor eine Methode, welche sich an die
 Update-Rate der State-Updates (also die Rate neuer Gelenkdaten) anpasst. So kann
 garantiert werden, dass ein State nicht doppelt verarbeitet und so
 beispielsweise die Geschwindigkeit falsch interpretiert wird, da es sich um den
-immer gleichen State des Roboters handelt.\\
+immer gleichen State des Roboters handelt.
 
 Bei der Überschreitung der Schwellwerte wird der \texttt{SafetyMonitor}
 mittels eines \texttt{SafetyEvents} benachrichtigt. Als zusätzliche
@@ -95,5 +89,13 @@ diese Meldung die Eventart (Geschwindigkeits- oder
 Beschleunigungsüberschreitung) und die damit zusammenhängenden Schwellwerte und
 aktuellen Werte. Da es in dem Rahmen vorkommen kann, dass hier die
 Geschwindigkeit über einen längeren Zeitraum überschritten wird, gibt der
-Monitor ebenfalls ein SafetyEvent aus, wenn die Geschwindigkeit unter den
+Monitor ebenfalls ein \texttt{SafetyEvent} aus, wenn die
+Geschwindigkeit unter den
 gegebenen Schwellwert sinkt.
+
+\begin{figure}[H]
+  \inputminted[fontsize=\footnotesize]{csharp}{code-snippets/SmoothVelocities.cs}
+  \caption{Mehrstufige Smoothing-Pipeline zur Geschwindigkeitsberechnung}
+  \label{listing:smoothing_pipeline}
+\end{figure}
+\newpage

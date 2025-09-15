@@ -42,7 +42,7 @@ provoziert werden, in dem das Werkstück abweichend zum in Abbildung
 Regal bewegt wird. Semantisch bedeutet dies ein Überspringen der Station
 \textit{Machine}. Das soll ein SafetyEvent triggern, sobald das Werkstück im
 falschen Regal abgelegt wird.
-
+\newpage
 \textbf{Korrekter Prozessfluss}
 \begin{enumerate}
   \item Bewegung von Home-Position zu linkem Regal
@@ -68,8 +68,7 @@ falschen Regal abgelegt wird.
 Im veränderten Prozessfluss wird nun der Schritt der Bearbeitung übersprungen.
 Dies kann in der Praxis durch eine inkorrekte Abfolge im Roboterprogrammcode
 passieren. Somit ist der veränderte Prozessfluss wie folgt definiert.
-
- 
+\newpage
 \textbf{Abgewandelter Prozessfluss}
 \begin{enumerate}
   \item Bewegung von Home-Position zu linkem Regal
@@ -165,25 +164,26 @@ Daten sind also als Event-Daten in einem String komprimiert.\\
   \label{listing:collisiondetectionerror}
 \end{figure}
 
- 
-Weiterführend ist zu erkennen, dass die Kollison mit verschiedenen Gliedern des
+Weiterführend ist zu erkennen, dass die Kollision mit verschiedenen Gliedern des
 Roboters sequentiell erkannt wird. Sobald der Roboter sich visuell weiter in die
-Säule bewegt, wird jeweils bei der Kollison mit einem weiteren Glied eine
+Säule bewegt, wird jeweils bei der Kollision mit einem weiteren Glied eine
 weitere Kollision erkannt und ein eigenes Event getriggert. Die Reihenfolge der
 Joints in diesem Szenario ist nach eingehender Überprüfung als korrekt zu
 bewerten, da die Robotergeometrie dafür sorgt, dass Gelenk 4 deutlich breiter
 ist als 5 und 6. Gelenk 5 und 6 sind in die Geometrie von Gelenk 4 eingefasst,
-daher kollidert der Roboter inital mit Gelenk 4, bevor eine Kollision an den
-kinematisch dahinterliegenden Gelenken erkannt wird.\\
+daher kollidiert der Roboter initial mit Gelenk 4, bevor eine Kollision an den
+kinematisch dahinterliegenden Gelenken erkannt wird.
 
-  Weiterführend lässt sich beim Greifen des Werkstücks feststellen, dass
-hier ebenfalls eine Kollison erkannt wird: Durch das Greifen des Werkstücks wird
-eine falsch-positive Kollison getriggert, da bevor das Werkstück gegriffen wird
+Zusätzlich dazu lässt sich beim Greifen des Werkstücks feststellen, dass
+hier ebenfalls eine Kollision erkannt wird: Durch das Greifen des
+Werkstücks wird
+eine falsch-positive Kollision getriggert, da bevor das Werkstück gegriffen wird
 und semantisch in die kinematische Kette des Roboters verschoben wird, für einen
-kurzen Zeitpunk eine Kollision stattfindet. Ein Beispiel dazu findet sich im
+kurzen Zeitpunkt eine Kollision stattfindet. Ein Beispiel dazu findet sich im
 letzten Block von Abbildung \ref{listing:collisiondetectionerror}. Gleiches
-lässt sich beim Ablegen desn Werkstücks beobachten. Wichtig zu erwähnen ist der
-unterschiedliche EventType, da das Werkstück aufgrund von fehlendem Tag nicht
+lässt sich beim Ablegen des Werkstücks beobachten. Wichtig zu
+erwähnen ist der unterschiedlichen Eventtypen, da das Werkstück
+aufgrund von fehlendem Tag nicht
 als kritisch eingestuft wird.
 
 \newpage
@@ -249,7 +249,7 @@ die Ergebnisse mit den oben Beschriebenen.
 
 \section{Auswertung der Gelenkdynamiküberwachung}
 \label{sec:Analyse_Sicherheit}
-Der \textit{Joint Dynamics Monitor} erfasst kontinuierlich die Dynamik der sechs
+Der Joint Dynamics Monitor erfasst kontinuierlich die Dynamik der sechs
 Roboterachsen. Die Implementierung in Unity3D basiert auf den vom digitalen
 Abbild gestreamten Gelenkwinkeln, welche aus denen Geschwindigkeiten und
 Beschleunigungen differenziell berechnet werden. Zur Signalanalyse werden
@@ -411,16 +411,15 @@ laufendes Programm, Pose/Kontext) betont. Die Einordnung der industriellen
 Robotersimulationslandschaft liefert den Rahmen, in dem die
 vorgestellten Ergebnisse zu
 sehen sind.
-
+\newpage
 \section{Zusammenfassung der Ergebnisse}
-
 Die Ergebnisse zeigen, dass die in Unity implementierten Monitore in allen
 Testfällen die in RobotStudio provozierten Szenarien widerspiegeln konnten.
 Dabei wurde deutlich, dass sich für jedes Modul charakteristische Muster im
 Logging abzeichnen: Prozessabweichungen wurden sequenziell dokumentiert,
 Kollisionen mit Schweregraden versehen, Singularitäten mit Gelenkwinkeln und
 Manipulierbarkeitswerten erfasst, und Geschwindigkeitsverletzungen durch
-Event-Paare (exceeded/resolved) gekennzeichnet.\\
+Event-Paare (exceeded/resolved) gekennzeichnet.
 
 \begin{table}[H]
   \centering

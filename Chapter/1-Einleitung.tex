@@ -69,30 +69,41 @@ Beschleunigungsüberschreitungen frühzeitig erkannt und berichtigt werden.
 Erkannte Fehlerereignisse sollen mit weiteren, der Analyse und Fehlersuche
 behilflichen Daten anreichert werden.
 
-Dazu wird in Kapitel~\ref{cap:Grundlagen}, wird zunächst der Stand
+Dazu wird in Kapitel~\ref{cap:Grundlagen} zunächst der Stand
 der Technik zu
 Robotersimulation, Offline‑Programmierung und LLMs zusammengefasst und
 herausgestellt, inwiefern die Notwendigkeit der Aufbau eines solches Frameworks
 besteht und welche Rahmenbedingungen dazu zu beachten sind.
-Darauf aufbauend wird in Kapitel~\ref{sec:framework} anschließend die
-Architektur des zu
-entwickelnden Frameworks beschrieben, welches die Einbindung einer
-virtuellen Robotersteuerung in der Entwicklungs- und
-Modellierungsumgebung Unity3D vorsieht.
+Auf Basis dessen wird in Kapitel~\ref{sec:architektur_frameowork}
+anschließend die Architektur des zu entwickelnden Frameworks
+beschrieben, welches die Einbindung einer virtuellen Robotersteuerung
+in der Entwicklungs- und Modellierungsumgebung Unity3D vorsieht.
+Darauf aufbauend werden in Kapitel~\ref{sec:implementierungMonitore}
+vier verschiedene Module zur Fehlererkennung des Roboterverhaltens
+implementiert. Dabei beschränkt sich diese Arbeit auf die Erkennung von falschen
+Prozessfolgen innerhalb eines Roboterprogramms, der
+Kollisionserkennung des Roboters mit seiner Umgebung, der
+Singularitätserkennung sowie der Geschwindigkeits- und
+Beschleunigungsüberschreitung von Robotergelenken.
 
-Weiterführend werden vier verschiedene Module zur Analyse des Roboterverhaltens
-implementiert werden. Dabei beschränkt sich diese Arbeit auf die Erkennung von
-falschen Prozessfolgen innerhalb eines Roboterprogramms, der Kollisionserkennung
-des Roboters mit seiner Umgebung, der Singularitätserkennung sowie der
-Geschwindigkeits- und Beschleunigungsüberschreitung von Robotergelenken.
+In Kapitel~\ref{sec:testumgebung} wird eine modellierte Testumgebung mit einem
+realitätsnahen Pick-and-Place-Szenarios vorgestellt, innerhalb dessen die
+Funktionalitäten des Frameworks getestet werden sollen.
 
-In einem realitätsnahen Beispielszenario einer Roboterzelle werden die
-Funktionalitäten des Frameworks getestet und durch spezifische
-Szenarien fehlerhaftes Roboterverhalten zu provozieren und die Detektion dessen
-durch das Framework zu
-verifizieren. Ein Experteninterview ergänzt die Evaluation und
-reflektiert die Eignung des Ansatzes aus praktischer Sicht.
+Anschließend wird in Kapitel~\ref{cap:Ergebnisse} dargestellt,
+inwiefern sich durch Veränderung des
+Roboterprogrammcodes innerhalb der Testumgebung fehlerhaftes
+Roboterverhalten provoziert werden kann. Zusätzlich wird im Rahmen eines
+Experteninterviews ergänzt, inwiefern der Ansatz qualitative und in
+der Praxis nutzbare Ergebnisse liefert.
 
-Abschließend werden die gewonnenen Erkenntnisse diskutiert, Limitationen
-des Prototyps aufgezeigt und in Zusammenhang mit einer Nutzung von LLMs zur
-Generierung und Verbesserung von Roboterprogrammcode gebracht.
+Im Rahmen von Kapitel~\ref{cap:diskussion} werden die gewonnenen
+Erkenntnisse diskutiert, Limitationen des entwickelten Frameworks
+aufgezeigt und in
+Zusammenhang mit einer Nutzung von LLMs zur Generierung und
+Verbesserung von Roboterprogrammcode gebracht. Dazu werden die Stärken und
+Schwächen des Ansatzes diskutiert sowie die Generalisierbarkeit und
+Weiterentwicklungsmöglichkeiten aufgezeigt.
+
+Die Arbeit schließt mit einer Zusammenfassung und Fazit in
+Kapitel~\ref{cap:Fazit} ab.

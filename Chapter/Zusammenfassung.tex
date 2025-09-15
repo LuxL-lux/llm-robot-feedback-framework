@@ -1,8 +1,39 @@
 \addchap{Zusammenfassung}
-% Was war konkret die Fragegestellung
-% Wie hab das durchgeführt
-% Simulationsaufbau
-% Wie habe ich das überprüft
-% Was waren die Ergebnisse
-% Ansatz zeigt anhand der Ergebnisse dass..
-%
+Die Programmierung von Industrierobotern erfordert bislang
+detaillierte Kenntnisse in herstellerspezifischen Programmiersprachen
+sowie tiefgehendes kinematisches Fachwissen. Mit der Verfügbarkeit
+generativer Sprachmodelle (engl. Large Language Models, LLMs) ergibt sich
+die Möglichkeit, Roboterprogramme aus natürlichsprachlichen
+Beschreibungen zu erzeugen. Ein direkter Einsatz solcher Ansätze im
+industriellen Umfeld ist jedoch mit erheblichen Risiken verbunden, da
+fehlerhafte Bewegungsabläufe oder Prozesslogiken zu Kollisionen,
+Produktionsausfällen oder sicherheitskritischen Zuständen führen
+können. Eine simulationsbasierte Validierung stellt daher einen
+notwendigen Zwischenschritt dar, um generierten Code zunächst
+virtuell zu prüfen und Risiken vor einer Übertragung auf reale
+Systeme zu minimieren.
+
+Im Rahmen dieser Arbeit wird ein Framework zur simulationsbasierten
+Validierung von LLM-generiertem Robotercode entwickelt, implementiert
+und evaluiert. Die Realisierung erfolgt in Unity3D unter Einbindung
+eines ABB IRB 6700 als virtuellen Testroboter. Das Framework basiert
+auf einer modularen, ereignisgesteuerten Architektur und integriert
+Überwachungsmechanismen, die Prozessfolgen prüfen, Kollisionen
+detektieren, kinematische Singularitäten identifizieren sowie
+Gelenkwinkel, -geschwindigkeiten und -beschleunigungen überwachen.
+Alle erfassten Abweichungen werden systematisch aufgezeichnet und mit
+zeitlichen sowie kontextbezogenen Informationen ergänzt, um eine
+spätere Auswertung zu ermöglichen.
+
+Die Funktionalität wurde anhand eines realitätsnahen
+Pick-and-Place-Szenarios untersucht, in dem gezielt fehlerhafte
+Sequenzen und kritische Roboterzustände provoziert wurden. Ergänzend
+erfolgte eine qualitative Reflexion im Rahmen eines
+Experteninterviews. Die Ergebnisse zeigen, dass sich
+Prozessabweichungen, Kollisionen, Singularitäten und
+Grenzwertverletzungen zuverlässig erkennen und reproduzierbar
+dokumentieren lassen. Damit leistet die Arbeit einen Beitrag zur
+sicheren Integration von LLMs in die industrielle Robotik, indem sie
+eine methodische Grundlage für die Validierung generierten Codes
+bereitstellt und eine Perspektive für die Rückkopplung von
+Simulationsergebnissen an Sprachmodelle eröffnet.
