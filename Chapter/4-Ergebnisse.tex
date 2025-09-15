@@ -69,7 +69,7 @@ Im veränderten Prozessfluss wird nun der Schritt der Bearbeitung übersprungen.
 Dies kann in der Praxis durch eine inkorrekte Abfolge im Roboterprogrammcode
 passieren. Somit ist der veränderte Prozessfluss wie folgt definiert.
 
-\noindent
+ 
 \textbf{Abgewandelter Prozessfluss}
 \begin{enumerate}
   \item Bewegung von Home-Position zu linkem Regal
@@ -165,7 +165,7 @@ Daten sind also als Event-Daten in einem String komprimiert.\\
   \label{listing:collisiondetectionerror}
 \end{figure}
 
-\noindent
+ 
 Weiterführend ist zu erkennen, dass die Kollison mit verschiedenen Gliedern des
 Roboters sequentiell erkannt wird. Sobald der Roboter sich visuell weiter in die
 Säule bewegt, wird jeweils bei der Kollison mit einem weiteren Glied eine
@@ -176,7 +176,7 @@ ist als 5 und 6. Gelenk 5 und 6 sind in die Geometrie von Gelenk 4 eingefasst,
 daher kollidert der Roboter inital mit Gelenk 4, bevor eine Kollision an den
 kinematisch dahinterliegenden Gelenken erkannt wird.\\
 
-\noindent Weiterführend lässt sich beim Greifen des Werkstücks feststellen, dass
+  Weiterführend lässt sich beim Greifen des Werkstücks feststellen, dass
 hier ebenfalls eine Kollison erkannt wird: Durch das Greifen des Werkstücks wird
 eine falsch-positive Kollison getriggert, da bevor das Werkstück gegriffen wird
 und semantisch in die kinematische Kette des Roboters verschoben wird, für einen
