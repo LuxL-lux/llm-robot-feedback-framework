@@ -33,7 +33,7 @@ Bearbeitungsschritte und Sicherheitsfunktionen eines Roboters
 definieren.\vglcites{\citesingle{pine1993};
   \citesingle{elmaraghy2005}; \citesingle{wiendahl2007};
 \citesingle{koren1999}; \citesingle{biggs2003}}
-Traditionelle Programmiermethoden sind komplex,
+Traditionelle Programmiermethoden und -sprachen sind komplex,
 herstellerspezifisch und setzen ein profundes Verständnis der
 jeweiligen Kinematik und proprietären Sprachen
 voraus.\vglcite[116]{lambrecht2011} Gleichzeitig halten generative
@@ -44,14 +44,14 @@ Hürden der Roboterprogrammierung zu
 senken.\vglcites{\citesingle{salimpour2025}; \citesingle{brohan2023};
 \citesingle{liang2023}} In der Praxis ist der
 direkte Einsatz von Large Language Models (LLMs) zur Generierung von
-Roboterprogrammcode im industriellen Kontext jedoch riskant:
+Roboterprogrammcode im industriellen Kontext jedoch problematisch:
 Fehlerhafte Bewegungssequenzen
 oder fehlerhafte Prozesslogiken können zu Kollisionen, Schäden und
 Produktionsausfällen führen.\vglcite[4]{bilancia2023} Daher ist eine
 sorgfältige Validierung des
-generierten Codes unerlässlich. Darüber hinaus stellt die
-Generierung von Roboterprogrammcode durch LLMs eine signifikante Hürde durch das
-Fehlen des Verständnisses der physikalischen Welt
+generierten Codes unerlässlich. Darüber hinaus stellt das Fehlen des
+Verständnisses der physikalischen Welt eine signifikante Hürde für  die
+Generierung von funktionalem Roboterprogrammcode durch LLMs
 dar.\vglcite[1/psqq]{cohen2024}
 
 \section{Zielsetzung und Aufbau der Arbeit}
@@ -67,34 +67,37 @@ getestet werden und fehlerhaftes Verhalten wie falsche Prozessabfolgen,
 Kollisionen, Singularitäten sowie Gelenkgeschwindigkeits- und
 Beschleunigungsüberschreitungen frühzeitig erkannt und berichtigt werden.
 Erkannte Fehlerereignisse sollen mit weiteren, der Analyse und Fehlersuche
-behilflichen Daten anreichert werden.
+behilflichen Daten angereichert werden.
 
 Dazu wird in Kapitel~\ref{cap:Grundlagen} zunächst der Stand
 der Technik zu
-Robotersimulation, Offline‑Programmierung und LLMs zusammengefasst und
-herausgestellt, inwiefern die Notwendigkeit der Aufbau eines solches Frameworks
+Robotersimulation, Offline-Programmierung und LLMs zusammengefasst und
+herausgestellt, inwiefern die Notwendigkeit des Aufbaus eines solchen Frameworks
 besteht und welche Rahmenbedingungen dazu zu beachten sind.
-Auf Basis dessen wird in Kapitel~\ref{sec:architektur_frameowork}
-anschließend die Architektur des zu entwickelnden Frameworks
+
+Auf dieser Basis erfolgt in Kapitel~\ref{cap:framework} die
+Darstellung der Implementierung des Frameworks zur
+simulationsbasierten Validierung. Dazu wird zunächst in
+Abschnitt~\ref{sec:architektur_frameowork} die Architektur des zu
+entwickelnden Frameworks
 beschrieben, welches die Einbindung einer virtuellen Robotersteuerung
 in der Entwicklungs- und Modellierungsumgebung Unity3D vorsieht.
-Darauf aufbauend werden in Kapitel~\ref{sec:implementierungMonitore}
+Darauf aufbauend werden in Abschnitt~\ref{sec:implementierungMonitore}
 vier verschiedene Module zur Fehlererkennung des Roboterverhaltens
 implementiert. Dabei beschränkt sich diese Arbeit auf die Erkennung von falschen
 Prozessfolgen innerhalb eines Roboterprogramms, der
 Kollisionserkennung des Roboters mit seiner Umgebung, der
 Singularitätserkennung sowie der Geschwindigkeits- und
 Beschleunigungsüberschreitung von Robotergelenken.
-
-In Kapitel~\ref{sec:testumgebung} wird eine modellierte Testumgebung mit einem
+In Abschnitt~\ref{sec:testumgebung} wird eine modellierte Testumgebung mit einem
 realitätsnahen Pick-and-Place-Szenarios vorgestellt, innerhalb dessen die
 Funktionalitäten des Frameworks getestet werden sollen.
 
 Anschließend wird in Kapitel~\ref{cap:Ergebnisse} dargestellt,
 inwiefern sich durch Veränderung des
 Roboterprogrammcodes innerhalb der Testumgebung fehlerhaftes
-Roboterverhalten provoziert werden kann. Zusätzlich wird im Rahmen eines
-Experteninterviews ergänzt, inwiefern der Ansatz qualitative und in
+Roboterverhalten provozieren lässt. Zusätzlich wird im Rahmen eines
+Experteninterviews ergänzt, inwiefern der Ansatz in
 der Praxis nutzbare Ergebnisse liefert.
 
 Im Rahmen von Kapitel~\ref{cap:diskussion} werden die gewonnenen

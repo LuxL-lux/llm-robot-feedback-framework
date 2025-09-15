@@ -24,7 +24,7 @@ konsistente kinematische Modellierung verschiedener Robotermodelle erlaubt.
 
 Gleichzeitig bleibt offen, inwiefern einzelne Simulationsparameter
 oder Modellierungsentscheidungen in Unity bei hochkomplexen Geometrien eine
-Limitation darstellen \emph{könnten}. Die Unity-Engine bietet hier zwar eine
+Limitation darstellen könnten. Die Unity-Engine bietet hier zwar eine
 Grundlage physischer Modellierung, abschließende Aussagen zur Genauigkeit in
 sehr dynamischen oder kleinschrittigen Prozessen können aber nicht getroffen
 werden. Diese Aspekte wurden nicht systematisch untersucht und markieren Raum
@@ -56,7 +56,7 @@ beschreiben lässt, so Syniawa.
 
 Das Modul erkennt Abweichungen in der vorgesehenen Reihenfolge zuverlässig,
 sofern Stationen korrekt modelliert und ausgelöst werden. Nicht abgedeckt sind
-Konstellationen, in denen ein Werkstück \emph{zwischen} zwei Stationen
+Konstellationen, in denen ein Werkstück zwischen zwei Stationen
 unbeabsichtigt abgelegt oder verloren wird, ohne dass eine Station detektiert
 wird. Die Praxistauglichkeit hängt damit von der Qualität der
 Prozessmodellierung und der Art des Prozesses ab. Im aktuellen Fokus stand hier
@@ -128,12 +128,7 @@ Modellierungsansätze.{\vglcite[39\psq]{cassandras2021} Im Interview
   Programmzeile sowie Motordaten und Achswinkel vor. Hinzu kommen
   event-spezifische Felder im \texttt{eventDataJson}, etwa
   Kollisionspunkt und Distanz oder Gelenkwinkel und
-  Manipulierbarkeitswert bei Singularitäten\footnote{Vgl. u.\,a.
-    Process-Flow-Event inkl.\ Programmpointer und RobotStateSnapshot
-    sowie die Beschreibung des JSON-Aufbaus; Kollisionsevents mit
-    \texttt{collisionPoint} und Distanz; Singularitätsevents mit
-    Gelenkwinkeln und Manipulierbarkeitswert; Joint-Dynamics-Events als
-  \enquote{exceeded}/\enquote{resolved}.}. Diese maschinenlesbare
+  Manipulierbarkeitswert bei Singularitäten. Diese maschinenlesbare
   Struktur eignet sich unmittelbar als gezielter Eingabekontext für
   generative Modelle: Der Fehler wird präzise beschrieben, der
   relevante Zustandsausschnitt ist enthalten, und die Semantik stammt
@@ -143,13 +138,14 @@ Modellierungsansätze.{\vglcite[39\psq]{cassandras2021} Im Interview
 
   Operativ lässt sich darauf ein kurzer Iterationszyklus aufbauen: Aus
   einem fehlgeschlagenen Lauf durch Nutzer- oder LLM-generierten
-  Roboterprogrammcode wird ein kompakter Fehlerkontext aus
+  Roboterprogrammcode wird ein kompakter Fehlerkontext
   gebildet und an ein LLM übergeben: Das
   LLM liefert einen minimalen Änderungsvorschlag am Robotercode
   bzw.\ an der Pfaddefinition und durch die Re-Simulation kann eine erneute
   Prüfung des Codes stattfinden. Die Akzeptanzkriterien für eine erfolgreiche
-  Behebung des Fehlers beispielsweise mit dem minimalen Achswinkel bereits
-  im Rahmen der Eventdaten und Monitorlogik im System vor wodurch die
+  Behebung des Fehlers, beispielsweise dem minimalen Achswinkel zur Vermeidung
+  einer Singularität, liegen bereits
+  im Rahmen der Eventdaten und Monitorlogik im System vor, wodurch die
   Bewertung reproduzierbar bleibt.
   Damit kann das Framework als
   Schnittstelle zwischen realitätsnaher Ausführung und
@@ -158,11 +154,11 @@ Modellierungsansätze.{\vglcite[39\psq]{cassandras2021} Im Interview
   Prompt-Ausschnitt aus genau den Feldern, die im Logging ohnehin
   verfügbar sind (z.\,B.\ Programmpointer, Gelenkwinkel,
   Kollisionspunkt), zweitens feste Akzeptanzregeln in der Simulation,
-  drittens Versionierung und Wiederholbarkeit der Läufe. Auf dieser
-  Basis lässt sich in zukünftiger Arbeit untersuchen, in welchem Umfang
-  sich Fehlerquote und Nachbearbeitungszeit durch die Rückkopplung
-  tatsächlich reduzieren – die in den Ergebnissen sichtbaren Muster wie
-  liefern bereits geeignete Zielgrößen.
+  drittens Versionierung und Wiederholbarkeit der Läufe. Auf Basis dieser
+  Ergebnisse ließe sich in zukünftiger Forschung untersuchen, in welchem Umfang
+  sich die Fehlerquote in generiertem Roboterprogrammcode tatsächlich reduziert
+  und daraus resultierend auch die erforderliche Nachbearbeitungszeit
+  des Programmcodes verringert wird.
 
   \section{Reflexion des eigenen Vorgehens}
 

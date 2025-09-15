@@ -14,7 +14,7 @@ Verhalten erkennen und dokumentieren.
 Im Folgenden wird erläutert, wie das Framework funktional, architektonisch und
 algorithmisch aufgebaut und implementiert ist. Grundlegend werden
 dabei für das Framework folgende Festlegungen vorgenommen, welche
-sich in Kapitel \ref{sec:aufbauTestszenario} wiederfinden: Als
+sich in Abschnitt~\ref{sec:testumgebung} wiederfinden: Als
 Testobjekt wird ein ABB IRB 6700-235/2.65 Roboter verwendet. Dabei handelt es
 sich um einen Knickarmroboter mit 6 Freiheitsgraden und 6
 Gelenken.\vglcite{abbirb2025} Dieser wird in RobotStudio Version 2025.3
@@ -60,7 +60,7 @@ vereinfachen. Neben der reinen Erkennung ist zur späteren Analyse und
 Fehlersuche die formalisierte
 Dokumentation der Fehlerereignisse notwendig. Bei der Dokumentation
 soll jedes detektierte Ereignis um
-entsprechenden Metadaten zum aktuellen Status sowie hilfreichen Daten zur
+entsprechende Metadaten zum aktuellen Status sowie hilfreiche Daten zur
 weiteren Fehleranalyse des Roboters ergänzt werden.
 Folgende Metadaten lassen sich nach initialem Testen mithilfe der zur Verfügung
 stehenden Tools extrahieren:
@@ -111,22 +111,21 @@ zentrale Ziele:
 \subsection{Unity3D als Simulationsplattform}
 
 Unity3D wird in dieser Arbeit ausschließlich als
-\emph{Simulations\-laufzeit} verwendet.
-Die Engine stellt Szene, Physik und Rendering bereit und bietet dank
-ihrer ausgereiften
-3D/Physik‑Infrastruktur eine plattformübergreifende Grundlage für den
-digitalen Zwilling des Roboters.\vglcite[247]{andaluz2016} Die eigentliche
+Simulations\-laufzeit verwendet.
+Die Engine stellt Szene, Physik und Rendering bereit und bietet aufgrund ihrer
+3D/Physik-Infrastruktur eine plattformübergreifende Grundlage für den
+digitalen Abschnitt des Roboters.\vglcite[247]{andaluz2016} Die eigentliche
 Anwendungslogik wird durch klar definierte Adapter von der Engine entkoppelt,
 wodurch eine strikte Trennung zwischen Simulation und Domäne gewahrt bleibt.
-Asynchrone Abläufe im Update‑Loop dienen lediglich der Taktung und greifen
-nicht direkt auf Unity‑APIs zu. Die Wahl von Unity begründet sich zudem durch
-die breite Tooling‑Unterstützung und die Möglichkeit, sowohl visuelle als auch
+Asynchrone Abläufe im Update-Loop dienen lediglich der Taktung und greifen
+nicht direkt auf Unity-APIs zu. Die Wahl von Unity begründet sich zudem durch
+die breite Tooling-Unterstützung und die Möglichkeit, sowohl visuelle als auch
 programmatische Arbeitsabläufe zu kombinieren.\vglcite[431]{bartneck2015}
 
 \subsection{Systemarchitektur}
 
 Das entwickelte Framework implementiert eine vierschichtige Architektur, die
-eine klare Trennung der Verantwortlichkeiten gewährleistet (siehe Abbildung
+eine klare Trennung der Verantwortlichkeiten gewährleistet (vgl. Abbildung
 \ref{fig:layer_architecture}). Diese Strukturierung folgt etablierten
 Software-Engineering-Prinzipien, um Wartbarkeit und Erweiterbarkeit zu
 gewährleisten.
@@ -160,13 +159,13 @@ Die Architektur gliedert sich in vier logisch getrennte Schichten:
 \paragraph{Unity3D Framework (Simulationsschicht)}
 \begin{itemize}
   \item \textbf{Zweck}: Bereitstellung der Simulationslaufzeit.
-  \item \textbf{Funktion}: Taktung des Systems (Update‑Loop),
+  \item \textbf{Funktion}: Taktung des Systems (Update-Loop),
     Szenenhosting und Bootstrap der Adapter. Abseits des
     Szenenlayouts und der Darstellung der Objekte soll hier keine
     tiefergehende Prozesslogik implementiert werden.
   \item \textbf{Schnittstellen}: Registrierung der Adapter über ein
-    Dependency‑Injection‑Konzept; Monitore greifen nicht direkt auf
-    Engine‑APIs, lediglich Collider-Objekte werden weitergegeben.
+    Dependency-Injection-Konzept; Monitore greifen nicht direkt auf
+    Engine-APIs, lediglich Collider-Objekte werden weitergegeben.
 \end{itemize}
 
 \paragraph{Core Layer}

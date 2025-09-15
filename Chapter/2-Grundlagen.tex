@@ -33,10 +33,11 @@ Führen des Roboters über ein Teach Pendant oder durch die direkte
 Führung der Roboterhand durch den Arbeitsbereich, wobei die dabei
 entstehenden Gelenkwinkel oder
 kartesische Tool Center Point Positionen (TCP-Positionen)
-aufgezeichnet und im Programm hinterlegt werden. Lernende und instruktive System
+aufgezeichnet und im Programm hinterlegt werden. Lernende und instruktive
+Systeme
 nutzen Methoden des maschinellen Lernens (z.\,B. Reinforcement Learning) sowie
-computerbasiertem Sehen (engl. Computer-Vision) zum Verständnis der Intention
-und der Umwelt, oft in Rahmen der Mensch-Maschine Kollaboration
+computerbasiertem Sehens (engl. Computer-Vision) zum Verständnis der Intention
+und der Umwelt, oft in Rahmen der Mensch-Roboter-Kollaboration
 (MRK).\vglcite[4\psqq]{biggs2003}
 
 Ergänzend zur methodischen Einordnung
@@ -68,8 +69,7 @@ bereitgestellt werden oder nachmodelliert werden müssen, um den
 Zielkontext möglichst realitätsnah abzubilden. Ziel ist es durch die OLP
 problematische Stellen des Roboterprogramms, Ablaufprobleme sowie
 Nebenwirkungen des direkt und indirekt beeinflussten
-Prozesses früh zu erkennen.
-\vglcite[62\psqq]{holubke2014} Externe
+Prozesses früh zu erkennen.\vglcite[62\psqq]{holubke2014} Externe
 Faktoren wie verformbare Objekte, Fluide oder Personen bei der MRK erhöhen im
 Rahmen solcher Simulationen maßgeblich die
 Komplexität. In realitätsnahen Szenarien (z.\,B. automatisierte
@@ -102,10 +102,10 @@ Robotersprachen und können erfahrene Programmierer bei komplexen
 Programmierroutinen nicht ersetzen.\vglcite[4]{bilancia2023} Der
 Versuch, eine einheitliche, standardisierte Programmiersprache für
 alle Industrieroboter zu definieren und zu
-verbreiten, scheitert dabei an der mangelnden Kooperation der
+verbreiten, scheitert dabei bislang an der mangelnden Kooperation der
 Hersteller industrieller Roboter.\vglcite[116]{lambrecht2011}
 
-Einen gegensätzlichen Ansatz verfolgt das open-source Projekt
+Einen entsprechenden Ansatz verfolgt das open-source Projekt
 Robot Operating System (ROS). ROS ist ein quelloffenes
 Middleware-Framework, das Bibliotheken und Werkzeuge für
 Nachrichtenübertragung, Paketverwaltung und Hardwareabstraktion
@@ -205,7 +205,7 @@ textueller Daten sowie Innovationen im Bereich der Hardware-Technologie zur
 wichtigsten Technologie im Bereich Künstliche Intelligenz (KI)
 entwickelt. \vglcite[1\psq]{naveed2024}\\
 
-  Den entscheidenden Durchbruch für moderne LLMs lieferte die
+Den entscheidenden Durchbruch für moderne LLMs lieferte die
 Transformer-Architektur, die sequenzielle Abhängigkeiten durch parallele
 Attention-Mechanismen ersetzt.\vglcite[1\psqq]{vaswani2023attentionneed}
 Mithilfe des
@@ -361,7 +361,7 @@ Möglichkeit, Roboterprogrammcode aus natürlicher Sprache zu generieren,
 stoßen in industriellen Kontexten jedoch auf die Anforderung,
 Ergebnisse systematisch und reproduzierbar zu validieren.
 
-Daraus leitet sich die zentrale Frage, wie gut sich
+Daraus leitet sich die zentrale Frage ab, wie gut sich
 von LLMs erzeugter Robotercode in einer simulationsbasierten
 Umgebung hinsichtlich prozessrelevanter Aspekte
 prüfen und bewerten lässt.
@@ -372,10 +372,10 @@ kompakten, realitätsnahen
 Szenario erprobt. Ziel ist das Ausführen von Robotercode innerhalb dieser
 Umgebung und belastbare Prüfung nach definierten möglichen Fehler im
 Programmablauf mit nachvollziehbarer Dokumentation der Ergebnisse.
-Dazu beschreibt Kapitel~\ref{sec:framework} dazu die Architektur der Frameworks,
-die verschiedenen zu prüfenden Fehlerarten sowie das
+Dazu beschreibt Kapitel~\ref{cap:framework} die Architektur des
+Frameworks, die verschiedenen zu prüfenden Fehlerarten sowie das
 Testszenario. Weiterführend wird durch Anwendung des Frameworks in
-Kapitel~\ref{cap:Ergebnisse} ausgewertet,
-inwiefern Fehler im Roboterprogrammcode
-erkannt werden sowie welche
-Struktur und Inhalt dessen Dokumentation folgen.
+Kapitel~\ref{cap:Ergebnisse} ausgewertet, inwiefern Fehler im
+Roboterprogrammcode
+erkannt werden sowie welche strukturierte Ausgabe und Dokumentation der
+Simulationsergebnisse möglich ist.

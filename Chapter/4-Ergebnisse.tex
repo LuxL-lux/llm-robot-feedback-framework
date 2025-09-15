@@ -1,9 +1,10 @@
 \chapter{Validierungsergebnisse der Testszenarien}
 \label{cap:Ergebnisse}
 Die Architektur des Frameworks besteht somit aus den genannten Modulen, die in
-Kapitel~\ref{sec:framework} im Detail beschrieben werden. Ihre
+Kapitel~\ref{cap:framework} im Detail beschrieben werden. Ihre
 Funktionsweise wird in
-Kapitel~\ref{cap:Ergebnisse} anhand von Testszenarien überprüft und ausgewertet.
+Abschnitt~\ref{cap:Ergebnisse} anhand von Testszenarien überprüft und
+ausgewertet.
 \section{Überblick und Zielsetzung}
 
 In diesem Kapitel werden die Ergebnisse der im vorherigen Kapitel beschriebenen
@@ -30,7 +31,7 @@ simulieren. So wurde für jedes Szenario vorgegangen.
 Zur zusätzlichen Validierung wurde ein Experteninterview durchgeführt, in dem
 die Testcases vorgestellt und die Funktionsweise des Frameworks diskutiert
 wurden. Die Aussagen des Experten werden an geeigneter Stelle in diesem Kapitel
-dargestellt und in Kapitel \ref{cap:diskussion} kritisch eingeordnet.
+dargestellt und in Kapitel~\ref{cap:diskussion} kritisch eingeordnet.
 
 \section{Auswertung der Prozessflussüberwachung}
 \label{sec:processauswertung}
@@ -42,8 +43,9 @@ provoziert werden, in dem das Werkstück abweichend zum in Abbildung
 Regal bewegt wird. Semantisch bedeutet dies ein Überspringen der Station
 \textit{Machine}. Das soll ein SafetyEvent triggern, sobald das Werkstück im
 falschen Regal abgelegt wird.
-\newpage
-\textbf{Korrekter Prozessfluss}
+
+\subsection{Darstellung des korrekten Prozessflusses}
+\label{sec:korrekterProzess}
 \begin{enumerate}
   \item Bewegung von Home-Position zu linkem Regal
   \item Greifen des Werkstücks
@@ -65,11 +67,11 @@ falschen Regal abgelegt wird.
   \label{figure:Prozessfluss}
 \end{figure}
 
+\subsection{Darstellung des abgewandelten Prozessflusses}
 Im veränderten Prozessfluss wird nun der Schritt der Bearbeitung übersprungen.
 Dies kann in der Praxis durch eine inkorrekte Abfolge im Roboterprogrammcode
 passieren. Somit ist der veränderte Prozessfluss wie folgt definiert.
-\newpage
-\textbf{Abgewandelter Prozessfluss}
+
 \begin{enumerate}
   \item Bewegung von Home-Position zu linkem Regal
   \item Greifen des Werkstücks
@@ -113,8 +115,10 @@ Genannte.
 \section{Auswertung der Kollisionserkennung}
 \label{sec:collisionauswertung}
 
+\subsection{Darstellung des Kollisionspfades}
 Zur Auswertung der Kollisionserkennung
-wurde der oben bereits genannte Prozess genutzt. Anschließend wurde
+wurde der in Abschnitt~\ref{sec:korrekterProzess} bereits genannte
+Prozess genutzt. Anschließend wurde
 der Pfad, auf dem sich der Roboter zwischen seiner Home-Position und dem linken
 Regal, in dem er ein Werkstück greifen soll, verändert. Rechts dargestellt in
 Abbildung \ref{figure:kollision}, führt der Pfad im Gegensatz zum
@@ -186,10 +190,10 @@ erwähnen ist der unterschiedlichen Eventtypen, da das Werkstück
 aufgrund von fehlendem Tag nicht
 als kritisch eingestuft wird.
 
-\newpage
 \section{Auswertung der Singularitätserkennung}
 \label{sec:singularityauswertung}
 
+\subsection{Darstellung einer singulären Roboterpose}
 Zur Untersuchung der Singularitätserkennung wurde in RobotStudio ein
 Szenario erstellt,
 das gezielt eine Handgelenks-Singularität provoziert. Dabei wurde der
@@ -249,6 +253,8 @@ die Ergebnisse mit den oben Beschriebenen.
 
 \section{Auswertung der Gelenkdynamiküberwachung}
 \label{sec:Analyse_Sicherheit}
+
+\subsection{Erzeugung überhöhter Gelenkgeschwindigkeiten}
 Der Joint Dynamics Monitor erfasst kontinuierlich die Dynamik der sechs
 Roboterachsen. Die Implementierung in Unity3D basiert auf den vom digitalen
 Abbild gestreamten Gelenkwinkeln, welche aus denen Geschwindigkeiten und
@@ -290,11 +296,10 @@ Im oberen Diagramm sind die Achswinkel aller sechs Gelenke
 dargestellt (J1 hervorgehoben in rot),
 darunter die berechneten Geschwindigkeiten mit markierten Schwellwertbereichen.
 Die rot eingefärbten Abschnitte kennzeichnen Intervalle, in denen die
-aus RobotStudio
-exportierten Daten die definierte Grenze von $\pm 50\,^\circ$/s überschreiten.
-Die blau markierten Bereiche repräsentieren die durch den Monitor in
-Unity ausgegebenen
-Safety Events.
+aus RobotStudio exportierten Daten die definierte Grenze von $\pm
+50\,^\circ$/s überschreiten. Die blau markierten Bereiche
+repräsentieren die durch den Monitor in
+Unity ausgegebenen Safety Events.
 Zu erkennen ist eine starke Überschneidung der Bereiche.
 Weiterführend zeichnet sich vor allem in der zweiten
 Geschwindigkeitsüberschreitung eine Verzögerung beim Ein- und Austritt in den
@@ -358,13 +363,13 @@ Im Rahmen der Ergebnisdarstellung wurde ein Experteninterview mit Daniel Syniawa
 (M.Sc.) durchgeführt. Ziel war es, die
 Funktionsfähigkeit des Frameworks praxisnah zu validieren und Einschätzungen zur
 industriellen Einordnung zu gewinnen. Das Interview diente ausschließlich der
-\emph{deskriptiven} Ergänzung der Ergebnisse; eine vertiefte Interpretation
+deskriptiven Ergänzung der Ergebnisse; eine vertiefte Interpretation
 erfolgt in Kapitel~\ref{cap:diskussion}.
 
 \subsection{Vorgehen und Gegenstand}
 
 Im Interview wurden die Software und ihre Architektur vorgestellt. Anschließend
-wurden die in Kapitel~4 beschriebenen Testfälle gemeinsam in RobotStudio
+wurden die in Abschnitt~4 beschriebenen Testfälle gemeinsam in RobotStudio
 nachvollzogen: Der Roboter führte die Szenarien aus, während parallel beobachtet
 wurde, ob und wie die Module Ereignisse auslösen und ob diese im Logging erfasst
 werden. Damit wurde die grundsätzliche Funktionsweise des Frameworks
@@ -384,7 +389,7 @@ nachvollziehbar.
 \subsection{Hinweis zur Evaluationsmethodik}
 
 Für eine belastbare Evaluation schlug Syniawa vor, die Leistung des Frameworks
-\emph{quantitativ} gegen manuelle Verfahren zu vergleichen. Konkret: Wie schnell
+quantitativ gegen manuelle Verfahren zu vergleichen. Konkret: Wie schnell
 findet eine Person den Fehler (z.\,B.\ Auftreten einer Singularität) im
 RAPID-Code in RobotStudio im Vergleich zur Erkennung durch Ausführung und
 Logging im Framework? Ein solcher Vergleich wäre mit erheblichem Aufwand
@@ -411,7 +416,7 @@ laufendes Programm, Pose/Kontext) betont. Die Einordnung der industriellen
 Robotersimulationslandschaft liefert den Rahmen, in dem die
 vorgestellten Ergebnisse zu
 sehen sind.
-\newpage
+
 \section{Zusammenfassung der Ergebnisse}
 Die Ergebnisse zeigen, dass die in Unity implementierten Monitore in allen
 Testfällen die in RobotStudio provozierten Szenarien widerspiegeln konnten.
@@ -465,6 +470,6 @@ zwischen den Monitoren hinsichtlich Art der Szenarien und Form der
 erfassten Events.
 Auffällig ist, dass sich in einigen Fällen eine zeitliche Verzögerung zwischen
 den in den Rohdaten beobachteten Zuständen und den vom Monitor generierten
-Ereignissen zeigt. Diese Beobachtung ergibt sich aus den in Kapitel~3
+Ereignissen zeigt. Diese Beobachtung ergibt sich aus den in Abschnitt~3
 beschriebenen
 Mechanismen (z.\,B. Glättung, Abtastrate).
